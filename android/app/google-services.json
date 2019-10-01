@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "346112262910",
+    "firebase_url": "https://dating-60c5f.firebaseio.com",
+    "project_id": "dating-60c5f",
+    "storage_bucket": "dating-60c5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346112262910:android:b3867ca1db7c2891a15baf",
+        "android_client_info": {
+          "package_name": "com.soybeans.dating"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346112262910-hukvk0flm7pp832nfsm21df08ojieoev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soybeans.dating",
+            "certificate_hash": "2be830d67f8f87d6a8e81c1d7af9c960f895171c"
+          }
+        },
+        {
+          "client_id": "346112262910-iudt0g44r3hclc5nsggh20oc24h86qsl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjSThMB_VqROqSVy6IlGlaANNvAG7etIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346112262910-iudt0g44r3hclc5nsggh20oc24h86qsl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
