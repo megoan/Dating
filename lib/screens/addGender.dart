@@ -1,3 +1,4 @@
+import 'package:dating/screens/moreMe.dart';
 import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/gradientSwitcher.dart';
 import 'package:dating/widgets/themeSwitcherButton.dart';
@@ -8,6 +9,7 @@ class AddGender extends StatefulWidget {
 }
 
 class _AddGenderState extends State<AddGender> {
+  BuildContext context2;
   bool verifyEnabled = false;
   bool genderMale;
   bool genderWoman;
@@ -31,12 +33,13 @@ class _AddGenderState extends State<AddGender> {
 
   @override
   Widget build(BuildContext context) {
+     context2 = context;
      gradientButtonMan =    GradientSwitcher.getGradiantButton(context, selectMan, 'MAN', 20,genderMale==null?false:genderMale);
     gradientButtonWoman =  GradientSwitcher.getGradiantButton(context, selectWoman, 'WOMAN', 20,genderWoman==null?false:genderWoman);
     return Scaffold(
-       appBar: AppBar(
-        title: Text('Gender'),
-      ),
+      //  appBar: AppBar(
+      //   title: Text('Gender'),
+      // ),
       floatingActionButton: FancyFab(context: context,),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Padding(
@@ -61,5 +64,7 @@ class _AddGenderState extends State<AddGender> {
     );
   }
 
-  void addUserGender() {}
+  void addUserGender() {
+    Navigator.of(context2).push( new MaterialPageRoute( builder: (context) => new MoreMe()));
+  }
 }

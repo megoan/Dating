@@ -23,11 +23,11 @@ MaterialColor colorCustom = MaterialColor(0xA00026, color);
       backgroundColor:colorCustom[900] ,
       primaryColor: Colors.lightBlueAccent,
       accentColor: Colors.purple,
-      inputDecorationTheme: InputDecorationTheme(
-      focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color:  Colors.lightBlueAccent)
-      )
-    )
+    //   inputDecorationTheme: InputDecorationTheme(
+    //   focusedBorder: UnderlineInputBorder(
+    //     borderSide: BorderSide(color:  Colors.lightBlueAccent)
+    //   )
+    // )
     );
   }
 }

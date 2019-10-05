@@ -17,9 +17,9 @@ class _AddEmailState extends State<AddEmail> {
   Widget build(BuildContext context) {
     context2 = context;
     return Scaffold(
-       appBar: AppBar(
-        title: Text('Add Email'),
-      ),
+      //  appBar: AppBar(
+      //   title: Text('Add Email'),
+      // ),
       floatingActionButton: FancyFab(context: context,),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Padding(

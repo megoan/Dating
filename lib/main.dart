@@ -1,13 +1,11 @@
-import 'package:dating/homepage.dart';
+
 import 'package:dating/landingpage.dart';
 import 'package:dating/screens/addEmail.dart';
 import 'package:dating/splash-screen.dart';
 import 'package:dating/themes/themeController.dart';
 import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/gradientSwitcher.dart';
-import 'package:dating/widgets/highlightWidget.dart';
 import 'package:dating/widgets/loader.dart';
-import 'package:dating/widgets/themeSwitcherButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';

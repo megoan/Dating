@@ -13,7 +13,7 @@ class Loader extends StatefulWidget {
 
 class _LoaderState extends State<Loader>
     with SingleTickerProviderStateMixin {
-  Animation<double> animation_rotation;
+  Animation<double> animationRotation;
   Animation<double> animation_0;
   Animation<double> animation_1;
   Animation<double> animation_2;
@@ -45,7 +45,7 @@ class _LoaderState extends State<Loader>
         duration: const Duration(milliseconds: 2000),
         vsync: this);
 
-    animation_rotation = Tween(begin: 0.0, end: 1.0).animate(
+    animationRotation = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: controller,
         curve: Interval(0.0, 1.0, curve: Curves.linear),
@@ -172,7 +172,7 @@ class _LoaderState extends State<Loader>
       child: new Center(
         child: new RotationTransition(
           
-          turns: animation_rotation,
+          turns: animationRotation,
           child: new Container(
             //color: Colors.limeAccent,
             child: new Center(
