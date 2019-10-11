@@ -34,7 +34,7 @@ class _AddGenderState extends State<AddGender> {
   @override
   Widget build(BuildContext context) {
      context2 = context;
-     gradientButtonMan =    GradientSwitcher.getGradiantButton(context, selectMan, 'MAN', 20,genderMale==null?false:genderMale);
+    gradientButtonMan =    GradientSwitcher.getGradiantButton(context, selectMan, 'MAN', 20,genderMale==null?false:genderMale);
     gradientButtonWoman =  GradientSwitcher.getGradiantButton(context, selectWoman, 'WOMAN', 20,genderWoman==null?false:genderWoman);
     return Scaffold(
       //  appBar: AppBar(

@@ -99,11 +99,12 @@ GradientSwitcher({
                   ),
               
                   onPressed: onPressed,
-                  child: Text(
+                  child: FittedBox(fit:BoxFit.fitWidth, 
+    child:  Text(
                     text,
                     style: TextStyle(color:(isEnabled)? fontColor:Color.fromRGBO(100, 100, 100, 0.5), fontSize: fontSize),
                   ),
-                );
+                ));
   }
    static GradientSwitcher getDarkGradiantButton(BuildContext context,Function onPressed, String text,Color fontColor,double fontSize,bool isEnabled){
      return new GradientSwitcher(
@@ -117,11 +118,12 @@ GradientSwitcher({
                   ),
               
                   onPressed: onPressed,
-                  child: Text(
+                  child:  FittedBox(fit:BoxFit.fitWidth, 
+    child: Text(
                     text,
                     style: TextStyle(color:(isEnabled)? fontColor:Color.fromRGBO(200, 200, 200, 0.5), fontSize: fontSize),
                   ),
-                );
+                ));
   }
 
   static GradientSwitcher getGradiantButton(BuildContext context,Function onPressed, String text, double fontSize,bool isEnabled){
