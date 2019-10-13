@@ -1,4 +1,4 @@
-import 'package:dating/screens/moreMe.dart';
+import 'package:dating/screens/moreMeBirthday.dart';
 import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/gradientSwitcher.dart';
 import 'package:dating/widgets/themeSwitcherButton.dart';
@@ -40,7 +40,12 @@ class _AddGenderState extends State<AddGender> {
       //  appBar: AppBar(
       //   title: Text('Gender'),
       // ),
-      floatingActionButton: FancyFab(context: context,),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top:150),
+        child: FancyFab(
+          context: context,
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Padding(
             padding: const EdgeInsets.all(25.0),
@@ -48,7 +53,12 @@ class _AddGenderState extends State<AddGender> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Text('I am a',style: TextStyle(fontSize: 35,color: Theme.of(context).primaryColor),),
+                Column(
+                  children: <Widget>[
+                    Text('I am a',style: TextStyle(fontSize: 35,color: Theme.of(context).primaryColor),),
+                      Text('Viewed by all',style: TextStyle(fontSize: 14,color: Theme.of(context).primaryColor),),
+                  ],
+                ),
                 Column(children: <Widget>[
                     gradientButtonMan,
                     SizedBox(height: 10,),
@@ -65,6 +75,6 @@ class _AddGenderState extends State<AddGender> {
   }
 
   void addUserGender() {
-    Navigator.of(context2).push( new MaterialPageRoute( builder: (context) => new MoreMe()));
+    Navigator.of(context2).push( new MaterialPageRoute( builder: (context) => new MoreMeBirthday()));
   }
 }

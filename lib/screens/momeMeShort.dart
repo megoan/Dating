@@ -1,17 +1,16 @@
-import 'package:dating/screens/addGender.dart';
 import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/themeSwitcherButton.dart';
 import 'package:flutter/material.dart';
 
-class AddEmail extends StatefulWidget {
-
+import 'moreMeLong.dart';
+class MoreMeShort extends StatefulWidget {
   @override
-  _AddEmailState createState() => _AddEmailState();
+  _MoreMeShortState createState() => _MoreMeShortState();
 }
 
-class _AddEmailState extends State<AddEmail> {
+class _MoreMeShortState extends State<MoreMeShort> {
   BuildContext context2;
-  TextEditingController emailText = TextEditingController();
+  TextEditingController shortMeText = TextEditingController();
   bool verifyEnabled = false;
   @override
   Widget build(BuildContext context) {
@@ -33,18 +32,25 @@ class _AddEmailState extends State<AddEmail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Text('My email is',style: TextStyle(fontSize: 35,color: Theme.of(context).primaryColor),),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('One sentance',style: TextStyle(fontSize: 35,color: Theme.of(context).primaryColor),),
+                     Text('Viewed by all',style: TextStyle(fontSize: 14,color: Theme.of(context).primaryColor),),
+                  ],
+                ),
                 TextField(
+                   maxLines: null,
+                   maxLength:70,
                   style: TextStyle(fontSize: 24),
                   decoration: InputDecoration(
-              hintText: 'Email'
+                     border:  OutlineInputBorder(   borderSide:  BorderSide(color: Colors.grey, width: 2.0), borderRadius: BorderRadius.all(Radius.circular(20))    ),
+              hintText: 'i"m so funny...'
             ),
-                  controller: emailText,
+                  controller: shortMeText,
                   onChanged: (value) {
-                    String patttern = r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-                    RegExp regExp = new RegExp(patttern);
-                    if (regExp.hasMatch(value)) {
-                      setState(() {
+                    if(value.length>10 && value.length<=71){
+                        setState(() {
                         verifyEnabled = true;
                       });
                     }
@@ -52,7 +58,7 @@ class _AddEmailState extends State<AddEmail> {
                           setState(() {
                         verifyEnabled = false;
                       });
-                    }
+                    } 
                   },
                 ),
                 GradientButton.getGradiantButton(context, addUserEmail,
@@ -66,6 +72,6 @@ class _AddEmailState extends State<AddEmail> {
   }
 
   void addUserEmail() {
-    Navigator.of(context2).push( new MaterialPageRoute( builder: (context) => new AddGender()));
+    Navigator.of(context2).push( new MaterialPageRoute( builder: (context) => new MoreMeLong()));
   }
 }
