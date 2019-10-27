@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dating/widgets/gradientButton.dart';
+import 'package:dating/widgets/photoPicker.dart';
 import 'package:dating/widgets/themeSwitcherButton.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,18 +60,16 @@ class _ProfilePicturesState extends State<ProfilePictures> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Expanded(
                   child: Column(
                     children: <Widget>[
-                      RaisedButton(
-                        onPressed: getImage,
-                      ),
-                      Center(
-                        child: _image == null
-                            ? Text('No image selected.')
-                            : Image.file(_image),
-                      ),
+                      // RaisedButton(
+                      //   onPressed: getImage,
+                      // ),
+                      PhotoPicker(),
+                     
                     ],
                   ),
                 ),
