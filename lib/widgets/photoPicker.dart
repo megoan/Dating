@@ -43,9 +43,9 @@ class _PhotoPickerState extends State<PhotoPicker> {
                               ),
                             ),
                           ),
-                          ImageButton(top: 10,right: -5,image: widget.image,imageCallBack: (){},),
-                          ImageButton( bottom: 10, right: -5,image: widget.image,imageCallBack: (){},),
-                         ImageButton( bottom: 10, left: -5,image: widget.image,imageCallBack: (){},),
+                          ImageButton(top: 10,right: -5,image: widget.image,imageCallBack: (){},iconData:Icons.delete ,),
+                          ImageButton( bottom: 10, right: -5,image: widget.image,imageCallBack: (){},iconData:Icons.add_a_photo),
+                          ImageButton( bottom: 10, left: -5,image: widget.image,imageCallBack: (){},iconData:Icons.image ,),
                           
                         ],
                       )
@@ -60,7 +60,8 @@ class ImageButton extends StatelessWidget {
    double bottom;
    File image;
    Function imageCallBack;
-   ImageButton({this.right,this.left,this.top,this.bottom,this.image,this.imageCallBack}) ;
+   IconData iconData;
+   ImageButton({this.right,this.left,this.top,this.bottom,this.image,this.imageCallBack,this.iconData}) ;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class ImageButton extends StatelessWidget {
            imageCallBack(image);
          },
          child: new Icon(
-           Icons.pause,
+           iconData,
            color: Colors.blue,
            size: 20.0,
          ),
