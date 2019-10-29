@@ -12,16 +12,103 @@ class ProfilePictures extends StatefulWidget {
 }
 
 class _ProfilePicturesState extends State<ProfilePictures> {
-  File _image;
+  File _image1;
+  File _image2;
+  File _image3;
+  File _image4;
+
   BuildContext context2;
   //TextEditingController shortMeText = TextEditingController();
   bool verifyEnabled = false;
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+  // Future getImage() async {
+  //   var image = await ImagePicker.pickImage(source: ImageSource.camera);
 
-    setState(() {
-      _image = image;
-    });
+  //   setState(() {
+  //     _image = image;
+  //   });
+  // }
+  void imageCallBack1(var image) {
+    if (image == null) {
+      setState(() {
+        _image1 = _image2;
+        _image2 = _image3;
+        _image3 = _image4;
+        _image4 = null;
+      });
+    } else {
+      setState(() {
+        _image1 = image;
+      });
+    }
+  }
+
+  void imageCallBack2(var image) {
+    if (image == null) {
+      setState(() {
+        _image2 = _image3;
+        _image3 = _image4;
+        _image4 = null;
+      });
+    } else {
+      if (_image1 == null) {
+        setState(() {
+          _image1 = image;
+        });
+      } else {
+        setState(() {
+          _image2 = image;
+        });
+      }
+    }
+  }
+
+  void imageCallBack3(var image) {
+    if (image == null) {
+      setState(() {
+        _image3 = _image4;
+        _image4 = null;
+      });
+    } else {
+      if (_image1 == null) {
+        setState(() {
+          _image1 = image;
+        });
+      } else if (_image2 == null) {
+        setState(() {
+          _image2 = image;
+        });
+      } else {
+        setState(() {
+          _image3 = image;
+        });
+      }
+    }
+  }
+
+  void imageCallBack4(var image) {
+    if (image == null) {
+      setState(() {
+        _image4 = null;
+      });
+    } else {
+      if (_image1 == null) {
+        setState(() {
+          _image1 = image;
+        });
+      } else if (_image2 == null) {
+        setState(() {
+          _image2 = image;
+        });
+      } else if (_image3 == null) {
+        setState(() {
+          _image3 = image;
+        });
+      } else {
+        setState(() {
+          _image4 = image;
+        });
+      }
+    }
   }
 
   @override
@@ -68,14 +155,33 @@ class _ProfilePicturesState extends State<ProfilePictures> {
                       // RaisedButton(
                       //   onPressed: getImage,
                       // ),
-                      PhotoPicker(),
-                     
+                      PhotoPicker(
+                        image: _image1,
+                        imageCallBack: imageCallBack1,
+                        photoNum: 1,
+                      ),
+                      PhotoPicker(
+                        image: _image3,
+                        imageCallBack: imageCallBack3,
+                        photoNum: 3,
+                      ),
                     ],
                   ),
                 ),
                 Expanded(
                   child: Column(
-                    children: <Widget>[],
+                    children: <Widget>[
+                      PhotoPicker(
+                        image: _image2,
+                        imageCallBack: imageCallBack2,
+                        photoNum: 2,
+                      ),
+                      PhotoPicker(
+                        image: _image4,
+                        imageCallBack: imageCallBack4,
+                        photoNum: 4,
+                      ),
+                    ],
                   ),
                 )
               ],
