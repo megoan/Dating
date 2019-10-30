@@ -1,6 +1,7 @@
 
 import 'package:dating/landingpage.dart';
 import 'package:dating/screens/addEmail.dart';
+import 'package:dating/screens/shadchanSignUpScrenn.dart';
 import 'package:dating/splash-screen.dart';
 import 'package:dating/themes/themeController.dart';
 import 'package:dating/widgets/gradientButton.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: theme,
       routes: <String, WidgetBuilder>{
-        '/homepage': (BuildContext context) => AddEmail(),
+        '/homepage': (BuildContext context) => ShadchanSignUpScreen(),
         '/landingpage': (BuildContext context) => LandingPage()
       },
       home: FutureBuilder(
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             authResultSnapshot.connectionState == ConnectionState.waiting
                 ? SplashScreen()
                 : authResultSnapshot.data != null
-                    ? AddEmail()
+                    ? ShadchanSignUpScreen()
                     : MyHomePage(
                         title: "Verify your phone",
                       ),
@@ -105,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => new AddEmail()));
+                              builder: (context) => new ShadchanSignUpScreen()));
                     }});
     };
     final PhoneVerificationFailed verifiedFailed = (AuthException exception) {
@@ -150,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.pushReplacement(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => new AddEmail()));
+                              builder: (context) => new ShadchanSignUpScreen()));
                     } else {
                       Navigator.of(context).pop();
                       signIn();
@@ -174,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                      isLoading=false; 
                     });
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => AddEmail()));
+          context, MaterialPageRoute(builder: (context) => ShadchanSignUpScreen()));
     }).catchError((e) {
       print(e);
     });
@@ -214,90 +215,109 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-                child: Center(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center
-                  ,
-                  children: <Widget>[
-                    CountryCodePicker(
-                      onChanged: (value) {
-                        phoneCode.text = value.toString();
-                      },
-                      // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                      initialSelection: 'IL',
-                      favorite: ['+39', 'FR'],
-                      // optional. Shows only country name and flag
-                      showCountryOnly: false,
-                      // optional. Shows only country name and flag when popup is closed.
+      body: Container(
+         decoration: BoxDecoration(
+        // Box decoration takes a gradient
+        gradient: LinearGradient(
+          // Where the linear gradient begins and ends
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          // Add one stop for each color. Stops should increase from 0 to 1
+          stops: [0.1, 0.4, 0.7, 0.9],
+          colors: [
+            // Colors are easy thanks to Flutter's Colors class.
+            Colors.indigo[800],
+            Colors.purple[700],
+            Colors.pink[600],
+            Colors.pink[800],
+          ],
+        ),
+      ),
+        child: Center(
+          child: SingleChildScrollView(
+                  child: Center(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center
+                    ,
+                    children: <Widget>[
+                      CountryCodePicker(
+                        onChanged: (value) {
+                          phoneCode.text = value.toString();
+                        },
+                        // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                        initialSelection: 'IL',
+                        favorite: ['+39', 'FR'],
+                        // optional. Shows only country name and flag
+                        showCountryOnly: false,
+                        // optional. Shows only country name and flag when popup is closed.
 
-                      // optional. aligns the flag and the Text left
-                      alignLeft: false,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Flexible(
-                            child: Container(
-                          width: 40,
-                          child: TextField(
-                            enabled: false,
-                            controller: phoneCode,
-                          ),
-                        )),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Flexible(
+                        // optional. aligns the flag and the Text left
+                        alignLeft: false,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Flexible(
+                              child: Container(
+                            width: 40,
                             child: TextField(
-                          decoration:
-                              InputDecoration(hintText: 'enter phone number'),
-                          onChanged: (value) {
-                            this.phoneNo = value;
-                            String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                            RegExp regExp = new RegExp(patttern);
-                            if(regExp.hasMatch(value)){
-                              setState(() {
-                               verifyEnabled = true; 
-                              });
-                            }
-                            else{
-                               setState(() {
-                               verifyEnabled = false; 
-                              });
-                            }
-                          },
-                        )),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                   
-                    SizedBox(height: 20,),
-                  
-                  
-                   
-                     // gradientButtonMan,
+                              enabled: false,
+                              controller: phoneCode,
+                            ),
+                          )),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Flexible(
+                              child: TextField(
+                            decoration:
+                                InputDecoration(hintText: 'enter phone number'),
+                            onChanged: (value) {
+                              this.phoneNo = value;
+                              String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                              RegExp regExp = new RegExp(patttern);
+                              if(regExp.hasMatch(value)){
+                                setState(() {
+                                 verifyEnabled = true; 
+                                });
+                              }
+                              else{
+                                 setState(() {
+                                 verifyEnabled = false; 
+                                });
+                              }
+                            },
+                          )),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                     
+                      SizedBox(height: 20,),
+                    
+                    
+                     
+                       // gradientButtonMan,
  
-                    //SizedBox(height: 10,),
-                    //  gradientButtonWoman,
-                    // SizedBox(height: 10,),
-                      GradientButton.getGradiantButton(context, verifyPhone, 'verify', Colors.black, 20,verifyEnabled),
-                   //   CircularProgressIndicator(strokeWidth: 10,),
-                     (isLoading)? Loader():Container(),
-                    // RaisedButton(
-                    //   onPressed: (){
-                    //     ThemeController.switchTheme(context);
-                    //       // DynamicTheme.of(context).setThemeData(ThemeSwitcher.getTheme(context));                   
-                    //   },
-                    //   child: Text('change theme'),
-                    // )
-                  ],
+                      //SizedBox(height: 10,),
+                      //  gradientButtonWoman,
+                      // SizedBox(height: 10,),
+                        GradientButton.getGradiantButton(context, verifyPhone, 'verify', Colors.black, 20,verifyEnabled),
+                     //   CircularProgressIndicator(strokeWidth: 10,),
+                       (isLoading)? Loader():Container(),
+                      // RaisedButton(
+                      //   onPressed: (){
+                      //     ThemeController.switchTheme(context);
+                      //       // DynamicTheme.of(context).setThemeData(ThemeSwitcher.getTheme(context));                   
+                      //   },
+                      //   child: Text('change theme'),
+                      // )
+                    ],
+                  ),
                 ),
               ),
             ),

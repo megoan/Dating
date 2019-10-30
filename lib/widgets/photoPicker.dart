@@ -69,12 +69,12 @@ class _PhotoPickerState extends State<PhotoPicker> {
     return  Stack(
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Container(
                               width: 140.0,
                               height: 140.0,
                               decoration: new BoxDecoration(
-                                color: const Color(0xff7c94b6),
+                                color:  Colors.black12,
                                 image: (widget.image==null)?null:new DecorationImage(
                                   image:  ExactAssetImage(widget.image.path)
                                )
@@ -88,12 +88,12 @@ class _PhotoPickerState extends State<PhotoPicker> {
                               ),
                             ),
                           ),
-                          if(widget.photoNum!=null)ImageNumberIcon( top: 10, right: -5,number:widget.photoNum,),
-                         (widget.image==null)? ImageButton( bottom: 10, right: -5,image: widget.image,imageCallBack: getCameraImage,iconData:Icons.add_a_photo):
-                         ImageButton(bottom: 10, right: -5,image: widget.image,imageCallBack: (){widget.imageCallBack(null);},iconData:Icons.close ,),
+                          if(widget.photoNum!=null)ImageNumberIcon( top: -5, right: -20,number:widget.photoNum,),
+                         (widget.image==null)? ImageButton( bottom: -5, right: -20,image: widget.image,imageCallBack: getCameraImage,iconData:Icons.add_a_photo):
+                         ImageButton(bottom: -5, right: -20,image: widget.image,imageCallBack: (){widget.imageCallBack(null);},iconData:Icons.close ,),
                          
-                         (widget.image==null)? ImageButton( bottom: 10, left: -5,image: widget.image,imageCallBack: getGalleryImage,iconData:Icons.image ,):
-                         ImageButton( bottom: 10, left: -5,image: widget.image,imageCallBack: cropImage,iconData:Icons.crop ,),
+                         (widget.image==null)? ImageButton( bottom: -5, left: -20,image: widget.image,imageCallBack: getGalleryImage,iconData:Icons.image ,):
+                         ImageButton( bottom: -5, left: -20,image: widget.image,imageCallBack: cropImage,iconData:Icons.crop ,),
                           
                         ],
                       )

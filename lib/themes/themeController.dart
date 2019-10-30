@@ -37,10 +37,10 @@ class ThemeController {
       if(themeType==null){
          prefs.setBool('theme',true);
       }
-      return LightTheme.getTheme();
+      return DarkTheme.getTheme();
     }
     else{
-       return DarkTheme.getTheme();
+       return LightTheme.getTheme();
     }
   
   }

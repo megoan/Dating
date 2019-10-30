@@ -76,27 +76,30 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
     ));
     }
     return FloatingActionButton(
-      backgroundColor: (Theme.of(context).brightness==Brightness.light)?ColorTween(
-      end: Color.fromRGBO(16, 0, 38, 1),
-      begin: Colors.white,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Interval(
-        0.00,
-        1.00,
-        curve: _curve,
-      ),
-    )).value:ColorTween(
-      begin: Color.fromRGBO(16, 0, 38, 1),
-      end: Colors.white,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Interval(
-        0.00,
-        1.00,
-        curve: _curve,
-      ),
-    )).value,
+      backgroundColor: (Theme.of(context).brightness==Brightness.light)?Color.fromRGBO(16, 0, 38, 1)
+    //   ColorTween(
+    //   end: Color.fromRGBO(16, 0, 38, 1),
+    //   begin: Colors.pink,
+    // ).animate(CurvedAnimation(
+    //   parent: _animationController,
+    //   curve: Interval(
+    //     0.00,
+    //     1.00,
+    //     curve: _curve,
+    //   ),
+    // )).value
+    :Colors.pink,
+    // ColorTween(
+    //   begin: Color.fromRGBO(16, 0, 38, 1),
+    //   end: Colors.pink,
+    // ).animate(CurvedAnimation(
+    //   parent: _animationController,
+    //   curve: Interval(
+    //     0.00,
+    //     1.00,
+    //     curve: _curve,
+    //   ),
+    // )).value,
       onPressed: animate,
       tooltip: 'Toggle',
       child: (Theme.of(context).brightness!=Brightness.light)? HighLightedIcon(Icons.wb_sunny,color: Theme.of(context).accentColor,):

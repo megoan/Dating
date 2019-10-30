@@ -22,7 +22,7 @@ MaterialColor colorCustom = MaterialColor(0xA00026, color);
       scaffoldBackgroundColor: colorCustom[900],
       backgroundColor:colorCustom[900] ,
       primaryColor: Colors.lightBlueAccent,
-      accentColor: Colors.purple,
+      accentColor: Colors.white,
     //   inputDecorationTheme: InputDecorationTheme(
     //   focusedBorder: UnderlineInputBorder(
     //     borderSide: BorderSide(color:  Colors.lightBlueAccent)
