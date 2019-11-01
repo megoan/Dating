@@ -6,7 +6,8 @@ class LightTheme {
     return new ThemeData(
       brightness: Brightness.light,
       primaryColor: Colors.purple,
-      accentColor: Colors.lightBlueAccent,
+      accentColor: Colors.black,
+      primarySwatch: Colors.purple
     );
   }
 }

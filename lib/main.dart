@@ -3,7 +3,9 @@ import 'package:dating/landingpage.dart';
 import 'package:dating/screens/addEmail.dart';
 import 'package:dating/screens/shadchanSignUpScrenn.dart';
 import 'package:dating/splash-screen.dart';
+import 'package:dating/themes/darkTheme.dart';
 import 'package:dating/themes/themeController.dart';
+import 'package:dating/widgets/OutLineButtonMy.dart';
 import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/gradientSwitcher.dart';
 import 'package:dating/widgets/loader.dart';
@@ -23,13 +25,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new DynamicTheme(
-      defaultBrightness: Brightness.light,
-      data: (brightness) => this.theme,
-      themedWidgetBuilder: (context, theme) {
+    // return new DynamicTheme(
+    //   defaultBrightness: Brightness.light,
+    //   data: (brightness) => this.theme,
+    //   themedWidgetBuilder: (context, theme) {
         return  MaterialApp(
       title: 'Flutter Demo',
-      theme: theme,
+      theme: DarkTheme.getTheme(),
       routes: <String, WidgetBuilder>{
         '/homepage': (BuildContext context) => ShadchanSignUpScreen(),
         '/landingpage': (BuildContext context) => LandingPage()
@@ -47,9 +49,9 @@ class MyApp extends StatelessWidget {
       ),
     );
       }
-    );
+   // );
   }
-}
+//}
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -212,9 +214,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       // floatingActionButton: FancyFab(context: context,),
       // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      // appBar: AppBar(
+      //   title: Text(widget.title),
+      // ),
       body: Container(
          decoration: BoxDecoration(
         // Box decoration takes a gradient
@@ -235,92 +237,100 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
         child: Center(
           child: SingleChildScrollView(
-                  child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Center(
+                        child: Text("Varify phone number",style:TextStyle(fontSize: 20)),
+                      ),
+                      Center(
               child: Container(
                 child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center
-                    ,
-                    children: <Widget>[
-                      CountryCodePicker(
-                        onChanged: (value) {
-                          phoneCode.text = value.toString();
-                        },
-                        // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                        initialSelection: 'IL',
-                        favorite: ['+39', 'FR'],
-                        // optional. Shows only country name and flag
-                        showCountryOnly: false,
-                        // optional. Shows only country name and flag when popup is closed.
-
-                        // optional. aligns the flag and the Text left
-                        alignLeft: false,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      padding: const EdgeInsets.all(25.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center
+                        ,
                         children: <Widget>[
-                          Flexible(
-                              child: Container(
-                            width: 40,
-                            child: TextField(
-                              enabled: false,
-                              controller: phoneCode,
-                            ),
-                          )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Flexible(
-                              child: TextField(
-                            decoration:
-                                InputDecoration(hintText: 'enter phone number'),
+                          CountryCodePicker(
                             onChanged: (value) {
-                              this.phoneNo = value;
-                              String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                              RegExp regExp = new RegExp(patttern);
-                              if(regExp.hasMatch(value)){
-                                setState(() {
-                                 verifyEnabled = true; 
-                                });
-                              }
-                              else{
-                                 setState(() {
-                                 verifyEnabled = false; 
-                                });
-                              }
+                              phoneCode.text = value.toString();
                             },
-                          )),
+                            // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                            initialSelection: 'IL',
+                            favorite: ['+39', 'FR'],
+                            // optional. Shows only country name and flag
+                            showCountryOnly: false,
+                            // optional. Shows only country name and flag when popup is closed.
+
+                            // optional. aligns the flag and the Text left
+                            alignLeft: false,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Flexible(
+                                  child: Container(
+                                width: 40,
+                                child: TextField(
+                                  enabled: false,
+                                  controller: phoneCode,
+                                ),
+                              )),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Flexible(
+                                  child: TextField(
+                                decoration:
+                                    InputDecoration(hintText: 'enter phone number'),
+                                onChanged: (value) {
+                                  this.phoneNo = value;
+                                  String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+                                  RegExp regExp = new RegExp(patttern);
+                                  if(regExp.hasMatch(value)){
+                                    setState(() {
+                                     verifyEnabled = true; 
+                                    });
+                                  }
+                                  else{
+                                     setState(() {
+                                     verifyEnabled = false; 
+                                    });
+                                  }
+                                },
+                              )),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                         
+                          SizedBox(height: 20,),
+                        
+                        
+                         
+                           // gradientButtonMan,
+ 
+                          //SizedBox(height: 10,),
+                          //  gradientButtonWoman,
+                          // SizedBox(height: 10,),
+                               OutLineButtonMy(verifyEnabled: verifyEnabled,callBackFunction: verifyPhone,text: 'verify',),
+                            //GradientButton.getGradiantButton(context, verifyPhone, 'verify', Colors.black, 20,verifyEnabled),
+                         //   CircularProgressIndicator(strokeWidth: 10,),
+                           (isLoading)? Loader():Container(),
+                          // RaisedButton(
+                          //   onPressed: (){
+                          //     ThemeController.switchTheme(context);
+                          //       // DynamicTheme.of(context).setThemeData(ThemeSwitcher.getTheme(context));                   
+                          //   },
+                          //   child: Text('change theme'),
+                          // )
                         ],
                       ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                     
-                      SizedBox(height: 20,),
-                    
-                    
-                     
-                       // gradientButtonMan,
- 
-                      //SizedBox(height: 10,),
-                      //  gradientButtonWoman,
-                      // SizedBox(height: 10,),
-                        GradientButton.getGradiantButton(context, verifyPhone, 'verify', Colors.black, 20,verifyEnabled),
-                     //   CircularProgressIndicator(strokeWidth: 10,),
-                       (isLoading)? Loader():Container(),
-                      // RaisedButton(
-                      //   onPressed: (){
-                      //     ThemeController.switchTheme(context);
-                      //       // DynamicTheme.of(context).setThemeData(ThemeSwitcher.getTheme(context));                   
-                      //   },
-                      //   child: Text('change theme'),
-                      // )
-                    ],
-                  ),
                 ),
               ),
             ),
+                    ],
+                  ),
           ),
         ),
       ),

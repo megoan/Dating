@@ -1,9 +1,13 @@
+import 'dart:ffi';
 import 'dart:io';
 
+import 'package:dating/widgets/OutLineButtonMy.dart';
 import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/photoPicker.dart';
 import 'package:dating/widgets/themeSwitcherButton.dart';
 import 'package:flutter/material.dart';
+
+import 'homePage.dart';
 
 class ShadchanSignUpScreen extends StatefulWidget {
   @override
@@ -39,7 +43,7 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
   }
 
   void addUserEmail() {
-    // Navigator.of(context2).push( new MaterialPageRoute( builder: (context) => new AddGender()));
+     Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new HomePage()));
   }
   @override
   Widget build(BuildContext context) {
@@ -119,6 +123,7 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                                   hintText: "Your name",
                                   //add icon outside input field
                                   icon: Icon(Icons.person),
+                                  
                                   //add icon to the beginning of text field
                                   //prefixIcon: Icon(Icons.person),
                                   //can also add icon to the end of the textfiled
@@ -164,16 +169,15 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                         ),
                       ),
                     ),
-                    GradientButton.getGradiantButton(context, addUserEmail,
-                        'GET STARTED', Colors.black, 20, verifyEnabled),
+                    OutLineButtonMy(verifyEnabled: verifyEnabled,callBackFunction: addUserEmail,text: "GET STARTED",),
+                   
                   ],
                 ),
               ),
             ),
           ),
         );
-      }
-      ),
+      }),
     );
   }
 }

@@ -68,26 +68,43 @@ class _PhotoPickerState extends State<PhotoPicker> {
   Widget build(BuildContext context) {
     return  Stack(
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Container(
-                              width: 140.0,
-                              height: 140.0,
-                              decoration: new BoxDecoration(
-                                color:  Colors.black12,
-                                image: (widget.image==null)?null:new DecorationImage(
-                                  image:  ExactAssetImage(widget.image.path)
-                               )
-                                ,
-                                borderRadius: new BorderRadius.all(
-                                    new Radius.circular(70.0)),
-                                border: new Border.all(
-                                  color: Theme.of(context).primaryColor,
-                                  width: 4.0,
-                                ),
+                          Stack(
+                             alignment: AlignmentDirectional.center,
+                            children: <Widget>[
+                               Container(
+                                width: 150,
+                                height: 150,
+                                child: CircleAvatar(radius: 140,backgroundColor: Theme.of(context).primaryColor,),
                               ),
-                            ),
+                              Container(
+                                width: 140,
+                                height: 140,
+                                child: widget.image!=null?CircleAvatar(backgroundImage: new FileImage(widget.image), radius: 140.0,):CircleAvatar(radius: 140,)
+                              ),
+                             
+                            ],
                           ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(0.0),
+                          //   child: Container(
+                          //     child: (widget.image==null)?null:Image.file(widget.image),
+                          //     width: 140.0,
+                          //     height: 140.0,
+                          //     decoration: new BoxDecoration(
+                          //       color:  Colors.black12,
+                          //     //   image: (widget.image==null)?null:new DecorationImage(
+                          //     //     image:  Image.file(widget.image)
+                          //     //  )
+                          //     //  ,
+                          //       borderRadius: new BorderRadius.all(
+                          //           new Radius.circular(70.0)),
+                          //       border: new Border.all(
+                          //         color: Theme.of(context).primaryColor,
+                          //         width: 4.0,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           if(widget.photoNum!=null)ImageNumberIcon( top: -5, right: -20,number:widget.photoNum,),
                          (widget.image==null)? ImageButton( bottom: -5, right: -20,image: widget.image,imageCallBack: getCameraImage,iconData:Icons.add_a_photo):
                          ImageButton(bottom: -5, right: -20,image: widget.image,imageCallBack: (){widget.imageCallBack(null);},iconData:Icons.close ,),
