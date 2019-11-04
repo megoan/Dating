@@ -1,6 +1,9 @@
+import 'package:dating/screens/shadchanList.dart';
 import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/widgets/fABBottomAppBarItem.dart';
 import 'package:flutter/material.dart';
+
+import 'everyone.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -73,6 +76,7 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       theme: LightTheme.getTheme(),
           home: Scaffold(
+            extendBody: true,
             floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.indigo,
@@ -112,13 +116,16 @@ IconButton(
           controller: controller,
   children: <Widget>[
     Container(
-      color: Colors.pink,
+      color: Colors.indigo,
+     child: ShadchanList(),
+    //  color: Colors.pink,
     ),
     Container(
-      color: Colors.cyan,
+       child: Everyone(),
+    //  color: Colors.cyan,
     ),
     Container(
-      color: Colors.deepPurple,
+    //  color: Colors.deepPurple,
     ),
   ],
 ),

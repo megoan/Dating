@@ -152,8 +152,8 @@ class _LoaderState extends State<Loader>
     int r;
     int g;
     int b;
-    Color c1 = Theme.of(context).primaryColor;
-    Color c2 = Theme.of(context).accentColor;
+    Color c1 = Colors.deepPurple;
+    Color c2 = Colors.indigoAccent;
 
     r=((c1.red-c2.red)*amount +c2.red).round();
     g=((c1.green-c2.green)*amount +c2.green).round();
