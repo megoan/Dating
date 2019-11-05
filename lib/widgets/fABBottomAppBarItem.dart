@@ -62,7 +62,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
       child: Padding(
         padding: const EdgeInsets.only(right: 70),
         child: Row(
-          
+
           //mainAxisSize: MainAxisSize.max,
          // mainAxisAlignment: MainAxisAlignment.start,
           children: items,

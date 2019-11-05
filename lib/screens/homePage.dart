@@ -4,6 +4,7 @@ import 'package:dating/widgets/fABBottomAppBarItem.dart';
 import 'package:flutter/material.dart';
 
 import 'everyone.dart';
+import 'favoritesList.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -116,13 +117,17 @@ IconButton(
           controller: controller,
   children: <Widget>[
     Container(
-      color: Colors.indigo,
+      color: Colors.grey[300],
      child: ShadchanList(),
     //  color: Colors.pink,
     ),
     Container(
        child: Everyone(),
     //  color: Colors.cyan,
+    ),
+    Container(
+      color: Colors.deepPurple,
+      child: FavoriteList(),
     ),
     Container(
     //  color: Colors.deepPurple,
@@ -176,7 +181,8 @@ IconButton(
           // FABBottomAppBarItem(iconData: Icons.menu, text: 'This'),
           FABBottomAppBarItem(iconData: Icons.people_outline, text: 'my list'),
           FABBottomAppBarItem(iconData: Icons.people, text: 'everyrone'),
-          FABBottomAppBarItem(iconData: Icons.chat, text: 'chats'),
+          FABBottomAppBarItem(iconData: Icons.star, text: 'favorites'),
+           FABBottomAppBarItem(iconData: Icons.chat, text: 'my chats'),
         ],
       ),
       ),
