@@ -41,14 +41,6 @@ class ShadchanListCard2 extends StatelessWidget {
                       child: Stack(
                         alignment: AlignmentDirectional.center,
                         children: <Widget>[
-                          // Container(
-                          //   width: 78,
-                          //   height: 78,
-                          //   child: CircleAvatar(
-                          //     radius: 100,
-                          //     backgroundColor: Theme.of(context).primaryColor,
-                          //   ),
-                          // ),
                           Container(
                             width: 70,
                             height: 70,
@@ -139,7 +131,8 @@ class ShadchanListCard2 extends StatelessWidget {
                        
                       ],
                     ),
-                    OutlineButton(onPressed: (){},
+                    OutlineButton(
+                      onPressed: (){},
                     child: Container(
                       child: Row(
                         children: <Widget>[

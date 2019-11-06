@@ -3,6 +3,7 @@ import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/widgets/fABBottomAppBarItem.dart';
 import 'package:flutter/material.dart';
 
+import 'chatList.dart';
 import 'everyone.dart';
 import 'favoritesList.dart';
 class HomePage extends StatefulWidget {
@@ -131,6 +132,7 @@ IconButton(
     ),
     Container(
     //  color: Colors.deepPurple,
+    child: ChatList(),
     ),
   ],
 ),
