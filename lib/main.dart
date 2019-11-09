@@ -4,6 +4,7 @@ import 'package:dating/screens/addEmail.dart';
 import 'package:dating/screens/shadchanSignUpScrenn.dart';
 import 'package:dating/splash-screen.dart';
 import 'package:dating/themes/darkTheme.dart';
+import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/themes/themeController.dart';
 import 'package:dating/widgets/OutLineButtonMy.dart';
 import 'package:dating/widgets/gradientButton.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
     //   themedWidgetBuilder: (context, theme) {
         return  MaterialApp(
       title: 'Flutter Demo',
-      theme: DarkTheme.getTheme(),
+      theme: LightTheme.getTheme(),
       routes: <String, WidgetBuilder>{
         '/homepage': (BuildContext context) => ShadchanSignUpScreen(),
         '/landingpage': (BuildContext context) => LandingPage()

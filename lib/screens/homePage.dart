@@ -1,3 +1,4 @@
+import 'package:dating/screens/addPerson.dart';
 import 'package:dating/screens/shadchanList.dart';
 import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/widgets/fABBottomAppBarItem.dart';
@@ -31,7 +32,9 @@ class _HomePageState extends State<HomePage> {
                         curve: Curves.easeInOut,);
     });
   }
-
+   void addPersonScreen() {
+    Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new AddPerson()));
+  }
   void _searchPressed() {
     setState(() {
       if (this._searchIcon.icon == Icons.search) {
@@ -82,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.indigo,
-              onPressed: (){},
+              onPressed: addPersonScreen,
               child:  Icon(Icons.person_add),
             ),
         appBar:  AppBar(

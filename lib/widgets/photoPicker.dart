@@ -7,10 +7,10 @@ class PhotoPicker extends StatefulWidget {
   File image;
   Function imageCallBack;
   int photoNum=0;
+  bool small=false;
   @override
   _PhotoPickerState createState() => _PhotoPickerState();
-
-  PhotoPicker({this.image,this.imageCallBack,this.photoNum});
+  PhotoPicker({this.image,this.imageCallBack,this.photoNum,this.small=false});
 }
 
 class _PhotoPickerState extends State<PhotoPicker> {
@@ -72,14 +72,14 @@ class _PhotoPickerState extends State<PhotoPicker> {
                              alignment: AlignmentDirectional.center,
                             children: <Widget>[
                                Container(
-                                width: 150,
-                                height: 150,
+                                width: (widget.small)?120:150,
+                                height: (widget.small)?120:150,
                                 child: CircleAvatar(radius: 140,backgroundColor: Theme.of(context).primaryColor,),
                               ),
                               Container(
-                                width: 140,
-                                height: 140,
-                                child: widget.image!=null?CircleAvatar(backgroundImage: new FileImage(widget.image), radius: 140.0,):CircleAvatar(radius: 140,)
+                                width: (widget.small)?112:140,
+                                height:(widget.small)?112:140,
+                                child: widget.image!=null?CircleAvatar(backgroundImage: new FileImage(widget.image), radius: (widget.small)?112:140,):CircleAvatar(backgroundColor: Colors.grey ,radius: (widget.small)?112:140,)
                               ),
                              
                             ],
@@ -105,12 +105,12 @@ class _PhotoPickerState extends State<PhotoPicker> {
                           //     ),
                           //   ),
                           // ),
-                          if(widget.photoNum!=null)ImageNumberIcon( top: -5, right: -20,number:widget.photoNum,),
-                         (widget.image==null)? ImageButton( bottom: -5, right: -20,image: widget.image,imageCallBack: getCameraImage,iconData:Icons.add_a_photo):
-                         ImageButton(bottom: -5, right: -20,image: widget.image,imageCallBack: (){widget.imageCallBack(null);},iconData:Icons.close ,),
+                          if(widget.photoNum!=null)ImageNumberIcon(top: (widget.small)?-5:-5, right:  (widget.small)?-20:-20,number:widget.photoNum,),
+                         (widget.image==null)? ImageButton( small: widget.small ,bottom: (widget.small)?-5:-5, right: (widget.small)?-20:-20,image: widget.image,imageCallBack: getCameraImage,iconData:Icons.add_a_photo):
+                         ImageButton(small: widget.small ,bottom:  (widget.small)?-5:-5, right: -20,image: widget.image,imageCallBack: (){widget.imageCallBack(null);},iconData:Icons.close ,),
                          
-                         (widget.image==null)? ImageButton( bottom: -5, left: -20,image: widget.image,imageCallBack: getGalleryImage,iconData:Icons.image ,):
-                         ImageButton( bottom: -5, left: -20,image: widget.image,imageCallBack: cropImage,iconData:Icons.crop ,),
+                         (widget.image==null)? ImageButton(small: widget.small ,bottom:  (widget.small)?-5:-5, left: (widget.small)?-20:-20,image: widget.image,imageCallBack: getGalleryImage,iconData:Icons.image ,):
+                         ImageButton( small: widget.small ,bottom:  (widget.small)?-5:-5, left: (widget.small)?-20:-20,image: widget.image,imageCallBack: cropImage,iconData:Icons.crop ,),
                           
                         ],
                       )
@@ -126,7 +126,8 @@ class ImageButton extends StatelessWidget {
    File image;
    Function imageCallBack;
    IconData iconData;
-   ImageButton({this.right,this.left,this.top,this.bottom,this.image,this.imageCallBack,this.iconData}) ;
+   bool small = false;
+   ImageButton({this.right,this.left,this.top,this.bottom,this.image,this.imageCallBack,this.iconData,this.small}) ;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +143,7 @@ class ImageButton extends StatelessWidget {
          child: new Icon(
            iconData,
            color: Colors.white,
-           size: 20.0,
+           size: (small)?15:20
          ),
          shape: new CircleBorder(),
          elevation: 0,
