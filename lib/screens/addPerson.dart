@@ -37,14 +37,14 @@ class _AddPersonState extends State<AddPerson> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   Contact newContact = new Contact();
-   List<String> _areas = <String>['', 'red', 'green', 'blue', 'orange'];
-  List<String> _colors = <String>['', 'red', 'green', 'blue', 'orange'];
+  List<String> _areas = <String>['', 'red', 'green', 'blue', 'orange'];
+  //List<String> _colors = <String>['', 'red', 'green', 'blue', 'orange'];
   List<String> _howReligios = <String>['', 'red', 'green', 'blue', 'orange'];
   List<String> _whatHashkafa = <String>['', 'red', 'green', 'blue', 'orange'];
   List<String> _statuses = <String>['', 'red', 'green', 'blue', 'orange'];
   List<String> _edas = <String>['', 'red', 'green', 'blue', 'orange'];
   List<String> _smokes = <String>['', 'red', 'green', 'blue', 'orange'];
-  List<String> _bodys = <String>['', 'red', 'green', 'blue', 'orange'];
+
   String _color = '';
   String _area = '';
   String _religious = '';
@@ -52,7 +52,8 @@ class _AddPersonState extends State<AddPerson> {
   String _status = '';
   String _eda = '';
   String _smoke = '';
-  String itsBody = '';
+  double personHeight = 1.5;
+  String myHeight = "";
 
   File _image1;
   File _image2;
@@ -206,8 +207,10 @@ class _AddPersonState extends State<AddPerson> {
       areaState.didChange(areaValue);
       statusState.didChange(statusValue);
       religiosState.didChange(religiosValue);
+      edaState.didChange(edaValue);
+      smokeState.didChange(smokeValue);
     });
-     
+
     if (!form.validate()) {
       showMessage('Form is not valid!  Please review and correct.');
     } else {
@@ -225,23 +228,31 @@ class _AddPersonState extends State<AddPerson> {
       print('TODO - we will write the submission part next...');
     }
   }
-  String areaValue="";
+
+  String areaValue = "";
   var areaState;
 
-  String statusValue="";
+  String statusValue = "";
   var statusState;
 
-  String religiosValue="";
+  String religiosValue = "";
   var religiosState;
 
-  
+  String hashkafaValue = "";
+  var hashkafaState;
+
+  String edaValue = "";
+  var edaState;
+
+  String smokeValue = "";
+  var smokeState;
+
   TextFormField tff;
   Map map1 = new Map();
   List lll = new List();
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -261,354 +272,459 @@ class _AddPersonState extends State<AddPerson> {
                   ),
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Form(
-                    key: _formKey,
-                    autovalidate: true,
-                    child: new Column(
-                      children: <Widget>[
-                        //FIRST NAME
-                        new TextFormField(
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.person),
-                            hintText: 'Enter your first name',
-                            labelText: 'First Name',
-                          ),
-                          inputFormatters: [
-                            new LengthLimitingTextInputFormatter(30)
-                          ],
-                          validator: (val) =>
-                              val.isEmpty ? 'First name is required' : null,
-                          onSaved: (val) => newContact.fName = val,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: _formKey,
+                  autovalidate: true,
+                  child: new Column(
+                    children: <Widget>[
+                      //FIRST NAME
+                      new TextFormField(
+                        decoration: const InputDecoration(
+                          icon: const Icon(Icons.person),
+                          hintText: 'Enter your first name',
+                          labelText: 'First Name',
                         ),
-                        //LAST NAME
-                        new TextFormField(
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.person),
-                            hintText: 'Enter your last name',
-                            labelText: 'Last Name',
-                          ),
-                          inputFormatters: [
-                            new LengthLimitingTextInputFormatter(30)
-                          ],
-                          validator: (val) =>
-                              val.isEmpty ? 'Last name is required' : null,
-                          onSaved: (val) => newContact.lName = val,
+                        inputFormatters: [
+                          new LengthLimitingTextInputFormatter(30)
+                        ],
+                        validator: (val) =>
+                            val.isEmpty ? 'First name is required' : null,
+                        onSaved: (val) => newContact.fName = val,
+                      ),
+                      //LAST NAME
+                      new TextFormField(
+                        decoration: const InputDecoration(
+                          icon: const Icon(Icons.person),
+                          hintText: 'Enter your last name',
+                          labelText: 'Last Name',
                         ),
-                        //BIRTH DAY
-                        new Row(children: <Widget>[
-                          new Expanded(
-                              child: new TextFormField(
-                            decoration: new InputDecoration(
-                              icon: const Icon(Icons.calendar_today),
-                              hintText: 'Enter your date of birth',
-                              labelText: 'Date Of Birth',
-                            ),
-                            controller: _controller,
-                            keyboardType: TextInputType.datetime,
-                            validator: (val) {
-                           
-                               if( isValidDob(val) ) return null; return 'Not a valid date';
-                            },
-                            onSaved: (val) => newContact.dob = convertToDate(val),
-                          )),
-                          new IconButton(
-                            icon: new Icon(Icons.more_horiz),
-                            tooltip: 'Choose date',
-                            onPressed: (() async{
-                            await  _chooseDate(context, _controller.text);
-                            
-                            }),
-                          )
-                        ]),
-                        //AREA
-                        new FormField<String>(
-                          builder: (FormFieldState<String> state) {
-                            areaState=state;
-                            return InputDecorator(
-                              decoration: InputDecoration(
-                                icon: const Icon(Icons.location_on),
-                                labelText: 'Area',
-                                errorText: state.hasError ? state.errorText : null,
-                              ),
-                              isEmpty: _area == '',
-                              child: new DropdownButtonHideUnderline(
-                                child: new DropdownButton<String>(
-                                  value: _area,
-                                  isDense: true,
-                                  onChanged: (String newValue) {
-                                   // map1["date"]= {newValue.toString():state};
-                                    //lll.add(state);
-                                    areaValue=newValue;
-                                      map1.putIfAbsent(newValue, () =>state);
-                                    setState(() {
-                                      newContact.area = newValue;
-                                      _area = newValue;
-                                      state.didChange(newValue);
-                                    });
-                                  },
-                                  items: _areas.map((String value) {
-                                    return new DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            );
-                          },
+                        inputFormatters: [
+                          new LengthLimitingTextInputFormatter(30)
+                        ],
+                        validator: (val) =>
+                            val.isEmpty ? 'Last name is required' : null,
+                        onSaved: (val) => newContact.lName = val,
+                      ),
+                      //BIRTH DAY
+                      new Row(children: <Widget>[
+                        new Expanded(
+                            child: new TextFormField(
+                          decoration: new InputDecoration(
+                            icon: const Icon(Icons.calendar_today),
+                            hintText: 'Enter your date of birth',
+                            labelText: 'Date Of Birth',
+                          ),
+                          controller: _controller,
+                          keyboardType: TextInputType.datetime,
                           validator: (val) {
-                            return val != '' ? null : 'Please select an area';
+                            if (isValidDob(val)) return null;
+                            return 'Not a valid date';
                           },
-                        ),
-                        //STATUS
-                        new FormField<String>(
-                          builder: (FormFieldState<String> state) {
-                            statusState = state;
-                            return InputDecorator(
-                              decoration: InputDecoration(
-                                icon: const Icon(Icons.people),
-                                labelText: 'Status',
-                                errorText:
-                                    state.hasError ? state.errorText : null,
-                              ),
-                              isEmpty: _status == '',
-                              child: new DropdownButtonHideUnderline(
-                                child: new DropdownButton<String>(
-                                  value: _status,
-                                  isDense: true,
-                                  onChanged: (String newValue) {
-                                    statusValue = newValue;
-                                    setState(() {
-                                      newContact.status = newValue;
-                                      _status = newValue;
-                                      state.didChange(newValue);
-                                    });
-                                  },
-                                  items: _statuses.map((String value) {
-                                    return new DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            );
-                          },
-                          validator: (val) {
-                            return val != '' ? null : 'Please select a status';
-                          },
-                        ),
-                          //RELIGIOUS
-                        new FormField<String>(
-                          builder: (FormFieldState<String> state) {
-                            religiosState = state;
-                            return InputDecorator(
-                              decoration: InputDecoration(
-                                icon: const Icon(Icons.call_split),
-                                labelText: 'how religious',
-                                errorText:
-                                    state.hasError ? state.errorText : null,
-                              ),
-                              isEmpty: _religious == '',
-                              child: new DropdownButtonHideUnderline(
-                                child: new DropdownButton<String>(
-                                  value: _religious,
-                                  isDense: true,
-                                  onChanged: (String newValue) {
-                                    religiosValue = newValue;
-                                    setState(() {
-                                      newContact.status = newValue;
-                                      _religious = newValue;
-                                      state.didChange(newValue);
-                                    });
-                                  },
-                                  items: _howReligios.map((String value) {
-                                    return new DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            );
-                          },
-                          validator: (val) {
-                            return val != '' ? null : 'Please select how religious';
-                          },
-                        ),
-                         
-                        //ABOUT ME SHORT
-                        new TextFormField(
-                              maxLines: null,
-                               maxLength:70,
-                               
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.short_text),
-                            hintText: 'About me',
-                            labelText: 'About me short',
-                          ),
-                          inputFormatters: [
-                            new LengthLimitingTextInputFormatter(70)
-                          ],
-                          validator: (val) =>
-                              val.isEmpty ? 'About me is requierd' : null,
-                          onSaved: (val) => newContact.aboutMeShort = val,
-                        ),
-                        //ABOUT ME LONG
-                        new TextFormField(
-                            maxLines: null,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.format_align_justify),
-                            hintText: 'About me',
-                            labelText: 'About me long',
-                          ),
-                          // inputFormatters: [
-                          //   new LengthLimitingTextInputFormatter(500)
-                          // ],
-                          validator: (val) =>
-                              val.isEmpty ? 'About me is requierd' : null,
-                          onSaved: (val) => newContact.aboutMeLong = val,
-                        ),
-                        new FormField<String>(
-                          builder: (FormFieldState<String> state) {
-                            return InputDecorator(
-                              decoration: InputDecoration(
-                                icon: const Icon(Icons.color_lens),
-                                labelText: 'Color',
-                                errorText:
-                                    state.hasError ? state.errorText : null,
-                              ),
-                              isEmpty: _color == '',
-                              child: new DropdownButtonHideUnderline(
-                                child: new DropdownButton<String>(
-                                  value: _color,
-                                  isDense: true,
-                                  onChanged: (String newValue) {
-                                    setState(() {
-                                      newContact.favoriteColor = newValue;
-                                      _color = newValue;
-                                      state.didChange(newValue);
-                                    });
-                                  },
-                                  items: _colors.map((String value) {
-                                    return new DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            );
-                          },
-                          validator: (val) {
-                            return val != '' ? null : 'Please select a color';
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text("Add at least one image!")),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: PhotoPicker(
-                            image: _image1,
-                            imageCallBack: imageCallBack1,
-                            photoNum: 1,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            PhotoPicker(
-                              image: _image2,
-                              imageCallBack: imageCallBack2,
-                              photoNum: 2,
-                              small: true,
-                            ),
-                            PhotoPicker(
-                              image: _image3,
-                              imageCallBack: imageCallBack3,
-                              photoNum: 3,
-                              small: true,
-                            ),
-                            PhotoPicker(
-                              image: _image4,
-                              imageCallBack: imageCallBack4,
-                              photoNum: 4,
-                              small: true,
-                            ),
-                          ],
-                        ),
-                         SizedBox(
-                          height: 40,
-                        ),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Optional Fields",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[600]),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        //PHONE NUMBER
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.phone),
-                            hintText: 'Enter a phone number',
-                            labelText: 'Phone',
-                          ),
-                          keyboardType: TextInputType.phone,
-                          inputFormatters: [
-                            new WhitelistingTextInputFormatter(
-                                new RegExp(r'^[()\d -]{1,15}$')),
-                          ],
-                          validator: (value) => isValidPhoneNumber(value)
-                              ? null
-                              : 'Phone number must be entered as (###)###-####',
-                          onSaved: (val) => newContact.phone = val,
-                        ),
-                       //EMAIL ADDRESS
-                        new TextFormField(
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.email),
-                            hintText: 'Enter a email address',
-                            labelText: 'Email',
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) => isValidEmail(value)
-                              ? null
-                              : 'Please enter a valid email address',
-                          onSaved: (val) => newContact.email = val,
-                        ),
-                            new Container(
-                       // padding: const EdgeInsets.only(left: 40.0, top: 20.0),
-                        child: new RaisedButton(
-                          child: const Text('Submit'),
-                          onPressed: _submitForm,
+                          onSaved: (val) => newContact.dob = convertToDate(val),
                         )),
-                      ],
-                    ),
+                        new IconButton(
+                          icon: new Icon(Icons.more_horiz),
+                          tooltip: 'Choose date',
+                          onPressed: (() async {
+                            await _chooseDate(context, _controller.text);
+                          }),
+                        )
+                      ]),
+                      //AREA
+                      new FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          areaState = state;
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              icon: const Icon(Icons.location_on),
+                              labelText: 'Area',
+                              errorText:
+                                  state.hasError ? state.errorText : null,
+                            ),
+                            isEmpty: _area == '',
+                            child: new DropdownButtonHideUnderline(
+                              child: new DropdownButton<String>(
+                                value: _area,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  // map1["date"]= {newValue.toString():state};
+                                  //lll.add(state);
+                                  areaValue = newValue;
+                                  map1.putIfAbsent(newValue, () => state);
+                                  setState(() {
+                                    newContact.area = newValue;
+                                    _area = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: _areas.map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                        validator: (val) {
+                          return val != '' ? null : 'Please select an area';
+                        },
+                      ),
+                      //STATUS
+                      new FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          statusState = state;
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              icon: const Icon(Icons.people),
+                              labelText: 'Status',
+                              errorText:
+                                  state.hasError ? state.errorText : null,
+                            ),
+                            isEmpty: _status == '',
+                            child: new DropdownButtonHideUnderline(
+                              child: new DropdownButton<String>(
+                                value: _status,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  statusValue = newValue;
+                                  setState(() {
+                                    newContact.status = newValue;
+                                    _status = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: _statuses.map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                        validator: (val) {
+                          return val != '' ? null : 'Please select a status';
+                        },
+                      ),
+                      //RELIGIOUS
+                      new FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          religiosState = state;
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              icon: const Icon(Icons.call_split),
+                              labelText: 'how religious',
+                              errorText:
+                                  state.hasError ? state.errorText : null,
+                            ),
+                            isEmpty: _religious == '',
+                            child: new DropdownButtonHideUnderline(
+                              child: new DropdownButton<String>(
+                                value: _religious,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  religiosValue = newValue;
+                                  setState(() {
+                                    newContact.status = newValue;
+                                    _religious = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: _howReligios.map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                        validator: (val) {
+                          return val != ''
+                              ? null
+                              : 'Please select how religious';
+                        },
+                      ),
+                      //HASHKAFA
+                      new FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          hashkafaState = state;
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              icon: const Icon(Icons.group_work),
+                              labelText: 'what hashkafa',
+                              errorText:
+                                  state.hasError ? state.errorText : null,
+                            ),
+                            isEmpty: _hashkafa == '',
+                            child: new DropdownButtonHideUnderline(
+                              child: new DropdownButton<String>(
+                                value: _hashkafa,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  hashkafaValue = newValue;
+                                  setState(() {
+                                    newContact.status = newValue;
+                                    _hashkafa = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: _whatHashkafa.map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                        validator: (val) {
+                          return val != ''
+                              ? null
+                              : 'Please select what hashkafa';
+                        },
+                      ),
+                      //EDA
+                      new FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          edaState = state;
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              icon: const Icon(Icons.fastfood),
+                              labelText: 'what eda',
+                              errorText:
+                                  state.hasError ? state.errorText : null,
+                            ),
+                            isEmpty: _eda == '',
+                            child: new DropdownButtonHideUnderline(
+                              child: new DropdownButton<String>(
+                                value: _eda,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  edaValue = newValue;
+                                  setState(() {
+                                    newContact.status = newValue;
+                                    _eda = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: _edas.map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                        validator: (val) {
+                          return val != '' ? null : 'Please select what eda';
+                        },
+                      ),
+                      //SMOKE
+                      new FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          smokeState = state;
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              icon: const Icon(Icons.smoke_free),
+                              labelText: 'smoking',
+                              errorText:
+                                  state.hasError ? state.errorText : null,
+                            ),
+                            isEmpty: _smoke == '',
+                            child: new DropdownButtonHideUnderline(
+                              child: new DropdownButton<String>(
+                                value: _smoke,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  smokeValue = newValue;
+                                  setState(() {
+                                    newContact.status = newValue;
+                                    _smoke = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: _smokes.map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                        validator: (val) {
+                          return val != '' ? null : 'Please select if smokes';
+                        },
+                      ),
+
+                      //ABOUT ME SHORT
+                      new TextFormField(
+                        maxLines: null,
+                        maxLength: 70,
+                        decoration: const InputDecoration(
+                          icon: const Icon(Icons.short_text),
+                          hintText: 'About me',
+                          labelText: 'About me short',
+                        ),
+                        inputFormatters: [
+                          new LengthLimitingTextInputFormatter(70)
+                        ],
+                        validator: (val) =>
+                            val.isEmpty ? 'About me is requierd' : null,
+                        onSaved: (val) => newContact.aboutMeShort = val,
+                      ),
+                      //ABOUT ME LONG
+                      new TextFormField(
+                        maxLines: null,
+                        decoration: const InputDecoration(
+                          icon: const Icon(Icons.format_align_justify),
+                          hintText: 'About me',
+                          labelText: 'About me long',
+                        ),
+                        // inputFormatters: [
+                        //   new LengthLimitingTextInputFormatter(500)
+                        // ],
+                        validator: (val) =>
+                            val.isEmpty ? 'About me is requierd' : null,
+                        onSaved: (val) => newContact.aboutMeLong = val,
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Row(
+                          children: <Widget>[
+                            Text("height"),
+                            Expanded(
+                              child: Slider(
+                                min: 1.0,
+                                max: 2.3,
+                                divisions: 130,
+                                label: "" + personHeight.toStringAsFixed(2),
+                                value: personHeight,
+                                onChanged: ((newValue) {
+                                  setState(() {
+                                    personHeight = newValue;
+                                  });
+                                }),
+                              ),
+                            ),
+                            Text("" + personHeight.toStringAsFixed(2) + " m")
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text("Add at least one image!")),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: PhotoPicker(
+                          image: _image1,
+                          imageCallBack: imageCallBack1,
+                          photoNum: 1,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          PhotoPicker(
+                            image: _image2,
+                            imageCallBack: imageCallBack2,
+                            photoNum: 2,
+                            small: true,
+                          ),
+                          PhotoPicker(
+                            image: _image3,
+                            imageCallBack: imageCallBack3,
+                            photoNum: 3,
+                            small: true,
+                          ),
+                          PhotoPicker(
+                            image: _image4,
+                            imageCallBack: imageCallBack4,
+                            photoNum: 4,
+                            small: true,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Optional Fields",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[600]),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //PHONE NUMBER
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          icon: const Icon(Icons.phone),
+                          hintText: 'Enter a phone number',
+                          labelText: 'Phone',
+                        ),
+                        keyboardType: TextInputType.phone,
+                        inputFormatters: [
+                          new WhitelistingTextInputFormatter(
+                              new RegExp(r'^[()\d -]{1,15}$')),
+                        ],
+                        validator: (value) => isValidPhoneNumber(value)
+                            ? null
+                            : 'Phone number must be entered as (###)###-####',
+                        onSaved: (val) => newContact.phone = val,
+                      ),
+                      //EMAIL ADDRESS
+                      new TextFormField(
+                        decoration: const InputDecoration(
+                          icon: const Icon(Icons.email),
+                          hintText: 'Enter a email address',
+                          labelText: 'Email',
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) => isValidEmail(value)
+                            ? null
+                            : 'Please enter a valid email address',
+                        onSaved: (val) => newContact.email = val,
+                      ),
+                      new Container(
+                          // padding: const EdgeInsets.only(left: 40.0, top: 20.0),
+                          child: new RaisedButton(
+                        child: const Text('Submit'),
+                        onPressed: _submitForm,
+                      ),
+                      ),
+                    ],
                   ),
-            ),
-               
+                ),
+              ),
             ],
           ),
         ),
