@@ -1,9 +1,13 @@
+import 'package:dating/providers/langText.dart';
 import 'package:dating/screens/addPerson.dart';
 import 'package:dating/screens/shadchanList.dart';
 import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/widgets/fABBottomAppBarItem.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
+import '../main.dart';
 import 'chatList.dart';
 import 'everyone.dart';
 import 'favoritesList.dart';
@@ -78,9 +82,9 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: LightTheme.getTheme(),
-          home: Scaffold(
+    return Scaffold(
+   
+          body: Scaffold(
             extendBody: true,
             floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
             floatingActionButton: FloatingActionButton(
@@ -184,10 +188,10 @@ IconButton(
         backgroundColor: LightTheme.getTheme().primaryColor,
         items: [
           // FABBottomAppBarItem(iconData: Icons.menu, text: 'This'),
-          FABBottomAppBarItem(iconData: Icons.people_outline, text: 'my list'),
-          FABBottomAppBarItem(iconData: Icons.people, text: 'everyrone'),
-          FABBottomAppBarItem(iconData: Icons.star, text: 'favorites'),
-           FABBottomAppBarItem(iconData: Icons.chat, text: 'my chats'),
+          FABBottomAppBarItem(iconData: Icons.people_outline, text: LocaleText.getLocaleText(MyApp.getLocale(), "My list")),
+          FABBottomAppBarItem(iconData: Icons.people, text: LocaleText.getLocaleText(MyApp.getLocale(), "Everyone")),
+          FABBottomAppBarItem(iconData: Icons.star, text: LocaleText.getLocaleText(MyApp.getLocale(), "Favorites")),
+           FABBottomAppBarItem(iconData: Icons.chat, text: LocaleText.getLocaleText(MyApp.getLocale(), "My Chats")),
         ],
       ),
       ),

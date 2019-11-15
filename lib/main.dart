@@ -11,18 +11,37 @@ import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/gradientSwitcher.dart';
 import 'package:dating/widgets/loader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'dart:ui' as ui;
 
+import 'package:shared_preferences/shared_preferences.dart';
+Locale local;
 void main() async{ 
   ThemeData themeData = await ThemeController.getTheme();
   runApp(MyApp(theme: themeData,));
   }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget { 
   final ThemeData theme;
-  MyApp({this.theme});
+  MyApp({this.theme}){
+    local= Locale('he');
+  }
+   static String getLocale() {
+    try {
+      if (locale != null) {
+        return locale.languageCode;
+      } else
+        return ui.window.locale.languageCode;
+    } catch (error) {
+      print("error in get locale $error");
+      return "en";
+    }
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,6 +50,17 @@ class MyApp extends StatelessWidget {
     //   data: (brightness) => this.theme,
     //   themedWidgetBuilder: (context, theme) {
         return  MaterialApp(
+           localizationsDelegates: [
+   // ... app-specific localization delegate[s] here
+   GlobalMaterialLocalizations.delegate,
+   GlobalWidgetsLocalizations.delegate,
+ ],
+ supportedLocales: [
+    const Locale('en'), // English
+    const Locale('he'), // Hebrew
+    // ... other locales the app supports
+  ],
+     locale: local,
       title: 'Flutter Demo',
       theme: LightTheme.getTheme(),
       routes: <String, WidgetBuilder>{
@@ -67,12 +97,17 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
+  
   @override
   _MyHomePageState createState() => _MyHomePageState();
+
+  
+
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+
   String phoneNo;
   String smsCode;
   String verificationId;
@@ -83,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
   GradientSwitcher gradientButtonWoman;
   TextEditingController phoneCode = TextEditingController(text: "+972");
   bool isLoading = false;
-
+  
   Future<void> verifyPhone() async {
     setState(() {
      isLoading=true; 
@@ -213,11 +248,8 @@ class _MyHomePageState extends State<MyHomePage> {
     gradientButtonMan =    GradientSwitcher.getGradiantButton(context, selectMan, 'MAN', 20,genderMale==null?false:genderMale);
     gradientButtonWoman =  GradientSwitcher.getGradiantButton(context, selectWoman, 'WOMAN', 20,genderWoman==null?false:genderWoman);
     return Scaffold(
-      // floatingActionButton: FancyFab(context: context,),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
+  
+      
       body: Container(
          decoration: BoxDecoration(
         // Box decoration takes a gradient

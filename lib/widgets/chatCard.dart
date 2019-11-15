@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/providers/langText.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import 'loader.dart';
 class ChatCard extends StatelessWidget {
   @override
@@ -44,8 +46,23 @@ class ChatCard extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                       Positioned(
+                                      MyApp.getLocale()=="he"?  Positioned(
                                         top: 0,
+                                        // MyApp.getLocale()=="he"?  left:0: right: 0,
+                                        right: 0,
+                                        child: Stack(
+                                          alignment: AlignmentDirectional.center,
+                                          children: <Widget>[
+                                           
+                                            CircleAvatar(
+                                              radius: 5,
+                                              backgroundColor: Colors.green,
+                                            ),
+                                          ],
+                                        ),
+                                      ):Positioned(
+                                        top: 0,
+                                        // MyApp.getLocale()=="he"?  left:0: right: 0,
                                         left: 0,
                                         child: Stack(
                                           alignment: AlignmentDirectional.center,
@@ -142,7 +159,7 @@ class ChatCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                  Text(
-                                    "Contacted Me About:",
+                                    LocaleText.getLocaleText(MyApp.getLocale(), 'Contacted me about'),
                                     style:
                                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   ),

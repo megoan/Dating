@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/providers/langText.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import 'loader.dart';
 
 class ShadchanListCard extends StatelessWidget {
@@ -90,7 +92,7 @@ class ShadchanListCard extends StatelessWidget {
                             fontSize: 20,
                             color: Theme.of(context).primaryColor),
                       ),
-                      Text("views")
+                      Text(LocaleText.getLocaleText(MyApp.getLocale(), 'viewes'))
                     ],
                   ),
                 ),

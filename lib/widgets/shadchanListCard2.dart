@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/providers/langText.dart';
+import 'package:dating/screens/compareThemList.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import 'loader.dart';
 
 class ShadchanListCard2 extends StatelessWidget {
@@ -67,10 +70,12 @@ class ShadchanListCard2 extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
-                                "Samy, 25",
-                                style:
-                                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              Row(
+                                children: <Widget>[
+                                  Text("Samy", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                                   Text(" ,", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                                    Text("25", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                                ],
                               ),
                                Text("very very funny dsdsh hgjhghhhh hhhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhadhg jdhdfg gdhjhg ghjdg gyjhgs dhjdsf fdshjhg",style: TextStyle(color: Colors.grey),),
                               // Row(
@@ -99,7 +104,7 @@ class ShadchanListCard2 extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: <Widget>[
-                           Text("views",style: TextStyle(color: Colors.grey),),
+                           Text(LocaleText.getLocaleText(MyApp.getLocale(), 'viewes'),style: TextStyle(color: Colors.grey),),
                           Text(
                             "500",
                             style: TextStyle(
@@ -111,7 +116,7 @@ class ShadchanListCard2 extends StatelessWidget {
                     ),
                     Column(
                       children: <Widget>[
-                         Text("requests",style: TextStyle(color: Colors.grey),),
+                         Text(LocaleText.getLocaleText(MyApp.getLocale(), 'requests'),style: TextStyle(color: Colors.grey),),
                         Text(
                           "50",
                           style: TextStyle(
@@ -122,7 +127,7 @@ class ShadchanListCard2 extends StatelessWidget {
                     ),
                     Column(
                       children: <Widget>[
-                         Text("dates",style: TextStyle(color: Colors.grey),),
+                         Text(LocaleText.getLocaleText(MyApp.getLocale(), 'dates'),style: TextStyle(color: Colors.grey),),
                         Text(
                           "4",
                           style: TextStyle(
@@ -132,11 +137,14 @@ class ShadchanListCard2 extends StatelessWidget {
                       ],
                     ),
                     OutlineButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new CompareThemList()));
+  
+                      },
                     child: Container(
                       child: Row(
                         children: <Widget>[
-                          Text("Compare",style: TextStyle(color: Colors.purple),),
+                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),style: TextStyle(color: Colors.purple),),
                         ],
                       ),
                     ),

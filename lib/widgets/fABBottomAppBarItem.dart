@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class FABBottomAppBarItem {
   FABBottomAppBarItem({this.iconData, this.text});
   IconData iconData;
@@ -60,7 +62,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     return BottomAppBar(
       shape: widget.notchedShape,
       child: Padding(
-        padding: const EdgeInsets.only(right: 70),
+        padding: (MyApp.getLocale()=="he")?const EdgeInsets.only(left: 70):EdgeInsets.only(right: 70),
         child: Row(
 
           //mainAxisSize: MainAxisSize.max,

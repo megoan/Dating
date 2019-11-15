@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/main.dart';
 import 'package:flutter/material.dart';
 
 import 'loader.dart';
@@ -48,10 +49,14 @@ class PersonListCardTest extends StatelessWidget {
                       children: <Widget>[
                         Icon(Icons.person, color: Colors.white),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text("Samy, 28",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
+                          padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
+                          child: Row(
+                            children: <Widget>[
+                              Text("שמואל",  style:  TextStyle(fontSize: 18, color: Colors.white)),
+                              Text(" ,",  style:  TextStyle(fontSize: 18, color: Colors.white)),
+                               Text("25",  style:  TextStyle(fontSize: 18, color: Colors.white)),
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -62,8 +67,8 @@ class PersonListCardTest extends StatelessWidget {
                       children: <Widget>[
                         Icon(Icons.location_city, color: Colors.white),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text("Bet Shemesh",
+                          padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
+                          child: Text("בית שמש",
                               style:
                                   TextStyle(fontSize: 18, color: Colors.white)),
                         )
@@ -76,7 +81,7 @@ class PersonListCardTest extends StatelessWidget {
                       children: <Widget>[
                         Icon(Icons.short_text, color: Colors.white),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10),
+                          padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
                           child: FittedBox(
                               fit: BoxFit.fitWidth,
                               child: Text("dsfjhfgsh djkasdfg dsfsdfsdf h",

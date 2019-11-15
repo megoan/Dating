@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:io';
 
+import 'package:dating/providers/langText.dart';
 import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/widgets/DateText.dart';
 import 'package:dating/widgets/photoPicker.dart';
@@ -8,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'package:grouped_buttons/grouped_buttons.dart';
+
+import '../main.dart';
 
 class Contact {
   String fName;
@@ -37,13 +41,16 @@ class _AddPersonState extends State<AddPerson> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   Contact newContact = new Contact();
-  List<String> _areas = <String>['', 'red', 'green', 'blue', 'orange'];
+  List<String> _areas = <String>['', 'גוש דן והמרכז' , 'השרון והסביבה', 'ירושלים והסביבה','באר שבע והדרום','חיפה והצפון','חו"ל'];
   //List<String> _colors = <String>['', 'red', 'green', 'blue', 'orange'];
-  List<String> _howReligios = <String>['', 'red', 'green', 'blue', 'orange'];
-  List<String> _whatHashkafa = <String>['', 'red', 'green', 'blue', 'orange'];
-  List<String> _statuses = <String>['', 'red', 'green', 'blue', 'orange'];
-  List<String> _edas = <String>['', 'red', 'green', 'blue', 'orange'];
-  List<String> _smokes = <String>['', 'red', 'green', 'blue', 'orange'];
+  List<String> _howReligios = <String>['', 'מסורתי', 'לייט', 'רגיל', 'מאוד','דוס'];
+  List<String> _whatHashkafa = <String>['', 'לאומי', 'חרדי', 'חבד', 'ברסלב','חוזר בתשובה','יהודי'];
+  List<String> _statuses = <String>['', 'רווק', 'אלמן', 'גרוש'];
+  List<String> _edas = <String>['', 'אשכנזי', 'ספרדי', 'תימני', 'אתיופי','צרפתי','מעורב'];
+  List<String> _smokes = <String>['', 'לא מעשן', 'מעשן', 'לפעמים', 'משתדל להפסיק'];
+
+  List<String> _FemaleSheruts = <String>[ 'צבא', 'מכינה','שנה שירות', 'שנתיים שירות', 'מדרשה','שליחות','גורנישט'];
+  List<String> _MaleSheruts = <String>[ 'צבא קרבי', "צבא ג'וב", 'מכינה', 'הסדר','גבוהה','שירות לאומי','שליחות','גורנישט'];
 
   String _color = '';
   String _area = '';
@@ -52,9 +59,26 @@ class _AddPersonState extends State<AddPerson> {
   String _status = '';
   String _eda = '';
   String _smoke = '';
-  double personHeight = 1.5;
-  String myHeight = "";
+  String _FemaleSherut;
+  String _MaleSherut;
 
+  double personHeight = 1.5;
+  double lookingPersonHeightMin = 1.4;
+  double lookingPersonHeightMax = 1.85;
+
+   double personAge = 23;
+  double lookingPersonAgeMin = 18;
+  double lookingPersonAgeMax = 99;
+
+  String myHeight = "";
+  String hisHeight1 = "";
+  String hisHeight2 = "";
+  RangeValues rangeValues = RangeValues(1, 2.3);
+  RangeLabels rangeLabels = RangeLabels('1','2.3');
+
+  RangeValues rangeValuesAge = RangeValues(18, 99);
+  RangeLabels rangeLabelsAge = RangeLabels('18','99');
+  String sSelected = LocaleText.getLocaleText(MyApp.getLocale(), "Female") ;
   File _image1;
   File _image2;
   File _image3;
@@ -197,22 +221,18 @@ class _AddPersonState extends State<AddPerson> {
 
   void _submitForm() {
     final FormState form = _formKey.currentState;
-    // map1.forEach((k,v)=>{
-    //   v.forEach((k2,v2)=>{
-    //     v2.didChange(k2)
-    //   })
-    // });
-    // state.didChange(newValue);
+
     setState(() {
       areaState.didChange(areaValue);
       statusState.didChange(statusValue);
       religiosState.didChange(religiosValue);
       edaState.didChange(edaValue);
+      hashkafaState.didChange(hashkafaValue);
       smokeState.didChange(smokeValue);
     });
-
+//LocaleText.getLocaleText(MyApp.getLocale(), "Female") ;
     if (!form.validate()) {
-      showMessage('Form is not valid!  Please review and correct.');
+      showMessage(LocaleText.getLocaleText(MyApp.getLocale(), "Form is not valid!  Please review and correct!") );
     } else {
       form.save(); //This invokes each onSaved event
 
@@ -256,22 +276,22 @@ class _AddPersonState extends State<AddPerson> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("add Person"),
+        title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate') ),
       ),
       body: SingleChildScrollView(
         child: Container(
           child: Column(
             children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
+             // Align(
+               // alignment: Alignment.topLeft,
+                Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
-                    "Required Fields",
+                    LocaleText.getLocaleText(MyApp.getLocale(), 'Required fields') ,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
-              ),
+             // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Form(
@@ -279,32 +299,45 @@ class _AddPersonState extends State<AddPerson> {
                   autovalidate: true,
                   child: new Column(
                     children: <Widget>[
+                      RadioButtonGroup(orientation: GroupedButtonsOrientation.HORIZONTAL,
+                    
+  labels: <String>[
+      LocaleText.getLocaleText(MyApp.getLocale(), 'Female'),
+      LocaleText.getLocaleText(MyApp.getLocale(), 'Male'),
+  ],
+  picked:sSelected ,
+  onSelected: (String selected) {
+    setState(() {
+      sSelected = selected;
+    });
+  }
+),
                       //FIRST NAME
                       new TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           icon: const Icon(Icons.person),
-                          hintText: 'Enter your first name',
-                          labelText: 'First Name',
+                          hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
+                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
                         ),
                         inputFormatters: [
                           new LengthLimitingTextInputFormatter(30)
                         ],
                         validator: (val) =>
-                            val.isEmpty ? 'First name is required' : null,
+                            val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
                         onSaved: (val) => newContact.fName = val,
                       ),
                       //LAST NAME
                       new TextFormField(
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           icon: const Icon(Icons.person),
-                          hintText: 'Enter your last name',
-                          labelText: 'Last Name',
+                          hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
+                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
                         ),
                         inputFormatters: [
                           new LengthLimitingTextInputFormatter(30)
                         ],
                         validator: (val) =>
-                            val.isEmpty ? 'Last name is required' : null,
+                            val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required')  : null,
                         onSaved: (val) => newContact.lName = val,
                       ),
                       //BIRTH DAY
@@ -313,20 +346,20 @@ class _AddPersonState extends State<AddPerson> {
                             child: new TextFormField(
                           decoration: new InputDecoration(
                             icon: const Icon(Icons.calendar_today),
-                            hintText: 'Enter your date of birth',
-                            labelText: 'Date Of Birth',
+                            hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Please enter a valid date'),
+                            labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth'),
                           ),
                           controller: _controller,
                           keyboardType: TextInputType.datetime,
                           validator: (val) {
                             if (isValidDob(val)) return null;
-                            return 'Not a valid date';
+                            return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') ;
                           },
                           onSaved: (val) => newContact.dob = convertToDate(val),
                         )),
                         new IconButton(
                           icon: new Icon(Icons.more_horiz),
-                          tooltip: 'Choose date',
+                          tooltip: LocaleText.getLocaleText(MyApp.getLocale(), 'choose date'),
                           onPressed: (() async {
                             await _chooseDate(context, _controller.text);
                           }),
@@ -339,7 +372,7 @@ class _AddPersonState extends State<AddPerson> {
                           return InputDecorator(
                             decoration: InputDecoration(
                               icon: const Icon(Icons.location_on),
-                              labelText: 'Area',
+                              labelText:  LocaleText.getLocaleText(MyApp.getLocale(), 'Area'),
                               errorText:
                                   state.hasError ? state.errorText : null,
                             ),
@@ -370,7 +403,7 @@ class _AddPersonState extends State<AddPerson> {
                           );
                         },
                         validator: (val) {
-                          return val != '' ? null : 'Please select an area';
+                          return val != '' ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') ;
                         },
                       ),
                       //STATUS
@@ -380,7 +413,7 @@ class _AddPersonState extends State<AddPerson> {
                           return InputDecorator(
                             decoration: InputDecoration(
                               icon: const Icon(Icons.people),
-                              labelText: 'Status',
+                              labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
                               errorText:
                                   state.hasError ? state.errorText : null,
                             ),
@@ -408,7 +441,7 @@ class _AddPersonState extends State<AddPerson> {
                           );
                         },
                         validator: (val) {
-                          return val != '' ? null : 'Please select a status';
+                          return val != '' ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') ;
                         },
                       ),
                       //RELIGIOUS
@@ -418,7 +451,7 @@ class _AddPersonState extends State<AddPerson> {
                           return InputDecorator(
                             decoration: InputDecoration(
                               icon: const Icon(Icons.call_split),
-                              labelText: 'how religious',
+                              labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'),
                               errorText:
                                   state.hasError ? state.errorText : null,
                             ),
@@ -448,7 +481,7 @@ class _AddPersonState extends State<AddPerson> {
                         validator: (val) {
                           return val != ''
                               ? null
-                              : 'Please select how religious';
+                              : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') ;
                         },
                       ),
                       //HASHKAFA
@@ -458,7 +491,7 @@ class _AddPersonState extends State<AddPerson> {
                           return InputDecorator(
                             decoration: InputDecoration(
                               icon: const Icon(Icons.group_work),
-                              labelText: 'what hashkafa',
+                              labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa'),
                               errorText:
                                   state.hasError ? state.errorText : null,
                             ),
@@ -488,7 +521,7 @@ class _AddPersonState extends State<AddPerson> {
                         validator: (val) {
                           return val != ''
                               ? null
-                              : 'Please select what hashkafa';
+                              : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') ;
                         },
                       ),
                       //EDA
@@ -498,7 +531,7 @@ class _AddPersonState extends State<AddPerson> {
                           return InputDecorator(
                             decoration: InputDecoration(
                               icon: const Icon(Icons.fastfood),
-                              labelText: 'what eda',
+                              labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Eda'),
                               errorText:
                                   state.hasError ? state.errorText : null,
                             ),
@@ -526,7 +559,7 @@ class _AddPersonState extends State<AddPerson> {
                           );
                         },
                         validator: (val) {
-                          return val != '' ? null : 'Please select what eda';
+                          return val != '' ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') ;
                         },
                       ),
                       //SMOKE
@@ -536,7 +569,7 @@ class _AddPersonState extends State<AddPerson> {
                           return InputDecorator(
                             decoration: InputDecoration(
                               icon: const Icon(Icons.smoke_free),
-                              labelText: 'smoking',
+                              labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking'),
                               errorText:
                                   state.hasError ? state.errorText : null,
                             ),
@@ -564,7 +597,7 @@ class _AddPersonState extends State<AddPerson> {
                           );
                         },
                         validator: (val) {
-                          return val != '' ? null : 'Please select if smokes';
+                          return val != '' ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') ;
                         },
                       ),
 
@@ -572,38 +605,38 @@ class _AddPersonState extends State<AddPerson> {
                       new TextFormField(
                         maxLines: null,
                         maxLength: 70,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           icon: const Icon(Icons.short_text),
-                          hintText: 'About me',
-                          labelText: 'About me short',
+                          hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
+                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                         ),
                         inputFormatters: [
                           new LengthLimitingTextInputFormatter(70)
                         ],
                         validator: (val) =>
-                            val.isEmpty ? 'About me is requierd' : null,
+                            val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required')  : null,
                         onSaved: (val) => newContact.aboutMeShort = val,
                       ),
                       //ABOUT ME LONG
                       new TextFormField(
                         maxLines: null,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                           icon: const Icon(Icons.format_align_justify),
-                          hintText: 'About me',
-                          labelText: 'About me long',
+                          hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
+                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                         ),
                         // inputFormatters: [
                         //   new LengthLimitingTextInputFormatter(500)
                         // ],
                         validator: (val) =>
-                            val.isEmpty ? 'About me is requierd' : null,
+                            val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required')  : null,
                         onSaved: (val) => newContact.aboutMeLong = val,
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: Row(
                           children: <Widget>[
-                            Text("height"),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Height'),),
                             Expanded(
                               child: Slider(
                                 min: 1.0,
@@ -618,18 +651,75 @@ class _AddPersonState extends State<AddPerson> {
                                 }),
                               ),
                             ),
-                            Text("" + personHeight.toStringAsFixed(2) + " m")
+                            Text("" + personHeight.toStringAsFixed(2) +" " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),)
                           ],
                         ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
+                        if(sSelected==LocaleText.getLocaleText(MyApp.getLocale(), 'Female'))  Container(
+                        child: Column(
+                          children: <Widget>[
+                            // MyApp.getLocale()=="he"? const Alignment.topLeft:const Alignment.topRight,
+                              Align(
+                        alignment: MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels: _FemaleSheruts,
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          ],
+                        ),
+                      ),
+                    if(sSelected==LocaleText.getLocaleText(MyApp.getLocale(), 'Male'))  Container(
+                        child: Column(
+                          children: <Widget>[
+                              Align(
+                        alignment: MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels: _MaleSheruts,
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          ],
+                        ),
+                      ),
+                        
+                     
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text("Add at least one image!")),
+                            alignment: MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                            child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add at least one image!'))),
                       ),
                       Align(
                         alignment: Alignment.center,
@@ -668,58 +758,346 @@ class _AddPersonState extends State<AddPerson> {
                       SizedBox(
                         height: 40,
                       ),
+                      // Align(
+                      //   alignment: Alignment.topLeft,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: Text(
+                      //       "Optional Fields - only viewed by you",
+                      //       style: TextStyle(
+                      //           fontSize: 18,
+                      //           fontWeight: FontWeight.bold,
+                      //           color: Colors.grey[600]),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
+                      // //PHONE NUMBER
+                      // TextFormField(
+                      //   decoration: const InputDecoration(
+                      //     icon: const Icon(Icons.phone),
+                      //     hintText: 'Enter a phone number',
+                      //     labelText: 'Phone',
+                      //   ),
+                      //   keyboardType: TextInputType.phone,
+                      //   inputFormatters: [
+                      //     new WhitelistingTextInputFormatter(
+                      //         new RegExp(r'^[()\d -]{1,15}$')),
+                      //   ],
+                      //   validator: (value) => isValidPhoneNumber(value)
+                      //       ? null
+                      //       : 'Phone number must be entered as (###)###-####',
+                      //   onSaved: (val) => newContact.phone = val,
+                      // ),
+                      // //EMAIL ADDRESS
+                      // new TextFormField(
+                      //   decoration: const InputDecoration(
+                      //     icon: const Icon(Icons.email),
+                      //     hintText: 'Enter a email address',
+                      //     labelText: 'Email',
+                      //   ),
+                      //   keyboardType: TextInputType.emailAddress,
+                      //   validator: (value) => isValidEmail(value)
+                      //       ? null
+                      //       : 'Please enter a valid email address',
+                      //   onSaved: (val) => newContact.email = val,
+                      // ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      Container(
+                        padding: const EdgeInsets.only( top: 14.0),
+                        child: Text(
+                          LocaleText.getLocaleText(MyApp.getLocale(), 'What are they looking for?'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20.0),
+                        ),
+                      ),
                       Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        alignment:  MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
                           child: Text(
-                            "Optional Fields",
+                             LocaleText.getLocaleText(MyApp.getLocale(), 'Area'),
                             style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[600]),
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
                           ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels: _areas.skip(1).toList(),
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          Align(
+                        alignment:  MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                             LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels: _statuses.skip(1).toList(),
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          Align(
+                        alignment: MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels: _howReligios.skip(1).toList(),
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          Align(
+                        alignment:  MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels:_whatHashkafa.skip(1).toList(),
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          Align(
+                        alignment:  MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Eda'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels:_edas.skip(1).toList(),
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          Align(
+                        alignment: MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                             LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels: _smokes.skip(1).toList(),
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                    if(sSelected== LocaleText.getLocaleText(MyApp.getLocale(), 'Male'))  Container(
+                        child: Column(
+                          children: <Widget>[
+                              Align(
+                        alignment:  MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                             LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels: _FemaleSheruts,
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          ],
+                        ),
+                      ),
+                    if(sSelected== LocaleText.getLocaleText(MyApp.getLocale(), 'Female'))  Container(
+                        child: Column(
+                          children: <Widget>[
+                              Align(
+                        alignment:  MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                              child: Container(
+                          padding: const EdgeInsets.only( top: 14.0),
+                          child: Text(
+                             LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                      CheckboxGroup(
+                        labels: _MaleSheruts,
+                  
+                        onChange: (bool isChecked, String label, int index) =>
+                            print(
+                                "isChecked: $isChecked   label: $label  index: $index"),
+                        onSelected: (List<String> checked) =>
+                            print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(height: 20,),
+                          ],
+                        ),
+                      ),
+                        
+                         Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Column(
+                          children: <Widget>[
+                             Align(
+                               alignment: MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                                            child: Container(
+                                  padding: const EdgeInsets.only( top: 14.0),
+                                 child: Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Height'), style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 14.0),),
+                               ),
+                             ),
+                            Row(
+                              children: <Widget>[
+                                Text("" + lookingPersonHeightMin.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),),
+                                Expanded(
+                                  child: RangeSlider(
+                                    min: 1.0,
+                                    max: 2.3,
+                                    divisions: 130,
+                                    
+                                    labels:rangeLabels,
+                                    values: rangeValues,
+                                    onChanged: ((newValue) {
+                                      setState(() {
+                                        rangeValues = newValue;
+                                        rangeLabels = RangeLabels(newValue.start.toStringAsFixed(2),newValue.end.toStringAsFixed(2));
+                                        lookingPersonHeightMax = newValue.end;
+                                        lookingPersonHeightMin = newValue.start;
+                                      });
+                                    }),
+                                  ),
+                                ),
+                                Text("" + lookingPersonHeightMax.toStringAsFixed(2) + " " +LocaleText.getLocaleText(MyApp.getLocale(), 'm'))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                        Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Column(
+                          children: <Widget>[
+                             Align(
+                               alignment: MyApp.getLocale()=="he"?  Alignment.topRight: Alignment.topLeft,
+                                                            child: Container(
+                                  padding: const EdgeInsets.only( top: 14.0),
+                                 child: Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Age'), style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 14.0),),
+                               ),
+                             ),
+                            Row(
+                              children: <Widget>[
+                                Text("" + lookingPersonAgeMin.toStringAsFixed(1),),
+                                Expanded(
+                                  child: RangeSlider(
+                                    min: 18,
+                                    max: 99,
+                                    divisions: 162,
+                                    
+                                    labels:rangeLabelsAge,
+                                    values: rangeValuesAge,
+                                    onChanged: ((newValue) {
+                                      setState(() {
+                                        rangeValuesAge = newValue;
+                                        rangeLabelsAge = RangeLabels(newValue.start.toStringAsFixed(1),newValue.end.toStringAsFixed(1));
+                                        lookingPersonAgeMax = newValue.end;
+                                        lookingPersonAgeMin = newValue.start;
+                                      });
+                                    }),
+                                  ),
+                                ),
+                                Text("" + lookingPersonAgeMax.toStringAsFixed(1) )
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      //PHONE NUMBER
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          icon: const Icon(Icons.phone),
-                          hintText: 'Enter a phone number',
-                          labelText: 'Phone',
+                        new TextField(
+                          maxLines: null,
+                        decoration:  InputDecoration(
+                          icon: const Icon(Icons.wb_sunny),
+                          hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
+                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
                         ),
-                        keyboardType: TextInputType.phone,
-                        inputFormatters: [
-                          new WhitelistingTextInputFormatter(
-                              new RegExp(r'^[()\d -]{1,15}$')),
-                        ],
-                        validator: (value) => isValidPhoneNumber(value)
-                            ? null
-                            : 'Phone number must be entered as (###)###-####',
-                        onSaved: (val) => newContact.phone = val,
+                        
+                       
+                       
                       ),
-                      //EMAIL ADDRESS
-                      new TextFormField(
-                        decoration: const InputDecoration(
-                          icon: const Icon(Icons.email),
-                          hintText: 'Enter a email address',
-                          labelText: 'Email',
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) => isValidEmail(value)
-                            ? null
-                            : 'Please enter a valid email address',
-                        onSaved: (val) => newContact.email = val,
-                      ),
+                      SizedBox(height: 20,),
                       new Container(
-                          // padding: const EdgeInsets.only(left: 40.0, top: 20.0),
-                          child: new RaisedButton(
-                        child: const Text('Submit'),
-                        onPressed: _submitForm,
-                      ),
+                        // padding: const EdgeInsets.only(left: 40.0, top: 20.0),
+                        child: new RaisedButton(
+                          child: const Text('Submit'),
+                          onPressed: _submitForm,
+                        ),
                       ),
                     ],
                   ),

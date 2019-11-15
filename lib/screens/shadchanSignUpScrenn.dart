@@ -1,18 +1,41 @@
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:dating/providers/langText.dart';
 import 'package:dating/themes/darkTheme.dart';
 import 'package:dating/widgets/OutLineButtonMy.dart';
 import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/photoPicker.dart';
 import 'package:dating/widgets/themeSwitcherButton.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'dart:ui' as ui;
+import '../main.dart';
 import 'homePage.dart';
 
+Locale locale;
 class ShadchanSignUpScreen extends StatefulWidget {
   @override
   _ShadchanSignUpScreenState createState() => _ShadchanSignUpScreenState();
+
+     static void setLocale(BuildContext context, Locale newLocale) {
+    _ShadchanSignUpScreenState state = context.ancestorStateOfType(TypeMatcher<_ShadchanSignUpScreenState>());
+    locale = newLocale;
+    state.setState(() {});
+  }
+
+  static String getLocale() {
+    try {
+      if (locale != null) {
+        return locale.languageCode;
+      } else
+        return ui.window.locale.languageCode;
+    } catch (error) {
+      print("error in get locale $error");
+      return "en";
+    }
+  }
 }
 
 class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
@@ -46,11 +69,19 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
   void addUserEmail() {
      Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new HomePage()));
   }
+   initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+        locale = Locale("he");
+        setState(() {});
+     
+    }
+    );
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme:   DarkTheme.getTheme(),
-          home: Scaffold(
+    return Scaffold(
         //   floatingActionButton: Padding(
         //   padding: const EdgeInsets.only(top:150),
         //   child: FancyFab(
@@ -99,8 +130,8 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                               height: 10,
                             ),
                             Text(
-                              "Your Picture",
-                              style: TextStyle(fontSize: 20),
+                              LocaleText.getLocaleText(MyApp.getLocale(), 'Your picture'),
+                              style: TextStyle(fontSize: 20,color: Colors.white),
                             )
                           ],
                         ),
@@ -123,7 +154,11 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                                     checkValid();
                                   },
                                   decoration: InputDecoration(
-                                    hintText: "Your name",
+                                    focusColor: Colors.white,
+                                    fillColor: Colors.white,
+                                    hoverColor: Colors.white,
+                                    hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'name'),
+                             
                                     //add icon outside input field
                                     icon: Icon(Icons.person),
                                     
@@ -154,7 +189,7 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                                     checkValid();
                                   },
                                   decoration: InputDecoration(
-                                    hintText: "Your email",
+                                    hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'email'),
                                     //add icon outside input field
                                     icon: Icon(Icons.mail),
 
@@ -172,7 +207,7 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                           ),
                         ),
                       ),
-                      OutLineButtonMy(verifyEnabled: verifyEnabled,callBackFunction: addUserEmail,text: "GET STARTED",),
+                      OutLineButtonMy(verifyEnabled: verifyEnabled,callBackFunction: addUserEmail,text:  LocaleText.getLocaleText(MyApp.getLocale(), 'Get Started'),),
                      
                     ],
                   ),
@@ -181,7 +216,7 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
             ),
           );
         }),
-      ),
+      
     );
   }
 }
