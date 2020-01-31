@@ -21,6 +21,7 @@ import 'dart:ui' as ui;
 import 'package:shared_preferences/shared_preferences.dart';
 Locale local;
 void main() async{ 
+   WidgetsFlutterBinding.ensureInitialized();
   ThemeData themeData = await ThemeController.getTheme();
   runApp(MyApp(theme: themeData,));
   }
