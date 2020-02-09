@@ -265,7 +265,9 @@ class _AddPersonState extends State<AddPerson> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
@@ -291,65 +293,100 @@ class _AddPersonState extends State<AddPerson> {
                   autovalidate: false,
                   child: new Column(
                     children: <Widget>[
-                      RadioButtonGroup(
-                          orientation: GroupedButtonsOrientation.HORIZONTAL,
-                          labels: <String>[
-                            LocaleText.getLocaleText(MyApp.getLocale(), 'Female'),
-                            LocaleText.getLocaleText(MyApp.getLocale(), 'Male'),
-                          ],
-                          picked: sSelected,
-                          onSelected: (String selected) {
-                            setState(() {
-                              sSelected = selected;
-                            });
-                          }),
-                          Column(
-                        children: <Widget>[
-                            Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child:
-                            Align(alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft, child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add at least one image!'))),
-                      ),
-                            Align(
+                      Stack(
                         alignment: Alignment.center,
-                        child: PhotoPicker(
-                          image: _image1,
-                          imageCallBack: imageCallBack1,
-                          photoNum: 1,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          PhotoPicker(
-                            image: _image2,
-                            imageCallBack: imageCallBack2,
-                            photoNum: 2,
-                            small: true,
+                          
+                          Container(
+                            width: width * 0.5,
+                            height: 100,
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      print("male");
+                                      setState(() {
+                                        sSelected = LocaleText.getLocaleText(MyApp.getLocale(), 'Male');
+                                      });
+                                    },
+                                    child: Container(
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: GestureDetector(
+                                      onTap: () {
+                                         print("female");
+                                        setState(() {
+                                          sSelected = LocaleText.getLocaleText(MyApp.getLocale(), 'Female');
+                                        });
+                                      },
+                                      child: Container(
+                                         color: Colors.transparent,
+                                      )),
+                                )
+                              ],
+                            ),
                           ),
-                          PhotoPicker(
-                            image: _image3,
-                            imageCallBack: imageCallBack3,
-                            photoNum: 3,
-                            small: true,
+                          IgnorePointer(
+                              ignoring: true,
+                                                          child: Container(
+                              width: width * 0.5,
+                              child: sSelected == LocaleText.getLocaleText(MyApp.getLocale(), 'Female') ? Image.asset("assets/images/girlpressed.png") : Image.asset("assets/images/boy_pressed.png"),
                           ),
-                          PhotoPicker(
-                            image: _image4,
-                            imageCallBack: imageCallBack4,
-                            photoNum: 4,
-                            small: true,
-                          ),
+                            ),
                         ],
                       ),
-                      SizedBox(height: 40,)
+                    
+                      Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Align(
+                                alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft, child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add at least one image!'))),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: PhotoPicker(
+                              image: _image1,
+                              imageCallBack: imageCallBack1,
+                              photoNum: 1,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              PhotoPicker(
+                                image: _image2,
+                                imageCallBack: imageCallBack2,
+                                photoNum: 2,
+                                small: true,
+                              ),
+                              PhotoPicker(
+                                image: _image3,
+                                imageCallBack: imageCallBack3,
+                                photoNum: 3,
+                                small: true,
+                              ),
+                              PhotoPicker(
+                                image: _image4,
+                                imageCallBack: imageCallBack4,
+                                photoNum: 4,
+                                small: true,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 40,
+                          )
                         ],
                       ),
-                   
-                     
-                     
+
                       //FIRST NAME
                       new TextFormField(
                         decoration: InputDecoration(
@@ -750,10 +787,7 @@ class _AddPersonState extends State<AddPerson> {
                           ),
                         ),
 
-                    
-                      
-                   
-                    SizedBox(
+                      SizedBox(
                         height: 40,
                       ),
                       // Align(

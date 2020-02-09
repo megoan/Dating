@@ -13,6 +13,6 @@ class Everyone extends StatelessWidget {
   
 
   Widget returnCard(BuildContext ctxt, int index){
-    return new PersonListCardTest();
+    return new PersonListCardTest(index);
   }
 }

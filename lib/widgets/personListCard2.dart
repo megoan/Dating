@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/main.dart';
 import 'package:flutter/material.dart';
-
+import 'package:dating/screens/profileInfo.dart';
 import 'loader.dart';
 
 class PersonListCardTest extends StatelessWidget {
+  final int index;
+  PersonListCardTest(this.index);
   var image;
   @override
   Widget build(BuildContext context) {
@@ -21,12 +23,14 @@ class PersonListCardTest extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
+              Hero(
+            tag: 'imageHero'+index.toString(), child:
               CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: 'https://placeimg.com/640/480/any',
                 placeholder: (context, url) => Loader(),
                 errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
+              )),
               DecoratedBox(
                 decoration: new BoxDecoration(
                   //color: Colors.lightGreen
@@ -238,6 +242,14 @@ class PersonListCardTest extends StatelessWidget {
                   ],
                 ),
               ),
+               Positioned.fill(
+                child: new Material(
+                    color: Colors.transparent,
+                    child: new InkWell(
+                      onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo(index)));
+                      },
+                    ))),
             ],
           ),
         ),
