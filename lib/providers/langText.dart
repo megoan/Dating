@@ -60,7 +60,9 @@ class LocaleText {
       'Please enter a valid date':'Please enter a valid date',
       'Add a candidate':'Add a candidate',
       'Form is not valid!  Please review and correct!':'Form is not valid!  Please review and correct!',
-      'Age':'Age'
+      'Age':'Age',
+      'Who am I':'Who am I',
+      'What am I looking for':'hat am I looking for'
     },
     'he': {
       'name': 'שם',
@@ -117,7 +119,9 @@ class LocaleText {
       'Please enter a valid date':'מעל גיל 18...',
       'Form is not valid!  Please review and correct!':'הטופס אינו תקף! אנא עיין ותקן. ',
       'choose date':'בחר תאריך',
-      'Age':'גיל'
+      'Age':'גיל',
+      'Who am I':'מי אני',
+      'What am I looking for':'מי אני מחפש'
     },
   };
 
