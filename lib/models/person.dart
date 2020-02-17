@@ -10,8 +10,10 @@ enum SherutGirl {ARMY,MECHINA,ONE_YEAR_SHERUT,TWO_YEARS_SHERUT,MIDRASHA,SHLICHUT
 enum SherutBoy {KRAVI,JOBNIK,MECHINA,HESDER,GVOHA,SHERUT,SHLICHUT,GURNISH}
 
 class Person {
+  String id;
+  //my info
   Gender gender;
-  List<String> profileImages;
+  List<String> profileImages=[];
   String firstName;
   String lastName;
   DateTime birthday;
@@ -25,11 +27,31 @@ class Person {
   Hashkafa hashkafa;
   Eda eda;
   Smoke smoke;
+  List<SherutBoy> mySherutBoy=[];
+  List<SherutBoy> mySherutGirl=[];
 
+  //looking for info
+  List<Area>areas=[];
+  List<Status>statuses=[];
+  List<Dos>doses=[];
+  List<Hashkafa>hashkafas=[];
+  List<Eda>edas=[];
+  List<Smoke>smoking=[];
+  List<SherutBoy>thereSherutBoy=[];
+  List<SherutGirl>thereSherutGirl=[];
+  int heightMin;
+  int heightMax;
+  int ageMin;
+  int ageMax;
+  String moreInfo;
 
+  String shadchanID;
 
-  int heightLow;
-  int heightHigh;
-  int ageLow;
-  int ageHigh;
+  int views;
+  int requests;
+  int dates;
+
+  bool isVisible;
+
+  Person.smallDetails(this.id,this.firstName,this.birthday,this.area,this.short);
 }

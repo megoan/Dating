@@ -1,13 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/main.dart';
+import 'package:dating/models/person.dart';
+import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/widgets/shadchanDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dating/screens/profileInfo.dart';
 import 'loader.dart';
 
 class PersonListCardTest extends StatefulWidget {
-  final int index;
-  PersonListCardTest(this.index);
+
+  final Person person;
+  PersonListCardTest(this.person);
   bool favorite = false;
    var image;
   @override
@@ -26,7 +29,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
         aspectRatio: 1 / 1,
         child: GestureDetector(
            onTap: () {
-               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo(index: widget.index)));
+               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo(person: widget.person)));
                       },
                   child: Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -39,7 +42,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
               fit: StackFit.expand,
               children: <Widget>[
                 Hero(
-              tag: 'imageHero'+widget.index.toString(), child:
+              tag: 'imageHero'+widget.person.id.toString(), child:
                 CachedNetworkImage(
                   fit: BoxFit.cover,
                   imageUrl: 'https://placeimg.com/640/480/any',
@@ -71,9 +74,9 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                             padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
                             child: Row(
                               children: <Widget>[
-                                Text("שמואל",  style:  TextStyle(fontSize: 18, color: Colors.white)),
+                                Text(widget.person.firstName,  style:  TextStyle(fontSize: 18, color: Colors.white)),
                                 Text(" ,",  style:  TextStyle(fontSize: 18, color: Colors.white)),
-                                 Text("25",  style:  TextStyle(fontSize: 18, color: Colors.white)),
+                                 Text(StaticFunctions.getAge(widget.person.birthday).toString(),  style:  TextStyle(fontSize: 18, color: Colors.white)),
                               ],
                             ),
                           )
@@ -87,7 +90,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                           Icon(Icons.location_city, color: Colors.white),
                           Padding(
                             padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
-                            child: Text("בית שמש",
+                            child: Text(widget.person.area.toString().split(".").last,
                                 style:
                                     TextStyle(fontSize: 18, color: Colors.white)),
                           )
@@ -103,7 +106,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                             padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
                             child: FittedBox(
                                 fit: BoxFit.fitWidth,
-                                child: Text("dsfjhfgsh djkasdfg dsfsdfsdf h",
+                                child: Text(widget.person.short,
                                     style: TextStyle(
                                         fontSize: 18, color: Colors.white))),
                           )

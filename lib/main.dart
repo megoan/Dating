@@ -1,5 +1,7 @@
 
 import 'package:dating/landingpage.dart';
+import 'package:dating/providers/personProvider.dart';
+import 'package:dating/providers/shadchanProvider.dart';
 import 'package:dating/screens/addEmail.dart';
 import 'package:dating/screens/shadchanSignUpScrenn.dart';
 import 'package:dating/splash-screen.dart';
@@ -16,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,6 +26,7 @@ Locale local;
 void main() async{ 
    WidgetsFlutterBinding.ensureInitialized();
   ThemeData themeData = await ThemeController.getTheme();
+   Provider.debugCheckInvalidValueType = null;
   runApp(MyApp(theme: themeData,));
   }
 
@@ -50,7 +54,13 @@ class MyApp extends StatelessWidget {
     //   defaultBrightness: Brightness.light,
     //   data: (brightness) => this.theme,
     //   themedWidgetBuilder: (context, theme) {
-        return  MaterialApp(
+        return  MultiProvider(
+  providers: [
+    Provider<PersonProvider>(create: (_) => PersonProvider()),
+    Provider<ShadchanProvider>(create: (_) => ShadchanProvider()),
+   
+  ],
+  child:   MaterialApp(
            localizationsDelegates: [
    // ... app-specific localization delegate[s] here
    GlobalMaterialLocalizations.delegate,
@@ -63,7 +73,7 @@ class MyApp extends StatelessWidget {
   ],
      locale: local,
       title: 'Flutter Demo',
-      theme: LightTheme.getTheme(),
+     // theme: LightTheme.getTheme(),
       routes: <String, WidgetBuilder>{
         '/homepage': (BuildContext context) => ShadchanSignUpScreen(),
         '/landingpage': (BuildContext context) => LandingPage()
@@ -79,7 +89,7 @@ class MyApp extends StatelessWidget {
                         title: "Verify your phone",
                       ),
       ),
-    );
+         ) );
       }
    // );
   }
