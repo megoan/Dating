@@ -271,7 +271,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "bet shemesh",
+                          StaticFunctions.getArea(widget.person.area),
                           style: TextStyle(color: Colors.black54, fontSize: 16),
                         ),
                         SizedBox(width: 4),
