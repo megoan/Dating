@@ -1,5 +1,7 @@
 import 'package:dating/models/person.dart';
+import 'package:dating/models/shadchan.dart';
 import 'package:dating/providers/langText.dart';
+import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/widgets/shadchanDialog.dart';
 import 'package:dating/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,8 @@ import 'compareThemList.dart';
 
 class ProfileInfo extends StatefulWidget {
   Person person;
-  ProfileInfo({this.person});
+  Shadchan shadchan;
+  ProfileInfo({this.person,this.shadchan});
   @override
   _ProfileInfoState createState() => _ProfileInfoState();
 }
@@ -22,7 +25,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text("samy"),
+        title: Text(widget.person.firstName),
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -39,9 +42,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) => CustomDialog(
-                                title: "Shlomit Shadchanit",
-                                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                                buttonText: "Okay",
+                                shadchan: widget.shadchan,
                               ),
                             );
                           },
@@ -70,13 +71,13 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                             child: ClipOval(
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: 'https://placeimg.com/640/480/any',
+                                                imageUrl: widget.shadchan.image,
                                                 placeholder: (context, url) => Loader(),
                                                 errorWidget: (context, url, error) => Icon(Icons.error),
                                               ),
                                             ),
                                           ),
-                                          MyApp.getLocale() == "he"
+                                        widget.shadchan.isOnline?  MyApp.getLocale() == "he"
                                               ? Positioned(
                                                   top: 0,
                                                   // MyApp.getLocale()=="he"?  left:0: right: 0,
@@ -104,7 +105,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                       ),
                                                     ],
                                                   ),
-                                                ),
+                                                ):Container(),
                                         ],
                                       ),
                                     ),
@@ -236,7 +237,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       tag: 'imageHero' + widget.person.id.toString(),
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: 'https://placeimg.com/640/480/any',
+                        imageUrl: widget.person.profileImages[0],
                         placeholder: (context, url) => Loader(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
@@ -253,12 +254,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "Shmuel Soibelman",
+                          widget.person.firstName,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(width: 10),
                         Text(
-                          "28",
+                          "${StaticFunctions.getAge(widget.person.birthday)}",
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ],

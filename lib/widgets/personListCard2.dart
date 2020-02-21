@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/main.dart';
 import 'package:dating/models/person.dart';
+import 'package:dating/models/shadchan.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/widgets/shadchanDialog.dart';
 import 'package:flutter/material.dart';
@@ -8,30 +9,26 @@ import 'package:dating/screens/profileInfo.dart';
 import 'loader.dart';
 
 class PersonListCardTest extends StatefulWidget {
-
   final Person person;
-  PersonListCardTest(this.person);
+  final Shadchan shadchan;
+  PersonListCardTest(this.person,this.shadchan);
   bool favorite = false;
-   var image;
+  var image;
   @override
   _PersonListCardTestState createState() => _PersonListCardTestState();
 }
 
 class _PersonListCardTestState extends State<PersonListCardTest> {
- 
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Align(
       child: AspectRatio(
         aspectRatio: 1 / 1,
         child: GestureDetector(
-           onTap: () {
-               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo(person: widget.person)));
-                      },
-                  child: Card(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo(person: widget.person,shadchan: widget.shadchan,)));
+          },
+          child: Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24.0),
@@ -42,13 +39,13 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
               fit: StackFit.expand,
               children: <Widget>[
                 Hero(
-              tag: 'imageHero'+widget.person.id.toString(), child:
-                CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: 'https://placeimg.com/640/480/any',
-                  placeholder: (context, url) => Loader(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                )),
+                    tag: 'imageHero' + widget.person.id.toString(),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl: widget.person.profileImages[0],
+                      placeholder: (context, url) => Loader(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    )),
                 DecoratedBox(
                   decoration: new BoxDecoration(
                     //color: Colors.lightGreen
@@ -71,12 +68,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                         children: <Widget>[
                           Icon(Icons.person, color: Colors.white),
                           Padding(
-                            padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
+                            padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 10) : const EdgeInsets.only(left: 10),
                             child: Row(
                               children: <Widget>[
-                                Text(widget.person.firstName,  style:  TextStyle(fontSize: 18, color: Colors.white)),
-                                Text(" ,",  style:  TextStyle(fontSize: 18, color: Colors.white)),
-                                 Text(StaticFunctions.getAge(widget.person.birthday).toString(),  style:  TextStyle(fontSize: 18, color: Colors.white)),
+                                Text(widget.person.firstName, style: TextStyle(fontSize: 18, color: Colors.white)),
+                                Text(" ,", style: TextStyle(fontSize: 18, color: Colors.white)),
+                                Text(StaticFunctions.getAge(widget.person.birthday).toString(), style: TextStyle(fontSize: 18, color: Colors.white)),
                               ],
                             ),
                           )
@@ -89,10 +86,8 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                         children: <Widget>[
                           Icon(Icons.location_city, color: Colors.white),
                           Padding(
-                            padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
-                            child: Text(widget.person.area.toString().split(".").last,
-                                style:
-                                    TextStyle(fontSize: 18, color: Colors.white)),
+                            padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 10) : const EdgeInsets.only(left: 10),
+                            child: Text(widget.person.area.toString().split(".").last, style: TextStyle(fontSize: 18, color: Colors.white)),
                           )
                         ],
                       ),
@@ -103,28 +98,22 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                         children: <Widget>[
                           Icon(Icons.short_text, color: Colors.white),
                           Padding(
-                            padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
-                            child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(widget.person.short,
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white))),
+                            padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 10) : const EdgeInsets.only(left: 10),
+                            child: FittedBox(fit: BoxFit.fitWidth, child: Text(widget.person.short, style: TextStyle(fontSize: 18, color: Colors.white))),
                           )
                         ],
                       ),
                       Spacer(),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: InkWell(
-                              onTap: (){
+                              onTap: () {
                                 setState(() {
-                                     widget.favorite=!widget.favorite;
+                                  widget.favorite = !widget.favorite;
                                 });
-                             
                               },
                               child: Stack(
                                 alignment: AlignmentDirectional.center,
@@ -132,12 +121,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                   Icon(
                                     Icons.star,
                                     size: 55,
-                                    color:widget.favorite?Colors.white:Colors.deepPurple,
+                                    color: widget.favorite ? Colors.white : Colors.deepPurple,
                                   ),
                                   Icon(
                                     Icons.star,
                                     size: 40,
-                                    color:widget.favorite?Colors.deepPurple:Colors.white,
+                                    color: widget.favorite ? Colors.deepPurple : Colors.white,
                                   ),
                                 ],
                               ),
@@ -145,16 +134,14 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                           ),
                           GestureDetector(
                             onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) => CustomDialog(
-                                title: "Shlomit Shadchanit",
-                                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                                buttonText: "Okay",
-                              ),
-                            );
-                          },
-                                                      child: Container(
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => CustomDialog(
+                                  shadchan: widget.shadchan,
+                                ),
+                              );
+                            },
+                            child: Container(
                               child: Column(
                                 children: <Widget>[
                                   Stack(
@@ -165,8 +152,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                         height: 100,
                                         child: CircleAvatar(
                                           radius: 100,
-                                          backgroundColor:
-                                              Theme.of(context).primaryColor,
+                                          backgroundColor: Theme.of(context).primaryColor,
                                         ),
                                       ),
                                       Container(
@@ -175,24 +161,20 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                         child: ClipOval(
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl:
-                                                'https://placeimg.com/640/480/any',
+                                            imageUrl: widget.shadchan.image,
                                             placeholder: (context, url) => Loader(),
-                                            errorWidget: (context, url, error) =>
-                                                Icon(Icons.error),
+                                            errorWidget: (context, url, error) => Icon(Icons.error),
                                           ),
                                         ),
                                       ),
-                                      FittedBox(
+                                     if(false) FittedBox(
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           children: <Widget>[
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 58),
+                                              padding: const EdgeInsets.only(top: 58),
                                               child: Stack(
-                                                alignment:
-                                                    AlignmentDirectional.center,
+                                                alignment: AlignmentDirectional.center,
                                                 children: <Widget>[
                                                   Icon(
                                                     Icons.star,
@@ -208,11 +190,9 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 70),
+                                              padding: const EdgeInsets.only(top: 70),
                                               child: Stack(
-                                                alignment:
-                                                    AlignmentDirectional.center,
+                                                alignment: AlignmentDirectional.center,
                                                 children: <Widget>[
                                                   Icon(
                                                     Icons.star,
@@ -228,11 +208,9 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 58),
+                                              padding: const EdgeInsets.only(top: 58),
                                               child: Stack(
-                                                alignment:
-                                                    AlignmentDirectional.center,
+                                                alignment: AlignmentDirectional.center,
                                                 children: <Widget>[
                                                   Icon(
                                                     Icons.star,
@@ -250,7 +228,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                           ],
                                         ),
                                       ),
-                                      Positioned(
+                                     if(widget.shadchan.isOnline!=null &&widget.shadchan.isOnline==true) Positioned(
                                         top: 0,
                                         right: 10,
                                         child: Stack(
@@ -258,8 +236,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                           children: <Widget>[
                                             CircleAvatar(
                                               radius: 13,
-                                              backgroundColor:
-                                                  Theme.of(context).primaryColor,
+                                              backgroundColor: Theme.of(context).primaryColor,
                                             ),
                                             CircleAvatar(
                                               radius: 10,
@@ -279,15 +256,6 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                     ],
                   ),
                 ),
-                //  Positioned.fill(
-                //   child: new Material(
-                //       color: Colors.transparent,
-                //       child: new InkWell(
-                //         onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo(index)));
-                //         },
-                //       ))),
-              
               ],
             ),
           ),

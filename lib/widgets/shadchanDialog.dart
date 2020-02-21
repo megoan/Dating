@@ -1,22 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/models/shadchan.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../main.dart';
 import 'loader.dart';
 class CustomDialog extends StatelessWidget {
-  final String title, description, buttonText;
-  final Image image;
-
+ // final String title, description, buttonText;
+ // final String image;
+  final Shadchan shadchan;
   CustomDialog({
-    @required this.title,
-    @required this.description,
-    @required this.buttonText,
-    this.image,
+   // @required this.title,
+   // @required this.description,
+   // @required this.buttonText,
+    @required this.shadchan,
+   // this.image,
   });
   _launchWhatsApp() async {
-  String phoneNumber = '+97252981797';
-  String message = 'hello from flutter app!!';
-  var whatsappUrl = "whatsapp://send?phone=$phoneNumber&text=$message";
+  String message = 'hello from Database app!!';
+  var whatsappUrl = "whatsapp://send?phone=${shadchan.phone}&text=$message";
   if (await canLaunch(whatsappUrl)) {
     await launch(whatsappUrl);
   } else {
@@ -24,7 +25,7 @@ class CustomDialog extends StatelessWidget {
   }
 }
 sendEmail() async {
-    var url = 'mailto:shmuelsoib@gmail.com?subject=database&body=hello';
+    var url = 'mailto:${shadchan.email}?subject=database&body=hello';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -70,7 +71,7 @@ sendEmail() async {
     mainAxisSize: MainAxisSize.min, // To make the card compact
     children: <Widget>[
       Text(
-        title,
+        shadchan.name,
         style: TextStyle(
           fontSize: 24.0,
           fontWeight: FontWeight.w700,
@@ -137,7 +138,7 @@ sendEmail() async {
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl:
-                    'https://placeimg.com/640/480/any',
+                    shadchan.image,
                 placeholder: (context, url) => Loader(),
                 errorWidget: (context, url, error) =>
                     Icon(Icons.error),

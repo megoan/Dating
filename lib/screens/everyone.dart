@@ -25,7 +25,8 @@ class _EveryoneState extends State<Everyone> {
       isInit=false;
       personProvider = Provider.of<PersonProvider>(context);
       shadchanProvider = Provider.of<ShadchanProvider>(context);
-      await personProvider.getAllPeople();
+      await Future.wait([personProvider.getAllPeople(),shadchanProvider.getAllShadchanim()]);
+     
       setState(() {
         isLoading = false;
       });
@@ -41,6 +42,6 @@ class _EveryoneState extends State<Everyone> {
   }
 
   Widget returnCard(BuildContext ctxt, int index) {
-    return new PersonListCardTest(personProvider.allPeople[index]);
+    return new PersonListCardTest(personProvider.allPeople[index],shadchanProvider.allShadchanimMap[personProvider.allPeople[index].shadchanID]);
   }
 }

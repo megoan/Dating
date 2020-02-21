@@ -1,6 +1,6 @@
 enum Gender {MALE,FEMALE}
 enum Area {GUSH_DAN,SHARON,JERUSALEM,BEER_SHEVA,HIFA,CHUL}
-enum Country{AUSTRALIA,BELGIUM,CANADA,ISRAEL,UK,USA,SWITZERLAND}
+enum Country{ISRAEL,AUSTRALIA,BELGIUM,CANADA,UK,USA,SWITZERLAND}
 enum Status{SINGLE,ALMAN,GARUSH}
 enum Dos{MASORTI, LITE, REGULAR,VERY,DOS}
 enum Hashkafa{LEUMI,CHAREDI,CHABAD,BRESLUV,CHOZER_BITSHUVA,JEW}
@@ -29,7 +29,6 @@ class Person {
   Smoke smoke;
   List<SherutBoy> mySherutBoy=[];
   List<SherutBoy> mySherutGirl=[];
-
   //looking for info
   List<Area>areas=[];
   List<Status>statuses=[];
@@ -53,5 +52,13 @@ class Person {
 
   bool isVisible;
 
-  Person.smallDetails(this.id,this.firstName,this.birthday,this.area,this.short);
+  Person.smallDetails(
+    this.id,
+    this.firstName,
+    this.birthday,
+    this.area,
+    this.short,
+    this.profileImages,
+    this.shadchanID
+    );
 }
