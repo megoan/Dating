@@ -62,7 +62,13 @@ class LocaleText {
       'Form is not valid!  Please review and correct!':'Form is not valid!  Please review and correct!',
       'Age':'Age',
       'Who am I':'Who am I',
-      'What am I looking for':'hat am I looking for'
+      'What am I looking for':'hat am I looking for',
+      'Status':'Status',
+      'Hashkafa':'Hashkafa',
+      'Height':'Height',
+      'Religious':'Religious',
+      'Smoking':'Smoking',
+      'Eda':'Eda'
     },
     'he': {
       'name': 'שם',
@@ -121,7 +127,13 @@ class LocaleText {
       'choose date':'בחר תאריך',
       'Age':'גיל',
       'Who am I':'מי אני',
-      'What am I looking for':'מי אני מחפש'
+      'What am I looking for':'מי אני מחפש',
+      'Status':'סטטוס',
+      'Hashkafa':'השקפה',
+      'Height':'גובה',
+      'Religious':'דת',
+      'Smoking':'עישון',
+      'Eda':'עדה'
     },
   };
 

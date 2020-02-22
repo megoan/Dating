@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/models/person.dart';
 import 'package:dating/providers/langText.dart';
+import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/screens/compareThemList.dart';
 import 'package:flutter/material.dart';
 import 'package:dating/screens/addPerson.dart';
@@ -7,7 +9,8 @@ import '../main.dart';
 import 'loader.dart';
 
 class ShadchanListCard2 extends StatefulWidget {
-  bool visable = true;
+  final Person person;
+  ShadchanListCard2(this.person);
   @override
   _ShadchanListCard2State createState() => _ShadchanListCard2State();
 }
@@ -61,7 +64,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                               child: ClipOval(
                                 child: CachedNetworkImage(
                                   fit: BoxFit.cover,
-                                  imageUrl: 'https://placeimg.com/640/480/any',
+                                  imageUrl: widget.person.profileImages[0],
                                   placeholder: (context, url) => Loader(),
                                   errorWidget: (context, url, error) =>
                                       Icon(Icons.error),
@@ -83,12 +86,14 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    Text("Samy", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                                    Text(widget.person.firstName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                                    Text(" ", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                                    Text(widget.person.lastName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
                                      Text(" ,", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
-                                      Text("25", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
+                                      Text(StaticFunctions.getAge(widget.person.birthday).toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
                                   ],
                                 ),
-                                 Text("very very funny dsdsh hgjhghhhh hhhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhadhg jdhdfg gdhjhg ghjdg gyjhgs dhjdsf fdshjhg",style: TextStyle(color: Colors.grey),),
+                                 Text(widget.person.short,style: TextStyle(color: Colors.grey),),
                                 // Row(
                                 //   children: <Widget>[
                                 //     Text(
@@ -108,10 +113,10 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                           child: GestureDetector(
                             onTap: (){
                               setState(() {
-                                widget.visable=!widget.visable;
+                               widget.person.isVisible=!widget.person.isVisible;
                               });
                             },
-                            child: Icon(widget.visable?Icons.visibility:Icons.visibility_off,color: Colors.black54,)),
+                            child: Icon(widget.person.isVisible?Icons.visibility:Icons.visibility_off,color: Colors.black54,)),
                         )
                     ],
                   ),
@@ -127,7 +132,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                           children: <Widget>[
                              Text(LocaleText.getLocaleText(MyApp.getLocale(), 'viewes'),style: TextStyle(color: Colors.grey),),
                             Text(
-                              "500",
+                              widget.person.views.toString(),
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -139,7 +144,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                         children: <Widget>[
                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'requests'),style: TextStyle(color: Colors.grey),),
                           Text(
-                            "50",
+                            widget.person.requests.toString(),
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
@@ -150,7 +155,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                         children: <Widget>[
                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'dates'),style: TextStyle(color: Colors.grey),),
                           Text(
-                            "4",
+                            widget.person.dates.toString(),
                             style: TextStyle(
                                 fontSize: 20, color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
                           ),

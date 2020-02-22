@@ -1,16 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/models/person.dart';
+import 'package:dating/models/shadchan.dart';
+import 'package:dating/providers/generalProvider.dart';
 import 'package:dating/providers/langText.dart';
+import 'package:dating/providers/personProvider.dart';
+import 'package:dating/providers/staticFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:dating/screens/compareThemList.dart';
 import 'package:dating/screens/profileInfo.dart';
+import 'package:provider/provider.dart';
 import '../main.dart';
 import 'loader.dart';
 class FavoritesCard extends StatelessWidget {
+  final Person person;
+  final Shadchan shadchan;
+  final Function reset;
+  FavoritesCard(this.person,this.shadchan,this.reset);
   @override
   Widget build(BuildContext context) {
+    PersonProvider personProvider = Provider.of<PersonProvider>(context);
     return GestureDetector(
       onTap: (){
-           Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo()));
+           Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo(person: person,shadchan: shadchan,)));
       },
           child: Card(
             child: Container(
@@ -19,6 +30,10 @@ class FavoritesCard extends StatelessWidget {
               Padding(
                 padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
                 child: InkWell(
+                  onTap: (){
+                    personProvider.removeFavorite(person.id);
+                    reset();
+                  },
                   child: Icon(Icons.cancel,size:40,color: Colors.red,),
                 ),
               ),
@@ -33,7 +48,7 @@ class FavoritesCard extends StatelessWidget {
                                 child: ClipOval(
                                   child: CachedNetworkImage(
                                     fit: BoxFit.cover,
-                                    imageUrl: 'https://placeimg.com/640/480/any',
+                                    imageUrl: person.profileImages[0],
                                     placeholder: (context, url) => Loader(),
                                     errorWidget: (context, url, error) =>
                                         Icon(Icons.error),
@@ -52,14 +67,14 @@ class FavoritesCard extends StatelessWidget {
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
-                                      Text( "Samy", style:   TextStyle(fontSize: 18, fontWeight: FontWeight.bold),  ),
+                                      Text( person.firstName, style:   TextStyle(fontSize: 18, fontWeight: FontWeight.bold),  ),
                                        Text( " ,", style:   TextStyle(fontSize: 18, fontWeight: FontWeight.bold),  ),
-                                        Text( "25", style:   TextStyle(fontSize: 18, fontWeight: FontWeight.bold),  ),
+                                        Text( StaticFunctions.getAge(person.birthday).toString(), style:   TextStyle(fontSize: 18, fontWeight: FontWeight.bold),  ),
                                     ],
                                   ),
                                    Row(
                                      children: <Widget>[
-                                       Text("Bet Shemesh",),
+                                       Text(StaticFunctions.getArea(person.area),),
                                        Icon(Icons.location_on,color:Colors.purple),
                                      ],
                                    ),

@@ -286,28 +286,28 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       alignment: Alignment.center,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text("dsfsdf sdfkdslfdsf sdfskjfsdf sdflsdkjfgsd sdfsdf"),
+                        child: Text(widget.person.short),
                       ),
                     ),
                     SizedBox(height: 30),
                     Container(
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
                         Column(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                          Text("סטטוס", style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Status'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
                           SizedBox(
                             height: 10,
                           ),
                           Text(
-                            "hello",
+                             StaticFunctions.getStatus(widget.person.status),
                             style: TextStyle(color: Colors.black54),
                           ),
                           SizedBox(
                             height: 20,
                           ),
-                          Text("השקפה", style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
                           SizedBox(height: 10),
                           Text(
-                            "hello",
+                            StaticFunctions.getHashkafa(widget.person.hashkafa),
                             style: TextStyle(color: Colors.black54),
                           )
                         ]),
@@ -315,19 +315,19 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("גובה", style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Height'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
-                              "hello",
+                               (widget.person.height.toString()),
                               style: TextStyle(color: Colors.black54),
                             ),
                             SizedBox(
                               height: 20,
                             ),
-                            Text("דת", style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
-                              "hello",
+                              StaticFunctions.getDos(widget.person.dos),
                               style: TextStyle(color: Colors.black54),
                             )
                           ],
@@ -336,19 +336,19 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("עישון", style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
-                              "hello",
+                               StaticFunctions.getSmoke(widget.person.smoke),
                               style: TextStyle(color: Colors.black54),
                             ),
                             SizedBox(
                               height: 20,
                             ),
-                            Text("עדה", style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Eda'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
-                              "hello",
+                               StaticFunctions.getEda(widget.person.eda),
                               style: TextStyle(color: Colors.black54),
                             ),
                           ],
@@ -374,9 +374,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Text("dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd"),
-                          Text("dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd"),
-                          Text("dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd"),
+                          Text(widget.person.long),
+                         
                           SizedBox(height: 40),
                           Text(
                             LocaleText.getLocaleText(MyApp.getLocale(), 'What am I looking for'),
@@ -390,9 +389,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Text("dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd"),
-                          Text("dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd"),
-                          Text("dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd dfsdf dsfsdf sdfsdf dsfsdfsdf sdfsdfsdf sdfsdfsdf sdfsfd sdfsdf sdfsdfsd sdfsd")
+                          Text(widget.person.moreInfo),
+                          SizedBox(height: 40),
                         ]),
                       ),
                     ),

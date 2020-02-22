@@ -2,17 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/main.dart';
 import 'package:dating/models/person.dart';
 import 'package:dating/models/shadchan.dart';
+
+import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/widgets/shadchanDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:dating/screens/profileInfo.dart';
+import 'package:provider/provider.dart';
 import 'loader.dart';
 
 class PersonListCardTest extends StatefulWidget {
   final Person person;
   final Shadchan shadchan;
   PersonListCardTest(this.person,this.shadchan);
-  bool favorite = false;
   var image;
   @override
   _PersonListCardTestState createState() => _PersonListCardTestState();
@@ -21,6 +23,7 @@ class PersonListCardTest extends StatefulWidget {
 class _PersonListCardTestState extends State<PersonListCardTest> {
   @override
   Widget build(BuildContext context) {
+   PersonProvider personProvider = Provider.of<PersonProvider>(context);
     return Align(
       child: AspectRatio(
         aspectRatio: 1 / 1,
@@ -113,7 +116,8 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                             child: InkWell(
                               onTap: () {
                                 setState(() {
-                                  widget.favorite = !widget.favorite;
+                                  personProvider.switchFavorite(widget.person.id);
+                                
                                 });
                               },
                               child: Stack(
@@ -122,12 +126,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                   Icon(
                                     Icons.star,
                                     size: 55,
-                                    color: widget.favorite ? Colors.white : Colors.deepPurple,
+                                    color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.white : Colors.deepPurple,
                                   ),
                                   Icon(
                                     Icons.star,
                                     size: 40,
-                                    color: widget.favorite ? Colors.deepPurple : Colors.white,
+                                    color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.deepPurple : Colors.white,
                                   ),
                                 ],
                               ),

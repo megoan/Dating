@@ -56,9 +56,11 @@ class MyApp extends StatelessWidget {
     //   themedWidgetBuilder: (context, theme) {
         return  MultiProvider(
   providers: [
-    Provider<PersonProvider>(create: (_) => PersonProvider()),
-    Provider<ShadchanProvider>(create: (_) => ShadchanProvider()),
-   
+     Provider<ShadchanProvider>(create: (_) => ShadchanProvider()),
+   // Provider<PersonProvider>(create: (_) => PersonProvider()),
+   ProxyProvider<ShadchanProvider, PersonProvider>(
+        update: (_, shadchanProvider, __) => PersonProvider(shadchanProvider),
+      ),
   ],
   child:   MaterialApp(
            localizationsDelegates: [

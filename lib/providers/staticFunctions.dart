@@ -162,5 +162,55 @@ class StaticFunctions {
     };
      return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][smoke]:smoke.toString().split(".").last;
   }
+
+  static String getSherutGirl(SherutGirl sherutGirl) {
+    Map<String, Map<SherutGirl, String>> areaText = {
+      "he": {
+        SherutGirl.ARMY: "צבא",
+        SherutGirl.MECHINA: 'מכינה',
+        SherutGirl.ONE_YEAR_SHERUT: "שנה שירות",
+        SherutGirl.TWO_YEARS_SHERUT: 'שנתים שירות',
+        SherutGirl.MIDRASHA: "מדרשה",
+        SherutGirl.SHLICHUT: 'שליחות',
+        SherutGirl.GURNISHT: "אחר",     
+      },
+      "en": {
+        SherutGirl.ARMY: 'Army',
+        SherutGirl.MECHINA: "Mechina",
+        SherutGirl.ONE_YEAR_SHERUT: 'One Year Sherut',
+        SherutGirl.TWO_YEARS_SHERUT: "Two Years Sherut",
+        SherutGirl.MIDRASHA: 'Midrasha',
+        SherutGirl.SHLICHUT: "Shlichut",
+        SherutGirl.GURNISHT: 'Other',
+      }
+    };
+     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][sherutGirl]:sherutGirl.toString().split(".").last;
+  }
+
+  static String getSherutBoy(SherutBoy sherutBoy) {
+    Map<String, Map<SherutBoy, String>> areaText = {
+      "he": {
+        SherutBoy.KRAVI: "קרבי",
+        SherutBoy.JOBNIK: "ג'וב",
+        SherutBoy.MECHINA: "מכינה",
+        SherutBoy.HESDER: 'ישיבת הסדר',
+        SherutBoy.GVOHA: "ישיבה גבוהה",
+        SherutBoy.SHERUT: 'שירות',
+        SherutBoy.SHLICHUT: "שליחות",
+        SherutBoy.GURNISH: "אחר",     
+      },
+      "en": {
+        SherutBoy.KRAVI: "Kravi",
+        SherutBoy.JOBNIK: 'Jobnik',
+        SherutBoy.MECHINA: "Mechina",
+        SherutBoy.HESDER: 'Hesder Yeshiva',
+        SherutBoy.GVOHA: "Yeshiva Gvoha",
+        SherutBoy.SHERUT: 'Sherut',
+        SherutBoy.SHLICHUT: "Shlichut",
+        SherutBoy.GURNISH: "Other",     
+      }
+    };
+     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][sherutBoy]:sherutBoy.toString().split(".").last;
+  }
  
 }
