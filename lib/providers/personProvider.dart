@@ -1,5 +1,4 @@
 import 'package:dating/models/person.dart';
-import 'package:dating/providers/generalProvider.dart';
 import 'package:dating/providers/shadchanProvider.dart';
 import 'package:flutter/material.dart';
 

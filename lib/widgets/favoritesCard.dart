@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/models/person.dart';
 import 'package:dating/models/shadchan.dart';
-import 'package:dating/providers/generalProvider.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
