@@ -1,22 +1,79 @@
+import 'package:dating/models/person.dart';
+import 'package:dating/models/shadchan.dart';
 import 'package:dating/providers/langText.dart';
+import 'package:dating/providers/personProvider.dart';
 import 'package:dating/widgets/compareCard.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 
 class CompareThemList extends StatefulWidget {
+  final Person person;
+  final Shadchan shadchan;
+  CompareThemList(this.person, this.shadchan);
   @override
   _CompareThemListState createState() => _CompareThemListState();
 }
 
 class _CompareThemListState extends State<CompareThemList> {
-  Widget returnCard(BuildContext ctxt, int index) {
-    return new CompareCard();
+  PersonProvider personProvider;
+
+  bool isLoading = true;
+  List<Person> list = [];
+  Widget returnCard(Person person, Shadchan shadchan) {
+    return new CompareCard(person, shadchan);
+  }
+  bool myP(Person p){
+    return p.shadchanID==personProvider.shadchanProvider.myShadchanId;
+  }
+  bool myF(Person p){
+    return personProvider.shadchanProvider.myFavorites.containsKey(p.id);
+  }
+
+  void resetList() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (allSelected) {
+      list = await personProvider.getAllPeopleQuery(personComparator: personProvider.myCompare);
+      setState(() {
+        isLoading = false;
+      });
+    } else if (myListSelected) {
+      list = await personProvider.getAllPeopleQuery(predicate: myP,personComparator: personProvider.myCompare);
+      setState(() {
+        isLoading = false;
+      });
+    } else {
+      list = await personProvider.getAllPeopleQuery(predicate: myF,personComparator: personProvider.myCompare);
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  bool isInit = true;
+  @override
+  void didChangeDependencies() async {
+    if (isInit) {
+      isInit = false;
+      personProvider = Provider.of<PersonProvider>(context);
+      personProvider.comparePerson = widget.person;
+      list = await personProvider.getAllPeopleQuery();
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
+    super.didChangeDependencies();
+    //getAllPeople()
   }
 
   List<String> litems = ["1", "2", "Third", "4"];
-  bool allSelected = true;
-  bool myListSelected = false;
+  bool allSelected = false;
+  bool myListSelected = true;
   bool myFavoritesSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -29,7 +86,7 @@ class _CompareThemListState extends State<CompareThemList> {
             child: CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(
-                'https://placeimg.com/640/480/any',
+                widget.person.profileImages[0],
                 //fit: BoxFit.fill,
               ),
             ),
@@ -42,11 +99,11 @@ class _CompareThemListState extends State<CompareThemList> {
             SizedBox(
               width: 8.0,
             ),
-            Text("אחאמדושי"),
+            Text(widget.person.firstName),
           ],
         ),
       ),
-      body: Container(
+      body:isLoading?Center(child:CircularProgressIndicator()): Container(
         child: Column(
           children: <Widget>[
             Container(
@@ -62,12 +119,8 @@ class _CompareThemListState extends State<CompareThemList> {
                           // });
                         },
                         color: Colors.purple,
-                        child: Text(
-                            LocaleText.getLocaleText(
-                                MyApp.getLocale(), 'My list'),
-                            style: TextStyle(color: Colors.white)),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0))),
+                        child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'My list'), style: TextStyle(color: Colors.white)),
+                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))),
                   if (!myListSelected)
                     OutlineButton(
                       onPressed: () {
@@ -76,13 +129,13 @@ class _CompareThemListState extends State<CompareThemList> {
                           myFavoritesSelected = false;
                           allSelected = false;
                         });
+                         resetList();
                       },
                       child: Container(
                         child: Row(
                           children: <Widget>[
                             Text(
-                              LocaleText.getLocaleText(
-                                  MyApp.getLocale(), 'My list'),
+                              LocaleText.getLocaleText(MyApp.getLocale(), 'My list'),
                               style: TextStyle(color: Colors.purple),
                             ),
                           ],
@@ -105,12 +158,8 @@ class _CompareThemListState extends State<CompareThemList> {
                           // });
                         },
                         color: Colors.purple,
-                        child: Text(
-                            LocaleText.getLocaleText(
-                                MyApp.getLocale(), 'Favorites'),
-                            style: TextStyle(color: Colors.white)),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0))),
+                        child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Favorites'), style: TextStyle(color: Colors.white)),
+                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))),
                   if (!myFavoritesSelected)
                     OutlineButton(
                       onPressed: () {
@@ -119,13 +168,13 @@ class _CompareThemListState extends State<CompareThemList> {
                           myListSelected = false;
                           allSelected = false;
                         });
+                          resetList();
                       },
                       child: Container(
                         child: Row(
                           children: <Widget>[
                             Text(
-                              LocaleText.getLocaleText(
-                                  MyApp.getLocale(), 'Favorites'),
+                              LocaleText.getLocaleText(MyApp.getLocale(), 'Favorites'),
                               style: TextStyle(color: Colors.purple),
                             ),
                           ],
@@ -148,12 +197,8 @@ class _CompareThemListState extends State<CompareThemList> {
                           // });
                         },
                         color: Colors.purple,
-                        child: Text(
-                            LocaleText.getLocaleText(
-                                MyApp.getLocale(), 'Everyone'),
-                            style: TextStyle(color: Colors.white)),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0))),
+                        child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Everyone'), style: TextStyle(color: Colors.white)),
+                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))),
                   if (!allSelected)
                     OutlineButton(
                       onPressed: () {
@@ -162,13 +207,13 @@ class _CompareThemListState extends State<CompareThemList> {
                           myFavoritesSelected = false;
                           myListSelected = false;
                         });
+                          resetList();
                       },
                       child: Container(
                         child: Row(
                           children: <Widget>[
                             Text(
-                              LocaleText.getLocaleText(
-                                  MyApp.getLocale(), 'Everyone'),
+                              LocaleText.getLocaleText(MyApp.getLocale(), 'Everyone'),
                               style: TextStyle(color: Colors.purple),
                             ),
                           ],
@@ -188,10 +233,10 @@ class _CompareThemListState extends State<CompareThemList> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: litems.length,
+                  itemCount: list.length,
                   itemBuilder: (BuildContext ctxt, int index) => Padding(
                         padding: const EdgeInsets.all(0.0),
-                        child: returnCard(ctxt, index),
+                        child: returnCard(list[index], personProvider.shadchanProvider.allShadchanimMap[list[index].shadchanID]),
                       )),
             )
           ],

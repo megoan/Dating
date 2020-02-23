@@ -50,6 +50,6 @@ class _ShadchanListState extends State<ShadchanList> {
 }
 
   Widget returnCard( Person person){
-    return new ShadchanListCard2(person);
+    return new ShadchanListCard2(person,personProvider.shadchanProvider.allShadchanimMap[person.shadchanID]);
   }
 }

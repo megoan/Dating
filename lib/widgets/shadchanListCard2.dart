@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/models/person.dart';
+import 'package:dating/models/shadchan.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/screens/compareThemList.dart';
@@ -10,7 +11,8 @@ import 'loader.dart';
 
 class ShadchanListCard2 extends StatefulWidget {
   final Person person;
-  ShadchanListCard2(this.person);
+   final Shadchan shadchan;
+  ShadchanListCard2(this.person,this.shadchan);
   @override
   _ShadchanListCard2State createState() => _ShadchanListCard2State();
 }
@@ -164,7 +166,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                       ),
                       OutlineButton(
                         onPressed: (){
-                          Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new CompareThemList()));
+                          Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new CompareThemList(widget.person,widget.shadchan)));
   
                         },
                       child: Container(

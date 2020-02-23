@@ -184,7 +184,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           alignment: Alignment.center,
                           child: OutlineButton(
                             onPressed: () {
-                              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new CompareThemList()));
+                              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new CompareThemList(widget.person,widget.shadchan)));
                             },
                             child: Container(
                               child: Row(

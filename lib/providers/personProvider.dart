@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class PersonProvider extends ChangeNotifier {
   PersonProvider(this.shadchanProvider);
   ShadchanProvider shadchanProvider;
+
+  Person comparePerson;
   List<Person> allPeopleDataBase = [
     Person(
         id: "1",
@@ -226,7 +228,22 @@ class PersonProvider extends ChangeNotifier {
   ];
   List<Person> allPeople = [];
   List<Person> myPeople = [];
-  
+  Future<List<Person>> getAllPeopleQuery({Function predicate,Comparator<Person> personComparator}){
+    List<Person> temp=[];
+       return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
+      for (var person in allPeopleDataBase) {
+        if (predicate==null || predicate(person)) {
+           temp.add(person);
+        }
+        if (personComparator!=null) {
+          temp.sort(personComparator);
+        }
+       
+      }
+
+      return temp;
+    });
+  }
   Future<bool> getAllPeople() async {
     allPeople = [];
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
@@ -292,5 +309,21 @@ class PersonProvider extends ChangeNotifier {
      
       notifyListeners();
     }
+  }
+
+  double compareScore(Person person){
+    return 66.0;
+  }
+  int myCompare(Person person1,Person person2){
+    if (compareScore(person1)>compareScore(person2)) {
+      return 1;
+    }
+    else if (compareScore(person1)<compareScore(person2)) {
+      return -1;
+    }
+    else{
+       return 0;
+    }
+   
   }
 }

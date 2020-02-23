@@ -87,7 +87,7 @@ class FavoritesCard extends StatelessWidget {
               padding: MyApp.getLocale()=="he"? const EdgeInsets.only(left: 10):const EdgeInsets.only(right: 10),
               child: OutlineButton(
                           onPressed: (){
-                            Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new CompareThemList()));
+                            Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new CompareThemList(person,shadchan)));
                           },
                         child: Container(
                           child: Row(
