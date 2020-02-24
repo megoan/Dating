@@ -43,10 +43,10 @@ class CompareCard extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: new Text(
-                      personProvider.compareScore(person).toString(),
+                   StaticFunctions.getCompareScore(personProvider.compareScore(person)),
                       style: new TextStyle(
                         color: Colors.white,
-                        fontSize: 28,
+                        fontSize: 18,
                       ),
                       textAlign: TextAlign.center,
                     ),

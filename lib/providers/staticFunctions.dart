@@ -38,8 +38,9 @@ class StaticFunctions {
         Area.SHARON: "Sharon",
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][area]:area.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][area] : area.toString().split(".").last;
   }
+
   static String getCountry(Country country) {
     Map<String, Map<Country, String>> areaText = {
       "he": {
@@ -61,15 +62,15 @@ class StaticFunctions {
         Country.SWITZERLAND: "Switzerland",
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][country]:country.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][country] : country.toString().split(".").last;
   }
+
   static String getStatus(Status status) {
     Map<String, Map<Status, String>> areaText = {
       "he": {
         Status.SINGLE: "רווק/ה",
         Status.ALMAN: 'אלמנ/ה',
         Status.GARUSH: "גרוש/ה",
-       
       },
       "en": {
         Status.SINGLE: "Single",
@@ -77,10 +78,10 @@ class StaticFunctions {
         Status.GARUSH: "Divorced",
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][status]:status.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][status] : status.toString().split(".").last;
   }
 
-   static String getDos(Dos dos) {
+  static String getDos(Dos dos) {
     Map<String, Map<Dos, String>> areaText = {
       "he": {
         Dos.MASORTI: "מסורתי",
@@ -88,7 +89,6 @@ class StaticFunctions {
         Dos.REGULAR: "רגיל",
         Dos.VERY: 'מאוד',
         Dos.DOS: "דוס",
-       
       },
       "en": {
         Dos.MASORTI: "Masorati",
@@ -98,7 +98,7 @@ class StaticFunctions {
         Dos.DOS: "Dos",
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][dos]:dos.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][dos] : dos.toString().split(".").last;
   }
 
   static String getHashkafa(Hashkafa hashkafa) {
@@ -120,7 +120,7 @@ class StaticFunctions {
         Hashkafa.JEW: "Jew",
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][hashkafa]:hashkafa.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][hashkafa] : hashkafa.toString().split(".").last;
   }
 
   static String getEda(Eda eda) {
@@ -142,7 +142,7 @@ class StaticFunctions {
         Eda.MIXED: "Mixed",
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][eda]:eda.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][eda] : eda.toString().split(".").last;
   }
 
   static String getSmoke(Smoke smoke) {
@@ -151,7 +151,7 @@ class StaticFunctions {
         Smoke.NO: "לא",
         Smoke.SOMETIMES: 'לפעמים',
         Smoke.TRY_TO_STOP: "מנסה להפסיק",
-        Smoke.YES: 'כן',      
+        Smoke.YES: 'כן',
       },
       "en": {
         Smoke.NO: "no",
@@ -160,7 +160,7 @@ class StaticFunctions {
         Smoke.YES: 'yes',
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][smoke]:smoke.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][smoke] : smoke.toString().split(".").last;
   }
 
   static String getSherutGirl(SherutGirl sherutGirl) {
@@ -172,7 +172,7 @@ class StaticFunctions {
         SherutGirl.TWO_YEARS_SHERUT: 'שנתים שירות',
         SherutGirl.MIDRASHA: "מדרשה",
         SherutGirl.SHLICHUT: 'שליחות',
-        SherutGirl.GURNISHT: "אחר",     
+        SherutGirl.GURNISHT: "אחר",
       },
       "en": {
         SherutGirl.ARMY: 'Army',
@@ -184,9 +184,10 @@ class StaticFunctions {
         SherutGirl.GURNISHT: 'Other',
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][sherutGirl]:sherutGirl.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][sherutGirl] : sherutGirl.toString().split(".").last;
   }
 
+//enum CompareScore{NOT_KASHUR,KACHA,MAYBE,YALA}
   static String getSherutBoy(SherutBoy sherutBoy) {
     Map<String, Map<SherutBoy, String>> areaText = {
       "he": {
@@ -197,7 +198,7 @@ class StaticFunctions {
         SherutBoy.GVOHA: "ישיבה גבוהה",
         SherutBoy.SHERUT: 'שירות',
         SherutBoy.SHLICHUT: "שליחות",
-        SherutBoy.GURNISH: "אחר",     
+        SherutBoy.GURNISH: "אחר",
       },
       "en": {
         SherutBoy.KRAVI: "Kravi",
@@ -207,10 +208,25 @@ class StaticFunctions {
         SherutBoy.GVOHA: "Yeshiva Gvoha",
         SherutBoy.SHERUT: 'Sherut',
         SherutBoy.SHLICHUT: "Shlichut",
-        SherutBoy.GURNISH: "Other",     
+        SherutBoy.GURNISH: "Other",
       }
     };
-     return areaText[MyApp.getLocale()]!=null?areaText[MyApp.getLocale()][sherutBoy]:sherutBoy.toString().split(".").last;
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][sherutBoy] : sherutBoy.toString().split(".").last;
   }
- 
+
+  static String getCompareScore(CompareScore compareScore) {
+    Map<String, Map<CompareScore, String>> areaText = {
+      "he": {
+        CompareScore.NOT_KASHUR: "לא קשור",
+        CompareScore.MAYBE: "יכול להיות",
+        CompareScore.YALA: 'יאלה',
+      },
+      "en": {
+        CompareScore.NOT_KASHUR: "No way",
+        CompareScore.MAYBE: "Could be",
+        CompareScore.YALA: 'Do it',
+      }
+    };
+    return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][compareScore] : compareScore.toString().split(".").last;
+  }
 }

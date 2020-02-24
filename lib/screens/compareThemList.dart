@@ -25,10 +25,13 @@ class _CompareThemListState extends State<CompareThemList> {
     return new CompareCard(person, shadchan);
   }
   bool myP(Person p){
-    return p.shadchanID==personProvider.shadchanProvider.myShadchanId;
+    return p.shadchanID==personProvider.shadchanProvider.myShadchanId && personProvider.comparePerson.gender!=p.gender;
   }
   bool myF(Person p){
-    return personProvider.shadchanProvider.myFavorites.containsKey(p.id);
+    return personProvider.shadchanProvider.myFavorites.containsKey(p.id) && personProvider.comparePerson.gender!=p.gender;
+  }
+  bool allP(Person p){
+    return personProvider.comparePerson.gender!=p.gender;
   }
 
   void resetList() async {
@@ -36,7 +39,7 @@ class _CompareThemListState extends State<CompareThemList> {
       isLoading = true;
     });
     if (allSelected) {
-      list = await personProvider.getAllPeopleQuery(personComparator: personProvider.myCompare);
+      list = await personProvider.getAllPeopleQuery(predicate: allP, personComparator: personProvider.myCompare);
       setState(() {
         isLoading = false;
       });
@@ -60,7 +63,7 @@ class _CompareThemListState extends State<CompareThemList> {
       isInit = false;
       personProvider = Provider.of<PersonProvider>(context);
       personProvider.comparePerson = widget.person;
-      list = await personProvider.getAllPeopleQuery();
+      list = await personProvider.getAllPeopleQuery(predicate: myP);
 
       setState(() {
         isLoading = false;

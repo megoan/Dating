@@ -8,7 +8,7 @@ enum Eda { ASHKENAZI, SEFARADI, TEMANI, ETYOPI, FRENCH, MIXED }
 enum Smoke { NO, SOMETIMES, TRY_TO_STOP, YES }
 enum SherutGirl { ARMY, MECHINA, ONE_YEAR_SHERUT, TWO_YEARS_SHERUT, MIDRASHA, SHLICHUT, GURNISHT }
 enum SherutBoy { KRAVI, JOBNIK, MECHINA, HESDER, GVOHA, SHERUT, SHLICHUT, GURNISH }
-
+enum CompareScore{NOT_KASHUR,MAYBE,YALA}
 class Person {
   String id;
   //my info
@@ -28,7 +28,7 @@ class Person {
   Eda eda;
   Smoke smoke;
   List<SherutBoy> mySherutBoy = [];
-  List<SherutBoy> mySherutGirl = [];
+  List<SherutGirl> mySherutGirl = [];
   //looking for info
   List<Area> areas = [];
   List<Status> statuses = [];
