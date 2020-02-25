@@ -19,7 +19,7 @@ class Person {
   DateTime birthday;
   String short;
   String long;
-  int height;
+  double height;
   Area area;
   Country country;
   Status status;
@@ -27,21 +27,21 @@ class Person {
   Hashkafa hashkafa;
   Eda eda;
   Smoke smoke;
-  List<SherutBoy> mySherutBoy = [];
-  List<SherutGirl> mySherutGirl = [];
+  List<SherutBoy> mySherutBoy =new List<SherutBoy> ();
+  List<SherutGirl> mySherutGirl =new List<SherutGirl>();
   //looking for info
-  List<Area> areas = [];
-  List<Status> statuses = [];
-  List<Dos> doses = [];
-  List<Hashkafa> hashkafas = [];
-  List<Eda> edas = [];
-  List<Smoke> smoking = [];
-  List<SherutBoy> thereSherutBoy = [];
-  List<SherutGirl> thereSherutGirl = [];
-  int heightMin;
-  int heightMax;
-  int ageMin;
-  int ageMax;
+  List<Area> areas =new List<Area>();
+  List<Status> statuses =new List<Status>();
+  List<Dos> doses =new List<Dos>();
+  List<Hashkafa> hashkafas =new List<Hashkafa>();
+  List<Eda> edas =new List<Eda>();
+  List<Smoke> smoking =new List<Smoke>();
+  List<SherutBoy> thereSherutBoy =new List<SherutBoy>();
+  List<SherutGirl> thereSherutGirl = new List<SherutGirl>();
+  double heightMin;
+  double heightMax;
+  double ageMin;
+  double ageMax;
   String moreInfo;
 
   String shadchanID;
