@@ -9,9 +9,9 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 
 class CompareThemList extends StatefulWidget {
-  final Person person;
+  final Person myPerson;
   final Shadchan shadchan;
-  CompareThemList(this.person, this.shadchan);
+  CompareThemList(this.myPerson, this.shadchan);
   @override
   _CompareThemListState createState() => _CompareThemListState();
 }
@@ -21,8 +21,8 @@ class _CompareThemListState extends State<CompareThemList> {
 
   bool isLoading = true;
   List<Person> list = [];
-  Widget returnCard(Person person, Shadchan shadchan) {
-    return new CompareCard(person, shadchan);
+  Widget returnCard(Person myPerson,Person person, Shadchan shadchan) {
+    return new CompareCard(myPerson,person, shadchan);
   }
   bool myP(Person p){
     return p.shadchanID==personProvider.shadchanProvider.myShadchanId && personProvider.comparePerson.gender!=p.gender;
@@ -62,7 +62,7 @@ class _CompareThemListState extends State<CompareThemList> {
     if (isInit) {
       isInit = false;
       personProvider = Provider.of<PersonProvider>(context);
-      personProvider.comparePerson = widget.person;
+      personProvider.comparePerson = widget.myPerson;
       list = await personProvider.getAllPeopleQuery(predicate: myP);
 
       setState(() {
@@ -86,13 +86,13 @@ class _CompareThemListState extends State<CompareThemList> {
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
+            child:widget.myPerson.profileImages!=null? CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(
-                widget.person.profileImages[0],
+                 widget.myPerson.profileImages[0],
                 //fit: BoxFit.fill,
               ),
-            ),
+            ):Container(),
           )
         ],
         title: Row(
@@ -102,7 +102,7 @@ class _CompareThemListState extends State<CompareThemList> {
             SizedBox(
               width: 8.0,
             ),
-            Text(widget.person.firstName),
+            Text(widget.myPerson.firstName),
           ],
         ),
       ),
@@ -239,7 +239,7 @@ class _CompareThemListState extends State<CompareThemList> {
                   itemCount: list.length,
                   itemBuilder: (BuildContext ctxt, int index) => Padding(
                         padding: const EdgeInsets.all(0.0),
-                        child: returnCard(list[index], personProvider.shadchanProvider.allShadchanimMap[list[index].shadchanID]),
+                        child: returnCard(widget.myPerson,list[index], personProvider.shadchanProvider.allShadchanimMap[list[index].shadchanID]),
                       )),
             )
           ],

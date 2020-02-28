@@ -12,23 +12,23 @@ enum CompareScore{NOT_KASHUR,MAYBE,YALA}
 class Person {
   String id;
   //my info
-  Gender gender;
+  Gender gender = Gender.FEMALE;
   List<String> profileImages = [];
   String firstName;
   String lastName;
   DateTime birthday;
   String short;
   String long;
-  double height;
+  double height=1.5;
   Area area;
-  Country country;
+  Country country=Country.ISRAEL;
   Status status;
   Dos dos;
   Hashkafa hashkafa;
   Eda eda;
   Smoke smoke;
-  List<SherutBoy> mySherutBoy =new List<SherutBoy> ();
-  List<SherutGirl> mySherutGirl =new List<SherutGirl>();
+  List<SherutBoy> mySherutBoy = new List<SherutBoy> ();
+  List<SherutGirl> mySherutGirl = new List<SherutGirl>();
   //looking for info
   List<Area> areas =new List<Area>();
   List<Status> statuses =new List<Status>();
@@ -38,32 +38,32 @@ class Person {
   List<Smoke> smoking =new List<Smoke>();
   List<SherutBoy> thereSherutBoy =new List<SherutBoy>();
   List<SherutGirl> thereSherutGirl = new List<SherutGirl>();
-  double heightMin;
-  double heightMax;
-  double ageMin;
-  double ageMax;
+  double heightMin= 1.4;
+  double heightMax = 1.85;
+  double ageMin = 18;
+  double ageMax = 99;
   String moreInfo;
 
   String shadchanID;
 
-  int views;
-  int requests;
-  int dates;
+  int views=0;
+  int requests=0;
+  int dates=0;
 
-  bool isVisible;
+  bool isVisible=true;
 
   Person(
     {
       this.id,
-      this.gender,
-      this.firstName,
-      this.lastName,
+      this.gender=Gender.FEMALE,
+      this.firstName="",
+      this.lastName="",
       this.birthday,
-      this.short,
-      this.long,
-      this.height,
+      this.short="",
+      this.long="",
+      this.height=1.5,
       this.area,
-      this.country,
+      this.country=Country.ISRAEL,
       this.status,
       this.dos,
       this.hashkafa,
@@ -73,10 +73,10 @@ class Person {
       this.mySherutGirl,
       this.profileImages,
       this.shadchanID,
-      this.views,
-      this.requests,
-      this.dates,
-      this.isVisible,
+      this.views=0,
+      this.requests=0,
+      this.dates=0,
+      this.isVisible=true,
       
 
       this.areas,
@@ -87,11 +87,11 @@ class Person {
       this.smoking,
       this.thereSherutBoy,
       this.thereSherutGirl,
-      this.heightMin,
-      this.heightMax,
-      this.ageMin,
-      this.ageMax,
-      this.moreInfo,
+      this.heightMin=1.4,
+      this.heightMax=1.85,
+      this.ageMin=18,
+      this.ageMax=99,
+      this.moreInfo="",
       
       });
 }

@@ -13,15 +13,16 @@ import 'loader.dart';
 
 class CompareCard extends StatelessWidget {
   final Person person;
+  final Person myPerson;
   final Shadchan shadchan;
-  CompareCard(this.person, this.shadchan);
+  CompareCard(this.myPerson,this.person, this.shadchan);
   @override
   Widget build(BuildContext context) {
     PersonProvider personProvider = Provider.of<PersonProvider>(context);
     return Card(
       child: InkWell(
         onTap: () {
-          Navigator.push(context, new MaterialPageRoute(builder: (context) => new CompareScreen()));
+          Navigator.push(context, new MaterialPageRoute(builder: (context) => new CompareScreen(myPerson,person)));
         },
         child: Container(
           child: Row(

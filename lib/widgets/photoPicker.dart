@@ -8,9 +8,10 @@ class PhotoPicker extends StatefulWidget {
   Function imageCallBack;
   int photoNum=0;
   bool small=false;
+  String imageUrl;
   @override
   _PhotoPickerState createState() => _PhotoPickerState();
-  PhotoPicker({this.image,this.imageCallBack,this.photoNum,this.small=false});
+  PhotoPicker({this.image,this.imageCallBack,this.photoNum,this.imageUrl,this.small=false});
 }
 
 class _PhotoPickerState extends State<PhotoPicker> {
@@ -79,7 +80,7 @@ class _PhotoPickerState extends State<PhotoPicker> {
                               Container(
                                 width: (widget.small)?112:140,
                                 height:(widget.small)?112:140,
-                                child: widget.image!=null?CircleAvatar(backgroundImage: new FileImage(widget.image), radius: (widget.small)?112:140,):CircleAvatar(backgroundColor: Colors.grey ,radius: (widget.small)?112:140,)
+                                child: widget.image!=null?CircleAvatar(backgroundImage:widget.imageUrl!=null?Image.network(widget.imageUrl): new FileImage(widget.image), radius: (widget.small)?112:140,):CircleAvatar(backgroundColor: Colors.grey ,radius: (widget.small)?112:140,)
                               ),
                              
                             ],

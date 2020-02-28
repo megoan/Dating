@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   var currentIndex = 0;
   var selectedIndex = 0;
   bool isInit = true;
-  
+  PersonProvider personProvider;
   //String _lastSelected = 'TAB: 0';
   void _selectedTab(int index) {
     setState(() {
@@ -47,7 +47,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void addPersonScreen() {
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new AddPerson()));
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new AddPerson())).then((value) {setState(() {
+      
+    });});
   }
 
   void _searchPressed() {
@@ -98,6 +100,8 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     if (isInit) {
       isInit = false;
+      personProvider = Provider.of<PersonProvider>(context);
+     personProvider.shadchanProvider.getMyShadchanByID();
     }
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();

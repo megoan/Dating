@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class ShadchanProvider extends ChangeNotifier {
 
   String myShadchanId="1";
+  Shadchan myShadchan;
   Map<String,bool> myFavorites={"3":true,"4":true};
   List<Person> myFavoritesList = [];
   List<Shadchan> allShadchanim = [];
@@ -32,6 +33,11 @@ class ShadchanProvider extends ChangeNotifier {
       return true;
     }
  
+  }
+  Future<bool> getMyShadchanByID()async{
+    return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
+      myShadchan=new Shadchan("1", "shmilo", "222", "aaa@bbb.ccc", "https://cdn.pixabay.com/photo/2015/09/18/11/38/old-woman-945448_960_720.jpg", ["5","6"], ["3","4"], true);
+    });
   }
 
   void removeFavorite(String id){

@@ -235,12 +235,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     child: ClipOval(
                         child: Hero(
                       tag: 'imageHero' + widget.person.id.toString(),
-                      child: CachedNetworkImage(
+                      child:widget.person.profileImages!=null?  CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: widget.person.profileImages[0],
+                        imageUrl:widget.person.profileImages[0],
                         placeholder: (context, url) => Loader(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
+                      ):Container(),
                     )),
                   ),
                   //   Positioned(top:0, child: TopBar())

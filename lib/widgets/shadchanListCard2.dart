@@ -2,17 +2,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/models/person.dart';
 import 'package:dating/models/shadchan.dart';
 import 'package:dating/providers/langText.dart';
+import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/screens/compareThemList.dart';
 import 'package:flutter/material.dart';
 import 'package:dating/screens/addPerson.dart';
+import 'package:provider/provider.dart';
 import '../main.dart';
 import 'loader.dart';
 
 class ShadchanListCard2 extends StatefulWidget {
   final Person person;
    final Shadchan shadchan;
-  ShadchanListCard2(this.person,this.shadchan);
+  final Function reset;
+  final Function updateVisible;
+  ShadchanListCard2(this.person,this.shadchan,this.reset,this.updateVisible);
   @override
   _ShadchanListCard2State createState() => _ShadchanListCard2State();
 }
@@ -20,9 +24,13 @@ class ShadchanListCard2 extends StatefulWidget {
 class _ShadchanListCard2State extends State<ShadchanListCard2> {
   @override
   Widget build(BuildContext context) {
+    PersonProvider personProvider = Provider.of<PersonProvider>(context);
     return GestureDetector(
       onTap: (){
-          Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new AddPerson()));
+        personProvider.newPerson=widget.person;
+          Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new AddPerson(update: true,))).then((value) {
+          widget.reset();
+          });
       },
           child: Card(
         shape: RoundedRectangleBorder(
@@ -64,13 +72,13 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                               width: 70,
                               height: 70,
                               child: ClipOval(
-                                child: CachedNetworkImage(
+                                child:widget.person.profileImages!=null? CachedNetworkImage(
                                   fit: BoxFit.cover,
                                   imageUrl: widget.person.profileImages[0],
                                   placeholder: (context, url) => Loader(),
                                   errorWidget: (context, url, error) =>
                                       Icon(Icons.error),
-                                ),
+                                ):Container(),
                               ),
                             ),
                           ],
@@ -114,6 +122,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                             onTap: (){
+                              widget.updateVisible(widget.person.id,!widget.person.isVisible);
                               setState(() {
                                widget.person.isVisible=!widget.person.isVisible;
                               });

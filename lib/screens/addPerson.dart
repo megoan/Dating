@@ -17,9 +17,9 @@ import 'package:provider/provider.dart';
 
 import '../main.dart';
 
-
-
 class AddPerson extends StatefulWidget {
+  bool update;
+  AddPerson({this.update});
   @override
   _AddPersonState createState() => _AddPersonState();
 }
@@ -27,7 +27,6 @@ class AddPerson extends StatefulWidget {
 class _AddPersonState extends State<AddPerson> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  Person person = new Person();
 
   Area _area;
   Dos _religious;
@@ -36,10 +35,9 @@ class _AddPersonState extends State<AddPerson> {
   Eda _eda;
   Smoke _smoke;
 
-
   double personHeight = 1.5;
-  double lookingPersonHeightMin = 1.4;
-  double lookingPersonHeightMax = 1.85;
+  double lookingPersonHeightMin = 1;
+  double lookingPersonHeightMax = 2.3;
 
   double personAge = 23;
   double lookingPersonAgeMin = 18;
@@ -53,7 +51,7 @@ class _AddPersonState extends State<AddPerson> {
 
   RangeValues rangeValuesAge = RangeValues(18, 99);
   RangeLabels rangeLabelsAge = RangeLabels('18', '99');
-  String sSelected = LocaleText.getLocaleText(MyApp.getLocale(), "Female");
+  Gender sSelected = Gender.FEMALE;
   File _image1;
   File _image2;
   File _image3;
@@ -186,7 +184,7 @@ class _AddPersonState extends State<AddPerson> {
     _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
   }
 
-  void _submitForm()async {
+  void _submitForm() async {
     final FormState form = _formKey.currentState;
 
     setState(() {
@@ -201,27 +199,62 @@ class _AddPersonState extends State<AddPerson> {
     if (!form.validate()) {
       showMessage(LocaleText.getLocaleText(MyApp.getLocale(), "Form is not valid!  Please review and correct!"));
     } else {
-      form.save(); //This invokes each onSaved event
-    await  personProvider.addPerson(person);
-    Navigator.pop(context);
-     
+      //This invokes each onSaved event
+      form.save();
+      if (widget.update) {
+        await personProvider.updatePerson(personProvider.newPerson);
+      } 
+      else{
+        await personProvider.addPerson(personProvider.newPerson);
+      }
+      
+      Navigator.pop(context);
     }
   }
-   PersonProvider personProvider;
 
- // ShadchanProvider shadchanProvider;
+  PersonProvider personProvider;
 
-  bool isInit=true;
+  // ShadchanProvider shadchanProvider;
+
+  bool isInit = true;
   bool isLoading = true;
   @override
-  void didChangeDependencies() async{
+  void didChangeDependencies() async {
     if (isInit) {
-      isInit=false;
+      isInit = false;
       personProvider = Provider.of<PersonProvider>(context);
-     // shadchanProvider = Provider.of<ShadchanProvider>(context);
-     
+      print(widget.update);
+      if (widget.update == null || !widget.update) {
+        personProvider.newPerson = new Person(shadchanID: personProvider.shadchanProvider.myShadchan.id);
+      } else {
+        personHeight = personProvider.newPerson.height;
+        lookingPersonHeightMin = personProvider.newPerson.heightMin;
+        lookingPersonHeightMax = personProvider.newPerson.heightMax;
+        lookingPersonAgeMin = personProvider.newPerson.ageMin;
+        lookingPersonAgeMax = personProvider.newPerson.ageMax;
+        rangeValuesAge = RangeValues(personProvider.newPerson.ageMin, personProvider.newPerson.ageMax);
+        rangeValues = RangeValues(personProvider.newPerson.heightMin, personProvider.newPerson.heightMax);
+      }
+      _area = personProvider.newPerson.area;
+      _religious = personProvider.newPerson.dos;
+      _hashkafa = personProvider.newPerson.hashkafa;
+      _status = personProvider.newPerson.status;
+      _eda = personProvider.newPerson.eda;
+      _smoke = personProvider.newPerson.smoke;
+      sSelected = personProvider.newPerson.gender;
+      areaValue = personProvider.newPerson.area;
+      statusValue = personProvider.newPerson.status;
+      religiosValue = personProvider.newPerson.dos;
+      hashkafaValue = personProvider.newPerson.hashkafa;
+      edaValue = personProvider.newPerson.eda;
+      smokeValue = personProvider.newPerson.smoke;
+
+      _controller.text = personProvider.newPerson.birthday != null ? new DateFormat.yMd().format(personProvider.newPerson.birthday) : null;
+      setState(() {});
+      // shadchanProvider = Provider.of<ShadchanProvider>(context);
+
     }
-   
+
     super.didChangeDependencies();
     //getAllPeople()
   }
@@ -281,7 +314,6 @@ class _AddPersonState extends State<AddPerson> {
                       Stack(
                         alignment: Alignment.center,
                         children: <Widget>[
-                          
                           Container(
                             width: width * 0.5,
                             height: 100,
@@ -292,9 +324,9 @@ class _AddPersonState extends State<AddPerson> {
                                     onTap: () {
                                       print("male");
                                       setState(() {
-                                        sSelected = LocaleText.getLocaleText(MyApp.getLocale(), 'Male');
+                                        sSelected = Gender.MALE;
                                       });
-                                      person.gender=Gender.MALE;
+                                      personProvider.newPerson.gender = Gender.MALE;
                                     },
                                     child: Container(
                                       color: Colors.transparent,
@@ -304,29 +336,29 @@ class _AddPersonState extends State<AddPerson> {
                                 Expanded(
                                   child: GestureDetector(
                                       onTap: () {
-                                         print("female");
+                                        print("female");
                                         setState(() {
-                                          sSelected = LocaleText.getLocaleText(MyApp.getLocale(), 'Female');
+                                          sSelected = Gender.FEMALE;
                                         });
-                                        person.gender=Gender.FEMALE;
+                                        personProvider.newPerson.gender = Gender.FEMALE;
                                       },
                                       child: Container(
-                                         color: Colors.transparent,
+                                        color: Colors.transparent,
                                       )),
                                 )
                               ],
                             ),
                           ),
                           IgnorePointer(
-                              ignoring: true,
-                                                          child: Container(
+                            ignoring: true,
+                            child: Container(
                               width: width * 0.5,
-                              child: sSelected == LocaleText.getLocaleText(MyApp.getLocale(), 'Female') ? Image.asset("assets/images/girlpressed.png") : Image.asset("assets/images/boy_pressed.png"),
-                          ),
+                              child: sSelected == Gender.FEMALE ? Image.asset("assets/images/girlpressed.png") : Image.asset("assets/images/boy_pressed.png"),
                             ),
+                          ),
                         ],
                       ),
-                    
+
                       Column(
                         children: <Widget>[
                           // Padding(
@@ -337,6 +369,9 @@ class _AddPersonState extends State<AddPerson> {
                           Align(
                             alignment: Alignment.center,
                             child: PhotoPicker(
+                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
+                                  ? personProvider.newPerson.profileImages[0]
+                                  : null,
                               image: _image1,
                               imageCallBack: imageCallBack1,
                               photoNum: 1,
@@ -349,18 +384,27 @@ class _AddPersonState extends State<AddPerson> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               PhotoPicker(
+                                imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
+                                    ? personProvider.newPerson.profileImages[0]
+                                    : null,
                                 image: _image2,
                                 imageCallBack: imageCallBack2,
                                 photoNum: 2,
                                 small: true,
                               ),
                               PhotoPicker(
+                                imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
+                                    ? personProvider.newPerson.profileImages[0]
+                                    : null,
                                 image: _image3,
                                 imageCallBack: imageCallBack3,
                                 photoNum: 3,
                                 small: true,
                               ),
                               PhotoPicker(
+                                imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
+                                    ? personProvider.newPerson.profileImages[0]
+                                    : null,
                                 image: _image4,
                                 imageCallBack: imageCallBack4,
                                 photoNum: 4,
@@ -376,6 +420,7 @@ class _AddPersonState extends State<AddPerson> {
 
                       //FIRST NAME
                       new TextFormField(
+                        initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
                         decoration: InputDecoration(
                           icon: const Icon(Icons.person),
                           hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
@@ -383,10 +428,11 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                         inputFormatters: [new LengthLimitingTextInputFormatter(30)],
                         validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                        onSaved: (val) => person.firstName = val,
+                        onSaved: (val) => personProvider.newPerson.firstName = val,
                       ),
                       //LAST NAME
                       new TextFormField(
+                        initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
                         decoration: InputDecoration(
                           icon: const Icon(Icons.person),
                           hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
@@ -394,7 +440,7 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                         inputFormatters: [new LengthLimitingTextInputFormatter(30)],
                         validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                        onSaved: (val) => person.lastName = val,
+                        onSaved: (val) => personProvider.newPerson.lastName = val,
                       ),
                       //BIRTH DAY
                       new Row(children: <Widget>[
@@ -411,7 +457,7 @@ class _AddPersonState extends State<AddPerson> {
                             if (isValidDob(val)) return null;
                             return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                           },
-                          onSaved: (val) => person.birthday = convertToDate(val),
+                          onSaved: (val) => personProvider.newPerson.birthday = convertToDate(val),
                         )),
                         new IconButton(
                           icon: new Icon(Icons.more_horiz),
@@ -444,7 +490,7 @@ class _AddPersonState extends State<AddPerson> {
                                     areaValue = newValue;
                                     map1.putIfAbsent(newValue, () => state);
                                     setState(() {
-                                      person.area = newValue;
+                                      personProvider.newPerson.area = newValue;
                                       _area = newValue;
                                       state.didChange(newValue);
                                     });
@@ -484,7 +530,7 @@ class _AddPersonState extends State<AddPerson> {
                                   onChanged: (Status newValue) {
                                     statusValue = newValue;
                                     setState(() {
-                                      person.status = newValue;
+                                      personProvider.newPerson.status = newValue;
                                       _status = newValue;
                                       state.didChange(newValue);
                                     });
@@ -524,7 +570,7 @@ class _AddPersonState extends State<AddPerson> {
                                   onChanged: (Dos newValue) {
                                     religiosValue = newValue;
                                     setState(() {
-                                      person.dos = newValue;
+                                      personProvider.newPerson.dos = newValue;
                                       _religious = newValue;
                                       state.didChange(newValue);
                                     });
@@ -564,7 +610,7 @@ class _AddPersonState extends State<AddPerson> {
                                   onChanged: (Hashkafa newValue) {
                                     hashkafaValue = newValue;
                                     setState(() {
-                                      person.hashkafa = newValue;
+                                      personProvider.newPerson.hashkafa = newValue;
                                       _hashkafa = newValue;
                                       state.didChange(newValue);
                                     });
@@ -604,7 +650,7 @@ class _AddPersonState extends State<AddPerson> {
                                   onChanged: (Eda newValue) {
                                     edaValue = newValue;
                                     setState(() {
-                                      person.eda = newValue;
+                                      personProvider.newPerson.eda = newValue;
                                       _eda = newValue;
                                       state.didChange(newValue);
                                     });
@@ -644,7 +690,7 @@ class _AddPersonState extends State<AddPerson> {
                                   onChanged: (Smoke newValue) {
                                     smokeValue = newValue;
                                     setState(() {
-                                      person.smoke = newValue;
+                                      personProvider.newPerson.smoke = newValue;
                                       _smoke = newValue;
                                       state.didChange(newValue);
                                     });
@@ -667,6 +713,7 @@ class _AddPersonState extends State<AddPerson> {
 
                       //ABOUT ME SHORT
                       new TextFormField(
+                        initialValue: personProvider.newPerson != null && personProvider.newPerson.short != null ? personProvider.newPerson.short : "",
                         maxLines: null,
                         maxLength: 70,
                         decoration: InputDecoration(
@@ -676,10 +723,11 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                         inputFormatters: [new LengthLimitingTextInputFormatter(70)],
                         validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                        onSaved: (val) => person.short = val,
+                        onSaved: (val) => personProvider.newPerson.short = val,
                       ),
                       //ABOUT ME LONG
                       new TextFormField(
+                        initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
                         maxLines: null,
                         decoration: InputDecoration(
                           icon: const Icon(Icons.format_align_justify),
@@ -690,9 +738,9 @@ class _AddPersonState extends State<AddPerson> {
                         //   new LengthLimitingTextInputFormatter(500)
                         // ],
                         validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                        onSaved: (val) => person.long = val,
+                        onSaved: (val) => personProvider.newPerson.long = val,
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 20,
                       ),
                       Container(
@@ -712,7 +760,7 @@ class _AddPersonState extends State<AddPerson> {
                                 onChanged: ((newValue) {
                                   setState(() {
                                     personHeight = newValue;
-                                    person.height=newValue;
+                                    personProvider.newPerson.height = newValue;
                                   });
                                 }),
                               ),
@@ -726,7 +774,7 @@ class _AddPersonState extends State<AddPerson> {
                       SizedBox(
                         height: 20,
                       ),
-                      if (sSelected == LocaleText.getLocaleText(MyApp.getLocale(), 'Female'))
+                      if (sSelected == Gender.FEMALE)
                         Container(
                           child: Column(
                             children: <Widget>[
@@ -742,19 +790,19 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                               ),
                               CheckboxGroup(
+                                checked: personProvider.newPerson!=null && personProvider.newPerson.mySherutGirl!=null ?personProvider.newPerson.mySherutGirl.map((e) =>  StaticFunctions.getSherutGirl(e)).toList():null,
                                 labels: SherutGirl.values.map((e) => StaticFunctions.getSherutGirl(e)).toList(),
                                 onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if ( person.mySherutGirl==null) {
-                                         person.mySherutGirl=[];
-                                      }
-                                      person.mySherutGirl.add(SherutGirl.values[index]);
+                                  if (isChecked) {
+                                    if (personProvider.newPerson.mySherutGirl == null) {
+                                      personProvider.newPerson.mySherutGirl = [];
                                     }
-                                    else{
-                                      person.mySherutGirl.remove(SherutGirl.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                                    personProvider.newPerson.mySherutGirl.add(SherutGirl.values[index]);
+                                  } else {
+                                    personProvider.newPerson.mySherutGirl.remove(SherutGirl.values[index]);
+                                  }
+                                  print("isChecked: $isChecked   label: $label  index: $index");
+                                },
                                 onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                               ),
                               SizedBox(
@@ -763,7 +811,7 @@ class _AddPersonState extends State<AddPerson> {
                             ],
                           ),
                         ),
-                      if (sSelected == LocaleText.getLocaleText(MyApp.getLocale(), 'Male'))
+                      if (sSelected == Gender.MALE)
                         Container(
                           child: Column(
                             children: <Widget>[
@@ -778,19 +826,19 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                               ),
                               CheckboxGroup(
+                                checked:personProvider.newPerson!=null && personProvider.newPerson.mySherutBoy!=null?personProvider.newPerson.mySherutBoy.map((e) =>  StaticFunctions.getSherutBoy(e)).toList():null,
                                 labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(),
                                 onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                       if ( person.mySherutBoy==null) {
-                                         person.mySherutBoy=[];
-                                      }
-                                      person.mySherutBoy.add(SherutBoy.values[index]);
+                                  if (isChecked) {
+                                    if (personProvider.newPerson.mySherutBoy == null) {
+                                      personProvider.newPerson.mySherutBoy = [];
                                     }
-                                    else{
-                                      person.mySherutBoy.remove(SherutBoy.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                                    personProvider.newPerson.mySherutBoy.add(SherutBoy.values[index]);
+                                  } else {
+                                    personProvider.newPerson.mySherutBoy.remove(SherutBoy.values[index]);
+                                  }
+                                  print("isChecked: $isChecked   label: $label  index: $index");
+                                },
                                 onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                               ),
                               SizedBox(
@@ -803,55 +851,7 @@ class _AddPersonState extends State<AddPerson> {
                       SizedBox(
                         height: 40,
                       ),
-                      // Align(
-                      //   alignment: Alignment.topLeft,
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: Text(
-                      //       "Optional Fields - only viewed by you",
-                      //       style: TextStyle(
-                      //           fontSize: 18,
-                      //           fontWeight: FontWeight.bold,
-                      //           color: Colors.grey[600]),
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
-                      // //PHONE NUMBER
-                      // TextFormField(
-                      //   decoration: const InputDecoration(
-                      //     icon: const Icon(Icons.phone),
-                      //     hintText: 'Enter a phone number',
-                      //     labelText: 'Phone',
-                      //   ),
-                      //   keyboardType: TextInputType.phone,
-                      //   inputFormatters: [
-                      //     new WhitelistingTextInputFormatter(
-                      //         new RegExp(r'^[()\d -]{1,15}$')),
-                      //   ],
-                      //   validator: (value) => isValidPhoneNumber(value)
-                      //       ? null
-                      //       : 'Phone number must be entered as (###)###-####',
-                      //   onSaved: (val) => newContact.phone = val,
-                      // ),
-                      // //EMAIL ADDRESS
-                      // new TextFormField(
-                      //   decoration: const InputDecoration(
-                      //     icon: const Icon(Icons.email),
-                      //     hintText: 'Enter a email address',
-                      //     labelText: 'Email',
-                      //   ),
-                      //   keyboardType: TextInputType.emailAddress,
-                      //   validator: (value) => isValidEmail(value)
-                      //       ? null
-                      //       : 'Please enter a valid email address',
-                      //   onSaved: (val) => newContact.email = val,
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
+
                       Container(
                         padding: const EdgeInsets.only(top: 14.0),
                         child: Text(
@@ -870,19 +870,19 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                       ),
                       CheckboxGroup(
+                        checked:personProvider.newPerson!=null && personProvider.newPerson.areas!=null ?personProvider.newPerson.areas.map((e) =>  StaticFunctions.getArea(e)).toList():null,
                         labels: Area.values.map((e) => StaticFunctions.getArea(e)).toList(),
                         onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                       if ( person.areas==null) {
-                                         person.areas=[];
-                                      }
-                                      person.areas.add(Area.values[index]);
-                                    }
-                                    else{
-                                      person.areas.remove(Area.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                          if (isChecked) {
+                            if (personProvider.newPerson.areas == null) {
+                              personProvider.newPerson.areas = [];
+                            }
+                            personProvider.newPerson.areas.add(Area.values[index]);
+                          } else {
+                            personProvider.newPerson.areas.remove(Area.values[index]);
+                          }
+                          print("isChecked: $isChecked   label: $label  index: $index");
+                        },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
                       SizedBox(
@@ -899,19 +899,19 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                       ),
                       CheckboxGroup(
+                         checked:personProvider.newPerson!=null && personProvider.newPerson.statuses!=null?personProvider.newPerson.statuses.map((e) =>  StaticFunctions.getStatus(e)).toList():null,
                         labels: Status.values.map((e) => StaticFunctions.getStatus(e)).toList(),
                         onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if ( person.statuses==null) {
-                                         person.statuses=[];
-                                      }
-                                      person.statuses.add(Status.values[index]);
-                                    }
-                                    else{
-                                      person.statuses.remove(Status.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                          if (isChecked) {
+                            if (personProvider.newPerson.statuses == null) {
+                              personProvider.newPerson.statuses = [];
+                            }
+                            personProvider.newPerson.statuses.add(Status.values[index]);
+                          } else {
+                            personProvider.newPerson.statuses.remove(Status.values[index]);
+                          }
+                          print("isChecked: $isChecked   label: $label  index: $index");
+                        },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
                       SizedBox(
@@ -928,19 +928,19 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                       ),
                       CheckboxGroup(
+                          checked:personProvider.newPerson!=null && personProvider.newPerson.doses!=null?personProvider.newPerson.doses.map((e) =>  StaticFunctions.getDos(e)).toList():null,
                         labels: Dos.values.map((e) => StaticFunctions.getDos(e)).toList(),
                         onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                       if ( person.doses==null) {
-                                         person.doses=[];
-                                      }
-                                      person.doses.add(Dos.values[index]);
-                                    }
-                                    else{
-                                      person.doses.remove(Dos.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                          if (isChecked) {
+                            if (personProvider.newPerson.doses == null) {
+                              personProvider.newPerson.doses = [];
+                            }
+                            personProvider.newPerson.doses.add(Dos.values[index]);
+                          } else {
+                            personProvider.newPerson.doses.remove(Dos.values[index]);
+                          }
+                          print("isChecked: $isChecked   label: $label  index: $index");
+                        },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
                       SizedBox(
@@ -957,19 +957,19 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                       ),
                       CheckboxGroup(
+                           checked:personProvider.newPerson!=null &&personProvider.newPerson.hashkafas!=null ?personProvider.newPerson.hashkafas.map((e) =>  StaticFunctions.getHashkafa(e)).toList():null,
                         labels: Hashkafa.values.map((e) => StaticFunctions.getHashkafa(e)).toList(),
                         onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                       if ( person.hashkafas==null) {
-                                         person.hashkafas=[];
-                                      }
-                                      person.hashkafas.add(Hashkafa.values[index]);
-                                    }
-                                    else{
-                                      person.hashkafas.remove(Hashkafa.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                          if (isChecked) {
+                            if (personProvider.newPerson.hashkafas == null) {
+                              personProvider.newPerson.hashkafas = [];
+                            }
+                            personProvider.newPerson.hashkafas.add(Hashkafa.values[index]);
+                          } else {
+                            personProvider.newPerson.hashkafas.remove(Hashkafa.values[index]);
+                          }
+                          print("isChecked: $isChecked   label: $label  index: $index");
+                        },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
                       SizedBox(
@@ -986,19 +986,19 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                       ),
                       CheckboxGroup(
+                         checked:personProvider.newPerson!=null && personProvider.newPerson.edas!=null?personProvider.newPerson.edas.map((e) =>  StaticFunctions.getEda(e)).toList():null,
                         labels: Eda.values.map((e) => StaticFunctions.getEda(e)).toList(),
                         onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                       if ( person.edas==null) {
-                                         person.edas=[];
-                                      }
-                                      person.edas.add(Eda.values[index]);
-                                    }
-                                    else{
-                                      person.edas.remove(Eda.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                          if (isChecked) {
+                            if (personProvider.newPerson.edas == null) {
+                              personProvider.newPerson.edas = [];
+                            }
+                            personProvider.newPerson.edas.add(Eda.values[index]);
+                          } else {
+                            personProvider.newPerson.edas.remove(Eda.values[index]);
+                          }
+                          print("isChecked: $isChecked   label: $label  index: $index");
+                        },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
                       SizedBox(
@@ -1015,25 +1015,25 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                       ),
                       CheckboxGroup(
+                           checked:personProvider.newPerson!=null && personProvider.newPerson.smoking!=null?personProvider.newPerson.smoking.map((e) =>  StaticFunctions.getSmoke(e)).toList():null,
                         labels: Smoke.values.map((e) => StaticFunctions.getSmoke(e)).toList(),
                         onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                       if ( person.smoking==null) {
-                                         person.smoking=[];
-                                      }
-                                      person.smoking.add(Smoke.values[index]);
-                                    }
-                                    else{
-                                      person.smoking.remove(Smoke.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                          if (isChecked) {
+                            if (personProvider.newPerson.smoking == null) {
+                              personProvider.newPerson.smoking = [];
+                            }
+                            personProvider.newPerson.smoking.add(Smoke.values[index]);
+                          } else {
+                            personProvider.newPerson.smoking.remove(Smoke.values[index]);
+                          }
+                          print("isChecked: $isChecked   label: $label  index: $index");
+                        },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      if (sSelected == LocaleText.getLocaleText(MyApp.getLocale(), 'Male'))
+                      if (sSelected == Gender.MALE)
                         Container(
                           child: Column(
                             children: <Widget>[
@@ -1048,19 +1048,19 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                               ),
                               CheckboxGroup(
+                                    checked:personProvider.newPerson!=null && personProvider.newPerson.thereSherutGirl!=null?personProvider.newPerson.thereSherutGirl.map((e) =>  StaticFunctions.getSherutGirl(e)).toList():null,
                                 labels: SherutGirl.values.map((e) => StaticFunctions.getSherutGirl(e)).toList(),
                                 onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                       if ( person.thereSherutGirl==null) {
-                                         person.thereSherutGirl=[];
-                                      }
-                                      person.thereSherutGirl.add(SherutGirl.values[index]);
+                                  if (isChecked) {
+                                    if (personProvider.newPerson.thereSherutGirl == null) {
+                                      personProvider.newPerson.thereSherutGirl = [];
                                     }
-                                    else{
-                                      person.thereSherutGirl.remove(SherutGirl.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                                    personProvider.newPerson.thereSherutGirl.add(SherutGirl.values[index]);
+                                  } else {
+                                    personProvider.newPerson.thereSherutGirl.remove(SherutGirl.values[index]);
+                                  }
+                                  print("isChecked: $isChecked   label: $label  index: $index");
+                                },
                                 onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                               ),
                               SizedBox(
@@ -1069,7 +1069,7 @@ class _AddPersonState extends State<AddPerson> {
                             ],
                           ),
                         ),
-                      if (sSelected == LocaleText.getLocaleText(MyApp.getLocale(), 'Female'))
+                      if (sSelected == Gender.FEMALE)
                         Container(
                           child: Column(
                             children: <Widget>[
@@ -1084,19 +1084,19 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                               ),
                               CheckboxGroup(
-                                labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(), 
-                                onChange:(bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if ( person.thereSherutBoy==null) {
-                                         person.thereSherutBoy=[];
-                                      }
-                                      person.thereSherutBoy.add(SherutBoy.values[index]);
+                                checked:personProvider.newPerson!=null && personProvider.newPerson.thereSherutBoy!=null?personProvider.newPerson.thereSherutBoy.map((e) =>  StaticFunctions.getSherutBoy(e)).toList():null,
+                                labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(),
+                                onChange: (bool isChecked, String label, int index) {
+                                  if (isChecked) {
+                                    if (personProvider.newPerson.thereSherutBoy == null) {
+                                      personProvider.newPerson.thereSherutBoy = [];
                                     }
-                                    else{
-                                      person.thereSherutBoy.remove(SherutBoy.values[index]);
-                                    }
-                                   print("isChecked: $isChecked   label: $label  index: $index");
-                                   },
+                                    personProvider.newPerson.thereSherutBoy.add(SherutBoy.values[index]);
+                                  } else {
+                                    personProvider.newPerson.thereSherutBoy.remove(SherutBoy.values[index]);
+                                  }
+                                  print("isChecked: $isChecked   label: $label  index: $index");
+                                },
                                 onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                               ),
                               SizedBox(
@@ -1138,8 +1138,8 @@ class _AddPersonState extends State<AddPerson> {
                                         rangeLabels = RangeLabels(newValue.start.toStringAsFixed(2), newValue.end.toStringAsFixed(2));
                                         lookingPersonHeightMax = newValue.end;
                                         lookingPersonHeightMin = newValue.start;
-                                        person.heightMin= newValue.start;
-                                        person.heightMax= newValue.end;
+                                        personProvider.newPerson.heightMin = newValue.start;
+                                        personProvider.newPerson.heightMax = newValue.end;
                                       });
                                     }),
                                   ),
@@ -1185,8 +1185,8 @@ class _AddPersonState extends State<AddPerson> {
                                         rangeLabelsAge = RangeLabels(newValue.start.toStringAsFixed(1), newValue.end.toStringAsFixed(1));
                                         lookingPersonAgeMax = newValue.end;
                                         lookingPersonAgeMin = newValue.start;
-                                        person.ageMin = newValue.start;
-                                        person.ageMax = newValue.end;
+                                        personProvider.newPerson.ageMin = newValue.start;
+                                        personProvider.newPerson.ageMax = newValue.end;
                                       });
                                     }),
                                   ),
@@ -1200,9 +1200,12 @@ class _AddPersonState extends State<AddPerson> {
                       SizedBox(
                         height: 20,
                       ),
-                      new TextField(
-                        maxLines: null, 
-                        onChanged: (value)  {person.moreInfo=value;},
+                      new TextFormField(
+                        initialValue: personProvider.newPerson != null && personProvider.newPerson.moreInfo != null ? personProvider.newPerson.moreInfo : "",
+                        maxLines: null,
+                        onChanged: (value) {
+                          personProvider.newPerson.moreInfo = value;
+                        },
                         decoration: InputDecoration(
                           icon: const Icon(Icons.wb_sunny),
                           hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),

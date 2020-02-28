@@ -43,12 +43,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
               children: <Widget>[
                 Hero(
                     tag: 'imageHero' + widget.person.id.toString(),
-                    child: CachedNetworkImage(
+                    child: widget.person.profileImages!=null?CachedNetworkImage(
                       fit: BoxFit.cover,
-                      imageUrl: widget.person.profileImages[0],
+                      imageUrl:  widget.person.profileImages[0],
                       placeholder: (context, url) => Loader(),
                       errorWidget: (context, url, error) => Icon(Icons.error),
-                    )),
+                    ):Container()),
                 DecoratedBox(
                   decoration: new BoxDecoration(
                     //color: Colors.lightGreen

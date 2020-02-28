@@ -20,14 +20,27 @@ class _ShadchanListState extends State<ShadchanList> {
   bool isInit=true;
 
   bool isLoading = true;
-
+  void reset()async{
+     isLoading = true;
+     setState(() {
+       
+     });
+      await Future.wait([personProvider.getAllMyPeople(),shadchanProvider.getAllShadchanim()]);
+       setState(() {
+        isLoading = false;
+      });
+  }
+  void updateVisible(String id,bool visible){
+    personProvider.updateVisible(id,visible);
+  }
+  
   @override
   void didChangeDependencies() async{
     if (isInit) {
       isInit=false;
       personProvider = Provider.of<PersonProvider>(context);
       shadchanProvider = Provider.of<ShadchanProvider>(context);
-      await Future.wait([personProvider.getAllMyPeople(),shadchanProvider.getAllShadchanim()]);
+     await Future.wait([personProvider.getAllMyPeople(),shadchanProvider.getAllShadchanim()]);
      
       setState(() {
         isLoading = false;
@@ -50,6 +63,6 @@ class _ShadchanListState extends State<ShadchanList> {
 }
 
   Widget returnCard( Person person){
-    return new ShadchanListCard2(person,personProvider.shadchanProvider.allShadchanimMap[person.shadchanID]);
+    return new ShadchanListCard2(person,personProvider.shadchanProvider.allShadchanimMap[person.shadchanID],reset,updateVisible);
   }
 }

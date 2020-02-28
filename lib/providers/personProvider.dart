@@ -8,27 +8,27 @@ import 'package:flutter/material.dart';
 class PersonProvider extends ChangeNotifier {
   PersonProvider(this.shadchanProvider);
   ShadchanProvider shadchanProvider;
-
+  Person newPerson;
   Person comparePerson;
   List<Person> allPeopleDataBase = [
     Person(
         id: "1",
         gender: Gender.FEMALE,
-        firstName: "Shmuel",
+        firstName: "Esther",
         lastName: "Soy",
-        birthday: DateTime(1991, 11, 17),
-        short: "I like Blender",
+        birthday: DateTime(1994, 11, 6),
+        short: "I like Horses",
         long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis feugiat vivamus at augue eget arcu dictum. ",
-        height: 174,
-        area: Area.CHUL,
+        height: 1.64,
+        area: Area.JERUSALEM,
         country: Country.ISRAEL,
         status: Status.SINGLE,
         dos: Dos.REGULAR,
-        hashkafa: Hashkafa.CHABAD,
+        hashkafa: Hashkafa.LEUMI,
         eda: Eda.FRENCH,
-        smoke: Smoke.TRY_TO_STOP,
+        smoke: Smoke.SOMETIMES,
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        mySherutGirl: [SherutGirl.GURNISHT],
+        mySherutGirl: [SherutGirl.ONE_YEAR_SHERUT,SherutGirl.MIDRASHA],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
         statuses: [Status.SINGLE],
         doses: [Dos.REGULAR, Dos.LITE],
@@ -37,8 +37,8 @@ class PersonProvider extends ChangeNotifier {
         smoking: [Smoke.YES],
         thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
         thereSherutBoy: [SherutBoy.GVOHA],
-        heightMin: 150,
-        heightMax: 170,
+        heightMin: 1.50,
+        heightMax: 1.70,
         ageMin: 23,
         ageMax: 27,
         moreInfo: "whats up",
@@ -53,31 +53,31 @@ class PersonProvider extends ChangeNotifier {
     Person(
         id: "2",
         gender: Gender.FEMALE,
-        firstName: "Shmuel",
+        firstName: "Bracha",
         lastName: "Soy",
         birthday: DateTime(1991, 11, 17),
-        short: "I like Blender",
+        short: "I like History",
         long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis feugiat vivamus at augue eget arcu dictum. ",
-        height: 174,
-        area: Area.CHUL,
+        height: 1.64,
+        area: Area.GUSH_DAN,
         country: Country.ISRAEL,
         status: Status.SINGLE,
         dos: Dos.REGULAR,
-        hashkafa: Hashkafa.CHABAD,
+        hashkafa: Hashkafa.JEW,
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        mySherutGirl: [SherutGirl.MECHINA],
+        mySherutGirl: [SherutGirl.TWO_YEARS_SHERUT],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
         statuses: [Status.SINGLE],
         doses: [Dos.REGULAR, Dos.LITE],
         hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
         edas: [Eda.ASHKENAZI, Eda.SEFARADI],
-        smoking: [Smoke.YES],
+        smoking: [Smoke.TRY_TO_STOP],
         thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        thereSherutBoy: [SherutBoy.HESDER],
-        heightMin: 150,
-        heightMax: 170,
+        thereSherutBoy: [SherutBoy.HESDER,SherutBoy.GVOHA],
+        heightMin: 1.50,
+        heightMax: 1.70,
         ageMin: 23,
         ageMax: 27,
         moreInfo: "whats up",
@@ -90,31 +90,31 @@ class PersonProvider extends ChangeNotifier {
     Person(
         id: "3",
         gender: Gender.FEMALE,
-        firstName: "Shmuel",
+        firstName: "Lyla",
         lastName: "Soy",
-        birthday: DateTime(1991, 11, 17),
-        short: "I like Blender",
+        birthday: DateTime(1996, 11, 17),
+        short: "I like Night",
         long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis feugiat vivamus at augue eget arcu dictum. ",
-        height: 174,
+        height: 1.54,
         area: Area.CHUL,
-        country: Country.ISRAEL,
-        status: Status.SINGLE,
-        dos: Dos.REGULAR,
-        hashkafa: Hashkafa.CHABAD,
+        country: Country.UK,
+        status: Status.GARUSH,
+        dos: Dos.LITE,
+        hashkafa: Hashkafa.CHOZER_BITSHUVA,
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        mySherutGirl: [SherutGirl.MIDRASHA],
+        mySherutGirl: [SherutGirl.MIDRASHA,SherutGirl.MECHINA,SherutGirl.ARMY],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
-        statuses: [Status.SINGLE],
-        doses: [Dos.REGULAR, Dos.LITE],
+        statuses: [Status.SINGLE,Status.ALMAN,Status.GARUSH],
+        doses: [Dos.REGULAR, Dos.LITE,Dos.MASORTI],
         hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
         edas: [Eda.ASHKENAZI, Eda.SEFARADI],
         smoking: [Smoke.YES],
         thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        thereSherutBoy: [SherutBoy.KRAVI],
-        heightMin: 150,
-        heightMax: 170,
+        thereSherutBoy: [SherutBoy.KRAVI,SherutBoy.MECHINA],
+        heightMin: 1.50,
+        heightMax: 1.70,
         ageMin: 23,
         ageMax: 27,
         moreInfo: "whats up",
@@ -129,10 +129,10 @@ class PersonProvider extends ChangeNotifier {
         gender: Gender.MALE,
         firstName: "Shmuel",
         lastName: "Soy",
-        birthday: DateTime(1991, 11, 17),
+        birthday: DateTime(1993, 11, 17),
         short: "I like Blender",
         long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis feugiat vivamus at augue eget arcu dictum. ",
-        height: 174,
+        height: 1.74,
         area: Area.CHUL,
         country: Country.ISRAEL,
         status: Status.SINGLE,
@@ -148,8 +148,8 @@ class PersonProvider extends ChangeNotifier {
         edas: [Eda.ASHKENAZI, Eda.SEFARADI],
         smoking: [Smoke.YES],
         thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        heightMin: 150,
-        heightMax: 170,
+        heightMin: 1.50,
+        heightMax: 1.70,
         ageMin: 23,
         ageMax: 27,
         moreInfo: "whats up",
@@ -164,10 +164,10 @@ class PersonProvider extends ChangeNotifier {
         gender: Gender.MALE,
         firstName: "Shmuel",
         lastName: "Soy",
-        birthday: DateTime(1991, 11, 17),
+        birthday: DateTime(1997, 11, 17),
         short: "I like Blender",
         long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis feugiat vivamus at augue eget arcu dictum. ",
-        height: 174,
+        height: 1.74,
         area: Area.CHUL,
         country: Country.ISRAEL,
         status: Status.SINGLE,
@@ -183,8 +183,8 @@ class PersonProvider extends ChangeNotifier {
         edas: [Eda.ASHKENAZI, Eda.SEFARADI],
         smoking: [Smoke.YES],
         thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        heightMin: 150,
-        heightMax: 170,
+        heightMin: 1.50,
+        heightMax: 1.70,
         ageMin: 23,
         ageMax: 27,
         moreInfo: "whats up",
@@ -202,7 +202,7 @@ class PersonProvider extends ChangeNotifier {
         birthday: DateTime(1991, 11, 17),
         short: "I like Blender",
         long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis feugiat vivamus at augue eget arcu dictum. ",
-        height: 174,
+        height: 1.74,
         area: Area.CHUL,
         country: Country.ISRAEL,
         status: Status.SINGLE,
@@ -218,8 +218,8 @@ class PersonProvider extends ChangeNotifier {
         edas: [Eda.ASHKENAZI, Eda.SEFARADI],
         smoking: [Smoke.YES],
         thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        heightMin: 150,
-        heightMax: 170,
+        heightMin: 1.50,
+        heightMax: 1.70,
         ageMin: 23,
         ageMax: 27,
         moreInfo: "whats up",
@@ -257,7 +257,10 @@ class PersonProvider extends ChangeNotifier {
     allPeople = [];
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       for (var person in allPeopleDataBase) {
-        allPeople.add(person);
+        if (person.isVisible) {
+            allPeople.add(person);
+        }
+      
       }
       notifyListeners();
       return true;
@@ -432,5 +435,29 @@ class PersonProvider extends ChangeNotifier {
       return "true";
     });
   }
+   Future<bool>updatePerson(Person person){
+    return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
+      for (var item in allPeopleDataBase) {
+        if (item.id==person.id) {
+          item=person;
+        }
+      }
+      notifyListeners();
+      return true;
+    });
+  }
+  Future<bool>updateVisible(String id,bool visible){
+    print("dfgdfgdgdfg");
+    return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
+      for (var item in allPeopleDataBase) {
+        if (item.id==id) {
+        item.isVisible=visible;
+        }
+      }
+      notifyListeners();
+      return true;
+    });
+  }
+
 }
 
