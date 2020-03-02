@@ -12,44 +12,43 @@ class PersonProvider extends ChangeNotifier {
   Person comparePerson;
   List<Person> allPeopleDataBase = [
     Person(
-        id: "1",
-        gender: Gender.FEMALE,
-        firstName: "Esther",
-        lastName: "Soy",
-        birthday: DateTime(1994, 11, 6),
-        short: "I like Horses",
-        long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis feugiat vivamus at augue eget arcu dictum. ",
-        height: 1.64,
-        area: Area.JERUSALEM,
-        country: Country.ISRAEL,
-        status: Status.SINGLE,
-        dos: Dos.REGULAR,
-        hashkafa: Hashkafa.LEUMI,
-        eda: Eda.FRENCH,
-        smoke: Smoke.SOMETIMES,
-        mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        mySherutGirl: [SherutGirl.ONE_YEAR_SHERUT,SherutGirl.MIDRASHA],
-        areas: [Area.GUSH_DAN, Area.JERUSALEM],
-        statuses: [Status.SINGLE],
-        doses: [Dos.REGULAR, Dos.LITE],
-        hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
-        edas: [Eda.ASHKENAZI, Eda.SEFARADI],
-        smoking: [Smoke.YES],
-        thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        thereSherutBoy: [SherutBoy.GVOHA],
-        heightMin: 1.50,
-        heightMax: 1.70,
-        ageMin: 23,
-        ageMax: 27,
-        moreInfo: "whats up",
-        views: 10,
-        requests: 13,
-        dates: 3,
-        isVisible: true,
-        profileImages: ["https://cdn.pixabay.com/photo/2018/05/15/07/39/girl-3402351_960_720.jpg"],
-        shadchanID: "5",
-        
-        ),
+      id: "1",
+      gender: Gender.FEMALE,
+      firstName: "Esther",
+      lastName: "Soy",
+      birthday: DateTime(1994, 11, 6),
+      short: "I like Horses",
+      long: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis feugiat vivamus at augue eget arcu dictum. ",
+      height: 1.64,
+      area: Area.JERUSALEM,
+      country: Country.ISRAEL,
+      status: Status.SINGLE,
+      dos: Dos.REGULAR,
+      hashkafa: Hashkafa.LEUMI,
+      eda: Eda.FRENCH,
+      smoke: Smoke.SOMETIMES,
+      mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
+      mySherutGirl: [SherutGirl.ONE_YEAR_SHERUT, SherutGirl.MIDRASHA],
+      areas: [Area.GUSH_DAN, Area.JERUSALEM],
+      statuses: [Status.SINGLE],
+      doses: [Dos.REGULAR, Dos.LITE],
+      hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
+      edas: [Eda.ASHKENAZI, Eda.SEFARADI],
+      smoking: [Smoke.YES],
+      thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
+      thereSherutBoy: [SherutBoy.GVOHA],
+      heightMin: 1.50,
+      heightMax: 1.70,
+      ageMin: 23,
+      ageMax: 27,
+      moreInfo: "whats up",
+      views: 10,
+      requests: 13,
+      dates: 3,
+      isVisible: true,
+      profileImages: ["https://cdn.pixabay.com/photo/2018/05/15/07/39/girl-3402351_960_720.jpg","https://cdn.pixabay.com/photo/2015/09/09/20/23/baby-933097_960_720.jpg"],
+      shadchanID: "5",
+    ),
     Person(
         id: "2",
         gender: Gender.FEMALE,
@@ -75,7 +74,7 @@ class PersonProvider extends ChangeNotifier {
         edas: [Eda.ASHKENAZI, Eda.SEFARADI],
         smoking: [Smoke.TRY_TO_STOP],
         thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        thereSherutBoy: [SherutBoy.HESDER,SherutBoy.GVOHA],
+        thereSherutBoy: [SherutBoy.HESDER, SherutBoy.GVOHA],
         heightMin: 1.50,
         heightMax: 1.70,
         ageMin: 23,
@@ -104,15 +103,15 @@ class PersonProvider extends ChangeNotifier {
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        mySherutGirl: [SherutGirl.MIDRASHA,SherutGirl.MECHINA,SherutGirl.ARMY],
+        mySherutGirl: [SherutGirl.MIDRASHA, SherutGirl.MECHINA, SherutGirl.ARMY],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
-        statuses: [Status.SINGLE,Status.ALMAN,Status.GARUSH],
-        doses: [Dos.REGULAR, Dos.LITE,Dos.MASORTI],
+        statuses: [Status.SINGLE, Status.ALMAN, Status.GARUSH],
+        doses: [Dos.REGULAR, Dos.LITE, Dos.MASORTI],
         hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
         edas: [Eda.ASHKENAZI, Eda.SEFARADI],
         smoking: [Smoke.YES],
         thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        thereSherutBoy: [SherutBoy.KRAVI,SherutBoy.MECHINA],
+        thereSherutBoy: [SherutBoy.KRAVI, SherutBoy.MECHINA],
         heightMin: 1.50,
         heightMax: 1.70,
         ageMin: 23,
@@ -194,7 +193,7 @@ class PersonProvider extends ChangeNotifier {
         isVisible: true,
         profileImages: ["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-dewey-1564143216.jpg"],
         shadchanID: "1"),
-     Person(
+    Person(
         id: "6",
         gender: Gender.MALE,
         firstName: "Shmil",
@@ -229,38 +228,85 @@ class PersonProvider extends ChangeNotifier {
         isVisible: true,
         profileImages: ["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-wells-1564112074.jpg"],
         shadchanID: "1"),
-
-    // Person.smallDetails("2","Esther",DateTime(1994,11,6),Area.GUSH_DAN,"I like horses",["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-declan-1564110338.jpg"],"4"),
-    // Person.smallDetails("3","Bracha",DateTime(1995,9,11),Area.BEER_SHEVA,"I like History",["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-wells-1564112074.jpg"],"3"),
-    // Person.smallDetails("4","Yaakov",DateTime(2000,0,20),Area.JERUSALEM,"I like Rav MM",["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-roland-1564112798.jpg"],"2"),
-    // Person.smallDetails("5","Ephraim",DateTime(2000,0,20),Area.JERUSALEM,"I like rav MS",["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-dewey-1564143216.jpg"],"1"),
   ];
   List<Person> allPeople = [];
   List<Person> myPeople = [];
-  Future<List<Person>> getAllPeopleQuery({Function predicate,Comparator<Person> personComparator}){
-    List<Person> temp=[];
-       return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
+  String nameFilter="";
+  ///List of my filters
+  ///
+  ///Gender select
+  ///Age range
+  ///Country select
+  ///
+  
+  int ageMax;
+  int ageMin;
+  List<Gender> genders = [];
+  List<Country> countrys = [];
+  void updateNameFilter(val){
+    nameFilter=val;
+    notifyListeners();
+  }
+  void setMainFilters(int ageMax,int ageMin,List<Gender> genders,List<Country> countrys){
+    this.ageMax=ageMax;
+    this.ageMin=ageMin;
+    this.genders=[];
+    for (var gender in genders) {
+      this.genders.add(gender);
+    }
+    this.countrys=[];
+    for (var country in countrys) {
+      this.countrys.add(country);
+    }
+    notifyListeners();
+  }
+  bool mainFilter(Person person) {
+    if (ageMax != null) {
+      if (ageMax < StaticFunctions.getAge(person.birthday)) {
+        return false;
+      }
+    }
+    if (ageMin != null) {
+      if (ageMin > StaticFunctions.getAge(person.birthday)) {
+        return false;
+      }
+    }
+    if (genders != null && genders.length > 0) {
+      if (!genders.contains(person.gender)) {
+        return false;
+      }
+    }
+    if (countrys != null && countrys.length > 0) {
+      if (!countrys.contains(person.country)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  Future<List<Person>> getAllPeopleQuery({Function predicate, Comparator<Person> personComparator}) {
+    List<Person> temp = [];
+    return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       for (var person in allPeopleDataBase) {
-        if (predicate==null || predicate(person)) {
-           temp.add(person);
+        if (mainFilter(person) && (predicate == null || predicate(person))) {
+          temp.add(person);
         }
-        if (personComparator!=null) {
+        if (personComparator != null) {
           temp.sort(personComparator);
         }
-       
       }
 
       return temp;
     });
   }
+
   Future<bool> getAllPeople() async {
     allPeople = [];
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       for (var person in allPeopleDataBase) {
-        if (person.isVisible) {
-            allPeople.add(person);
+        if (person.isVisible && mainFilter(person)) {
+          allPeople.add(person);
         }
-      
       }
       notifyListeners();
       return true;
@@ -271,21 +317,21 @@ class PersonProvider extends ChangeNotifier {
     myPeople = [];
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       for (var person in allPeopleDataBase) {
-        if (person.shadchanID==shadchanProvider.myShadchanId) {
-             myPeople.add(person);
+        if (person.shadchanID == shadchanProvider.myShadchanId) {
+          myPeople.add(person);
         }
-     
       }
       notifyListeners();
       return true;
     });
   }
-   Future<bool> getAllMyFavorites() async {
+
+  Future<bool> getAllMyFavorites() async {
     shadchanProvider.myFavoritesList = [];
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       for (var person in allPeopleDataBase) {
         if (shadchanProvider.myFavorites.containsKey(person.id)) {
-            shadchanProvider.myFavoritesList.add(person);
+          shadchanProvider.myFavoritesList.add(person);
         }
       }
       notifyListeners();
@@ -293,78 +339,78 @@ class PersonProvider extends ChangeNotifier {
     });
   }
 
-  void removeFavorite(String id){
+  void removeFavorite(String id) {
     if (shadchanProvider.myFavorites.containsKey(id)) {
       shadchanProvider.myFavorites.remove(id);
       print(shadchanProvider.myFavoritesList.length.toString());
-      shadchanProvider.myFavoritesList.removeWhere((element) => element.id==id);
+      shadchanProvider.myFavoritesList.removeWhere((element) => element.id == id);
       print(shadchanProvider.myFavoritesList.length.toString());
       notifyListeners();
     }
   }
 
-  void addFavorite(id){
+  void addFavorite(id) {
     if (!shadchanProvider.myFavorites.containsKey(id)) {
-      shadchanProvider.myFavorites[id]=true;
+      shadchanProvider.myFavorites[id] = true;
       notifyListeners();
     }
   }
 
-  void switchFavorite(id){
-      if (shadchanProvider.myFavorites.containsKey(id)) {
+  void switchFavorite(id) {
+    if (shadchanProvider.myFavorites.containsKey(id)) {
       shadchanProvider.myFavorites.remove(id);
-      shadchanProvider.myFavoritesList.removeWhere((element) => element.id==id);
+      shadchanProvider.myFavoritesList.removeWhere((element) => element.id == id);
       notifyListeners();
-    }
-    else{
-       shadchanProvider.myFavorites[id]=true;
-     
+    } else {
+      shadchanProvider.myFavorites[id] = true;
+
       notifyListeners();
     }
   }
 
-  CompareScore compareScore(Person person){
-    int cpAge= StaticFunctions.getAge(comparePerson.birthday);
-    int pAge= StaticFunctions.getAge(person.birthday);
+  CompareScore compareScore(Person person) {
+    int cpAge = StaticFunctions.getAge(comparePerson.birthday);
+    int pAge = StaticFunctions.getAge(person.birthday);
 
     // NOT KASHUR IFS
-    if ((pAge-comparePerson.ageMax>=3 && person.gender==Gender.FEMALE && cpAge<50) || (cpAge-person.ageMax>=3 && comparePerson.gender==Gender.FEMALE && pAge <50)) {
+    if ((pAge - comparePerson.ageMax >= 3 && person.gender == Gender.FEMALE && cpAge < 50) || (cpAge - person.ageMax >= 3 && comparePerson.gender == Gender.FEMALE && pAge < 50)) {
       return CompareScore.NOT_KASHUR;
     }
-    if(((comparePerson.ageMin-pAge)>=3 && cpAge<32) || ((person.ageMin-cpAge)>=3 && pAge<32)){
-       return CompareScore.NOT_KASHUR;
-    }
-    if ((comparePerson.heightMin-person.height>10) || (person.heightMin-comparePerson.height>10)) {
+    if (((comparePerson.ageMin - pAge) >= 3 && cpAge < 32) || ((person.ageMin - cpAge) >= 3 && pAge < 32)) {
       return CompareScore.NOT_KASHUR;
     }
-    if ((comparePerson.height-person.heightMax>10) || (person.height-comparePerson.heightMax>10)) {
+    if ((comparePerson.heightMin - person.height > 10) || (person.heightMin - comparePerson.height > 10)) {
       return CompareScore.NOT_KASHUR;
     }
-    if (((comparePerson.edas.contains(comparePerson.eda) && comparePerson.edas.length==1) ||(person.edas.contains(person.eda) && person.edas.length==1) ) && comparePerson.eda!=person.eda) {
+    if ((comparePerson.height - person.heightMax > 10) || (person.height - comparePerson.heightMax > 10)) {
       return CompareScore.NOT_KASHUR;
     }
-    if (((comparePerson.hashkafas.contains(comparePerson.hashkafa) && comparePerson.hashkafas.length==1) ||(person.hashkafas.contains(person.hashkafa) && person.hashkafas.length==1) ) && comparePerson.hashkafa!=person.hashkafa) {
+    if (((comparePerson.edas.contains(comparePerson.eda) && comparePerson.edas.length == 1) || (person.edas.contains(person.eda) && person.edas.length == 1)) && comparePerson.eda != person.eda) {
       return CompareScore.NOT_KASHUR;
     }
-    if (((comparePerson.doses.contains(comparePerson.dos) && comparePerson.doses.length==1) ||(person.doses.contains(person.dos) && person.doses.length==1) ) && comparePerson.dos!=person.dos) {
+    if (((comparePerson.hashkafas.contains(comparePerson.hashkafa) && comparePerson.hashkafas.length == 1) || (person.hashkafas.contains(person.hashkafa) && person.hashkafas.length == 1)) &&
+        comparePerson.hashkafa != person.hashkafa) {
       return CompareScore.NOT_KASHUR;
     }
-    if (comparePerson.smoking.length==1 && comparePerson.smoking[0].index==0 && person.smoke.index>1 || person.smoking.length==1 && person.smoking[0].index==0 && comparePerson.smoke.index>1) {
-       return CompareScore.NOT_KASHUR;
+    if (((comparePerson.doses.contains(comparePerson.dos) && comparePerson.doses.length == 1) || (person.doses.contains(person.dos) && person.doses.length == 1)) && comparePerson.dos != person.dos) {
+      return CompareScore.NOT_KASHUR;
+    }
+    if (comparePerson.smoking.length == 1 && comparePerson.smoking[0].index == 0 && person.smoke.index > 1 ||
+        person.smoking.length == 1 && person.smoking[0].index == 0 && comparePerson.smoke.index > 1) {
+      return CompareScore.NOT_KASHUR;
     }
     //YALLA IFS
-    List a=[];
-    LinkedHashSet aaa=new LinkedHashSet();
-    List b=[];
-    LinkedHashSet bbb=new LinkedHashSet();
+    List a = [];
+    LinkedHashSet aaa = new LinkedHashSet();
+    List b = [];
+    LinkedHashSet bbb = new LinkedHashSet();
 
+    List aa = [];
+    LinkedHashSet aaaaa = new LinkedHashSet();
+    List bb = [];
+    LinkedHashSet bbbbb = new LinkedHashSet();
 
-    List aa=[];
-    LinkedHashSet aaaaa=new LinkedHashSet();
-    List bb=[];
-    LinkedHashSet bbbbb=new LinkedHashSet();
-
-    if (comparePerson.gender==Gender.MALE) {
+    if (comparePerson.gender == Gender.MALE) {
       for (var item in comparePerson.mySherutBoy) {
         aaa.add(item);
       }
@@ -377,10 +423,8 @@ class PersonProvider extends ChangeNotifier {
       for (var item in person.thereSherutBoy) {
         bbbbb.add(item);
       }
-    
-    }
-    else{
-          for (var item in comparePerson.mySherutGirl) {
+    } else {
+      for (var item in comparePerson.mySherutGirl) {
         aaa.add(item);
       }
       for (var item in comparePerson.thereSherutBoy) {
@@ -392,72 +436,64 @@ class PersonProvider extends ChangeNotifier {
       for (var item in person.thereSherutGirl) {
         bbbbb.add(item);
       }
-
     }
-    if ((pAge>comparePerson.ageMin && pAge<comparePerson.ageMax && cpAge>person.ageMin && cpAge<person.ageMax) && // age compare
-      (person.height>comparePerson.heightMin && person.height<comparePerson.heightMax && comparePerson.height>person.heightMin && comparePerson.height<person.heightMax) && // height compare
-      (person.areas.contains(comparePerson.area) && comparePerson.areas.contains(person.area)) && // area compare
+    if ((pAge > comparePerson.ageMin && pAge < comparePerson.ageMax && cpAge > person.ageMin && cpAge < person.ageMax) && // age compare
+        (person.height > comparePerson.heightMin && person.height < comparePerson.heightMax && comparePerson.height > person.heightMin && comparePerson.height < person.heightMax) && // height compare
+        (person.areas.contains(comparePerson.area) && comparePerson.areas.contains(person.area)) && // area compare
 
-      (person.statuses.contains(comparePerson.status) && comparePerson.statuses.contains(person.status)) && // status compare
-      (person.doses.contains(comparePerson.dos) && comparePerson.doses.contains(person.dos)) && // dos compare
-      (person.hashkafas.contains(comparePerson.hashkafa) && comparePerson.hashkafas.contains(person.hashkafa)) && // hashkafa compare
-      (person.edas.contains(comparePerson.eda) && comparePerson.edas.contains(person.eda)) && // eda compare
-      (person.smoking.contains(comparePerson.smoke) && comparePerson.smoking.contains(person.smoke)) && // smoking compare
-       aaa.intersection(bbbbb).length>0 && bbb.intersection(aaaaa).length>0 ) {
-       return CompareScore.YALA;
+        (person.statuses.contains(comparePerson.status) && comparePerson.statuses.contains(person.status)) && // status compare
+        (person.doses.contains(comparePerson.dos) && comparePerson.doses.contains(person.dos)) && // dos compare
+        (person.hashkafas.contains(comparePerson.hashkafa) && comparePerson.hashkafas.contains(person.hashkafa)) && // hashkafa compare
+        (person.edas.contains(comparePerson.eda) && comparePerson.edas.contains(person.eda)) && // eda compare
+        (person.smoking.contains(comparePerson.smoke) && comparePerson.smoking.contains(person.smoke)) && // smoking compare
+        aaa.intersection(bbbbb).length > 0 &&
+        bbb.intersection(aaaaa).length > 0) {
+      return CompareScore.YALA;
     }
 
     return CompareScore.MAYBE;
-
-
   }
 
-
-
-  int myCompare(Person person1,Person person2){
-    if (compareScore(person1).index>compareScore(person2).index) {
+  int myCompare(Person person1, Person person2) {
+    if (compareScore(person1).index > compareScore(person2).index) {
       return 1;
-    }
-    else if (compareScore(person1).index<compareScore(person2).index) {
+    } else if (compareScore(person1).index < compareScore(person2).index) {
       return -1;
+    } else {
+      return 0;
     }
-    else{
-       return 0;
-    }
-   
   }
 
-
-  Future<String>addPerson(Person person){
+  Future<String> addPerson(Person person) {
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       allPeopleDataBase.add(person);
       notifyListeners();
       return "true";
     });
   }
-   Future<bool>updatePerson(Person person){
+
+  Future<bool> updatePerson(Person person) {
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       for (var item in allPeopleDataBase) {
-        if (item.id==person.id) {
-          item=person;
+        if (item.id == person.id) {
+          item = person;
         }
       }
       notifyListeners();
       return true;
     });
   }
-  Future<bool>updateVisible(String id,bool visible){
+
+  Future<bool> updateVisible(String id, bool visible) {
     print("dfgdfgdgdfg");
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       for (var item in allPeopleDataBase) {
-        if (item.id==id) {
-        item.isVisible=visible;
+        if (item.id == id) {
+          item.isVisible = visible;
         }
       }
       notifyListeners();
       return true;
     });
   }
-
 }
-

@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
   var currentIndex = 0;
   var selectedIndex = 0;
   bool isInit = true;
+  bool searchMode=false;
   PersonProvider personProvider;
   //String _lastSelected = 'TAB: 0';
   void _selectedTab(int index) {
@@ -52,49 +53,7 @@ class _HomePageState extends State<HomePage> {
     });});
   }
 
-  void _searchPressed() {
-    setState(() {
-      if (this._searchIcon.icon == Icons.search) {
-        this._searchIcon = new Icon(Icons.close);
-        this._appBarTitle = new TextField(
-          style: TextStyle(color: Colors.purple),
-          controller: _filter,
-          autofocus: true,
-          decoration: new InputDecoration(
-            //border: InputBorder.none,
-            //contentPadding: EdgeInsets.all(20),
-            filled: true,
-            fillColor: Colors.white,
-            hintStyle: TextStyle(
-              color: Colors.purple[300],
-            ),
-            prefixIcon: new Icon(
-              Icons.search,
-              color: Colors.purple,
-            ),
-            hintText: 'Search Name',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
 
-            //       focusedBorder: OutlineInputBorder(
-            // //  borderSide: BorderSide(color: Colors.white),
-            //   borderRadius: BorderRadius.circular(30),
-            // ),
-            // enabledBorder: UnderlineInputBorder(
-            // //  borderSide: BorderSide(color: Colors.white),
-            //   borderRadius: BorderRadius.circular(30),
-            // ),
-          ),
-        );
-      } else {
-        this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Search Example');
-        //filteredNames = names;
-        _filter.clear();
-      }
-    });
-  }
 
   @override
   void didChangeDependencies() {
@@ -120,19 +79,68 @@ class _HomePageState extends State<HomePage> {
         ),
         appBar: AppBar(
           // centerTitle: true,
-          title: _appBarTitle,
+          title: searchMode? TextField(
+          style: TextStyle(color: Colors.purple),
+          controller: _filter,
+          autofocus: true,
+          onChanged: (value){
+            personProvider.updateNameFilter(value);
+              setState(() {
+                
+              });
+          },
+          decoration: new InputDecoration(
+            //border: InputBorder.none,
+            //contentPadding: EdgeInsets.all(20),
+            filled: true,
+            fillColor: Colors.white,
+            hintStyle: TextStyle(
+              color: Colors.purple[300],
+            ),
+            prefixIcon: new Icon(
+              Icons.search,
+              color: Colors.purple,
+            ),
+            hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+            
+            //       focusedBorder: OutlineInputBorder(
+            // //  borderSide: BorderSide(color: Colors.white),
+            //   borderRadius: BorderRadius.circular(30),
+            // ),
+            // enabledBorder: UnderlineInputBorder(
+            // //  borderSide: BorderSide(color: Colors.white),
+            //   borderRadius: BorderRadius.circular(30),
+            // ),
+          ),
+        ):Text('Cool Group'),//_appBarTitle,
           actions: <Widget>[
-            IconButton(
-              icon: _searchIcon,
-              onPressed: _searchPressed,
+           if(selectedIndex==1) IconButton(
+              icon:searchMode? Icon(Icons.close):Icon(Icons.search),
+              onPressed:searchMode? (){
+                _filter.clear();
+                 personProvider.updateNameFilter("");
+                 searchMode=false;
+              setState(() {
+                
+              });
+              }:
+              (){
+                 searchMode=true;
+                 setState(() {
+                   
+                 });
+              },
             ),
             // IconButton(
             //   icon: Icon(Icons.sort),
             //   onPressed: (){},
 
             // ),
-            IconButton(
-              icon: Icon(Icons.more_vert),
+             if(selectedIndex==1) IconButton(
+              icon: Icon(Icons.filter_list),
               onPressed: () {},
             ),
           ],
@@ -140,6 +148,7 @@ class _HomePageState extends State<HomePage> {
         body: PageView(
           onPageChanged: (index) {
             setState(() {
+              searchMode = false;
               selectedIndex = index;
             });
           },
@@ -213,7 +222,7 @@ class _HomePageState extends State<HomePage> {
             FABBottomAppBarItem(iconData: Icons.people, text: LocaleText.getLocaleText(MyApp.getLocale(), "Everyone")),
             FABBottomAppBarItem(iconData: Icons.star, text: LocaleText.getLocaleText(MyApp.getLocale(), "Favorites")),
             FABBottomAppBarItem(iconData: Icons.chat, text: LocaleText.getLocaleText(MyApp.getLocale(), "My Chats")),
-          ],
+          ],//'Search Name'
         ),
       ),
       //)

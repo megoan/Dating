@@ -41,6 +41,10 @@ class _EveryoneState extends State<Everyone> {
   }
 
   Widget returnCard(int index) {
-    return new PersonListCardTest(personProvider.allPeople[index],personProvider.shadchanProvider.allShadchanimMap[personProvider.allPeople[index].shadchanID]);
+   return   (personProvider.nameFilter==null || personProvider.nameFilter=="")? 
+   PersonListCardTest(personProvider.allPeople[index],personProvider.shadchanProvider.allShadchanimMap[personProvider.allPeople[index].shadchanID]):
+   personProvider.allPeople[index].firstName.toLowerCase().contains(personProvider.nameFilter.toLowerCase())||personProvider.allPeople[index].lastName.toLowerCase().contains(personProvider.nameFilter.toLowerCase())?
+   PersonListCardTest(personProvider.allPeople[index],personProvider.shadchanProvider.allShadchanimMap[personProvider.allPeople[index].shadchanID]):
+   Container();
   }
 }

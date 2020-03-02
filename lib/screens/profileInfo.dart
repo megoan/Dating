@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dating/models/person.dart';
 import 'package:dating/models/shadchan.dart';
 import 'package:dating/providers/langText.dart';
@@ -20,6 +22,28 @@ class ProfileInfo extends StatefulWidget {
 }
 
 class _ProfileInfoState extends State<ProfileInfo> {
+  int topImage=0;
+  int _pos=0;
+  Timer _timer;
+   @override
+  void initState() {
+    if (widget.person.profileImages!=null) {
+      _timer = Timer.periodic(new Duration(seconds: 3), (_timer) {
+      setState(() {
+        _pos = (_pos + 1) % widget.person.profileImages.length;
+      });
+    });
+    }
+    
+    super.initState();
+  }
+    @override
+  void dispose() {
+    _timer.cancel();
+    _timer = null;
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +55,21 @@ class _ProfileInfoState extends State<ProfileInfo> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+                // Container(
+                //                   height: 200,
+                //                   width: 200,
+                //                   child: Stack(
+                //                   children:widget.person.profileImages!=null?widget.person.profileImages.map((e) =>  ClipRRect(
+                //         borderRadius: BorderRadius.circular(150),
+                //                               child: CachedNetworkImage(
+                //           fit: BoxFit.cover,
+                //           imageUrl:e,
+                //           placeholder: (context, url) => Loader(),
+                //           errorWidget: (context, url, error) => Icon(Icons.error),
+                //         ),
+                //       )).toList()
+                //                   :Container()),
+                //                 ),
               Stack(
                 alignment: Alignment.center,
                 children: <Widget>[
@@ -49,6 +88,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           child: Container(
                             child: Column(
                               children: <Widget>[
+                              
                                 Stack(
                                   alignment: AlignmentDirectional.center,
                                   children: <Widget>[
@@ -235,12 +275,17 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     child: ClipOval(
                         child: Hero(
                       tag: 'imageHero' + widget.person.id.toString(),
-                      child:widget.person.profileImages!=null?  CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        imageUrl:widget.person.profileImages[0],
-                        placeholder: (context, url) => Loader(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ):Container(),
+                      child:widget.person.profileImages!=null?  //getMyImage() 
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(150),
+                                              child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl:widget.person.profileImages[_pos],
+                          placeholder: (context, url) => Loader(),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                        ),
+                      )
+                      :Container(),
                     )),
                   ),
                   //   Positioned(top:0, child: TopBar())
