@@ -189,7 +189,18 @@ class _CompareScreenState extends State<CompareScreen> {
                       rows: [
                         DataRow(cells: [
                           DataCell(Text(StaticFunctions.getAge(widget.myPerson.birthday).toString())),
-                          DataCell(Text(StaticFunctions.getArea(widget.myPerson.area))),
+                          DataCell(
+                            Row(
+                          children: <Widget>[
+                               if(widget.myPerson.area!=null) Text(StaticFunctions.getArea(widget.myPerson.area),),
+                          if(widget.myPerson.area!=null)Text(", "),
+                                Text(StaticFunctions.getCountry(widget.myPerson.country),),
+                            // Text(
+                            //   StaticFunctions.getArea(person.area),
+                            // ),
+                            Icon(Icons.location_on, color: Colors.purple),
+                          ],
+                        ),),
                           DataCell(Text(StaticFunctions.getStatus(widget.myPerson.status))),
                           DataCell(Text(StaticFunctions.getDos(widget.myPerson.dos))),
                           DataCell(Text(StaticFunctions.getHashkafa(widget.myPerson.hashkafa))),
@@ -217,7 +228,18 @@ class _CompareScreenState extends State<CompareScreen> {
                         ]),
                         DataRow(cells: [
                           DataCell(Text(StaticFunctions.getAge(widget.person.birthday).toString())),
-                          DataCell(Text(StaticFunctions.getArea(widget.person.area))),
+                          DataCell(   Row(
+                          children: <Widget>[
+                               if(widget.person.area!=null) Text(StaticFunctions.getArea(widget.person.area),),
+                          if(widget.person.area!=null)Text(", "),
+                                Text(StaticFunctions.getCountry(widget.person.country),),
+
+                            // Text(
+                            //   StaticFunctions.getArea(person.area),
+                            // ),
+                            Icon(Icons.location_on, color: Colors.purple),
+                          ],
+                        )),
                           DataCell(Text(StaticFunctions.getStatus(widget.person.status))),
                           DataCell(Text(StaticFunctions.getDos(widget.person.dos))),
                           DataCell(Text(StaticFunctions.getHashkafa(widget.person.hashkafa))),
@@ -318,6 +340,33 @@ class _CompareScreenState extends State<CompareScreen> {
                           children: <Widget>[Text(widget.person.ageMin.round().toString()), Text("-"), Text(widget.person.ageMax.round().toString())])))
                   ,
                 ]),
+                 DataRow(cells: [
+                  DataCell(Text(
+                    LocaleText.getLocaleText(MyApp.getLocale(), "Country"),
+                  )),
+                (mainSelected)?  DataCell(Container(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: widget.myPerson.countrys.map((e) => (Text(StaticFunctions.getCountry(e)))).toList()))):
+                           DataCell(Container(
+                      child: Text(
+                    StaticFunctions.getCountry(widget.myPerson.country),
+                    style: TextStyle(color: (widget.person.countrys.contains(widget.myPerson.country)) ? Colors.green : Colors.red),
+                  ))),
+                (mainSelected)?  DataCell(Container(
+                      child: Text(
+                    StaticFunctions.getCountry(widget.person.country),
+                    style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red),
+                  ))):
+                  DataCell(Container(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: widget.person.countrys.map((e) => (Text(StaticFunctions.getCountry(e)))).toList())))
+                  ,
+                ]),
+
                 DataRow(cells: [
                   DataCell(Text(
                     LocaleText.getLocaleText(MyApp.getLocale(), "Area"),

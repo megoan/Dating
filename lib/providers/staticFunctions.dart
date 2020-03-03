@@ -66,6 +66,7 @@ class StaticFunctions {
   }
 
   static String getStatus(Status status) {
+    
     Map<String, Map<Status, String>> areaText = {
       "he": {
         Status.SINGLE: "רווק/ה",

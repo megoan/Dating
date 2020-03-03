@@ -93,8 +93,13 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                           Icon(Icons.location_city, color: Colors.white),
                           Padding(
                             padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 10) : const EdgeInsets.only(left: 10),
-                            child: Text(
-                             StaticFunctions.getArea(widget.person.area), style: TextStyle(fontSize: 18, color: Colors.white)),
+                            child: Row(
+                              children: <Widget>[
+                             if(widget.person.area!=null)   Text(StaticFunctions.getArea(widget.person.area), style: TextStyle(fontSize: 18, color: Colors.white)),
+                             if(widget.person.area!=null)     Text(", ",style: TextStyle(fontSize: 18, color: Colors.white)),
+                                Text(StaticFunctions.getCountry(widget.person.country), style: TextStyle(fontSize: 18, color: Colors.white)),
+                              ],
+                            ),
                           )
                         ],
                       ),

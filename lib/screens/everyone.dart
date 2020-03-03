@@ -34,10 +34,19 @@ class _EveryoneState extends State<Everyone> {
     super.didChangeDependencies();
     //getAllPeople()
   }
+  
   @override
   Widget build(BuildContext context) {
-    
-    return (isLoading)?Center(child: CircularProgressIndicator(),) :ListView.builder(itemCount: personProvider.allPeople.length, itemBuilder: (BuildContext ctxt, int index) => returnCard(index));
+    try {
+       return (isLoading)?Center(child: CircularProgressIndicator(),) :personProvider.allPeople.length>0?ListView.builder(itemCount: personProvider.allPeople.length, itemBuilder: (BuildContext ctxt, int index) => returnCard(index)):Container();
+    } catch (e) {
+      setState(() {
+        
+      });
+     // print("sdfsdfsdfsdfsdfsdfds");
+      return ListView.builder(itemCount: personProvider.allPeople.length, itemBuilder: (BuildContext ctxt, int index) => returnCard(index));
+    }
+   
   }
 
   Widget returnCard(int index) {

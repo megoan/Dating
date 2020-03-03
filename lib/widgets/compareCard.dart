@@ -99,9 +99,12 @@ class CompareCard extends StatelessWidget {
                         ),
                         Row(
                           children: <Widget>[
-                            Text(
-                              StaticFunctions.getArea(person.area),
-                            ),
+                               if(person.area!=null) Text(StaticFunctions.getArea(person.area),),
+                          if(person.area!=null)Text(", "),
+                                Text(StaticFunctions.getCountry(person.country),),
+                            // Text(
+                            //   StaticFunctions.getArea(person.area),
+                            // ),
                             Icon(Icons.location_on, color: Colors.purple),
                           ],
                         ),

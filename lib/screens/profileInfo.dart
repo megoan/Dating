@@ -315,10 +315,15 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
+                         // if(widget.person.area!=null)   Text(StaticFunctions.getArea(widget.person.area), style: TextStyle(fontSize: 18, color: Colors.white)),
+                         if(widget.person.area!=null)            Text(
                           StaticFunctions.getArea(widget.person.area),
                           style: TextStyle(color: Colors.black54, fontSize: 16),
                         ),
+                          if(widget.person.area!=null)     Text(", ",style: TextStyle(color: Colors.black54, fontSize: 16),),
+                                Text(StaticFunctions.getCountry(widget.person.country), style: TextStyle(color: Colors.black54, fontSize: 16),),
+                               
+                       
                         SizedBox(width: 4),
                         Icon(
                           Icons.location_on,

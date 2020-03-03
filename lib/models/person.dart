@@ -31,6 +31,7 @@ class Person {
   List<SherutGirl> mySherutGirl = new List<SherutGirl>();
   //looking for info
   List<Area> areas =new List<Area>();
+  List<Country>countrys=new List<Country>();
   List<Status> statuses =new List<Status>();
   List<Dos> doses =new List<Dos>();
   List<Hashkafa> hashkafas =new List<Hashkafa>();
@@ -78,7 +79,7 @@ class Person {
       this.dates=0,
       this.isVisible=true,
       
-
+      this.countrys,
       this.areas,
       this.statuses,
       this.doses,

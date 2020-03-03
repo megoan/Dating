@@ -69,7 +69,8 @@ class LocaleText {
       'Religious':'Religious',
       'Smoking':'Smoking',
       'Eda':'Eda',
-      'Search Name':'Search Name'
+      'Search Name':'Search Name',
+      'Country':'Country'
     },
     'he': {
       'name': 'שם',
@@ -135,7 +136,8 @@ class LocaleText {
       'Religious':'דת',
       'Smoking':'עישון',
       'Eda':'עדה',
-      'Search Name':'חפש שם'
+      'Search Name':'חפש שם',
+      'Country':'ארץ'
     },
   };
 

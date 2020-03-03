@@ -29,6 +29,7 @@ class _AddPersonState extends State<AddPerson> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   Area _area;
+  Country _country;
   Dos _religious;
   Hashkafa _hashkafa;
   Status _status;
@@ -189,6 +190,7 @@ class _AddPersonState extends State<AddPerson> {
 
     setState(() {
       areaState.didChange(areaValue);
+      countryState.didChange(countryValue);
       statusState.didChange(statusValue);
       religiosState.didChange(religiosValue);
       edaState.didChange(edaValue);
@@ -236,6 +238,7 @@ class _AddPersonState extends State<AddPerson> {
         rangeValues = RangeValues(personProvider.newPerson.heightMin, personProvider.newPerson.heightMax);
       }
       _area = personProvider.newPerson.area;
+      _country = personProvider.newPerson.country;
       _religious = personProvider.newPerson.dos;
       _hashkafa = personProvider.newPerson.hashkafa;
       _status = personProvider.newPerson.status;
@@ -243,6 +246,7 @@ class _AddPersonState extends State<AddPerson> {
       _smoke = personProvider.newPerson.smoke;
       sSelected = personProvider.newPerson.gender;
       areaValue = personProvider.newPerson.area;
+      countryValue = personProvider.newPerson.country;
       statusValue = personProvider.newPerson.status;
       religiosValue = personProvider.newPerson.dos;
       hashkafaValue = personProvider.newPerson.hashkafa;
@@ -261,6 +265,9 @@ class _AddPersonState extends State<AddPerson> {
 
   Area areaValue;
   var areaState;
+
+  Country countryValue;
+  var countryState;
 
   Status statusValue;
   var statusState;
@@ -467,8 +474,51 @@ class _AddPersonState extends State<AddPerson> {
                           }),
                         )
                       ]),
+                      //Country
+                      new FormField<Country>(
+                        builder: (FormFieldState<Country> state) {
+                          countryState = state;
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              icon: const Icon(Icons.location_on),
+                              labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
+                              errorText: state.hasError ? state.errorText : null,
+                            ),
+                            isEmpty: _country == null,
+                            child: new DropdownButtonHideUnderline(
+                              child: Listener(
+                                onPointerDown: (_) => FocusScope.of(context).unfocus(),
+                                child: new DropdownButton<Country>(
+                                  value: _country,
+                                  isDense: true,
+                                  onChanged: (Country newValue) {
+                                    // map1["date"]= {newValue.toString():state};
+                                    //lll.add(state);
+                                    countryValue = newValue;
+                                    map1.putIfAbsent(newValue, () => state);
+                                    setState(() {
+                                      personProvider.newPerson.country = newValue;
+                                      _country = newValue;
+                                      state.didChange(newValue);
+                                    });
+                                  },
+                                  items: Country.values.map((Country value) {
+                                    return new DropdownMenuItem<Country>(
+                                      value: value,
+                                      child: new Text(StaticFunctions.getCountry(value)),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        validator: (val) {
+                          return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                        },
+                      ),
                       //AREA
-                      new FormField<Area>(
+                if(countryValue==Country.ISRAEL) new FormField<Area>(
                         builder: (FormFieldState<Area> state) {
                           areaState = state;
                           return InputDecorator(
@@ -802,6 +852,9 @@ class _AddPersonState extends State<AddPerson> {
                                     personProvider.newPerson.mySherutGirl.remove(SherutGirl.values[index]);
                                   }
                                   print("isChecked: $isChecked   label: $label  index: $index");
+                                  setState(() {
+                            
+                          });
                                 },
                                 onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                               ),
@@ -838,6 +891,9 @@ class _AddPersonState extends State<AddPerson> {
                                     personProvider.newPerson.mySherutBoy.remove(SherutBoy.values[index]);
                                   }
                                   print("isChecked: $isChecked   label: $label  index: $index");
+                                  setState(() {
+                            
+                          });
                                 },
                                 onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                               ),
@@ -864,12 +920,45 @@ class _AddPersonState extends State<AddPerson> {
                         child: Container(
                           padding: const EdgeInsets.only(top: 14.0),
                           child: Text(
-                            LocaleText.getLocaleText(MyApp.getLocale(), 'Area'),
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
                           ),
                         ),
                       ),
                       CheckboxGroup(
+                        checked:personProvider.newPerson!=null && personProvider.newPerson.countrys!=null ?personProvider.newPerson.countrys.map((e) =>  StaticFunctions.getCountry(e)).toList():null,
+                        labels: Country.values.map((e) => StaticFunctions.getCountry(e)).toList(),
+                        onChange: (bool isChecked, String label, int index) {
+                          if (isChecked) {
+                            if (personProvider.newPerson.countrys == null) {
+                              personProvider.newPerson.countrys = [];
+                            }
+                            personProvider.newPerson.countrys.add(Country.values[index]);
+                          } else {
+                            personProvider.newPerson.countrys.remove(Country.values[index]);
+                          }
+                          print("isChecked: $isChecked   label: $label  index: $index");
+                          setState(() {
+                            
+                          });
+                        },
+                        onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                  if(personProvider.newPerson.countrys!=null&&personProvider.newPerson.countrys.contains(Country.ISRAEL))    Align(
+                        alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 14.0),
+                          child: Text(
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Area'),
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+                          ),
+                        ),
+                      ),
+                   if(personProvider.newPerson.countrys!=null&&personProvider.newPerson.countrys.contains(Country.ISRAEL))   
+                   CheckboxGroup(
                         checked:personProvider.newPerson!=null && personProvider.newPerson.areas!=null ?personProvider.newPerson.areas.map((e) =>  StaticFunctions.getArea(e)).toList():null,
                         labels: Area.values.map((e) => StaticFunctions.getArea(e)).toList(),
                         onChange: (bool isChecked, String label, int index) {
@@ -882,10 +971,13 @@ class _AddPersonState extends State<AddPerson> {
                             personProvider.newPerson.areas.remove(Area.values[index]);
                           }
                           print("isChecked: $isChecked   label: $label  index: $index");
+                          setState(() {
+                            
+                          });
                         },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
-                      SizedBox(
+                    if(personProvider.newPerson.countrys!=null&&personProvider.newPerson.countrys.contains(Country.ISRAEL))  SizedBox(
                         height: 20,
                       ),
                       Align(
@@ -911,6 +1003,9 @@ class _AddPersonState extends State<AddPerson> {
                             personProvider.newPerson.statuses.remove(Status.values[index]);
                           }
                           print("isChecked: $isChecked   label: $label  index: $index");
+                          setState(() {
+                            
+                          });
                         },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
@@ -940,6 +1035,9 @@ class _AddPersonState extends State<AddPerson> {
                             personProvider.newPerson.doses.remove(Dos.values[index]);
                           }
                           print("isChecked: $isChecked   label: $label  index: $index");
+                          setState(() {
+                            
+                          });
                         },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
@@ -969,6 +1067,9 @@ class _AddPersonState extends State<AddPerson> {
                             personProvider.newPerson.hashkafas.remove(Hashkafa.values[index]);
                           }
                           print("isChecked: $isChecked   label: $label  index: $index");
+                          setState(() {
+                            
+                          });
                         },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
@@ -998,6 +1099,9 @@ class _AddPersonState extends State<AddPerson> {
                             personProvider.newPerson.edas.remove(Eda.values[index]);
                           }
                           print("isChecked: $isChecked   label: $label  index: $index");
+                          setState(() {
+                            
+                          });
                         },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
@@ -1027,6 +1131,9 @@ class _AddPersonState extends State<AddPerson> {
                             personProvider.newPerson.smoking.remove(Smoke.values[index]);
                           }
                           print("isChecked: $isChecked   label: $label  index: $index");
+                          setState(() {
+                            
+                          });
                         },
                         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                       ),
@@ -1060,6 +1167,9 @@ class _AddPersonState extends State<AddPerson> {
                                     personProvider.newPerson.thereSherutGirl.remove(SherutGirl.values[index]);
                                   }
                                   print("isChecked: $isChecked   label: $label  index: $index");
+                                  setState(() {
+                            
+                          });
                                 },
                                 onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                               ),
@@ -1096,6 +1206,9 @@ class _AddPersonState extends State<AddPerson> {
                                     personProvider.newPerson.thereSherutBoy.remove(SherutBoy.values[index]);
                                   }
                                   print("isChecked: $isChecked   label: $label  index: $index");
+                                  setState(() {
+                            
+                          });
                                 },
                                 onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                               ),

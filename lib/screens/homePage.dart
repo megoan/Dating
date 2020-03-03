@@ -5,6 +5,7 @@ import 'package:dating/screens/addPerson.dart';
 import 'package:dating/screens/shadchanList.dart';
 import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/widgets/fABBottomAppBarItem.dart';
+import 'package:dating/widgets/filterDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -65,7 +66,9 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
   }
-
+  Widget getEveruone(){
+    return Everyone();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,7 +144,18 @@ class _HomePageState extends State<HomePage> {
             // ),
              if(selectedIndex==1) IconButton(
               icon: Icon(Icons.filter_list),
-              onPressed: () {},
+              onPressed: () {
+                showDialog(context: context,
+                builder: (_) => Dialog(
+                  child: FilterDialog(),
+                ),
+                ).then((value)async{
+                   await personProvider.getAllPeople();
+                  setState(() {
+                  
+            });
+                });
+              },
             ),
           ],
         ),
@@ -160,7 +174,7 @@ class _HomePageState extends State<HomePage> {
               //  color: Colors.pink,
             ),
             Container(
-              child: Everyone(),
+              child: getEveruone(),
               //  color: Colors.cyan,
             ),
             Container(

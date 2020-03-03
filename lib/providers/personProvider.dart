@@ -29,6 +29,7 @@ class PersonProvider extends ChangeNotifier {
       smoke: Smoke.SOMETIMES,
       mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
       mySherutGirl: [SherutGirl.ONE_YEAR_SHERUT, SherutGirl.MIDRASHA],
+      countrys: [Country.ISRAEL],
       areas: [Area.GUSH_DAN, Area.JERUSALEM],
       statuses: [Status.SINGLE],
       doses: [Dos.REGULAR, Dos.LITE],
@@ -67,6 +68,7 @@ class PersonProvider extends ChangeNotifier {
         smoke: Smoke.TRY_TO_STOP,
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
         mySherutGirl: [SherutGirl.TWO_YEARS_SHERUT],
+        countrys: [Country.ISRAEL],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
         statuses: [Status.SINGLE],
         doses: [Dos.REGULAR, Dos.LITE],
@@ -105,6 +107,7 @@ class PersonProvider extends ChangeNotifier {
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
         mySherutGirl: [SherutGirl.MIDRASHA, SherutGirl.MECHINA, SherutGirl.ARMY],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
+        countrys: [Country.ISRAEL],
         statuses: [Status.SINGLE, Status.ALMAN, Status.GARUSH],
         doses: [Dos.REGULAR, Dos.LITE, Dos.MASORTI],
         hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
@@ -140,6 +143,7 @@ class PersonProvider extends ChangeNotifier {
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
+        countrys: [Country.ISRAEL],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
         statuses: [Status.SINGLE],
         doses: [Dos.REGULAR, Dos.LITE],
@@ -175,6 +179,7 @@ class PersonProvider extends ChangeNotifier {
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
+        countrys: [Country.ISRAEL],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
         statuses: [Status.SINGLE],
         doses: [Dos.REGULAR, Dos.LITE],
@@ -210,6 +215,7 @@ class PersonProvider extends ChangeNotifier {
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
         mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
+        countrys: [Country.ISRAEL],
         areas: [Area.GUSH_DAN, Area.JERUSALEM],
         statuses: [Status.SINGLE],
         doses: [Dos.REGULAR, Dos.LITE],
@@ -239,15 +245,21 @@ class PersonProvider extends ChangeNotifier {
   ///Country select
   ///
   
-  int ageMax;
-  int ageMin;
+  double ageMax=99;
+  double ageMin=18;
+  Area pickedArea;
+  Country pickedCountry;
+  Status pickedStatus;
   List<Gender> genders = [];
   List<Country> countrys = [];
   void updateNameFilter(val){
-    nameFilter=val;
+
+       nameFilter=val;
     notifyListeners();
+ 
+   
   }
-  void setMainFilters(int ageMax,int ageMin,List<Gender> genders,List<Country> countrys){
+  void setMainFilters(double ageMax,double ageMin,List<Gender> genders,List<Country> countrys){
     this.ageMax=ageMax;
     this.ageMin=ageMin;
     this.genders=[];
