@@ -1,6 +1,8 @@
 import 'package:dating/models/chatMessage.dart';
 import 'package:dating/models/myChatlist.dart';
 import 'package:dating/providers/staticFunctions.dart';
+import 'package:dating/screens/chatScreen.dart';
+import 'package:dating/screens/chatTabScreen.dart';
 import 'package:flutter/material.dart';
 class ChatCardWhats extends StatelessWidget {
   final MyChatList myChatList;
@@ -30,65 +32,71 @@ class ChatCardWhats extends StatelessWidget {
         return Container();
         break;
       default:
+       return Container();
     }
   }
   @override
   Widget build(BuildContext context) {
-    return new Column(
-            children: <Widget>[
-              new Divider(
-                height: 10.0,
-              ),
-              new ListTile(
-                leading: new CircleAvatar(
-                  foregroundColor: Theme.of(context).primaryColor,
-                  backgroundColor: Colors.grey,
-                  backgroundImage: new NetworkImage(  myChatList.thereIcon,),
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new ChatScreen(chat: this.myChatList.lastMessage,myChatList: this.myChatList,)));
+      },
+          child: new Column(
+              children: <Widget>[
+                new Divider(
+                  height: 10.0,
                 ),
-                title: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Text(
-                     (myChatList.groupName!=null&&myChatList.groupName!="")? myChatList.groupName:myChatList.shadchanName,
-                      style: new TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    new Text(
-                    StaticFunctions.getChatTime(myChatList.lastMessageTime),
-                      style: new TextStyle(color: (myChatList.unread>0)?Colors.purple:Colors.grey, fontSize: 14.0),
-                    ),
-                  ],
-                ),
-                subtitle: new Container(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: Row(
+                new ListTile(
+                  leading: new CircleAvatar(
+                    foregroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: new NetworkImage(  myChatList.thereIcon,),
+                  ),
+                  title: new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          if(myChatList.groupName!=null&&myChatList.groupName!="" && myId!=myChatList.lastMessage.senderId)Text(myChatList.shadchanName+": "),
-                          getMessageTypeIcon(myChatList.lastMessage.contentType),
-                          new Text(
-                            myChatList.lastMessage.message,
-                            style: new TextStyle(color: Colors.grey, fontSize: 15.0),
-                          ),
-                          
-                        ],
+                      new Text(
+                       (myChatList.groupName!=null&&myChatList.groupName!="")? myChatList.groupName:myChatList.shadchanName,
+                        style: new TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    if(myChatList.unread>0)  Container(
-                      decoration: new BoxDecoration(
-                  color: Colors.purple, //new Color.fromRGBO(255, 0, 0, 0.0),
-                  borderRadius: new BorderRadius.all(
-                   Radius.circular(30)
-                ),),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 2),
-                        child: Text(myChatList.unread.toString(),style: TextStyle(color:Colors.white),),
-                      ),)
+                      new Text(
+                      StaticFunctions.getChatTime(myChatList.lastMessageTime),
+                        style: new TextStyle(color: (myChatList.unread>0)?Colors.purple:Colors.grey, fontSize: 14.0),
+                      ),
                     ],
                   ),
-                ),
-              )
-            ],
-          );
+                  subtitle: new Container(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            if(myChatList.groupName!=null&&myChatList.groupName!="" && myId!=myChatList.lastMessage.senderId)Text(myChatList.shadchanName+": "),
+                            getMessageTypeIcon(myChatList.lastMessage.contentType),
+                            new Text(
+                              myChatList.lastMessage.message,
+                              style: new TextStyle(color: Colors.grey, fontSize: 15.0),
+                            ),
+                            
+                          ],
+                        ),
+                      if(myChatList.unread>0)  Container(
+                        decoration: new BoxDecoration(
+                    color: Colors.purple, //new Color.fromRGBO(255, 0, 0, 0.0),
+                    borderRadius: new BorderRadius.all(
+                     Radius.circular(30)
+                  ),),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 2),
+                          child: Text(myChatList.unread.toString(),style: TextStyle(color:Colors.white),),
+                        ),)
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+    );
   }
 }

@@ -3,13 +3,51 @@ import 'package:dating/models/myChatlist.dart';
 import 'package:flutter/material.dart';
 
 class ChatProvider extends ChangeNotifier {
+  List<Chat>chats=[
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "Esther",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+     Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "Esther",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+     Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "Esther",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    )
+  ];
   static Chat chat=Chat(
     id: "1",
     chatMessageType: ChatMessageType.NORMAL,
     chatType: ChatType.GROUP,
     contentType: ContentType.TEXT,
     createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
-    message: "how is everyone",
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
     senderId: "2",
     senderName: "Esther",
     messageStatus: MessageStatus.READ
@@ -20,7 +58,7 @@ class ChatProvider extends ChangeNotifier {
     chatType: ChatType.GROUP,
     contentType: ContentType.COMPARE,
     createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
-    message: "how is everyone",
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
     senderId: "2",
     senderName: "Esther",
     messageStatus: MessageStatus.READ
@@ -31,7 +69,7 @@ class ChatProvider extends ChangeNotifier {
     chatType: ChatType.GROUP,
     contentType: ContentType.ABOUT,
     createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
-    message: "how is everyone",
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
     senderId: "1",
     senderName: "Esther",
     messageStatus: MessageStatus.READ
