@@ -1,6 +1,5 @@
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
-import 'package:dating/providers/shadchanProvider.dart';
 import 'package:dating/screens/addPerson.dart';
 import 'package:dating/screens/shadchanList.dart';
 import 'package:dating/themes/lightTheme.dart';
@@ -8,7 +7,6 @@ import 'package:dating/widgets/fABBottomAppBarItem.dart';
 import 'package:dating/widgets/filterDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
@@ -22,9 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Icon _searchIcon = new Icon(Icons.search);
 
-  Widget _appBarTitle = new Text('Search Example');
   final TextEditingController _filter = new TextEditingController();
   PageController controller = PageController(
     initialPage: 0,
@@ -63,7 +59,7 @@ class _HomePageState extends State<HomePage> {
       personProvider = Provider.of<PersonProvider>(context);
      personProvider.shadchanProvider.getMyShadchanByID();
     }
-    // TODO: implement didChangeDependencies
+
     super.didChangeDependencies();
   }
   Widget getEveruone(){

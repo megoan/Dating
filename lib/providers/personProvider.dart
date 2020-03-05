@@ -412,14 +412,9 @@ class PersonProvider extends ChangeNotifier {
       return CompareScore.NOT_KASHUR;
     }
     //YALLA IFS
-    List a = [];
     LinkedHashSet aaa = new LinkedHashSet();
-    List b = [];
     LinkedHashSet bbb = new LinkedHashSet();
-
-    List aa = [];
     LinkedHashSet aaaaa = new LinkedHashSet();
-    List bb = [];
     LinkedHashSet bbbbb = new LinkedHashSet();
 
     if (comparePerson.gender == Gender.MALE) {

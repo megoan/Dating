@@ -1,5 +1,7 @@
 import 'package:dating/main.dart';
 import 'package:dating/models/person.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class StaticFunctions {
   static int getAge(DateTime birthDay) {
@@ -18,7 +20,22 @@ class StaticFunctions {
     }
     return age;
   }
-
+  static String getChatTime(DateTime date){
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = DateTime(now.year, now.month, now.day - 1);
+    final aDate = DateTime(date.year, date.month, date.day);
+    if (aDate==yesterday) {
+      return "Yesterday";
+    }
+    else if(aDate==today){
+      final format = DateFormat.jm(); 
+      return format.format(date);
+    }
+    else{
+      return "${date.day}/${date.month}/${date.year}";
+    }
+  }
   static String getArea(Area area) {
     Map<String, Map<Area, String>> areaText = {
       "he": {

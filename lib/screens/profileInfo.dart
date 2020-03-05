@@ -5,7 +5,6 @@ import 'package:dating/models/shadchan.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/widgets/shadchanDialog.dart';
-import 'package:dating/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/widgets/loader.dart';
@@ -14,8 +13,8 @@ import '../main.dart';
 import 'compareThemList.dart';
 
 class ProfileInfo extends StatefulWidget {
-  Person person;
-  Shadchan shadchan;
+  final Person person;
+  final Shadchan shadchan;
   ProfileInfo({this.person,this.shadchan});
   @override
   _ProfileInfoState createState() => _ProfileInfoState();

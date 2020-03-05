@@ -1,6 +1,4 @@
 import 'package:dating/providers/personProvider.dart';
-import 'package:dating/providers/shadchanProvider.dart';
-import 'package:dating/widgets/personListCard.dart';
 import 'package:dating/widgets/personListCard2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

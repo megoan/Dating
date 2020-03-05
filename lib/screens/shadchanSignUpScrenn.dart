@@ -1,15 +1,11 @@
-import 'dart:ffi';
+
 import 'dart:io';
 
 import 'package:dating/providers/langText.dart';
-import 'package:dating/themes/darkTheme.dart';
 import 'package:dating/widgets/OutLineButtonMy.dart';
-import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/photoPicker.dart';
-import 'package:dating/widgets/themeSwitcherButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'dart:ui' as ui;
 import '../main.dart';
 import 'homePage.dart';
@@ -20,7 +16,7 @@ class ShadchanSignUpScreen extends StatefulWidget {
   _ShadchanSignUpScreenState createState() => _ShadchanSignUpScreenState();
 
      static void setLocale(BuildContext context, Locale newLocale) {
-    _ShadchanSignUpScreenState state = context.ancestorStateOfType(TypeMatcher<_ShadchanSignUpScreenState>());
+    _ShadchanSignUpScreenState state = context.findAncestorRenderObjectOfType();
     locale = newLocale;
     state.setState(() {});
   }

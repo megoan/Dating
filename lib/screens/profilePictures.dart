@@ -4,7 +4,7 @@ import 'package:dating/widgets/gradientButton.dart';
 import 'package:dating/widgets/photoPicker.dart';
 import 'package:dating/widgets/themeSwitcherButton.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 class ProfilePictures extends StatefulWidget {
   @override

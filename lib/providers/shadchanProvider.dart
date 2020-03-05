@@ -37,6 +37,7 @@ class ShadchanProvider extends ChangeNotifier {
   Future<bool> getMyShadchanByID()async{
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       myShadchan=new Shadchan("1", "shmilo", "222", "aaa@bbb.ccc", "https://cdn.pixabay.com/photo/2015/09/18/11/38/old-woman-945448_960_720.jpg", ["5","6"], ["3","4"], true);
+      return true;
     });
   }
 

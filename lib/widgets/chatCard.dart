@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dating/providers/langText.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -10,7 +9,7 @@ class ChatCard extends StatelessWidget {
     return Card(
           child: Container(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    
           children: <Widget>[
           
              Padding(
@@ -80,73 +79,7 @@ class ChatCard extends StatelessWidget {
                                 
                               ],
                             ),
-                              FittedBox(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 0),
-                                          child: Stack(
-                                            alignment:
-                                                AlignmentDirectional.center,
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.black,
-                                                size: 24,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.cyan,
-                                                size: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 0),
-                                          child: Stack(
-                                            alignment:
-                                                AlignmentDirectional.center,
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.black,
-                                                size: 24,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.cyan,
-                                                size: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 0),
-                                          child: Stack(
-                                            alignment:
-                                                AlignmentDirectional.center,
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.black,
-                                                size: 24,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.cyan,
-                                                size: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                          
                                
                           ],
                         ),
@@ -155,19 +88,20 @@ class ChatCard extends StatelessWidget {
                          
                             
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                             crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                  Text(
-                                    LocaleText.getLocaleText(MyApp.getLocale(), 'Contacted me about'),
+                                    "shlomo",
                                     style:
                                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
-                               SizedBox(height: 4,),
-                                
-                                     Text("Shlomo",style: TextStyle(color: Colors.purple),),
-                                      SizedBox(height: 4,),
-                                     Text("05/12/2019",),
+                                  SizedBox(height: 10,),
+                                     Column(
+                                       children: <Widget>[
+                                         Text("05/12/2019",),
+                                   
+                                       ],
+                                     ),
                                     
                                   
                               
@@ -175,36 +109,14 @@ class ChatCard extends StatelessWidget {
                             ),
                          
                         ),
+                        Spacer(),
+                        Container(
+                  
+                          child: Text("18:00 AM")
+                          )
+
                      
-                 Stack(
-                                    alignment: AlignmentDirectional.center,
-                                    children: <Widget>[
-                                      Container(
-                                        width: 70,
-                                        height: 70,
-                                        child: CircleAvatar(
-                                          radius: 70,
-                                          backgroundColor:
-                                              Theme.of(context).primaryColor,
-                                        ),
-                                      ),
-                                      Container(
-                                        width:65,
-                                        height: 65,
-                                        child: ClipOval(
-                                          child: CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl:
-                                                'https://placeimg.com/640/480/any',
-                                            placeholder: (context, url) => Loader(),
-                                            errorWidget: (context, url, error) =>
-                                                Icon(Icons.error),
-                                          ),
-                                        ),
-                                      ),
-                                     
-                                    ],
-                                  ),
+                
           ],
           
         ),

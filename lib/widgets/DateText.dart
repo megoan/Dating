@@ -173,7 +173,7 @@ class DateLetter extends StatelessWidget {
   final Function validate;
   final TextEditingController monthText;
   //String oldText = "";
-  OldText oldText;
+  final OldText oldText;
   DateLetter({
     Key key,
     @required this.monthText,

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/models/shadchan.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../main.dart';
 import 'loader.dart';
 class CustomDialog extends StatelessWidget {
  // final String title, description, buttonText;

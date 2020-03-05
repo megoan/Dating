@@ -1,10 +1,9 @@
 import 'package:dating/screens/moreMeArea.dart';
 import 'package:dating/widgets/DateText.dart';
 import 'package:dating/widgets/gradientButton.dart';
-import 'package:dating/widgets/gradientSwitcher.dart';
 import 'package:dating/widgets/themeSwitcherButton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 
 class MoreMeBirthday extends StatefulWidget {
   @override

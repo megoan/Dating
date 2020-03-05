@@ -1,12 +1,10 @@
-import 'dart:collection';
+
 import 'dart:io';
 
 import 'package:dating/models/person.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
-import 'package:dating/themes/lightTheme.dart';
-import 'package:dating/widgets/DateText.dart';
 import 'package:dating/widgets/photoPicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +16,7 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 
 class AddPerson extends StatefulWidget {
-  bool update;
+  final bool update;
   AddPerson({this.update});
   @override
   _AddPersonState createState() => _AddPersonState();
