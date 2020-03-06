@@ -70,16 +70,21 @@ class ChatCardWhats extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            if(myChatList.groupName!=null&&myChatList.groupName!="" && myId!=myChatList.lastMessage.senderId)Text(myChatList.shadchanName+": "),
-                            getMessageTypeIcon(myChatList.lastMessage.contentType),
-                            new Text(
-                              myChatList.lastMessage.message,
-                              style: new TextStyle(color: Colors.grey, fontSize: 15.0),
-                            ),
-                            
-                          ],
+                        Expanded(
+                                                  child: Row(
+                            children: <Widget>[
+                              if(myChatList.groupName!=null&&myChatList.groupName!="" && myId!=myChatList.lastMessage.senderId)Text(myChatList.shadchanName+": "),
+                              getMessageTypeIcon(myChatList.lastMessage.contentType),
+                              Expanded(
+                                                            child: new Text(
+                                  myChatList.lastMessage.message,
+                                   overflow: TextOverflow.ellipsis,
+                                  style: new TextStyle(color: Colors.grey, fontSize: 15.0),
+                                ),
+                              ),
+                              
+                            ],
+                          ),
                         ),
                       if(myChatList.unread>0)  Container(
                         decoration: new BoxDecoration(
