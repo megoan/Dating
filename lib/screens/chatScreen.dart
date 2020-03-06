@@ -94,11 +94,53 @@ class _ChatScreenState extends State<ChatScreen> {
             Text(chat.message),
             Row(
               children: <Widget>[
-               if(me) statusChat(chat.messageStatus),
-               if(me)SizedBox(width:5),
+               if(me && chat.chatType!=ChatType.GROUP) statusChat(chat.messageStatus),
+               if(me && chat.chatType!=ChatType.GROUP) SizedBox(width:5),
                 Text(StaticFunctions.getChatTime(chat.createdAt),style: TextStyle(fontSize: 12,color: Colors.grey),),
               ],
             ),
+          ],
+        ),
+      );
+        break;
+        case ContentType.ABOUT:
+        return Bubble(
+        style:me?styleMe:styleSomebody,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            if(chat.chatType==ChatType.GROUP && !me)Text(chat.senderName,style:TextStyle(color: getRandomColor(chat.senderName)),),
+           
+            Card(
+               elevation: 2,
+               color: Colors.blue[50],
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+                          child: InkWell(
+                         onTap: (){
+                           
+                         },
+      borderRadius: BorderRadius.circular(8),
+                                                      child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                children: <Widget>[
+                  CircleAvatar(
+                backgroundImage: NetworkImage(chat.p1Image),
+              ),
+              SizedBox(width: 10,),
+                  Container(alignment: Alignment.center, child: Text(chat.p1Name,style: TextStyle(fontSize: 16,color: Colors.blue),)),
+                  
+                ],
+              ),
+                            ),
+                          ),
+            ),
+            SizedBox(height: 5,),
+              Text(chat.message),
+               Text(StaticFunctions.getChatTime(chat.createdAt),style: TextStyle(fontSize: 12,color: Colors.grey),),
           ],
         ),
       );
@@ -173,7 +215,11 @@ class _ChatScreenState extends State<ChatScreen> {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child:
-        ListView.builder(reverse: true, itemCount: chatProvider.selectedChat.length, itemBuilder: (BuildContext ctxt, int index) => getChatBubble(chatProvider.selectedChat[index],myChatList.shadchanID==chatProvider.selectedChat[index].senderId,context)),
+        Column(
+          children: <Widget>[
+            Expanded(child: ListView.builder(reverse: true, itemCount: chatProvider.selectedChat.length, itemBuilder: (BuildContext ctxt, int index) => getChatBubble(chatProvider.selectedChat[index],myChatList.shadchanID==chatProvider.selectedChat[index].senderId,context))),
+
+      
         //  Column(
         //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
         //    crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,77 +311,79 @@ class _ChatScreenState extends State<ChatScreen> {
         //         ),
         //       ),
         //     ),
-        //     // Row(
-        //     //   children: <Widget>[
-        //         Stack(
-        //           overflow: Overflow.visible,
-        //           children: <Widget>[
-        //             Container(
-        //               padding: EdgeInsets.all(12),
-        //               margin: EdgeInsets.all(12),
-        //               decoration: BoxDecoration(
-        //                 color: Colors.white,
-        //                 borderRadius: BorderRadius.circular(12),
-        //               ),
-        //               child: Row(
-        //                 children: <Widget>[
-        //                   // Icon(
-        //                   //   Icons.tag_faces,
-        //                   //   color: Colors.grey,
-        //                   //   size: 35,
-        //                   // ),
-        //                   // SizedBox(
-        //                   //   width: 5,
-        //                   // ),
-        //                    Flexible(
-        //                                                   child: TextField(
-        //                                                     maxLines: null,
-        //                         decoration: InputDecoration(
-        //                             border: InputBorder.none,
-        //                             hintText: 'Type a message',
-        //                             //contentPadding: EdgeInsets.only(left: 5),
-        //                             hintStyle: TextStyle(
-        //                                 color: Colors.grey, fontSize: 18)),
-        //                       ),
-        //                     ),
+            // Row(
+            //   children: <Widget>[
+                Stack(
+                  overflow: Overflow.visible,
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(12),
+                      margin: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          // Icon(
+                          //   Icons.tag_faces,
+                          //   color: Colors.grey,
+                          //   size: 35,
+                          // ),
+                          // SizedBox(
+                          //   width: 5,
+                          // ),
+                           Flexible(
+                                                          child: TextField(
+                                                            maxLines: null,
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Type a message',
+                                    //contentPadding: EdgeInsets.only(left: 5),
+                                    hintStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 18)),
+                              ),
+                            ),
                         
                        
-        //                   // Icon(
-        //                   //   Icons.camera_alt,
-        //                   //   color: Colors.grey,
-        //                   //   size: 35,
-        //                   // )
-        //                 ],
-        //               ),
-        //             ),
-        //             Positioned(
-        //               right: -3,
-        //               top: 12,
-        //               child: ClipPath(
-        //                 clipper: TriangleClipper(),
-        //                 child: Container(
-        //                   height: 20,
-        //                   width: 30,
-        //                   color: Colors.white,
-        //                 ),
-        //               ),
-        //             )
-        //           ],
-        //         ),
-        //         // Container(
-        //         //   padding: EdgeInsets.all(12),
-        //         //   decoration: BoxDecoration(
-        //         //       color: Color(0xFF128C7E), shape: BoxShape.circle),
-        //         //   child: Icon(
-        //         //     Icons.keyboard_voice,
-        //         //     color: Colors.white,
-        //         //     size: 32,
-        //         //   ),
-        //         // )
-        //       ],
-        //     )
+                          // Icon(
+                          //   Icons.camera_alt,
+                          //   color: Colors.grey,
+                          //   size: 35,
+                          // )
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      right: -3,
+                      top: 12,
+                      child: ClipPath(
+                        clipper: TriangleClipper(),
+                        child: Container(
+                          height: 20,
+                          width: 30,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                // Container(
+                //   padding: EdgeInsets.all(12),
+                //   decoration: BoxDecoration(
+                //       color: Color(0xFF128C7E), shape: BoxShape.circle),
+                //   child: Icon(
+                //     Icons.keyboard_voice,
+                //     color: Colors.white,
+                //     size: 32,
+                //   ),
+                // )
+             // ],
+          //  )
         //  ],
        // ),
+           ],
+        ),
       ),
     );
   }
