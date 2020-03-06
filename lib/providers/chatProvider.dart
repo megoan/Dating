@@ -3,6 +3,7 @@ import 'package:dating/models/myChatlist.dart';
 import 'package:flutter/material.dart';
 
 class ChatProvider extends ChangeNotifier {
+  List<Chat>selectedChat=[];
   List<Chat>chats=[
     Chat(
     id: "1",
@@ -12,7 +13,43 @@ class ChatProvider extends ChangeNotifier {
     createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
     message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
     senderId: "2",
-    senderName: "Esther",
+    senderName: "אסתר",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "שמואל",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "Aba",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "Jeff",
     messageStatus: MessageStatus.READ,
     combinedId: "12"
     ),
@@ -21,10 +58,70 @@ class ChatProvider extends ChangeNotifier {
     chatMessageType: ChatMessageType.NORMAL,
     chatType: ChatType.GROUP,
     contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "1",
+    senderName: "Esther",
+    messageStatus: MessageStatus.SENT,
+    combinedId: "12"
+    ),
+     Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-2,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "Zeroth",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
     createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
     message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
     senderId: "2",
-    senderName: "Esther",
+    senderName: "אסתר",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "שמואל",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "Aba",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "2",
+    senderName: "Jeff",
     messageStatus: MessageStatus.READ,
     combinedId: "12"
     ),
@@ -33,10 +130,22 @@ class ChatProvider extends ChangeNotifier {
     chatMessageType: ChatMessageType.NORMAL,
     chatType: ChatType.GROUP,
     contentType: ContentType.TEXT,
-    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day),
+    message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
+    senderId: "1",
+    senderName: "Esther",
+    messageStatus: MessageStatus.SENT,
+    combinedId: "12"
+    ),
+     Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.TEXT,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-2,6),
     message: "how is everyone gfhfg fdgdfg fdgdfg fdgdfg fdgdfgd dfgdgdfhdf dfgsfdf gfhtrt sdfghgfhgf bds",
     senderId: "2",
-    senderName: "Esther",
+    senderName: "Zeroth",
     messageStatus: MessageStatus.READ,
     combinedId: "12"
     )
@@ -134,6 +243,28 @@ class ChatProvider extends ChangeNotifier {
       notifyListeners();
       return;
     });
+  }
+
+  Future<void> getSelectedChat(String chatListID)async{
+    selectedChat=[];
+    await Future.delayed(Duration(milliseconds: 500),(){
+      for (var chat in chats) {
+        if (chat.combinedId==chatListID) {
+          selectedChat.add(chat);
+        }
+      }
+      selectedChat.sort(chatCompare);
+    });
+  }
+
+  int chatCompare(Chat chat1, Chat chat2) {
+    if (chat1.createdAt.millisecondsSinceEpoch < chat2.createdAt.millisecondsSinceEpoch) {
+      return 1;
+    } else if (chat1.createdAt.millisecondsSinceEpoch > chat2.createdAt.millisecondsSinceEpoch) {
+      return -1;
+    } else {
+      return 0;
+    }
   }
 
 

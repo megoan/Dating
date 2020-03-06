@@ -1,7 +1,7 @@
 enum ChatType{SINGLE,GROUP}
 enum ChatMessageType{NORMAL,REPLY,}
 enum ContentType{TEXT,ABOUT,COMPARE,JOINED,REMOVED}
-enum MessageStatus{NOT_SENT,RECIEVED,READ}
+enum MessageStatus{NOT_SENT,SENT,RECIEVED,READ}
 class Chat {
   String id;
   String combinedId;
@@ -14,6 +14,8 @@ class Chat {
   MessageStatus messageStatus;
   DateTime createdAt;
   String p1;
+  String p1Image;
   String p2;
-  Chat({this.id,this.combinedId,this.chatType,this.chatMessageType,this.contentType,this.createdAt,this.message,this.messageStatus,this.p1,this.p2,this.senderId,this.senderName});
+  String p2Image;
+  Chat({this.id,this.combinedId,this.chatType,this.chatMessageType,this.contentType,this.createdAt,this.message,this.messageStatus,this.p1,this.p1Image,this.p2,this.p2Image,this.senderId,this.senderName});
 }
