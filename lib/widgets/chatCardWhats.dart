@@ -39,7 +39,7 @@ class ChatCardWhats extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new ChatScreen(chat: this.myChatList.lastMessage,myChatList: this.myChatList,)));
+        Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new ChatScreen(myChatList: this.myChatList,)));
       },
           child: new Column(
               children: <Widget>[

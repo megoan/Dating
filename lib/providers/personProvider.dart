@@ -125,7 +125,7 @@ class PersonProvider extends ChangeNotifier {
         dates: 3,
         isVisible: true,
         profileImages: ["https://cdn.pixabay.com/photo/2013/11/01/20/23/baby-204185_960_720.jpg"],
-        shadchanID: "3"),
+        shadchanID: "1"),
     Person(
         id: "4",
         gender: Gender.MALE,
@@ -238,12 +238,6 @@ class PersonProvider extends ChangeNotifier {
   List<Person> allPeople = [];
   List<Person> myPeople = [];
   String nameFilter="";
-  ///List of my filters
-  ///
-  ///Gender select
-  ///Age range
-  ///Country select
-  ///
   
   double ageMax=99;
   double ageMin=18;
@@ -378,6 +372,17 @@ class PersonProvider extends ChangeNotifier {
 
       notifyListeners();
     }
+  }
+
+  Future<Person>getPersonById(String id)async{
+    return Future.delayed(Duration(milliseconds: 500),(){
+      for (var person in allPeople) {
+        if (person.id==id) {
+          return person;
+        }
+      }
+      return null;
+    });
   }
 
   CompareScore compareScore(Person person) {

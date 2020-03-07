@@ -21,7 +21,7 @@ class CompareCard extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: () {
-          Navigator.push(context, new MaterialPageRoute(builder: (context) => new CompareScreen(myPerson,person)));
+          Navigator.push(context, new MaterialPageRoute(builder: (context) => new CompareScreen(myPerson:myPerson,person:person)));
         },
         child: Container(
           child: Row(

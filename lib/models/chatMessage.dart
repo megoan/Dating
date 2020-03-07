@@ -1,3 +1,5 @@
+import 'package:dating/models/person.dart';
+
 enum ChatType{SINGLE,GROUP}
 enum ChatMessageType{NORMAL,REPLY,}
 enum ContentType{TEXT,ABOUT,COMPARE,JOINED,REMOVED}
@@ -20,5 +22,6 @@ class Chat {
   String p2;
   String p2Name;
   String p2Image;
-  Chat({this.id,this.combinedId,this.chatType,this.chatMessageType,this.contentType,this.createdAt,this.message,this.messageStatus,this.p1,this.p1Name,this.p1Image,this.p1ShadchanId,this.p2,this.p2Name,this.p2Image,this.senderId,this.senderName});
+  CompareScore compareScore;
+  Chat({this.id,this.combinedId,this.chatType,this.chatMessageType,this.contentType,this.createdAt,this.message,this.messageStatus,this.p1,this.p1Name,this.p1Image,this.p1ShadchanId,this.p2,this.p2Name,this.p2Image,this.compareScore,this.senderId,this.senderName});
 }

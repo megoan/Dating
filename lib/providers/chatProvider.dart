@@ -1,5 +1,6 @@
 import 'package:dating/models/chatMessage.dart';
 import 'package:dating/models/myChatlist.dart';
+import 'package:dating/models/person.dart';
 import 'package:flutter/material.dart';
 
 class ChatProvider extends ChangeNotifier {
@@ -16,6 +17,27 @@ class ChatProvider extends ChangeNotifier {
     p1: "3",
     p1Image: "https://cdn.pixabay.com/photo/2013/11/01/20/23/baby-204185_960_720.jpg",
     p1Name: "Lyla",
+    p1ShadchanId: "1",
+    senderName: "אסתר",
+    messageStatus: MessageStatus.READ,
+    combinedId: "12"
+    ),
+    Chat(
+    id: "1",
+    chatMessageType: ChatMessageType.NORMAL,
+    chatType: ChatType.GROUP,
+    contentType: ContentType.COMPARE,
+    createdAt: new DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day-1,6),
+    message: "does anyOne have anybody for him",
+    senderId: "2",
+    p1: "3",
+    p1Image: "https://cdn.pixabay.com/photo/2013/11/01/20/23/baby-204185_960_720.jpg",
+    p1Name: "Lyla",
+    p1ShadchanId: "1",
+    p2: "3",
+    p2Image: "https://cdn.pixabay.com/photo/2013/11/01/20/23/baby-204185_960_720.jpg",
+    p2Name: "Lyla",
+    compareScore: CompareScore.NOT_KASHUR,
     senderName: "אסתר",
     messageStatus: MessageStatus.READ,
     combinedId: "12"

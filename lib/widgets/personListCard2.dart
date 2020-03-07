@@ -14,7 +14,7 @@ import 'loader.dart';
 class PersonListCardTest extends StatefulWidget {
   final Person person;
   final Shadchan shadchan;
-  PersonListCardTest(this.person,this.shadchan);
+  PersonListCardTest(this.person, this.shadchan);
   var image;
   @override
   _PersonListCardTestState createState() => _PersonListCardTestState();
@@ -23,13 +23,19 @@ class PersonListCardTest extends StatefulWidget {
 class _PersonListCardTestState extends State<PersonListCardTest> {
   @override
   Widget build(BuildContext context) {
-   PersonProvider personProvider = Provider.of<PersonProvider>(context);
+    PersonProvider personProvider = Provider.of<PersonProvider>(context);
     return Align(
       child: AspectRatio(
         aspectRatio: 1 / 1,
         child: GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfo(person: widget.person,shadchan: widget.shadchan,)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProfileInfo(
+                          person: widget.person,
+                          shadchan: widget.shadchan,
+                        )));
           },
           child: Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -43,15 +49,17 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
               children: <Widget>[
                 Hero(
                     tag: 'imageHero' + widget.person.id.toString(),
-                    child: widget.person.profileImages!=null?ClipRRect(
-                      borderRadius: BorderRadius.circular(24),
-                                          child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        imageUrl:  widget.person.profileImages[0],
-                        placeholder: (context, url) => Loader(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                    ):Container()),
+                    child: widget.person.profileImages != null
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(24),
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: widget.person.profileImages[0],
+                              placeholder: (context, url) => Loader(),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
+                            ),
+                          )
+                        : Container()),
                 DecoratedBox(
                   decoration: new BoxDecoration(
                     //color: Colors.lightGreen
@@ -95,8 +103,8 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                             padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 10) : const EdgeInsets.only(left: 10),
                             child: Row(
                               children: <Widget>[
-                             if(widget.person.area!=null)   Text(StaticFunctions.getArea(widget.person.area), style: TextStyle(fontSize: 18, color: Colors.white)),
-                             if(widget.person.area!=null)     Text(", ",style: TextStyle(fontSize: 18, color: Colors.white)),
+                                if (widget.person.area != null) Text(StaticFunctions.getArea(widget.person.area), style: TextStyle(fontSize: 18, color: Colors.white)),
+                                if (widget.person.area != null) Text(", ", style: TextStyle(fontSize: 18, color: Colors.white)),
                                 Text(StaticFunctions.getCountry(widget.person.country), style: TextStyle(fontSize: 18, color: Colors.white)),
                               ],
                             ),
@@ -125,7 +133,6 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                               onTap: () {
                                 setState(() {
                                   personProvider.switchFavorite(widget.person.id);
-                                
                                 });
                               },
                               child: Stack(
@@ -180,84 +187,86 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                           ),
                                         ),
                                       ),
-                                     if(false) FittedBox(
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 58),
-                                              child: Stack(
-                                                alignment: AlignmentDirectional.center,
-                                                children: <Widget>[
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.black,
-                                                    size: 24,
-                                                  ),
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.cyan,
-                                                    size: 15,
-                                                  ),
-                                                ],
+                                      if (false)
+                                        FittedBox(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.only(top: 58),
+                                                child: Stack(
+                                                  alignment: AlignmentDirectional.center,
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.black,
+                                                      size: 24,
+                                                    ),
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.cyan,
+                                                      size: 15,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 70),
-                                              child: Stack(
-                                                alignment: AlignmentDirectional.center,
-                                                children: <Widget>[
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.black,
-                                                    size: 24,
-                                                  ),
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.cyan,
-                                                    size: 15,
-                                                  ),
-                                                ],
+                                              Padding(
+                                                padding: const EdgeInsets.only(top: 70),
+                                                child: Stack(
+                                                  alignment: AlignmentDirectional.center,
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.black,
+                                                      size: 24,
+                                                    ),
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.cyan,
+                                                      size: 15,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(top: 58),
-                                              child: Stack(
-                                                alignment: AlignmentDirectional.center,
-                                                children: <Widget>[
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.black,
-                                                    size: 24,
-                                                  ),
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.cyan,
-                                                    size: 15,
-                                                  ),
-                                                ],
+                                              Padding(
+                                                padding: const EdgeInsets.only(top: 58),
+                                                child: Stack(
+                                                  alignment: AlignmentDirectional.center,
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.black,
+                                                      size: 24,
+                                                    ),
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.cyan,
+                                                      size: 15,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                     if(widget.shadchan.isOnline!=null &&widget.shadchan.isOnline==true) Positioned(
-                                        top: 0,
-                                        right: 10,
-                                        child: Stack(
-                                          alignment: AlignmentDirectional.center,
-                                          children: <Widget>[
-                                            CircleAvatar(
-                                              radius: 13,
-                                              backgroundColor: Theme.of(context).primaryColor,
-                                            ),
-                                            CircleAvatar(
-                                              radius: 10,
-                                              backgroundColor: Colors.green,
-                                            ),
-                                          ],
+                                      if (widget.shadchan.isOnline != null && widget.shadchan.isOnline == true)
+                                        Positioned(
+                                          top: 0,
+                                          right: 10,
+                                          child: Stack(
+                                            alignment: AlignmentDirectional.center,
+                                            children: <Widget>[
+                                              CircleAvatar(
+                                                radius: 13,
+                                                backgroundColor: Theme.of(context).primaryColor,
+                                              ),
+                                              CircleAvatar(
+                                                radius: 10,
+                                                backgroundColor: Colors.green,
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
                                     ],
                                   ),
                                 ],

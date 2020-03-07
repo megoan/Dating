@@ -1,14 +1,18 @@
 import 'package:dating/main.dart';
 import 'package:dating/models/person.dart';
 import 'package:dating/providers/langText.dart';
+import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
 class CompareScreen extends StatefulWidget {
-  final Person myPerson;
-  final Person person;
-  CompareScreen(this.myPerson, this.person);
+   Person myPerson;
+   Person person;
+  final String person1Id;
+  final String person2Id;
+  CompareScreen({this.myPerson, this.person,this.person1Id,this.person2Id});
   @override
   _CompareScreenState createState() => _CompareScreenState();
 }
@@ -18,6 +22,9 @@ class _CompareScreenState extends State<CompareScreen> {
   double rowHeight = 150;
   double radious = 30;
   bool mainSelected = true;
+  bool isLoading = false;
+  bool isInit =true;
+  PersonProvider personProvider;
   _scrollListener() {
     // if (scrollController.position.pixels<200 && scrollController.position.userScrollDirection==ScrollDirection.reverse && rowHeight>=100) {
     //   setState(() {
@@ -34,6 +41,41 @@ class _CompareScreenState extends State<CompareScreen> {
     // print(scrollController.position.pixels.toString());
     //print("row height:"+rowHeight.toString()+" radious: "+radious.toString());
   }
+
+  @override
+  void didChangeDependencies() async{
+    if (isInit) {
+      isInit=false;
+      List<Future>futures=[];
+      personProvider = Provider.of<PersonProvider>(context);
+      if(widget.person==null && widget.person1Id!=null){
+        setState(() {
+          isLoading = true;
+        });
+        futures.add(personProvider.getPersonById(widget.person1Id));
+      }
+      if (widget.myPerson==null && widget.person2Id!=null) {
+        setState(() {
+          isLoading = true;
+        });
+        futures.add(personProvider.getPersonById(widget.person2Id));
+      }
+      Future.wait(futures).then((value){
+        if (value!=null && value.length>0) {
+          widget.myPerson=value[0];
+        }
+        if (value!=null && value.length>1) {
+          widget.person=value[1];
+        }
+        setState(() {
+          isLoading=false;
+        });
+
+    });
+    }
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
   @override
   void initState() {
     scrollController = ScrollController();
@@ -48,7 +90,7 @@ class _CompareScreenState extends State<CompareScreen> {
       appBar: AppBar(
         title: Text("compare"),
       ),
-      body: SingleChildScrollView(
+      body:isLoading?Center(child: CircularProgressIndicator(),): SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(

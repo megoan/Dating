@@ -3,19 +3,23 @@ import 'dart:async';
 import 'package:dating/models/person.dart';
 import 'package:dating/models/shadchan.dart';
 import 'package:dating/providers/langText.dart';
+import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/widgets/shadchanDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/widgets/loader.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 import 'compareThemList.dart';
 
 class ProfileInfo extends StatefulWidget {
-  final Person person;
-  final Shadchan shadchan;
-  ProfileInfo({this.person,this.shadchan});
+  Person person;
+  Shadchan shadchan;
+  final String shadchanId;
+  final String personId;
+  ProfileInfo({this.person,this.shadchan,this.personId,this.shadchanId});
   @override
   _ProfileInfoState createState() => _ProfileInfoState();
 }
@@ -24,9 +28,53 @@ class _ProfileInfoState extends State<ProfileInfo> {
   int topImage=0;
   int _pos=0;
   Timer _timer;
+  bool isInit=true;
+  bool isLoading = false;
+  PersonProvider personProvider;
+  @override
+  void didChangeDependencies() {
+    if (isInit) {
+      isInit=false;
+      List<Future>futures=[];
+      personProvider = Provider.of<PersonProvider>(context);
+      if(widget.person==null && widget.personId!=null){
+        setState(() {
+          isLoading = true;
+        });
+        futures.add(personProvider.getPersonById(widget.personId));
+      }
+      if (widget.shadchan==null && widget.shadchanId!=null) {
+        setState(() {
+          isLoading = true;
+        });
+        futures.add(personProvider.shadchanProvider.getShadchanByID(widget.shadchanId));
+      }
+      Future.wait(futures).then((value){
+        if (value!=null && value.length>0) {
+          widget.person=value[0];
+        }
+        if (value!=null && value.length>1) {
+          widget.shadchan=value[1];
+        }
+        setState(() {
+          isLoading=false;
+        });
+         if (widget.person!=null && widget.person.profileImages!=null) {
+      _timer = Timer.periodic(new Duration(seconds: 3), (_timer) {
+      setState(() {
+        _pos = (_pos + 1) % widget.person.profileImages.length;
+      });
+    });
+    }
+      });
+
+    }
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
    @override
   void initState() {
-    if (widget.person.profileImages!=null) {
+    if (widget.person!=null && widget.person.profileImages!=null) {
       _timer = Timer.periodic(new Duration(seconds: 3), (_timer) {
       setState(() {
         _pos = (_pos + 1) % widget.person.profileImages.length;
@@ -48,9 +96,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(widget.person.firstName),
+        title: widget.person!=null?Text(widget.person.firstName):Container(),
       ),
-      body: Container(
+      body: isLoading?Center(child: CircularProgressIndicator(),): Container(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[

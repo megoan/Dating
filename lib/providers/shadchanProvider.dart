@@ -40,7 +40,16 @@ class ShadchanProvider extends ChangeNotifier {
       return true;
     });
   }
-
+    Future<Shadchan>getShadchanByID(String id)async{
+    return Future.delayed(Duration(milliseconds: 500),(){
+      for (var shadchan in allShadchanim) {
+        if (shadchan.id==id) {
+          return shadchan;
+        }
+      }
+      return null;
+    });
+  }
   void removeFavorite(String id){
     if (myFavorites.containsKey(id)) {
       myFavorites.remove(id);
