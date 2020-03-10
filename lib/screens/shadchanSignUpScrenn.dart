@@ -103,10 +103,10 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                     stops: [0.1, 0.4, 0.7, 0.9],
                     colors: [
                       // Colors are easy thanks to Flutter's Colors class.
-                      Colors.indigo[800],
-                      Colors.purple[700],
-                      Colors.pink[600],
-                      Colors.pink[800],
+                      Colors.blue[500].withOpacity(0.7),
+                      Colors.purple[500].withOpacity(0.7),
+                       Colors.purple[500].withOpacity(0.7),
+                      Colors.pink[500].withOpacity(0.7),
                     ],
                   ),
                 ),
@@ -127,7 +127,7 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                             ),
                             Text(
                               LocaleText.getLocaleText(MyApp.getLocale(), 'Your picture'),
-                              style: TextStyle(fontSize: 20,color: Colors.white),
+                              style: TextStyle(fontSize: 20,),
                             )
                           ],
                         ),
@@ -150,9 +150,9 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
                                     checkValid();
                                   },
                                   decoration: InputDecoration(
-                                    focusColor: Colors.white,
-                                    fillColor: Colors.white,
-                                    hoverColor: Colors.white,
+                                    // focusColor: Colors.white,
+                                    // fillColor: Colors.white,
+                                    // hoverColor: Colors.white,
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'name'),
                              
                                     //add icon outside input field

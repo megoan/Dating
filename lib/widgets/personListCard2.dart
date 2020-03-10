@@ -141,12 +141,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                   Icon(
                                     Icons.star,
                                     size: 55,
-                                    color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.white : Colors.deepPurple,
+                                    color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.white : Theme.of(context).accentColor,
                                   ),
                                   Icon(
                                     Icons.star,
                                     size: 40,
-                                    color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.deepPurple : Colors.white,
+                                    color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Theme.of(context).accentColor : Colors.white,
                                   ),
                                 ],
                               ),
@@ -172,7 +172,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                         height: 100,
                                         child: CircleAvatar(
                                           radius: 100,
-                                          backgroundColor: Theme.of(context).primaryColor,
+                                          backgroundColor: Theme.of(context).accentColor,
                                         ),
                                       ),
                                       Container(
@@ -249,24 +249,24 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                             ],
                                           ),
                                         ),
-                                      if (widget.shadchan.isOnline != null && widget.shadchan.isOnline == true)
-                                        Positioned(
-                                          top: 0,
-                                          right: 10,
-                                          child: Stack(
-                                            alignment: AlignmentDirectional.center,
-                                            children: <Widget>[
-                                              CircleAvatar(
-                                                radius: 13,
-                                                backgroundColor: Theme.of(context).primaryColor,
-                                              ),
-                                              CircleAvatar(
-                                                radius: 10,
-                                                backgroundColor: Colors.green,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                                      // if (widget.shadchan.isOnline != null && widget.shadchan.isOnline == true)
+                                      //   Positioned(
+                                      //     top: 0,
+                                      //     right: 10,
+                                      //     child: Stack(
+                                      //       alignment: AlignmentDirectional.center,
+                                      //       children: <Widget>[
+                                      //         CircleAvatar(
+                                      //           radius: 13,
+                                      //           backgroundColor: Theme.of(context).primaryColor,
+                                      //         ),
+                                      //         CircleAvatar(
+                                      //           radius: 10,
+                                      //           backgroundColor: Colors.green,
+                                      //         ),
+                                      //       ],
+                                      //     ),
+                                      //   ),
                                     ],
                                   ),
                                 ],

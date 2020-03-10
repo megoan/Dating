@@ -61,7 +61,7 @@ class ChatCardWhats extends StatelessWidget {
                       ),
                       new Text(
                       StaticFunctions.getChatTime(myChatList.lastMessageTime),
-                        style: new TextStyle(color: (myChatList.unread>0)?Colors.purple:Colors.grey, fontSize: 14.0),
+                        style: new TextStyle(color: (myChatList.unread>0)?Theme.of(context).accentColor:Colors.grey, fontSize: 14.0),
                       ),
                     ],
                   ),
@@ -88,7 +88,7 @@ class ChatCardWhats extends StatelessWidget {
                         ),
                       if(myChatList.unread>0)  Container(
                         decoration: new BoxDecoration(
-                    color: Colors.purple, //new Color.fromRGBO(255, 0, 0, 0.0),
+                    color: Theme.of(context).accentColor, //new Color.fromRGBO(255, 0, 0, 0.0),
                     borderRadius: new BorderRadius.all(
                      Radius.circular(30)
                   ),),

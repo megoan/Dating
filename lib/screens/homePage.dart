@@ -72,14 +72,14 @@ class _HomePageState extends State<HomePage> {
         extendBody: true,
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.indigo,
+          //backgroundColor: Colors.indigo,
           onPressed: addPersonScreen,
           child: Icon(Icons.person_add),
         ),
         appBar: AppBar(
           // centerTitle: true,
           title: searchMode? TextField(
-          style: TextStyle(color: Colors.purple),
+          style: TextStyle(color:Theme.of(context).accentColor),
           controller: _filter,
           autofocus: true,
           onChanged: (value){
@@ -94,11 +94,11 @@ class _HomePageState extends State<HomePage> {
             filled: true,
             fillColor: Colors.white,
             hintStyle: TextStyle(
-              color: Colors.purple[300],
+              color: Theme.of(context).accentColor,
             ),
             prefixIcon: new Icon(
               Icons.search,
-              color: Colors.purple,
+              color: Theme.of(context).accentColor,
             ),
             hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
             border: OutlineInputBorder(
@@ -170,62 +170,64 @@ class _HomePageState extends State<HomePage> {
               //  color: Colors.pink,
             ),
             Container(
+              color: Colors.grey[300],
               child: getEveruone(),
               //  color: Colors.cyan,
             ),
             Container(
-              color: Colors.deepPurple,
+              color: Colors.grey[300],
               child: FavoriteList(),
             ),
             Container(
+              //color: Colors.grey[300],
               //  color: Colors.deepPurple,
               child: ChatList(),
             ),
           ],
         ),
-        drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Text('Drawer Header'),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-              ),
-              ListTile(
-                title: Text('Item 1'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text('Item 2'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        ),
+        // drawer: Drawer(
+        //   // Add a ListView to the drawer. This ensures the user can scroll
+        //   // through the options in the drawer if there isn't enough vertical
+        //   // space to fit everything.
+        //   child: ListView(
+        //     // Important: Remove any padding from the ListView.
+        //     padding: EdgeInsets.zero,
+        //     children: <Widget>[
+        //       DrawerHeader(
+        //         child: Text('Drawer Header'),
+        //         decoration: BoxDecoration(
+        //           color: Colors.blue,
+        //         ),
+        //       ),
+        //       ListTile(
+        //         title: Text('Item 1'),
+        //         onTap: () {
+        //           // Update the state of the app
+        //           // ...
+        //           // Then close the drawer
+        //           Navigator.pop(context);
+        //         },
+        //       ),
+        //       ListTile(
+        //         title: Text('Item 2'),
+        //         onTap: () {
+        //           // Update the state of the app
+        //           // ...
+        //           // Then close the drawer
+        //           Navigator.pop(context);
+        //         },
+        //       ),
+        //     ],
+        //   ),
+        // ),
         bottomNavigationBar: FABBottomAppBar(
           selectedIndex: selectedIndex,
           centerItemText: 'A',
           color: Colors.grey,
-          selectedColor: Colors.white,
+          selectedColor:  Theme.of(context).primaryColor,
           notchedShape: CircularNotchedRectangle(),
           onTabSelected: _selectedTab,
-          backgroundColor: LightTheme.getTheme().primaryColor,
+          backgroundColor: Colors.white,
           items: [
             // FABBottomAppBarItem(iconData: Icons.menu, text: 'This'),
             FABBottomAppBarItem(iconData: Icons.people_outline, text: LocaleText.getLocaleText(MyApp.getLocale(), "My list")),

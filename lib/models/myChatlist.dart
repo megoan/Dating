@@ -9,5 +9,6 @@ class MyChatList {
   DateTime lastMessageTime;
   int unread;
   Chat lastMessage;
-  MyChatList({this.shadchanID,this.combinedId,this.lastMessage,this.lastMessageTime,this.shadchanName,this.groupName,this.thereIcon,this.unread});
+  ChatType chatType;
+  MyChatList({this.shadchanID,this.combinedId,this.lastMessage,this.lastMessageTime,this.shadchanName,this.groupName,this.thereIcon,this.unread,this.chatType});
 }

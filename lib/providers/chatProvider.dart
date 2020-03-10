@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:dating/models/chatMessage.dart';
 import 'package:dating/models/myChatlist.dart';
 import 'package:dating/models/person.dart';
@@ -216,7 +218,8 @@ class ChatProvider extends ChangeNotifier {
       shadchanName: "mommy",
       groupName: "",unread: 2000,
       thereIcon: "https://img.icons8.com/material/4ac144/256/home.png",
-      lastMessage: chat
+      lastMessage: chat,
+      chatType: ChatType.GROUP
       ),
     MyChatList(
       shadchanID: "1",
@@ -225,7 +228,8 @@ class ChatProvider extends ChangeNotifier {
       shadchanName: "sammy",
       groupName: "Points",unread: 100,
       thereIcon: "https://img.icons8.com/material/4ac144/256/home.png",
-      lastMessage: chat2
+      lastMessage: chat2,
+      chatType: ChatType.GROUP
     ),
     MyChatList(
       shadchanID: "1",
@@ -234,7 +238,8 @@ class ChatProvider extends ChangeNotifier {
       shadchanName: "sammy",
       groupName: "",unread: 50,
       thereIcon: "https://img.icons8.com/material/4ac144/256/home.png",
-      lastMessage: chat3
+      lastMessage: chat3,
+      chatType: ChatType.GROUP
     ),
     MyChatList(
       shadchanID: "1",
@@ -243,7 +248,8 @@ class ChatProvider extends ChangeNotifier {
       shadchanName: "mommy",
       groupName: "Points",unread: 5,
       thereIcon: "https://img.icons8.com/material/4ac144/256/home.png",
-      lastMessage: chat
+      lastMessage: chat,
+      chatType: ChatType.GROUP
     ),
     MyChatList(
       shadchanID: "1",
@@ -252,16 +258,18 @@ class ChatProvider extends ChangeNotifier {
       shadchanName: "mommy",
       groupName: "Points",unread: 0,
       thereIcon: "https://img.icons8.com/material/4ac144/256/home.png",
-      lastMessage: chat3
+      lastMessage: chat3,
+      chatType: ChatType.GROUP
     ),
   ];
   List<MyChatList> myChatLists=[];
-
+  LinkedHashMap<String,MyChatList>myChatListsMap=new LinkedHashMap();
   Future<void> getAllMyChats(String shadchanID)async{
     myChatLists=[];
    await Future.delayed(Duration(milliseconds: 500),(){
       for (var item in myChatListsDataBase) {
         if (item.shadchanID==shadchanID) {
+          myChatListsMap[item.combinedId]=item;
           myChatLists.add(item);
         }
       }
@@ -279,6 +287,14 @@ class ChatProvider extends ChangeNotifier {
         }
       }
       selectedChat.sort(chatCompare);
+    });
+  }
+
+  Future<void> addChat(Chat chat)async{
+     await Future.delayed(Duration(milliseconds: 500),(){
+    
+          selectedChat.insert(0,chat);
+          notifyListeners();
     });
   }
 

@@ -3,7 +3,7 @@ import 'package:dating/models/person.dart';
 enum ChatType{SINGLE,GROUP}
 enum ChatMessageType{NORMAL,REPLY,}
 enum ContentType{TEXT,ABOUT,COMPARE,JOINED,REMOVED}
-enum MessageStatus{NOT_SENT,SENT,RECIEVED,READ}
+enum MessageStatus{SENDING,NOT_SENT,SENT,RECIEVED,READ}
 class Chat {
   String id;
   String combinedId;

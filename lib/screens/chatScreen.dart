@@ -7,6 +7,7 @@ import 'package:dating/models/conversationModel.dart';
 import 'package:dating/models/myChatlist.dart';
 import 'package:dating/models/person.dart';
 import 'package:dating/providers/chatProvider.dart';
+import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/screens/profileInfo.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +27,15 @@ class _ChatScreenState extends State<ChatScreen> {
   bool isInit = true;
   bool isLoading = true;
   ChatProvider chatProvider;
+  PersonProvider personProvider;
+  TextEditingController textEditingController = new TextEditingController();
+  bool hasValue=false;
   @override
   void didChangeDependencies() async {
     if (isInit) {
       isInit = false;
       chatProvider = Provider.of<ChatProvider>(context);
+      personProvider = Provider.of<PersonProvider>(context);
       await chatProvider.getSelectedChat(myChatList.combinedId);
       setState(() {
         isLoading = false;
@@ -73,6 +78,13 @@ class _ChatScreenState extends State<ChatScreen> {
           size: 20,
         );
         break;
+      case MessageStatus.SENDING:
+        return Icon(
+          Icons.access_time,
+          color: Colors.grey,
+          size: 20,
+        );
+        break;
       default:
     }
   }
@@ -103,6 +115,7 @@ class _ChatScreenState extends State<ChatScreen> {
     switch (chat.contentType) {
       case ContentType.TEXT:
         return Bubble(
+          margin: alsoMine?BubbleEdges.only(top:2):BubbleEdges.only(top:8),
           style: me ? styleMe : styleSomebody,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -114,6 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   style: TextStyle(color: getRandomColor(chat.senderName)),
                 ),
               Text(chat.message),
+              SizedBox(height: 3,),
               Row(
                 children: <Widget>[
                   if (me && chat.chatType != ChatType.GROUP) statusChat(chat.messageStatus),
@@ -130,6 +144,7 @@ class _ChatScreenState extends State<ChatScreen> {
         break;
       case ContentType.ABOUT:
         return Bubble(
+          margin: alsoMine?BubbleEdges.only(top:2):BubbleEdges.only(top:8),
           style: me ? styleMe : styleSomebody,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -195,6 +210,7 @@ class _ChatScreenState extends State<ChatScreen> {
          case ContentType.COMPARE:
 
          return Bubble(
+           margin: alsoMine?BubbleEdges.only(top:2):BubbleEdges.only(top:8),
           style: me ? styleMe : styleSomebody,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -334,7 +350,7 @@ class _ChatScreenState extends State<ChatScreen> {
               backgroundImage: NetworkImage(myChatList.thereIcon),
             ),
             title: Text(
-              (myChatList.groupName != null && myChatList.groupName != "") ? myChatList.groupName : myChatList.shadchanName,
+              (myChatList.chatType==ChatType.GROUP) ? myChatList.groupName : myChatList.shadchanName,
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
             subtitle: Text(
@@ -466,73 +482,120 @@ class _ChatScreenState extends State<ChatScreen> {
                   //     ),
                   // Row(
                   //   children: <Widget>[
-                  Stack(
-                    overflow: Overflow.visible,
+                  Row(
                     children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.all(12),
-                        margin: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
+                      Expanded(
+                                          child: Stack(
+                          overflow: Overflow.visible,
                           children: <Widget>[
-                            // Icon(
-                            //   Icons.tag_faces,
-                            //   color: Colors.grey,
-                            //   size: 35,
-                            // ),
-                            // SizedBox(
-                            //   width: 5,
-                            // ),
-                            Flexible(
-                              child: TextField(
-                                maxLines: null,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Type a message',
-                                    //contentPadding: EdgeInsets.only(left: 5),
-                                    hintStyle: TextStyle(color: Colors.grey, fontSize: 18)),
+                            Container(
+                              padding: EdgeInsets.all(12),
+                              margin: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Row(
+                                children: <Widget>[
+                                  // Icon(
+                                  //   Icons.tag_faces,
+                                  //   color: Colors.grey,
+                                  //   size: 35,
+                                  // ),
+                                  // SizedBox(
+                                  //   width: 5,
+                                  // ),
+                                  Flexible(
+                                    child: TextField(
+                                      onChanged: (value) {
+                                        if (value!=null && value!="") {
+                                            hasValue=true;
+                                         
+                                        }
+                                        else{
+                                          hasValue=false;
+                                        }
+                                         setState(() {
+                                          
+                                          });
+                                      },
+                                      maxLines: null,
+                                      controller: textEditingController,
+                                      decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: 'Type a message',
+                                          //contentPadding: EdgeInsets.only(left: 5),
+                                          hintStyle: TextStyle(color: Colors.grey, fontSize: 18)),
+                                    ),
+                                  ),
+                                  
+                                  // Icon(
+                                  //   Icons.camera_alt,
+                                  //   color: Colors.grey,
+                                  //   size: 35,
+                                  // )
+                                ],
                               ),
                             ),
-
-                            // Icon(
-                            //   Icons.camera_alt,
-                            //   color: Colors.grey,
-                            //   size: 35,
-                            // )
+                            Positioned(
+                              right: -3,
+                              top: 12,
+                              child: ClipPath(
+                                clipper: TriangleClipper(),
+                                child: Container(
+                                  height: 20,
+                                  width: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),
-                      Positioned(
-                        right: -3,
-                        top: 12,
-                        child: ClipPath(
-                          clipper: TriangleClipper(),
-                          child: Container(
-                            height: 20,
-                            width: 30,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
+                  if(hasValue) GestureDetector(
+                    onTap: ()async{
+                      String temp=textEditingController.text.toString();
+                       textEditingController.text="";
+                          hasValue=false;
+                          setState(() {
+                            
+                          });
+                     await chatProvider.addChat(
+                        Chat(
+                          chatMessageType: ChatMessageType.NORMAL,
+                          combinedId: myChatList.combinedId,
+                          chatType: myChatList.chatType,
+                          createdAt: DateTime.now(),
+                          contentType: ContentType.TEXT,
+                          senderId: personProvider.shadchanProvider.myShadchanId,
+                          message: temp,
+                          messageStatus: MessageStatus.SENDING,
+                          id: "10",
+                          senderName: personProvider.shadchanProvider.myShadchan.name
+                          ));
+                         
+                          setState(() {
+                            
+                          });
+                    },
+                                      child: Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                          color: Colors.blue, shape: BoxShape.circle),
+                      child: Icon(
+                        Icons.send,
+                        color: Colors.white,
+                        size: 32,
+                      ),
+                    ),
+                  )
                     ],
                   ),
-                  // Container(
-                  //   padding: EdgeInsets.all(12),
-                  //   decoration: BoxDecoration(
-                  //       color: Color(0xFF128C7E), shape: BoxShape.circle),
-                  //   child: Icon(
-                  //     Icons.keyboard_voice,
-                  //     color: Colors.white,
-                  //     size: 32,
-                  //   ),
-                  // )
+                  
+                //  ],
+                 //  )
                   // ],
-                  //  )
-                  //  ],
-                  // ),
+                 // ),
                 ],
               ),
             ),

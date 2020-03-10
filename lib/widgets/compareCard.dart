@@ -33,7 +33,7 @@ class CompareCard extends StatelessWidget {
                   height: 70,
                   padding: EdgeInsets.all(1),
                   decoration: new BoxDecoration(
-                    color: Colors.purple,
+                    color: Theme.of(context).accentColor,
                     borderRadius: BorderRadius.circular(35),
                   ),
                   constraints: BoxConstraints(
@@ -104,7 +104,7 @@ class CompareCard extends StatelessWidget {
                             // Text(
                             //   StaticFunctions.getArea(person.area),
                             // ),
-                            Icon(Icons.location_on, color: Colors.purple),
+                            Icon(Icons.location_on, color: Theme.of(context).primaryColor),
                           ],
                         ),
                       ],

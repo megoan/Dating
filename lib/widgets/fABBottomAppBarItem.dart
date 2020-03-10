@@ -62,9 +62,9 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     return BottomAppBar(
       shape: widget.notchedShape,
       child: Padding(
-        padding: (MyApp.getLocale()=="he")?const EdgeInsets.only(left: 70):EdgeInsets.only(right: 70),
+        padding: (MyApp.getLocale()=="he")?const EdgeInsets.only(left: 80):EdgeInsets.only(right: 80),
         child: Row(
-
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           //mainAxisSize: MainAxisSize.max,
          // mainAxisAlignment: MainAxisAlignment.start,
           children: items,

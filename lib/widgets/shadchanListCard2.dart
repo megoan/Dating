@@ -46,7 +46,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
       border: Border(
           
       //  top: BorderSide(width: 16.0, color: Colors.lightBlue.shade50),
-          right: BorderSide(width: 12.0, color: Colors.lightBlue.shade900),
+          right: BorderSide(width: 12.0, color: Theme.of(context).primaryColor,),
       ),
   ),
             child: Column(
@@ -59,7 +59,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                            topRight: Radius.circular(15.0),
                           ),
                           ),
-                  //color: Colors.blue,
+                 
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -181,7 +181,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                       child: Container(
                         child: Row(
                           children: <Widget>[
-                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),style: TextStyle(color: Colors.purple),),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),style: TextStyle(color: Theme.of(context).accentColor),),
                           ],
                         ),
                       ),
@@ -190,7 +190,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                               ),
                      borderSide: BorderSide(
                        
-                  color: Colors.purple, //Color of the border
+                  color: Theme.of(context).accentColor, //Color of the border
                   style: BorderStyle.solid, //Style of the border
                   width: 1, //width of the border
                 ),),

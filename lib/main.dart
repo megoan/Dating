@@ -17,18 +17,17 @@ import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
 
 Locale local;
-void main() async {
+void main(){
   WidgetsFlutterBinding.ensureInitialized();
-  ThemeData themeData = await ThemeController.getTheme();
   Provider.debugCheckInvalidValueType = null;
   runApp(MyApp(
-    theme: themeData,
+
   ));
 }
 
 class MyApp extends StatelessWidget {
-  final ThemeData theme;
-  MyApp({this.theme}) {
+
+  MyApp() {
     local = Locale('he');
   }
   static String getLocale() {
@@ -46,10 +45,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // return new DynamicTheme(
-    //   defaultBrightness: Brightness.light,
-    //   data: (brightness) => this.theme,
-    //   themedWidgetBuilder: (context, theme) {
+
     return MultiProvider(
         providers: [
           Provider<ChatProvider>(create: (_) => ChatProvider()),
@@ -60,6 +56,11 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          theme: ThemeData(
+            primaryColor: Colors.blue,
+            accentColor: Color(0xffaa71f9),
+            primarySwatch:  Colors.blue,
+          ),
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here
             GlobalMaterialLocalizations.delegate,
@@ -72,7 +73,7 @@ class MyApp extends StatelessWidget {
           ],
           locale: local,
           title: 'Flutter Demo',
-          // theme: LightTheme.getTheme(),
+
           routes: <String, WidgetBuilder>{'/homepage': (BuildContext context) => ShadchanSignUpScreen(), '/landingpage': (BuildContext context) => LandingPage()},
           home: FutureBuilder(
             future: FirebaseAuth.instance.currentUser(),
@@ -216,7 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void didChangeDependencies() {
     if (!isInit) {
-      // DynamicTheme.of(context).setThemeData(ThemeSwitcher.getTheme(context));
+    
     }
     isInit = true;
 

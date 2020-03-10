@@ -247,4 +247,11 @@ class StaticFunctions {
     };
     return areaText[MyApp.getLocale()] != null ? areaText[MyApp.getLocale()][compareScore] : compareScore.toString().split(".").last;
   }
+
+  static String combinedID(String id1,String id2){
+    if (id1.compareTo(id2)==-1) {
+      return id1+id2;
+    }
+    return id2+id1;
+  } 
 }

@@ -98,7 +98,7 @@ class _CompareScreenState extends State<CompareScreen> {
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.indigoAccent,
+                    color: Theme.of(context).primaryColor,
                     boxShadow: [
                       new BoxShadow(
                         color: Colors.grey,
@@ -240,7 +240,7 @@ class _CompareScreenState extends State<CompareScreen> {
                             // Text(
                             //   StaticFunctions.getArea(person.area),
                             // ),
-                            Icon(Icons.location_on, color: Colors.purple),
+                            Icon(Icons.location_on, color: Theme.of(context).primaryColor),
                           ],
                         ),),
                           DataCell(Text(StaticFunctions.getStatus(widget.myPerson.status))),
@@ -279,7 +279,7 @@ class _CompareScreenState extends State<CompareScreen> {
                             // Text(
                             //   StaticFunctions.getArea(person.area),
                             // ),
-                            Icon(Icons.location_on, color: Colors.purple),
+                            Icon(Icons.location_on, color: Theme.of(context).primaryColor),
                           ],
                         )),
                           DataCell(Text(StaticFunctions.getStatus(widget.person.status))),

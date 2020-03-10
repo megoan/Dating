@@ -33,7 +33,7 @@ class FavoritesCard extends StatelessWidget {
                     personProvider.removeFavorite(person.id);
                     reset();
                   },
-                  child: Icon(Icons.cancel,size:40,color: Colors.red,),
+                  child: Icon(Icons.cancel,size:40,color: Theme.of(context).primaryColor,),
                 ),
               ),
                Padding(
@@ -74,7 +74,7 @@ class FavoritesCard extends StatelessWidget {
                                    Row(
                                      children: <Widget>[
                                        Text(StaticFunctions.getArea(person.area),),
-                                       Icon(Icons.location_on,color:Colors.purple),
+                                       Icon(Icons.location_on,color:Theme.of(context).primaryColor),
                                      ],
                                    ),
                                 
@@ -92,7 +92,7 @@ class FavoritesCard extends StatelessWidget {
                         child: Container(
                           child: Row(
                             children: <Widget>[
-                              Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),style: TextStyle(color: Colors.purple),),
+                              Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),style: TextStyle(color: Theme.of(context).accentColor),),
                             ],
                           ),
                         ),
@@ -101,7 +101,7 @@ class FavoritesCard extends StatelessWidget {
                                 ),
                        borderSide: BorderSide(
                          
-                    color: Colors.purple, //Color of the border
+                    color: Theme.of(context).accentColor, //Color of the border
                     style: BorderStyle.solid, //Style of the border
                     width: 1, //width of the border
                   ),),

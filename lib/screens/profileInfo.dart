@@ -59,7 +59,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
         setState(() {
           isLoading=false;
         });
-         if (widget.person!=null && widget.person.profileImages!=null) {
+         if (widget.person!=null && widget.person.profileImages!=null && widget.personId!=null) {
       _timer = Timer.periodic(new Duration(seconds: 3), (_timer) {
       setState(() {
         _pos = (_pos + 1) % widget.person.profileImages.length;
@@ -94,10 +94,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: widget.person!=null?Text(widget.person.firstName):Container(),
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   title: widget.person!=null?Text(widget.person.firstName):Container(),
+      // ),
       body: isLoading?Center(child: CircularProgressIndicator(),): Container(
         child: SingleChildScrollView(
           child: Column(
@@ -149,7 +149,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                             height: 70,
                                             child: CircleAvatar(
                                               radius: 70,
-                                              backgroundColor: Theme.of(context).primaryColor,
+                                              backgroundColor: Theme.of(context).accentColor,
                                             ),
                                           ),
                                           Container(
@@ -198,67 +198,67 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                     ),
                                   ],
                                 ),
-                                FittedBox(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 0),
-                                        child: Stack(
-                                          alignment: AlignmentDirectional.center,
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.black,
-                                              size: 24,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.cyan,
-                                              size: 15,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 0),
-                                        child: Stack(
-                                          alignment: AlignmentDirectional.center,
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.black,
-                                              size: 24,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.cyan,
-                                              size: 15,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 0),
-                                        child: Stack(
-                                          alignment: AlignmentDirectional.center,
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.black,
-                                              size: 24,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.cyan,
-                                              size: 15,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                // FittedBox(
+                                //   child: Row(
+                                //     mainAxisAlignment: MainAxisAlignment.end,
+                                //     children: <Widget>[
+                                //       Padding(
+                                //         padding: const EdgeInsets.only(top: 0),
+                                //         child: Stack(
+                                //           alignment: AlignmentDirectional.center,
+                                //           children: <Widget>[
+                                //             Icon(
+                                //               Icons.star,
+                                //               color: Colors.black,
+                                //               size: 24,
+                                //             ),
+                                //             Icon(
+                                //               Icons.star,
+                                //               color: Colors.cyan,
+                                //               size: 15,
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //       Padding(
+                                //         padding: const EdgeInsets.only(top: 0),
+                                //         child: Stack(
+                                //           alignment: AlignmentDirectional.center,
+                                //           children: <Widget>[
+                                //             Icon(
+                                //               Icons.star,
+                                //               color: Colors.black,
+                                //               size: 24,
+                                //             ),
+                                //             Icon(
+                                //               Icons.star,
+                                //               color: Colors.cyan,
+                                //               size: 15,
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //       Padding(
+                                //         padding: const EdgeInsets.only(top: 0),
+                                //         child: Stack(
+                                //           alignment: AlignmentDirectional.center,
+                                //           children: <Widget>[
+                                //             Icon(
+                                //               Icons.star,
+                                //               color: Colors.black,
+                                //               size: 24,
+                                //             ),
+                                //             Icon(
+                                //               Icons.star,
+                                //               color: Colors.cyan,
+                                //               size: 15,
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                               ],
                             ),
                           ))),
@@ -278,7 +278,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 children: <Widget>[
                                   Text(
                                     LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),
-                                    style: TextStyle(color: Colors.purple),
+                                    style: TextStyle(color: Theme.of(context).accentColor),
                                   ),
                                 ],
                               ),
@@ -287,7 +287,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                               borderRadius: new BorderRadius.circular(30.0),
                             ),
                             borderSide: BorderSide(
-                              color: Colors.purple, //Color of the border
+                              color: Theme.of(context).accentColor, //Color of the border
                               style: BorderStyle.solid, //Style of the border
                               width: 1, //width of the border
                             ),
@@ -296,14 +296,43 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       ],
                     ),
                   ),
+                  
                   Container(
-                    height: 200,
+                    height: 300,
                     width: double.infinity,
                     child: Column(
                       children: <Widget>[
+                        Opacity(
+                          opacity: 1,
+                            child: Container(
+                            height: 200,
+                            color: Theme.of(context).primaryColor
+                          ),
+                        ),
                         Container(
                           height: 100,
-                          color: Colors.purple,
+                        )
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    height: 300,
+                    width: double.infinity,
+                    child: Column(
+                      children: <Widget>[
+                        Opacity(
+                          opacity: 0.3,
+                                                  child: Container(
+                            decoration: BoxDecoration(
+                              
+                              image: DecorationImage(
+                                colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.color),
+                                fit: BoxFit.cover,
+                                image: AssetImage("assets/images/road.jpg"))),
+                            height: 200,
+                            //color: Theme.of(context).accentColor
+                          ),
                         ),
                         Container(
                           height: 100,
@@ -335,6 +364,16 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       :Container(),
                     )),
                   ),
+                  Positioned(
+                    top: 20,
+                    right: 8,
+                                      child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child:  GestureDetector(
+                        onTap: (){Navigator.pop(context);},
+                        child: Container(child: Icon(Icons.arrow_back,color: Colors.white,size: 36,),)),
+                    ),
+                  )
                   //   Positioned(top:0, child: TopBar())
                 ],
               ),
@@ -390,7 +429,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     Container(
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
                         Column(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Status'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Status'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                           SizedBox(
                             height: 10,
                           ),
@@ -401,7 +440,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           SizedBox(
                             height: 20,
                           ),
-                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                           SizedBox(height: 10),
                           Text(
                             StaticFunctions.getHashkafa(widget.person.hashkafa),
@@ -412,7 +451,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Height'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Height'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
                                (widget.person.height.toString()),
@@ -421,7 +460,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
                               StaticFunctions.getDos(widget.person.dos),
@@ -433,7 +472,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
                                StaticFunctions.getSmoke(widget.person.smoke),
@@ -442,7 +481,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Eda'), style: TextStyle(color: Colors.purple[300], fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Eda'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
                                StaticFunctions.getEda(widget.person.eda),
@@ -455,7 +494,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     SizedBox(height: 30),
                     Container(
                       width: double.infinity,
-                      color: Colors.purple[100],
+                      color: Theme.of(context).primaryColor.withOpacity(0.3),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
