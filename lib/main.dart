@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primaryColor: Colors.blue,
             accentColor: Color(0xffaa71f9),
-            primarySwatch:  Colors.blue,
+            //primarySwatch:  Colors.blue,
           ),
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here
@@ -74,7 +74,9 @@ class MyApp extends StatelessWidget {
           locale: local,
           title: 'Flutter Demo',
 
-          routes: <String, WidgetBuilder>{'/homepage': (BuildContext context) => ShadchanSignUpScreen(), '/landingpage': (BuildContext context) => LandingPage()},
+          routes: <String, WidgetBuilder>{
+            '/homepage': (BuildContext context) => ShadchanSignUpScreen(),
+            '/landingpage': (BuildContext context) => LandingPage()},
           home: FutureBuilder(
             future: FirebaseAuth.instance.currentUser(),
             builder: (ctx, authResultSnapshot) => authResultSnapshot.connectionState == ConnectionState.waiting

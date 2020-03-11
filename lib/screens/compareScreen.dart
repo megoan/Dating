@@ -80,7 +80,6 @@ class _CompareScreenState extends State<CompareScreen> {
   void initState() {
     scrollController = ScrollController();
     scrollController.addListener(_scrollListener);
-    print("object");
     super.initState();
   }
 

@@ -29,6 +29,7 @@ class _ChatScreenState extends State<ChatScreen> {
   ChatProvider chatProvider;
   PersonProvider personProvider;
   TextEditingController textEditingController = new TextEditingController();
+  ScrollController scrollController = new ScrollController();
   bool hasValue=false;
   @override
   void didChangeDependencies() async {
@@ -384,7 +385,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                       child: ListView.builder(
-                          
+                          controller: scrollController,
                           reverse: true,
                           itemCount: chatProvider.selectedChat.length,
                           itemBuilder: (BuildContext ctxt, int index) => getChatBubble(index, myChatList.shadchanID == chatProvider.selectedChat[index].senderId, context))),
