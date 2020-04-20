@@ -41,7 +41,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25.0),
             ),
-            elevation: 5,
+            elevation: 10,
             margin: EdgeInsets.all(15),
             child: Stack(
               fit: StackFit.expand,
@@ -67,6 +67,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                       end: FractionalOffset.bottomCenter,
                       colors: [
                         Colors.transparent,
+                        Colors.black38,
                         Colors.black54,
                         Colors.black87,
                       ],
@@ -78,7 +79,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                   child: Column(
                     children: <Widget>[
                      Spacer(
-                        // height: 3,
+                        
                       ),
                       Row(
                         children: <Widget>[
@@ -149,12 +150,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
               children: <Widget>[
                 Icon(
                   Icons.star,
-                  size: 45,
+                  size: 42,
                   color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.white : Theme.of(context).accentColor,
                 ),
                 Icon(
                   Icons.star,
-                  size: 40,
+                  size: 38,
                   color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Theme.of(context).accentColor : Colors.white,
                 ),
               ],

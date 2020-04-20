@@ -64,7 +64,7 @@ class _ShadchanSignUpScreenState extends State<ShadchanSignUpScreen> {
   }
 
   void addUserEmail() {
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new HomePage()));
+    Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (context) => new HomePage()));
   }
 
   initState() {
