@@ -9,49 +9,68 @@ class Everyone extends StatefulWidget {
 }
 
 class _EveryoneState extends State<Everyone> {
-
   PersonProvider personProvider;
 
- // ShadchanProvider shadchanProvider;
+  // ShadchanProvider shadchanProvider;
 
-  bool isInit=true;
+  bool isInit = true;
   bool isLoading = true;
   @override
-  void didChangeDependencies() async{
+  void didChangeDependencies() async {
     if (isInit) {
-      isInit=false;
+      isInit = false;
       personProvider = Provider.of<PersonProvider>(context);
-     // shadchanProvider = Provider.of<ShadchanProvider>(context);
-      await Future.wait([personProvider.getAllPeople(),personProvider.shadchanProvider.getAllShadchanim()]);
+      // shadchanProvider = Provider.of<ShadchanProvider>(context);
+      await Future.wait([personProvider.getAllPeople(), personProvider.shadchanProvider.getAllShadchanim()]);
       if (!mounted) return;
       setState(() {
         isLoading = false;
       });
     }
-   
+
     super.didChangeDependencies();
     //getAllPeople()
   }
-  
+
   @override
   Widget build(BuildContext context) {
     try {
-       return (isLoading)?Center(child: CircularProgressIndicator(),) :personProvider.allPeople.length>0?ListView.builder(itemCount: personProvider.allPeople.length, itemBuilder: (BuildContext ctxt, int index) => returnCard(index)):Container();
+      return (isLoading)
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : personProvider.allPeople.length > 0 ? 
+          GridView.builder(
+  itemCount: personProvider.allPeople.length,
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisSpacing: 0,
+      crossAxisCount:  2 ),
+      
+  itemBuilder: (BuildContext context, int index) {
+    return returnCard(index) ;
+    }) : Container();
     } catch (e) {
-      setState(() {
-        
-      });
-     // print("sdfsdfsdfsdfsdfsdfds");
-      return ListView.builder(itemCount: personProvider.allPeople.length, itemBuilder: (BuildContext ctxt, int index) => returnCard(index));
+      setState(() {});
+     
+      return  personProvider.allPeople.length > 0 ?  GridView.builder(
+  itemCount: personProvider.allPeople.length,
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    
+      crossAxisCount:  2 ),
+  itemBuilder: (BuildContext context, int index) {
+    return returnCard(index);
+    }): Container();
     }
-   
   }
 
   Widget returnCard(int index) {
-   return   (personProvider.nameFilter==null || personProvider.nameFilter=="")? 
-   PersonListCardTest(personProvider.allPeople[index],personProvider.shadchanProvider.allShadchanimMap[personProvider.allPeople[index].shadchanID]):
-   personProvider.allPeople[index].firstName.toLowerCase().contains(personProvider.nameFilter.toLowerCase())||personProvider.allPeople[index].lastName.toLowerCase().contains(personProvider.nameFilter.toLowerCase())?
-   PersonListCardTest(personProvider.allPeople[index],personProvider.shadchanProvider.allShadchanimMap[personProvider.allPeople[index].shadchanID]):
-   Container();
+    return
+     (personProvider.nameFilter == null || personProvider.nameFilter == "")
+        ? PersonListCardTest(personProvider.allPeople[index], personProvider.shadchanProvider.allShadchanimMap[personProvider.allPeople[index].shadchanID])
+        : personProvider.allPeople[index].firstName.toLowerCase().contains(personProvider.nameFilter.toLowerCase()) ||
+                personProvider.allPeople[index].lastName.toLowerCase().contains(personProvider.nameFilter.toLowerCase())
+            ? PersonListCardTest(personProvider.allPeople[index], personProvider.shadchanProvider.allShadchanimMap[personProvider.allPeople[index].shadchanID])
+            : 
+            Container();
   }
 }
