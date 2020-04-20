@@ -137,7 +137,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
         ),
         Positioned(
           bottom: 40,
-          left:-5,
+          left:-6,
           child: InkWell(
             onTap: () {
               setState(() {
