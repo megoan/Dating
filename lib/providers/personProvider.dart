@@ -243,7 +243,7 @@ class PersonProvider extends ChangeNotifier {
   double ageMin=18;
   Area pickedArea;
   Country pickedCountry;
-  Status pickedStatus;
+  Map<Status,bool> pickedStatus={};
   List<Gender> genders = [];
   List<Country> countrys = [];
   void updateNameFilter(val){

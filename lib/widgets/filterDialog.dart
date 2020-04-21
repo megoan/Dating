@@ -178,7 +178,7 @@ class _FilterDialogState extends State<FilterDialog> {
                                 onChanged: (Status newValue) {
                                   statusValue = newValue;
                                   setState(() {
-                                    personProvider.pickedStatus = newValue;
+                                    // personProvider.pickedStatus = newValue;
                                     _status = newValue;
                                     state.didChange(newValue);
                                   });

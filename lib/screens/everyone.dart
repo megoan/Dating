@@ -4,6 +4,7 @@ import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/widgets/personListCard2.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,10 +35,6 @@ class _EveryoneState extends State<Everyone> {
 
   FormFieldState<Status> statusState;
 
-  var _status;
-
-  Status statusValue;
-
   double lookingPersonAgeMin = 18;
   double lookingPersonAgeMax = 99;
   RangeValues rangeValuesAge = RangeValues(18, 99);
@@ -60,6 +57,32 @@ class _EveryoneState extends State<Everyone> {
     //getAllPeople()
   }
 
+  List<Widget> setChips(_enumValus) {
+    List<Widget> chipList = [];
+
+    for (var value in _enumValus) {
+      chipList.add(Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: new FilterChip(
+          selectedColor: Colors.blueGrey[500],
+          selected: personProvider.pickedStatus[value] != null && personProvider.pickedStatus[value]==true?true:false,
+          label: new Text(StaticFunctions.getStatus(value)),
+          backgroundColor: Colors.transparent,
+          
+          shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
+          onSelected: (bool bvalue) {
+            setState(() {
+              personProvider.pickedStatus[value] = bvalue;
+              print(personProvider.pickedStatus[value]);
+            });
+          },
+        ),
+      ));
+    }
+
+    return chipList;
+  }
+
   @override
   Widget build(BuildContext context) {
     try {
@@ -71,10 +94,12 @@ class _EveryoneState extends State<Everyone> {
               ? Column(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(height: 10),
+                          
                           Row(
                             children: <Widget>[
                               Expanded(
@@ -87,8 +112,10 @@ class _EveryoneState extends State<Everyone> {
                                     setState(() {});
                                   },
                                   decoration: new InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
+                                    
+                                    contentPadding: EdgeInsets.all(0),
+                                    // filled: true,
+                                    // fillColor: Colors.white,
                                     hintStyle: TextStyle(
                                       color: Theme.of(context).accentColor,
                                     ),
@@ -98,6 +125,7 @@ class _EveryoneState extends State<Everyone> {
                                     ),
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
                                     border: OutlineInputBorder(
+                                      
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
                                   ),
@@ -109,13 +137,19 @@ class _EveryoneState extends State<Everyone> {
                               )
                             ],
                           ),
+                          SizedBox(height: 10),
+                          Text(
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           new FormField<Country>(
                             builder: (FormFieldState<Country> state) {
                               countryState = state;
                               return InputDecorator(
                                 decoration: InputDecoration(
-                                  icon: const Icon(Icons.location_on),
-                                  labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
+                                  
+                                  // icon: const Icon(Icons.location_on),
+                                  // labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
                                   errorText: state.hasError ? state.errorText : null,
                                 ),
                                 isEmpty: _country == null,
@@ -195,58 +229,62 @@ class _EveryoneState extends State<Everyone> {
                                 return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                               },
                             ),
-                          //STATUS
-                          new FormField<Status>(
-                            builder: (FormFieldState<Status> state) {
-                              statusState = state;
-                              return InputDecorator(
-                                decoration: InputDecoration(
-                                  icon: const Icon(Icons.people),
-                                  labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
-                                  errorText: state.hasError ? state.errorText : null,
-                                ),
-                                isEmpty: _status == null,
-                                child: new DropdownButtonHideUnderline(
-                                  child: Listener(
-                                    onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                    child: new DropdownButton<Status>(
-                                      value: _status,
-                                      isDense: true,
-                                      onChanged: (Status newValue) {
-                                        statusValue = newValue;
-                                        setState(() {
-                                          personProvider.pickedStatus = newValue;
-                                          _status = newValue;
-                                          state.didChange(newValue);
-                                        });
-                                      },
-                                      items: Status.values.map((Status value) {
-                                        return new DropdownMenuItem<Status>(
-                                          value: value,
-                                          child: new Text(StaticFunctions.getStatus(value)),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                            validator: (val) {
-                              return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                            },
+                          // //STATUS
+                          // new FormField<Status>(
+                          //   builder: (FormFieldState<Status> state) {
+                          //     statusState = state;
+                          //     return InputDecorator(
+                          //       decoration: InputDecoration(
+                          //         icon: const Icon(Icons.people),
+                          //         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
+                          //         errorText: state.hasError ? state.errorText : null,
+                          //       ),
+                          //       isEmpty: _status == null,
+                          //       child: new DropdownButtonHideUnderline(
+                          //         child: Listener(
+                          //           onPointerDown: (_) => FocusScope.of(context).unfocus(),
+                          //           child: new DropdownButton<Status>(
+                          //             value: _status,
+                          //             isDense: true,
+                          //             onChanged: (Status newValue) {
+                          //               statusValue = newValue;
+                          //               setState(() {
+                          //                 // personProvider.pickedStatus = newValue;
+                          //                 _status = newValue;
+                          //                 state.didChange(newValue);
+                          //               });
+                          //             },
+                          //             items: Status.values.map((Status value) {
+                          //               return new DropdownMenuItem<Status>(
+                          //                 value: value,
+                          //                 child: new Text(StaticFunctions.getStatus(value)),
+                          //               );
+                          //             }).toList(),
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     );
+                          //   },
+                          //   validator: (val) {
+                          //     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                          //   },
+                          // ),
+                           SizedBox(height: 10),
+                          Text(
+                            LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-
-                          SizedBox(
-                            height: 10,
+                           SizedBox(height: 5),
+                          Row(
+                            children: setChips(Status.values),
                           ),
+                           SizedBox(height: 10),
                           Container(
-                            margin: EdgeInsets.only(top: 10),
                             child: Column(
                               children: <Widget>[
                                 Align(
                                   alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
                                   child: Container(
-                                    padding: const EdgeInsets.only(top: 14.0),
                                     child: Text(
                                       LocaleText.getLocaleText(MyApp.getLocale(), 'Age'),
                                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),

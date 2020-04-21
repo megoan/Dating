@@ -115,45 +115,45 @@ class _HomePageState extends State<HomePage> {
             // ),
           ),
         ):Text('Cool Group'),//_appBarTitle,
-          actions: <Widget>[
-           if(selectedIndex==1) IconButton(
-              icon:searchMode? Icon(Icons.close):Icon(Icons.search),
-              onPressed:searchMode? (){
-                _filter.clear();
-                 personProvider.updateNameFilter("");
-                 searchMode=false;
-              setState(() {
+          // actions: <Widget>[
+          //  if(selectedIndex==1) IconButton(
+          //     icon:searchMode? Icon(Icons.close):Icon(Icons.search),
+          //     onPressed:searchMode? (){
+          //       _filter.clear();
+          //        personProvider.updateNameFilter("");
+          //        searchMode=false;
+          //     setState(() {
                 
-              });
-              }:
-              (){
-                 searchMode=true;
-                 setState(() {
+          //     });
+          //     }:
+          //     (){
+          //        searchMode=true;
+          //        setState(() {
                    
-                 });
-              },
-            ),
-            // IconButton(
-            //   icon: Icon(Icons.sort),
-            //   onPressed: (){},
+          //        });
+          //     },
+          //   ),
+          //   // IconButton(
+          //   //   icon: Icon(Icons.sort),
+          //   //   onPressed: (){},
 
-            // ),
-             if(selectedIndex==1) IconButton(
-              icon: Icon(Icons.filter_list),
-              onPressed: () {
-                showDialog(context: context,
-                builder: (_) => Dialog(
-                  child: FilterDialog(),
-                ),
-                ).then((value)async{
-                   await personProvider.getAllPeople();
-                  setState(() {
+          //   // ),
+          //    if(selectedIndex==1) IconButton(
+          //     icon: Icon(Icons.filter_list),
+          //     onPressed: () {
+          //       showDialog(context: context,
+          //       builder: (_) => Dialog(
+          //         child: FilterDialog(),
+          //       ),
+          //       ).then((value)async{
+          //          await personProvider.getAllPeople();
+          //         setState(() {
                   
-            });
-                });
-              },
-            ),
-          ],
+          //   });
+          //       });
+          //     },
+          //   ),
+          // ],
         ),
         body: PageView(
           onPageChanged: (index) {
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> {
               //  color: Colors.pink,
             ),
             Container(
-              color: Colors.grey[300],
+              // color: Colors.blueGrey[800],
               child: getEveruone(),
               //  color: Colors.cyan,
             ),
