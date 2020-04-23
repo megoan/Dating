@@ -6,6 +6,7 @@ import 'package:dating/providers/staticFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CompareScreen extends StatefulWidget {
   Person myPerson;
@@ -44,7 +45,18 @@ class _CompareScreenState extends State<CompareScreen> {
                   mainSelected ? widget.myPerson.profileImages[0] : widget.person.profileImages[0],
                 ))));
   }
-
+  Widget circleIcon(IconData _icon){
+    return new Container(
+          //width: 50.0,
+          //height: 50.0,
+          padding: const EdgeInsets.all(7.0),
+          decoration: new BoxDecoration(
+            shape: BoxShape.circle,
+           
+            color: Colors.purple,
+            
+          ),child: FaIcon(_icon,color: Colors.white,size: 16,),);
+  }
   Widget personalDetails(screenSize, {bool mainSelected: true}) {
     TextStyle agestyle = TextStyle(
         fontSize: 17,
@@ -59,71 +71,74 @@ class _CompareScreenState extends State<CompareScreen> {
       child: Column(
         children: <Widget>[
           //Age
-          Container(
-            color: Colors.grey[200],
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
+          Stack(
+                      children:[ Container(
+              color: Colors.grey[200],
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.purple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(
+                            StaticFunctions.getAge(widget.myPerson.birthday).toString(),
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                widget.myPerson.ageMin.round().toString(),
+                                style: agestyle,
+                              ),
+                              Text("-", style: agestyle),
+                              Text(widget.myPerson.ageMax.round().toString(), style: agestyle)
+                            ],
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ),
+                  
+                  Expanded(
+                      child: Container(
                     decoration: BoxDecoration(
                         border: Border(
-                      left: BorderSide(
+                      right: BorderSide(
                         width: 0.5,
                         color: Colors.purple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(
-                          StaticFunctions.getAge(widget.myPerson.birthday).toString(),
+                          StaticFunctions.getAge(widget.person.birthday).toString(),
                           style: TextStyle(fontSize: 18),
                         ),
                         Row(
                           children: <Widget>[
                             Text(
-                              widget.myPerson.ageMin.round().toString(),
+                              widget.person.ageMin.round().toString(),
                               style: agestyle,
                             ),
                             Text("-", style: agestyle),
-                            Text(widget.myPerson.ageMax.round().toString(), style: agestyle)
+                            Text(widget.person.ageMax.round().toString(), style: agestyle)
                           ],
                         ),
                       ]),
                     ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(
-                        StaticFunctions.getAge(widget.person.birthday).toString(),
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            widget.person.ageMin.round().toString(),
-                            style: agestyle,
-                          ),
-                          Text("-", style: agestyle),
-                          Text(widget.person.ageMax.round().toString(), style: agestyle)
-                        ],
-                      ),
-                    ]),
-                  ),
-                ))
-              ],
-            ),
+                  ))
+                ],
+              ),
+            ),Positioned.fill( child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.bitcoin))),],
           ),
           //Country
           Container(
@@ -140,7 +155,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(StaticFunctions.getCountry(widget.myPerson.country)),
                         SizedBox(
@@ -171,7 +186,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       Text(StaticFunctions.getCountry(widget.person.country)),
                       SizedBox(
@@ -204,7 +219,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(StaticFunctions.getArea(widget.myPerson.area)),
                         SizedBox(
@@ -230,7 +245,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       Text(StaticFunctions.getArea(widget.person.area)),
                       SizedBox(
@@ -263,7 +278,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(StaticFunctions.getStatus(widget.myPerson.status)),
                         SizedBox(
@@ -290,7 +305,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       Text(StaticFunctions.getStatus(widget.person.status)),
                       SizedBox(
@@ -323,7 +338,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(StaticFunctions.getDos(widget.myPerson.dos)),
                         SizedBox(
@@ -349,7 +364,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       Text(StaticFunctions.getDos(widget.person.dos)),
                       SizedBox(
@@ -382,7 +397,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(StaticFunctions.getHashkafa(widget.myPerson.hashkafa)),
                         SizedBox(
@@ -410,7 +425,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       Text(StaticFunctions.getHashkafa(widget.person.hashkafa)),
                       SizedBox(
@@ -443,7 +458,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(StaticFunctions.getEda(widget.myPerson.eda)),
                         SizedBox(
@@ -469,7 +484,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       Text(StaticFunctions.getEda(widget.person.eda)),
                       SizedBox(
@@ -502,7 +517,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(StaticFunctions.getSmoke(widget.myPerson.smoke)),
                         SizedBox(
@@ -528,7 +543,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       Text(StaticFunctions.getSmoke(widget.person.smoke)),
                       SizedBox(
@@ -561,7 +576,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(
                           widget.myPerson.height.toString(),
@@ -591,7 +606,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       Text(
                         widget.person.height.toString(),
@@ -628,7 +643,7 @@ class _CompareScreenState extends State<CompareScreen> {
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         SizedBox(
                             width: 60,
@@ -672,7 +687,7 @@ class _CompareScreenState extends State<CompareScreen> {
                     ),
                   )),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                       SizedBox(
                           width: 60,
@@ -712,6 +727,7 @@ class _CompareScreenState extends State<CompareScreen> {
       ),
     );
   }
+
 
   @override
   void didChangeDependencies() async {
