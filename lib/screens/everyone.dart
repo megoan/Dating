@@ -157,6 +157,7 @@ class _EveryoneState extends State<Everyone> {
                                 countryState = state;
                                 return InputDecorator(
                                   decoration: InputDecoration(
+                                   // border: OutlineInputBorder(borderRadius:BorderRadius.all(Radius.circular(100.0)) ),
                                     // icon: const Icon(Icons.location_on),
                                     // labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
                                     errorText: state.hasError ? state.errorText : null,
