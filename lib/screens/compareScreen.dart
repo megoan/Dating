@@ -45,18 +45,24 @@ class _CompareScreenState extends State<CompareScreen> {
                   mainSelected ? widget.myPerson.profileImages[0] : widget.person.profileImages[0],
                 ))));
   }
-  Widget circleIcon(IconData _icon){
+
+  Widget circleIcon(IconData _icon) {
     return new Container(
-          //width: 50.0,
-          //height: 50.0,
-          padding: const EdgeInsets.all(7.0),
-          decoration: new BoxDecoration(
-            shape: BoxShape.circle,
-           
-            color: Colors.purple,
-            
-          ),child: FaIcon(_icon,color: Colors.white,size: 16,),);
+      //width: 50.0,
+      //height: 50.0,
+      padding: const EdgeInsets.all(8.0),
+      decoration: new BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.deepPurple,
+      ),
+      child: FaIcon(
+        _icon,
+        color: Colors.white,
+        size: 14,
+      ),
+    );
   }
+
   Widget personalDetails(screenSize, {bool mainSelected: true}) {
     TextStyle agestyle = TextStyle(
         fontSize: 17,
@@ -72,7 +78,174 @@ class _CompareScreenState extends State<CompareScreen> {
         children: <Widget>[
           //Age
           Stack(
-                      children:[ Container(
+            children: [
+              Container(
+                color: Colors.grey[200],
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border(
+                          left: BorderSide(
+                            width: 0.5,
+                            color: Colors.deepPurple,
+                          ),
+                        )),
+                        child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 12.0,
+                              bottom: 12.0,
+                              left: 10.0,
+                              right: 15.0,
+                            ),
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                              Text(
+                                StaticFunctions.getAge(widget.myPerson.birthday).toString(),
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              SizedBox(
+                                width: 60,
+                                child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        widget.myPerson.ageMin.round().toString(),
+                                        style: agestyle,
+                                      ),
+                                      Text("-", style: agestyle),
+                                      Text(widget.myPerson.ageMax.round().toString(), style: agestyle)
+                                    ],
+                                  ),
+                                ]),
+                              ),
+                            ])),
+                      ),
+                    ),
+                    Expanded(
+                        child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        right: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 5.0,
+                          right: 20.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(
+                            StaticFunctions.getAge(widget.person.birthday).toString(),
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          SizedBox(
+                              width: 60,
+                              child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      widget.person.ageMin.round().toString(),
+                                      style: agestyle,
+                                    ),
+                                    Text("-", style: agestyle),
+                                    Text(widget.person.ageMax.round().toString(), style: agestyle)
+                                  ],
+                                )
+                              ])),
+                        ]),
+                      ),
+                    ))
+                  ],
+                ),
+              ),
+              Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.birthdayCake))),
+            ],
+          ),
+          //Country
+          Stack(children: [
+            Container(
+              color: Colors.white,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(StaticFunctions.getCountry(widget.myPerson.country)),
+                          SizedBox(
+                            width: 60,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.myPerson.countrys
+                                    .map((e) => (Text(StaticFunctions.getCountry(e) + ',',
+                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red))))
+                                    .toList()),
+                          )
+                          // Text(
+                          //   widget.myPerson.countrys.map((country) => StaticFunctions.getCountry(country)).toList().join('\n'),
+                          //   style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red),
+                          // ),
+                        ]),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                      right: BorderSide(
+                        width: 0.5,
+                        color: Colors.deepPurple,
+                      ),
+                    )),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                        Text(StaticFunctions.getCountry(widget.person.country)),
+                        SizedBox(
+                            width: 60,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.person.countrys
+                                    .map((e) => (Text(StaticFunctions.getCountry(e) + ',',
+                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.countrys.contains(widget.myPerson.country)) ? Colors.green : Colors.red))))
+                                    .toList()))
+                      ]),
+                    ),
+                  ))
+                ],
+              ),
+            ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.globeEurope))),
+          ]),
+          //Area
+          Stack(children: [
+            Container(
               color: Colors.grey[200],
               child: Row(
                 children: <Widget>[
@@ -82,652 +255,641 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.purple,
+                          color: Colors.deepPurple,
                         ),
                       )),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
                         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                          Text(
-                            StaticFunctions.getAge(widget.myPerson.birthday).toString(),
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Text(
-                                widget.myPerson.ageMin.round().toString(),
-                                style: agestyle,
-                              ),
-                              Text("-", style: agestyle),
-                              Text(widget.myPerson.ageMax.round().toString(), style: agestyle)
-                            ],
-                          ),
+                          Text(StaticFunctions.getArea(widget.myPerson.area)),
+                          SizedBox(
+                              width: 60,
+                              child: (Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: widget.myPerson.areas
+                                      .map((e) => (Text(StaticFunctions.getArea(e) + ',',
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red))))
+                                      .toList())))
                         ]),
                       ),
                     ),
                   ),
-                  
                   Expanded(
                       child: Container(
                     decoration: BoxDecoration(
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.purple,
+                        color: Colors.deepPurple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(
-                          StaticFunctions.getAge(widget.person.birthday).toString(),
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              widget.person.ageMin.round().toString(),
-                              style: agestyle,
-                            ),
-                            Text("-", style: agestyle),
-                            Text(widget.person.ageMax.round().toString(), style: agestyle)
-                          ],
-                        ),
+                        Text(StaticFunctions.getArea(widget.person.area)),
+                        SizedBox(
+                            width: 60,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.person.areas
+                                    .map((e) => (Text(StaticFunctions.getArea(e) + ',',
+                                        maxLines: 3, style: TextStyle(color: (widget.person.countrys.contains(widget.myPerson.country)) ? Colors.green : Colors.red))))
+                                    .toList()))
                       ]),
                     ),
                   ))
                 ],
               ),
-            ),Positioned.fill( child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.bitcoin))),],
-          ),
-          //Country
-          Container(
-            color: Colors.white,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                      left: BorderSide(
-                        width: 0.5,
-                        color: Colors.purple,
-                      ),
-                    )),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(StaticFunctions.getCountry(widget.myPerson.country)),
-                        SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.myPerson.countrys
-                                  .map((e) => (Text(StaticFunctions.getCountry(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red))))
-                                  .toList()),
-                        )
-                        // Text(
-                        //   widget.myPerson.countrys.map((country) => StaticFunctions.getCountry(country)).toList().join('\n'),
-                        //   style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red),
-                        // ),
-                      ]),
-                    ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(StaticFunctions.getCountry(widget.person.country)),
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.person.countrys
-                                  .map((e) => (Text(StaticFunctions.getCountry(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.countrys.contains(widget.myPerson.country)) ? Colors.green : Colors.red))))
-                                  .toList()))
-                    ]),
-                  ),
-                ))
-              ],
             ),
-          ),
-          //Area
-          Container(
-            color: Colors.grey[200],
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border(
-                      left: BorderSide(
-                        width: 0.5,
-                        color: Colors.purple,
-                      ),
-                    )),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(StaticFunctions.getArea(widget.myPerson.area)),
-                        SizedBox(
-                            width: 60,
-                            child: (Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: widget.myPerson.areas
-                                    .map((e) => (Text(StaticFunctions.getArea(e),
-                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red))))
-                                    .toList())))
-                      ]),
-                    ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(StaticFunctions.getArea(widget.person.area)),
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.person.areas
-                                  .map((e) => (Text(StaticFunctions.getArea(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.countrys.contains(widget.myPerson.country)) ? Colors.green : Colors.red))))
-                                  .toList()))
-                    ]),
-                  ),
-                ))
-              ],
-            ),
-          ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.city))),
+          ]),
           //Status
-          Container(
-            color: Colors.white,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
+          Stack(children: [
+            Container(
+              color: Colors.white,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(StaticFunctions.getStatus(widget.myPerson.status)),
+                          SizedBox(
+                            width: 60,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.myPerson.statuses
+                                    .map((e) => (Text(StaticFunctions.getStatus(e) + ',',
+                                        maxLines: 3, style: TextStyle(color: (widget.myPerson.statuses.contains(widget.person.status)) ? Colors.green : Colors.red))))
+                                    .toList()),
+                          )
+                        ]),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
                     decoration: BoxDecoration(
                         border: Border(
-                      left: BorderSide(
+                      right: BorderSide(
                         width: 0.5,
-                        color: Colors.purple,
+                        color: Colors.deepPurple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(StaticFunctions.getStatus(widget.myPerson.status)),
+                        Text(StaticFunctions.getStatus(widget.person.status)),
                         SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.myPerson.statuses
-                                  .map((e) => (Text(StaticFunctions.getStatus(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.myPerson.statuses.contains(widget.person.status)) ? Colors.green : Colors.red))))
-                                  .toList()),
-                        )
+                            width: 60,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.person.statuses
+                                    .map((e) => (Text(StaticFunctions.getStatus(e) + ',',
+                                        maxLines: 3, style: TextStyle(color: (widget.person.statuses.contains(widget.myPerson.status)) ? Colors.green : Colors.red))))
+                                    .toList()))
                       ]),
                     ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(StaticFunctions.getStatus(widget.person.status)),
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.person.statuses
-                                  .map((e) => (Text(StaticFunctions.getStatus(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.statuses.contains(widget.myPerson.status)) ? Colors.green : Colors.red))))
-                                  .toList()))
-                    ]),
-                  ),
-                ))
-              ],
+                  ))
+                ],
+              ),
             ),
-          ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.userFriends))),
+          ]),
           //Religious
-          Container(
-            color: Colors.grey[200],
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
+          Stack(children: [
+            Container(
+              color: Colors.grey[200],
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(StaticFunctions.getDos(widget.myPerson.dos)),
+                          SizedBox(
+                              width: 60,
+                              child: (Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: widget.myPerson.doses
+                                      .map((e) => (Text(StaticFunctions.getDos(e) + ',',
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.doses.contains(widget.person.dos)) ? Colors.green : Colors.red))))
+                                      .toList())))
+                        ]),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
                     decoration: BoxDecoration(
                         border: Border(
-                      left: BorderSide(
+                      right: BorderSide(
                         width: 0.5,
-                        color: Colors.purple,
+                        color: Colors.deepPurple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(StaticFunctions.getDos(widget.myPerson.dos)),
+                        Text(StaticFunctions.getDos(widget.person.dos)),
                         SizedBox(
                             width: 60,
-                            child: (Column(
+                            child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: widget.myPerson.doses
-                                    .map((e) => (Text(StaticFunctions.getDos(e),
-                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.myPerson.doses.contains(widget.person.dos)) ? Colors.green : Colors.red))))
-                                    .toList())))
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.person.doses
+                                    .map((e) =>
+                                        (Text(StaticFunctions.getDos(e) + ',', maxLines: 3, style: TextStyle(color: (widget.person.doses.contains(widget.myPerson.dos)) ? Colors.green : Colors.red))))
+                                    .toList()))
                       ]),
                     ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(StaticFunctions.getDos(widget.person.dos)),
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.person.doses
-                                  .map((e) => (Text(StaticFunctions.getDos(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.doses.contains(widget.myPerson.dos)) ? Colors.green : Colors.red))))
-                                  .toList()))
-                    ]),
-                  ),
-                ))
-              ],
+                  ))
+                ],
+              ),
             ),
-          ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.pray))),
+          ]),
           //Hashkafa
-          Container(
-            color: Colors.white,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
+          Stack(children: [
+            Container(
+              color: Colors.white,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(StaticFunctions.getHashkafa(widget.myPerson.hashkafa)),
+                          SizedBox(
+                              width: 60,
+                              child: (Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: widget.myPerson.hashkafas
+                                      .map((e) => (Text(StaticFunctions.getHashkafa(e) + ',',
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.hashkafas.contains(widget.person.hashkafa)) ? Colors.green : Colors.red))))
+                                      .toList())))
+                        ]),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
                     decoration: BoxDecoration(
                         border: Border(
-                      left: BorderSide(
+                      right: BorderSide(
                         width: 0.5,
-                        color: Colors.purple,
+                        color: Colors.deepPurple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(StaticFunctions.getHashkafa(widget.myPerson.hashkafa)),
+                        Text(StaticFunctions.getHashkafa(widget.person.hashkafa)),
                         SizedBox(
                             width: 60,
-                            child: (Column(
+                            child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: widget.myPerson.hashkafas
-                                    .map((e) => (Text(StaticFunctions.getHashkafa(e),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(color: (widget.myPerson.hashkafas.contains(widget.person.hashkafa)) ? Colors.green : Colors.red))))
-                                    .toList())))
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.person.hashkafas
+                                    .map((e) => (Text(StaticFunctions.getHashkafa(e) + ',',
+                                        maxLines: 3, style: TextStyle(color: (widget.person.hashkafas.contains(widget.myPerson.hashkafa)) ? Colors.green : Colors.red))))
+                                    .toList()))
                       ]),
                     ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(StaticFunctions.getHashkafa(widget.person.hashkafa)),
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.person.hashkafas
-                                  .map((e) => (Text(StaticFunctions.getHashkafa(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.hashkafas.contains(widget.myPerson.hashkafa)) ? Colors.green : Colors.red))))
-                                  .toList()))
-                    ]),
-                  ),
-                ))
-              ],
+                  ))
+                ],
+              ),
             ),
-          ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.synagogue))),
+          ]),
           //Eda
-          Container(
-            color: Colors.grey[200],
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
+          Stack(children: [
+            Container(
+              color: Colors.grey[200],
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(StaticFunctions.getEda(widget.myPerson.eda)),
+                          SizedBox(
+                              width: 60,
+                              child: (Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: widget.myPerson.edas
+                                      .map((e) =>
+                                          (Text(StaticFunctions.getEda(e) + ',', maxLines: 3, style: TextStyle(color: (widget.myPerson.edas.contains(widget.person.eda)) ? Colors.green : Colors.red))))
+                                      .toList())))
+                        ]),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
                     decoration: BoxDecoration(
                         border: Border(
-                      left: BorderSide(
+                      right: BorderSide(
                         width: 0.5,
-                        color: Colors.purple,
+                        color: Colors.deepPurple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(StaticFunctions.getEda(widget.myPerson.eda)),
+                        Text(StaticFunctions.getEda(widget.person.eda)),
                         SizedBox(
                             width: 60,
-                            child: (Column(
+                            child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: widget.myPerson.edas
-                                    .map((e) => (Text(StaticFunctions.getEda(e),
-                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.myPerson.edas.contains(widget.person.eda)) ? Colors.green : Colors.red))))
-                                    .toList())))
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.person.edas
+                                    .map((e) =>
+                                        (Text(StaticFunctions.getEda(e) + ',', maxLines: 3, style: TextStyle(color: (widget.person.edas.contains(widget.myPerson.eda)) ? Colors.green : Colors.red))))
+                                    .toList()))
                       ]),
                     ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(StaticFunctions.getEda(widget.person.eda)),
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.person.edas
-                                  .map((e) => (Text(StaticFunctions.getEda(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.edas.contains(widget.myPerson.eda)) ? Colors.green : Colors.red))))
-                                  .toList()))
-                    ]),
-                  ),
-                ))
-              ],
+                  ))
+                ],
+              ),
             ),
-          ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.starOfDavid))),
+          ]),
           //Smoking
-          Container(
-            color: Colors.white,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
+          Stack(children: [
+            Container(
+              color: Colors.white,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(StaticFunctions.getSmoke(widget.myPerson.smoke)),
+                          SizedBox(
+                              width: 60,
+                              child: (Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: widget.myPerson.smoking
+                                      .map((e) => (Text(StaticFunctions.getSmoke(e) + ',',
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.smoking.contains(widget.person.smoke)) ? Colors.green : Colors.red))))
+                                      .toList())))
+                        ]),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
                     decoration: BoxDecoration(
                         border: Border(
-                      left: BorderSide(
+                      right: BorderSide(
                         width: 0.5,
-                        color: Colors.purple,
+                        color: Colors.deepPurple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(StaticFunctions.getSmoke(widget.myPerson.smoke)),
+                        Text(StaticFunctions.getSmoke(widget.person.smoke)),
                         SizedBox(
                             width: 60,
-                            child: (Column(
+                            child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: widget.myPerson.smoking
-                                    .map((e) => (Text(StaticFunctions.getSmoke(e),
-                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.myPerson.smoking.contains(widget.person.smoke)) ? Colors.green : Colors.red))))
-                                    .toList())))
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: widget.person.smoking
+                                    .map((e) => (Text(StaticFunctions.getSmoke(e) + ',',
+                                        maxLines: 3, style: TextStyle(color: (widget.person.smoking.contains(widget.myPerson.smoke)) ? Colors.green : Colors.red))))
+                                    .toList()))
                       ]),
                     ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(StaticFunctions.getSmoke(widget.person.smoke)),
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: widget.person.smoking
-                                  .map((e) => (Text(StaticFunctions.getSmoke(e),
-                                      maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.smoking.contains(widget.myPerson.smoke)) ? Colors.green : Colors.red))))
-                                  .toList()))
-                    ]),
-                  ),
-                ))
-              ],
+                  ))
+                ],
+              ),
             ),
-          ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.smoking))),
+          ]),
           //height
-          Container(
-            color: Colors.grey[200],
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
+          Stack(children: [
+            Container(
+              color: Colors.grey[200],
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Text(
+                            widget.myPerson.height.toString(),
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          SizedBox(
+                              width: 60,
+                              child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      widget.myPerson.heightMin.toString(),
+                                      style: heightStyle,
+                                    ),
+                                    Text("-", style: heightStyle),
+                                    Text(widget.myPerson.heightMax.toString(), style: heightStyle)
+                                  ],
+                                )
+                              ])),
+                        ]),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
                     decoration: BoxDecoration(
                         border: Border(
-                      left: BorderSide(
+                      right: BorderSide(
                         width: 0.5,
-                        color: Colors.purple,
+                        color: Colors.deepPurple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
                         Text(
-                          widget.myPerson.height.toString(),
+                          widget.person.height.toString(),
                           style: TextStyle(fontSize: 18),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              widget.myPerson.heightMin.toString(),
-                              style: heightStyle,
-                            ),
-                            Text("-", style: heightStyle),
-                            Text(widget.myPerson.heightMax.toString(), style: heightStyle)
-                          ],
-                        ),
+                        SizedBox(
+                            width: 60,
+                            child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    widget.person.heightMin.toString(),
+                                    style: heightStyle,
+                                  ),
+                                  Text("-", style: heightStyle),
+                                  Text(widget.person.heightMax.toString(), style: heightStyle)
+                                ],
+                              )
+                            ])),
                       ]),
                     ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      Text(
-                        widget.person.height.toString(),
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text(
-                            widget.person.heightMin.toString(),
-                            style: heightStyle,
-                          ),
-                          Text("-", style: heightStyle),
-                          Text(widget.person.heightMax.toString(), style: heightStyle)
-                        ],
-                      ),
-                    ]),
-                  ),
-                ))
-              ],
+                  ))
+                ],
+              ),
             ),
-          ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.ruler))),
+          ]),
           //sherut
-          Container(
-            color: Colors.white,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
+          Stack(children: [
+            Container(
+              color: Colors.white,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                        left: BorderSide(
+                          width: 0.5,
+                          color: Colors.deepPurple,
+                        ),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12.0,
+                          bottom: 12.0,
+                          left: 10.0,
+                          right: 15.0,
+                        ),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: widget.myPerson.gender == Gender.MALE
+                                ? widget.myPerson.mySherutBoy != null ? widget.myPerson.mySherutBoy.map((e) => Text(StaticFunctions.getSherutBoy(e) + ',', maxLines: 3)).toList() : []
+                                : widget.myPerson.mySherutGirl != null ? widget.myPerson.mySherutGirl.map((e) => Text(StaticFunctions.getSherutGirl(e) + ',', maxLines: 3)).toList() : [],
+                          ),
+                          SizedBox(
+                              width: 60,
+                              child: (Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: widget.myPerson.gender == Gender.MALE
+                                    ? widget.myPerson.thereSherutGirl
+                                        .map((e) => Text(
+                                              StaticFunctions.getSherutGirl(e) + ',',
+                                              maxLines: 3,
+                                              style: TextStyle(color: (widget.person.thereSherutBoy.contains(e) ? Colors.green : Colors.red)),
+                                            ))
+                                        .toList()
+                                    : widget.myPerson.thereSherutBoy
+                                        .map((e) => Text(
+                                              StaticFunctions.getSherutBoy(e) + ',',
+                                              maxLines: 3,
+                                              style: TextStyle(color: (widget.person.thereSherutGirl.contains(e) ? Colors.green : Colors.red)),
+                                            ))
+                                        .toList(),
+                              )))
+                        ]),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
                     decoration: BoxDecoration(
                         border: Border(
-                      left: BorderSide(
+                      right: BorderSide(
                         width: 0.5,
-                        color: Colors.purple,
+                        color: Colors.deepPurple,
                       ),
                     )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+                      padding: const EdgeInsets.only(
+                        top: 12.0,
+                        bottom: 12.0,
+                        left: 5.0,
+                        right: 20.0,
+                      ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        SizedBox(
-                            width: 60,
-                            child: (Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: widget.myPerson.gender == Gender.MALE
-                                  ? widget.myPerson.mySherutBoy != null ? widget.myPerson.mySherutBoy.map((e) => Text(StaticFunctions.getSherutBoy(e))).toList() : []
-                                  : widget.myPerson.mySherutGirl != null ? widget.myPerson.mySherutGirl.map((e) => Text(StaticFunctions.getSherutGirl(e))).toList() : [],
-                            ))),
-                        SizedBox(
-                            width: 60,
-                            child: (Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: widget.myPerson.gender == Gender.MALE
-                                  ? widget.myPerson.thereSherutGirl
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: widget.person.gender == Gender.MALE
+                              ? widget.person.mySherutBoy != null
+                                  ? widget.person.mySherutBoy
                                       .map((e) => Text(
-                                            StaticFunctions.getSherutGirl(e),
-                                            style: TextStyle(color: (widget.person.thereSherutBoy.contains(e) ? Colors.green : Colors.red)),
+                                            StaticFunctions.getSherutBoy(e) + ',',
+                                            maxLines: 3,
                                           ))
                                       .toList()
-                                  : widget.myPerson.thereSherutBoy
+                                  : []
+                              : widget.person.mySherutGirl != null
+                                  ? widget.person.mySherutGirl
                                       .map((e) => Text(
-                                            StaticFunctions.getSherutBoy(e),
-                                            style: TextStyle(color: (widget.person.thereSherutGirl.contains(e) ? Colors.green : Colors.red)),
+                                            StaticFunctions.getSherutGirl(e) + ',',
+                                            maxLines: 3,
+                                          ))
+                                      .toList()
+                                  : [],
+                        ),
+                        SizedBox(
+                            width: 60,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: widget.person.gender == Gender.MALE
+                                  ? widget.person.thereSherutGirl
+                                      .map((e) => Text(
+                                            StaticFunctions.getSherutGirl(e) + ',',
+                                            maxLines: 3,
+                                            style: TextStyle(color: (widget.myPerson.thereSherutBoy.contains(e) ? Colors.green : Colors.red)),
+                                          ))
+                                      .toList()
+                                  : widget.person.thereSherutBoy
+                                      .map((e) => Text(
+                                            StaticFunctions.getSherutBoy(e) + ',',
+                                            maxLines: 3,
+                                            style: TextStyle(color: (widget.myPerson.thereSherutGirl.contains(e) ? Colors.green : Colors.red)),
                                           ))
                                       .toList(),
-                            )))
+                            ))
                       ]),
                     ),
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(
-                    right: BorderSide(
-                      width: 0.5,
-                      color: Colors.purple,
-                    ),
-                  )),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: widget.person.gender == Gender.MALE
-                                ? widget.person.mySherutBoy != null ? widget.person.mySherutBoy.map((e) => Text(StaticFunctions.getSherutBoy(e))).toList() : []
-                                : widget.person.mySherutGirl != null ? widget.person.mySherutGirl.map((e) => Text(StaticFunctions.getSherutGirl(e))).toList() : [],
-                          )),
-                      SizedBox(
-                          width: 60,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: widget.person.gender == Gender.MALE
-                                ? widget.person.thereSherutGirl
-                                    .map((e) => Text(
-                                          StaticFunctions.getSherutGirl(e),
-                                          style: TextStyle(color: (widget.myPerson.thereSherutBoy.contains(e) ? Colors.green : Colors.red)),
-                                        ))
-                                    .toList()
-                                : widget.person.thereSherutBoy
-                                    .map((e) => Text(
-                                          StaticFunctions.getSherutBoy(e),
-                                          style: TextStyle(color: (widget.myPerson.thereSherutGirl.contains(e) ? Colors.green : Colors.red)),
-                                        ))
-                                    .toList(),
-                          ))
-                    ]),
-                  ),
-                ))
-              ],
+                  ))
+                ],
+              ),
             ),
-          ),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.handHoldingHeart))),
+          ]),
         ],
       ),
     );
   }
-
 
   @override
   void didChangeDependencies() async {
@@ -802,15 +964,33 @@ class _CompareScreenState extends State<CompareScreen> {
                           borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 20.0, bottom: 25),
-                          child: Text(
-                            widget.myPerson.firstName,
-                            style: TextStyle(fontSize: 25, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                          padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                widget.myPerson.firstName,
+                                style: TextStyle(fontSize: 25, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 18.0,
+                          right: 15.0,),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(widget.myPerson.gender == Gender.MALE ? "Him" : "her", style: TextStyle(fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
+                                    Text("Desire", style: TextStyle(fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),
                     ),
-                    Container(width: 1, color: Colors.purple),
+                    Container(width: 1, color: Colors.deepPurple),
                     Expanded(
                       child: Container(
                         alignment: Alignment.center,
@@ -819,17 +999,38 @@ class _CompareScreenState extends State<CompareScreen> {
                           borderRadius: BorderRadius.only(topRight: Radius.circular(30)),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 20.0, bottom: 25),
-                          child: Text(
-                            widget.person.firstName,
-                            style: TextStyle(fontSize: 25, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                          padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                widget.person.firstName,
+                                style: TextStyle(fontSize: 25, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  
+                                  left: 12.0,
+                                  right: 20.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(widget.person.gender == Gender.MALE ? "Him" : "her", style: TextStyle(fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
+                                    Text("Desire", style: TextStyle(fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ),
                     )
                   ]),
                   personalDetails(screenSize, mainSelected: mainSelected),
-                  
+
                   //End
                   Row(children: [
                     Expanded(
@@ -841,7 +1042,7 @@ class _CompareScreenState extends State<CompareScreen> {
                             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30)),
                           )),
                     ),
-                     Container(width: 1, color: Colors.purple),
+                    Container(width: 1, color: Colors.deepPurple),
                     Expanded(
                       child: Container(
                         height: 20,
