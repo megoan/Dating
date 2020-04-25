@@ -305,7 +305,7 @@ class _AddPersonState extends State<AddPerson> {
                 });
               },
               onStepCancel: () {
-                print("You are clicking the cancel button.");
+               Navigator.of(context).pop();
               },
               onStepContinue: () {
                 if (_index == 0)
@@ -376,7 +376,6 @@ class _AddPersonState extends State<AddPerson> {
                                     ),
                                   ],
                                 ),
-
                                 Column(
                                   children: <Widget>[
                                     // Padding(
@@ -435,7 +434,6 @@ class _AddPersonState extends State<AddPerson> {
                                     )
                                   ],
                                 ),
-
                                 //FIRST NAME
                                 new TextFormField(
                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
@@ -772,7 +770,6 @@ class _AddPersonState extends State<AddPerson> {
                                     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                                   },
                                 ),
-
                                 //ABOUT ME SHORT
                                 new TextFormField(
                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.short != null ? personProvider.newPerson.short : "",
