@@ -6,6 +6,7 @@ import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/themes/appTheme.dart';
 import 'package:dating/widgets/photoPicker.dart';
+import 'package:dating/widgets/selectAndMultiSelectChips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -305,7 +306,7 @@ class _AddPersonState extends State<AddPerson> {
                 });
               },
               onStepCancel: () {
-               Navigator.of(context).pop();
+                Navigator.of(context).pop();
               },
               onStepContinue: () {
                 if (_index == 0)
@@ -323,59 +324,14 @@ class _AddPersonState extends State<AddPerson> {
                   content: SingleChildScrollView(
                     child: Container(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Form(
                             key: _formKey,
                             autovalidate: false,
                             child: new Column(
                               children: <Widget>[
-                                Stack(
-                                  alignment: Alignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      width: width * 0.5,
-                                      height: 100,
-                                      child: Row(
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                print("male");
-                                                setState(() {
-                                                  sSelected = Gender.MALE;
-                                                });
-                                                personProvider.newPerson.gender = Gender.MALE;
-                                              },
-                                              child: Container(
-                                                color: Colors.transparent,
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: GestureDetector(
-                                                onTap: () {
-                                                  print("female");
-                                                  setState(() {
-                                                    sSelected = Gender.FEMALE;
-                                                  });
-                                                  personProvider.newPerson.gender = Gender.FEMALE;
-                                                },
-                                                child: Container(
-                                                  color: Colors.transparent,
-                                                )),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    IgnorePointer(
-                                      ignoring: true,
-                                      child: Container(
-                                        width: width * 0.5,
-                                        child: sSelected == Gender.FEMALE ? Image.asset("assets/images/girlpressed.png") : Image.asset("assets/images/boy_pressed.png"),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                    
                                 Column(
                                   children: <Widget>[
                                     // Padding(
@@ -383,83 +339,150 @@ class _AddPersonState extends State<AddPerson> {
                                     //   child: Align(
                                     //       alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft, child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add at least one image!'))),
                                     // ),
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: PhotoPicker(
-                                        imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
-                                            ? personProvider.newPerson.profileImages[0]
-                                            : null,
-                                        image: _image1,
-                                        imageCallBack: imageCallBack1,
-                                        photoNum: 1,
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        
+                                          PhotoPicker(
+                                            imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
+                                                ? personProvider.newPerson.profileImages[0]
+                                                : null,
+                                            image: _image1,
+                                            imageCallBack: imageCallBack1,
+                                            photoNum: 1,
+                                          ),
+                                        
+                                        Container(
+                                          width: width*0.5-24,
+                                          child: Column(children: [
+                                                    
+                                                       //FIRST NAME
+                                 Column(
+                                   children: <Widget>[
+                                     TextFormField(
+                                        initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
+                                        decoration: InputDecoration(
+                                          icon: const Icon(Icons.person),
+                                          hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
+                                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
+                                        ),
+                                        inputFormatters: [new LengthLimitingTextInputFormatter(30)],
+                                        validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
+                                        onSaved: (val) => personProvider.newPerson.firstName = val,
+                                ),
+                                       //LAST NAME
+                                 TextFormField(
+                                    initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
+                                    decoration: InputDecoration(
+                                      icon: const Icon(Icons.person),
+                                      hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
+                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
+                                    ),
+                                    inputFormatters: [new LengthLimitingTextInputFormatter(30)],
+                                    validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
+                                    onSaved: (val) => personProvider.newPerson.lastName = val,
+                                ),
+                                       Stack(
+                                  alignment: Alignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      width: width * 0.3,
+                                      height: 100,
+                                      child: Row(
+                                          children: <Widget>[
+                                            Expanded(
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  print("male");
+                                                  setState(() {
+                                                    sSelected = Gender.MALE;
+                                                  });
+                                                  personProvider.newPerson.gender = Gender.MALE;
+                                                },
+                                                child: Container(
+                                                  color: Colors.transparent,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: GestureDetector(
+                                                  onTap: () {
+                                                    print("female");
+                                                    setState(() {
+                                                      sSelected = Gender.FEMALE;
+                                                    });
+                                                    personProvider.newPerson.gender = Gender.FEMALE;
+                                                  },
+                                                  child: Container(
+                                                    color: Colors.transparent,
+                                                  )),
+                                            )
+                                          ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 20,
+                                    IgnorePointer(
+                                      ignoring: true,
+                                      child: Container(
+                                          width: width * 0.3,
+                                          child: sSelected == Gender.FEMALE ? Image.asset("assets/images/girlpressed.png") : Image.asset("assets/images/boy_pressed.png"),
+                                      ),
                                     ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        // PhotoPicker(
-                                        //   imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
-                                        //       ? personProvider.newPerson.profileImages[0]
-                                        //       : null,
-                                        //   image: _image2,
-                                        //   imageCallBack: imageCallBack2,
-                                        //   photoNum: 2,
-                                        //   small: true,
-                                        // ),
-                                        PhotoPicker(
-                                          imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
-                                              ? personProvider.newPerson.profileImages[0]
-                                              : null,
-                                          image: _image3,
-                                          imageCallBack: imageCallBack3,
-                                          photoNum: 3,
-                                          small: true,
-                                        ),
-                                        PhotoPicker(
-                                          imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
-                                              ? personProvider.newPerson.profileImages[0]
-                                              : null,
-                                          image: _image4,
-                                          imageCallBack: imageCallBack4,
-                                          photoNum: 4,
-                                          small: true,
+                                  ],
+                                ),
+                                   ]
+                                   
+                                  ,
+                                 ),
+                              
+                               
+                                          ]),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 40,
-                                    )
+                                    // SizedBox(
+                                    //   height: 20,
+                                    // ),
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    //   children: <Widget>[
+                                    //     // PhotoPicker(
+                                    //     //   imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
+                                    //     //       ? personProvider.newPerson.profileImages[0]
+                                    //     //       : null,
+                                    //     //   image: _image2,
+                                    //     //   imageCallBack: imageCallBack2,
+                                    //     //   photoNum: 2,
+                                    //     //   small: true,
+                                    //     // ),
+                                    //     PhotoPicker(
+                                    //       imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
+                                    //           ? personProvider.newPerson.profileImages[0]
+                                    //           : null,
+                                    //       image: _image3,
+                                    //       imageCallBack: imageCallBack3,
+                                    //       photoNum: 3,
+                                    //       small: true,
+                                    //     ),
+                                    //     PhotoPicker(
+                                    //       imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
+                                    //           ? personProvider.newPerson.profileImages[0]
+                                    //           : null,
+                                    //       image: _image4,
+                                    //       imageCallBack: imageCallBack4,
+                                    //       photoNum: 4,
+                                    //       small: true,
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                    // SizedBox(
+                                    //   height: 40,
+                                    // )
                                   ],
                                 ),
-                                //FIRST NAME
-                                new TextFormField(
-                                  initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
-                                  decoration: InputDecoration(
-                                    icon: const Icon(Icons.person),
-                                    hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
-                                    labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
-                                  ),
-                                  inputFormatters: [new LengthLimitingTextInputFormatter(30)],
-                                  validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                  onSaved: (val) => personProvider.newPerson.firstName = val,
-                                ),
-                                //LAST NAME
-                                new TextFormField(
-                                  initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
-                                  decoration: InputDecoration(
-                                    icon: const Icon(Icons.person),
-                                    hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
-                                    labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
-                                  ),
-                                  inputFormatters: [new LengthLimitingTextInputFormatter(30)],
-                                  validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                  onSaved: (val) => personProvider.newPerson.lastName = val,
-                                ),
+                
                                 //BIRTH DAY
-                                new Row(children: <Widget>[
+                                  new Row(children: <Widget>[
                                   new Expanded(
                                       child: new TextFormField(
                                     decoration: new InputDecoration(
@@ -487,40 +510,7 @@ class _AddPersonState extends State<AddPerson> {
                                 new FormField<Country>(
                                   builder: (FormFieldState<Country> state) {
                                     countryState = state;
-                                    return InputDecorator(
-                                      decoration: InputDecoration(
-                                        icon: const Icon(Icons.location_on),
-                                        labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
-                                        errorText: state.hasError ? state.errorText : null,
-                                      ),
-                                      isEmpty: _country == null,
-                                      child: new DropdownButtonHideUnderline(
-                                        child: Listener(
-                                          onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                          child: new DropdownButton<Country>(
-                                            value: _country,
-                                            isDense: true,
-                                            onChanged: (Country newValue) {
-                                              // map1["date"]= {newValue.toString():state};
-                                              //lll.add(state);
-                                              countryValue = newValue;
-                                              map1.putIfAbsent(newValue, () => state);
-                                              setState(() {
-                                                personProvider.newPerson.country = newValue;
-                                                _country = newValue;
-                                                state.didChange(newValue);
-                                              });
-                                            },
-                                            items: Country.values.map((Country value) {
-                                              return new DropdownMenuItem<Country>(
-                                                value: value,
-                                                child: new Text(StaticFunctions.getCountry(value)),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    return SelectChip(Country.values, (country) => _country = country, pickedValue: _country);
                                   },
                                   validator: (val) {
                                     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -531,40 +521,7 @@ class _AddPersonState extends State<AddPerson> {
                                   new FormField<Area>(
                                     builder: (FormFieldState<Area> state) {
                                       areaState = state;
-                                      return InputDecorator(
-                                        decoration: InputDecoration(
-                                          icon: const Icon(Icons.location_on),
-                                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Area'),
-                                          errorText: state.hasError ? state.errorText : null,
-                                        ),
-                                        isEmpty: _area == null,
-                                        child: new DropdownButtonHideUnderline(
-                                          child: Listener(
-                                            onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                            child: new DropdownButton<Area>(
-                                              value: _area,
-                                              isDense: true,
-                                              onChanged: (Area newValue) {
-                                                // map1["date"]= {newValue.toString():state};
-                                                //lll.add(state);
-                                                areaValue = newValue;
-                                                map1.putIfAbsent(newValue, () => state);
-                                                setState(() {
-                                                  personProvider.newPerson.area = newValue;
-                                                  _area = newValue;
-                                                  state.didChange(newValue);
-                                                });
-                                              },
-                                              items: Area.values.map((Area value) {
-                                                return new DropdownMenuItem<Area>(
-                                                  value: value,
-                                                  child: new Text(StaticFunctions.getArea(value)),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ),
-                                        ),
-                                      );
+                                      return SelectChip(Area.values, (area) => _area = area, pickedValue: _area);
                                     },
                                     validator: (val) {
                                       return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -574,37 +531,7 @@ class _AddPersonState extends State<AddPerson> {
                                 new FormField<Status>(
                                   builder: (FormFieldState<Status> state) {
                                     statusState = state;
-                                    return InputDecorator(
-                                      decoration: InputDecoration(
-                                        icon: const Icon(Icons.people),
-                                        labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
-                                        errorText: state.hasError ? state.errorText : null,
-                                      ),
-                                      isEmpty: _status == null,
-                                      child: new DropdownButtonHideUnderline(
-                                        child: Listener(
-                                          onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                          child: new DropdownButton<Status>(
-                                            value: _status,
-                                            isDense: true,
-                                            onChanged: (Status newValue) {
-                                              statusValue = newValue;
-                                              setState(() {
-                                                personProvider.newPerson.status = newValue;
-                                                _status = newValue;
-                                                state.didChange(newValue);
-                                              });
-                                            },
-                                            items: Status.values.map((Status value) {
-                                              return new DropdownMenuItem<Status>(
-                                                value: value,
-                                                child: new Text(StaticFunctions.getStatus(value)),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    return SelectChip(Status.values, (status) => _status = status, pickedValue: _status);
                                   },
                                   validator: (val) {
                                     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -614,37 +541,7 @@ class _AddPersonState extends State<AddPerson> {
                                 new FormField<Dos>(
                                   builder: (FormFieldState<Dos> state) {
                                     religiosState = state;
-                                    return InputDecorator(
-                                      decoration: InputDecoration(
-                                        icon: const Icon(Icons.call_split),
-                                        labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'),
-                                        errorText: state.hasError ? state.errorText : null,
-                                      ),
-                                      isEmpty: _religious == null,
-                                      child: new DropdownButtonHideUnderline(
-                                        child: Listener(
-                                          onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                          child: new DropdownButton<Dos>(
-                                            value: _religious,
-                                            isDense: true,
-                                            onChanged: (Dos newValue) {
-                                              religiosValue = newValue;
-                                              setState(() {
-                                                personProvider.newPerson.dos = newValue;
-                                                _religious = newValue;
-                                                state.didChange(newValue);
-                                              });
-                                            },
-                                            items: Dos.values.map((Dos value) {
-                                              return new DropdownMenuItem<Dos>(
-                                                value: value,
-                                                child: new Text(StaticFunctions.getDos(value)),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    return SelectChip(Dos.values, (val) => _religious = val, pickedValue: _religious);
                                   },
                                   validator: (val) {
                                     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -654,37 +551,7 @@ class _AddPersonState extends State<AddPerson> {
                                 new FormField<Hashkafa>(
                                   builder: (FormFieldState<Hashkafa> state) {
                                     hashkafaState = state;
-                                    return InputDecorator(
-                                      decoration: InputDecoration(
-                                        icon: const Icon(Icons.group_work),
-                                        labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa'),
-                                        errorText: state.hasError ? state.errorText : null,
-                                      ),
-                                      isEmpty: _hashkafa == null,
-                                      child: new DropdownButtonHideUnderline(
-                                        child: Listener(
-                                          onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                          child: new DropdownButton<Hashkafa>(
-                                            value: _hashkafa,
-                                            isDense: true,
-                                            onChanged: (Hashkafa newValue) {
-                                              hashkafaValue = newValue;
-                                              setState(() {
-                                                personProvider.newPerson.hashkafa = newValue;
-                                                _hashkafa = newValue;
-                                                state.didChange(newValue);
-                                              });
-                                            },
-                                            items: Hashkafa.values.map((Hashkafa value) {
-                                              return new DropdownMenuItem<Hashkafa>(
-                                                value: value,
-                                                child: new Text(StaticFunctions.getHashkafa(value)),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    return SelectChip(Hashkafa.values, (val) => _hashkafa = val, pickedValue: _hashkafa);
                                   },
                                   validator: (val) {
                                     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -694,37 +561,7 @@ class _AddPersonState extends State<AddPerson> {
                                 new FormField<Eda>(
                                   builder: (FormFieldState<Eda> state) {
                                     edaState = state;
-                                    return InputDecorator(
-                                      decoration: InputDecoration(
-                                        icon: const Icon(Icons.fastfood),
-                                        labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Eda'),
-                                        errorText: state.hasError ? state.errorText : null,
-                                      ),
-                                      isEmpty: _eda == null,
-                                      child: new DropdownButtonHideUnderline(
-                                        child: Listener(
-                                          onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                          child: new DropdownButton<Eda>(
-                                            value: _eda,
-                                            isDense: true,
-                                            onChanged: (Eda newValue) {
-                                              edaValue = newValue;
-                                              setState(() {
-                                                personProvider.newPerson.eda = newValue;
-                                                _eda = newValue;
-                                                state.didChange(newValue);
-                                              });
-                                            },
-                                            items: Eda.values.map((Eda value) {
-                                              return new DropdownMenuItem<Eda>(
-                                                value: value,
-                                                child: new Text(StaticFunctions.getEda(value)),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    return SelectChip(Eda.values, (val) => _eda = val, pickedValue: _eda);
                                   },
                                   validator: (val) {
                                     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -734,37 +571,7 @@ class _AddPersonState extends State<AddPerson> {
                                 new FormField<Smoke>(
                                   builder: (FormFieldState<Smoke> state) {
                                     smokeState = state;
-                                    return InputDecorator(
-                                      decoration: InputDecoration(
-                                        icon: const Icon(Icons.smoke_free),
-                                        labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking'),
-                                        errorText: state.hasError ? state.errorText : null,
-                                      ),
-                                      isEmpty: _smoke == null,
-                                      child: new DropdownButtonHideUnderline(
-                                        child: Listener(
-                                          onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                          child: new DropdownButton<Smoke>(
-                                            value: _smoke,
-                                            isDense: true,
-                                            onChanged: (Smoke newValue) {
-                                              smokeValue = newValue;
-                                              setState(() {
-                                                personProvider.newPerson.smoke = newValue;
-                                                _smoke = newValue;
-                                                state.didChange(newValue);
-                                              });
-                                            },
-                                            items: Smoke.values.map((Smoke value) {
-                                              return new DropdownMenuItem<Smoke>(
-                                                value: value,
-                                                child: new Text(StaticFunctions.getSmoke(value)),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    return SelectChip(Smoke.values, (val) => _smoke = val, pickedValue: _smoke);
                                   },
                                   validator: (val) {
                                     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -831,91 +638,76 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 30,
+                                ),
+                                Align(
+                                  alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
+                                  child: Text(
+                                    LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+                                  ),
                                 ),
                                 if (sSelected == Gender.FEMALE)
-                                  Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        // MyApp.getLocale()=="he"? const Alignment.topLeft:const Alignment.topRight,
-                                        Align(
-                                          alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                          child: Container(
-                                            padding: const EdgeInsets.only(top: 14.0),
-                                            child: Text(
-                                              LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
-                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                            ),
-                                          ),
-                                        ),
-                                        CheckboxGroup(
-                                          checked: personProvider.newPerson != null && personProvider.newPerson.mySherutGirl != null
-                                              ? personProvider.newPerson.mySherutGirl.map((e) => StaticFunctions.getSherutGirl(e)).toList()
-                                              : null,
-                                          labels: SherutGirl.values.map((e) => StaticFunctions.getSherutGirl(e)).toList(),
-                                          onChange: (bool isChecked, String label, int index) {
-                                            if (isChecked) {
-                                              if (personProvider.newPerson.mySherutGirl == null) {
-                                                personProvider.newPerson.mySherutGirl = [];
-                                              }
-                                              personProvider.newPerson.mySherutGirl.add(SherutGirl.values[index]);
-                                            } else {
-                                              personProvider.newPerson.mySherutGirl.remove(SherutGirl.values[index]);
-                                            }
-                                            print("isChecked: $isChecked   label: $label  index: $index");
-                                            setState(() {});
-                                          },
-                                          onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                if (sSelected == Gender.MALE)
-                                  Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                          child: Container(
-                                            padding: const EdgeInsets.only(top: 14.0),
-                                            child: Text(
-                                              LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
-                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                            ),
-                                          ),
-                                        ),
-                                        CheckboxGroup(
-                                          checked: personProvider.newPerson != null && personProvider.newPerson.mySherutBoy != null
-                                              ? personProvider.newPerson.mySherutBoy.map((e) => StaticFunctions.getSherutBoy(e)).toList()
-                                              : null,
-                                          labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(),
-                                          onChange: (bool isChecked, String label, int index) {
-                                            if (isChecked) {
-                                              if (personProvider.newPerson.mySherutBoy == null) {
-                                                personProvider.newPerson.mySherutBoy = [];
-                                              }
-                                              personProvider.newPerson.mySherutBoy.add(SherutBoy.values[index]);
-                                            } else {
-                                              personProvider.newPerson.mySherutBoy.remove(SherutBoy.values[index]);
-                                            }
-                                            print("isChecked: $isChecked   label: $label  index: $index");
-                                            setState(() {});
-                                          },
-                                          onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  MultiSelectChip(SherutGirl.values, (val) => print(val)),
+                                // Container(
+                                //   child: Column(
+                                //     children: <Widget>[
 
-                              
-                               
-                                
+                                //       CheckboxGroup(
+                                //         checked: personProvider.newPerson != null && personProvider.newPerson.mySherutGirl != null
+                                //             ? personProvider.newPerson.mySherutGirl.map((e) => StaticFunctions.getSherutGirl(e)).toList()
+                                //             : null,
+                                //         labels: SherutGirl.values.map((e) => StaticFunctions.getSherutGirl(e)).toList(),
+                                //         onChange: (bool isChecked, String label, int index) {
+                                //           if (isChecked) {
+                                //             if (personProvider.newPerson.mySherutGirl == null) {
+                                //               personProvider.newPerson.mySherutGirl = [];
+                                //             }
+                                //             personProvider.newPerson.mySherutGirl.add(SherutGirl.values[index]);
+                                //           } else {
+                                //             personProvider.newPerson.mySherutGirl.remove(SherutGirl.values[index]);
+                                //           }
+                                //           print("isChecked: $isChecked   label: $label  index: $index");
+                                //           setState(() {});
+                                //         },
+                                //         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                //       ),
+                                //       SizedBox(
+                                //         height: 20,
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
+                                if (sSelected == Gender.MALE)
+                                  MultiSelectChip(SherutBoy.values, (val) => print(val)),
+                                // Container(
+                                //   child: Column(
+                                //     children: <Widget>[
+                                //       CheckboxGroup(
+                                //         checked: personProvider.newPerson != null && personProvider.newPerson.mySherutBoy != null
+                                //             ? personProvider.newPerson.mySherutBoy.map((e) => StaticFunctions.getSherutBoy(e)).toList()
+                                //             : null,
+                                //         labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(),
+                                //         onChange: (bool isChecked, String label, int index) {
+                                //           if (isChecked) {
+                                //             if (personProvider.newPerson.mySherutBoy == null) {
+                                //               personProvider.newPerson.mySherutBoy = [];
+                                //             }
+                                //             personProvider.newPerson.mySherutBoy.add(SherutBoy.values[index]);
+                                //           } else {
+                                //             personProvider.newPerson.mySherutBoy.remove(SherutBoy.values[index]);
+                                //           }
+                                //           print("isChecked: $isChecked   label: $label  index: $index");
+                                //           setState(() {});
+                                //         },
+                                //         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                //       ),
+                                //       SizedBox(
+                                //         height: 20,
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
@@ -924,8 +716,10 @@ class _AddPersonState extends State<AddPerson> {
                     ),
                   ),
                 ),
-                Step(isActive: _index == 1, title: Text('הצד השני'),
-                 content: SingleChildScrollView(
+                Step(
+                  isActive: _index == 1,
+                  title: Text('הצד השני'),
+                  content: SingleChildScrollView(
                     child: Container(
                       child: Column(
                         children: <Widget>[
@@ -934,7 +728,6 @@ class _AddPersonState extends State<AddPerson> {
                             autovalidate: false,
                             child: new Column(
                               children: <Widget>[
-                               
                                 Container(
                                   padding: const EdgeInsets.only(top: 14.0),
                                   child: Text(
@@ -1245,7 +1038,6 @@ class _AddPersonState extends State<AddPerson> {
                                       ],
                                     ),
                                   ),
-
                                 Container(
                                   margin: EdgeInsets.only(top: 10),
                                   child: Column(

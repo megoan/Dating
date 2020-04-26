@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
 
-class MultySelectChip extends StatefulWidget {
+class MultiSelectChip extends StatefulWidget {
   final dynamic chips; // map or enum of Chips
   final Map<dynamic, bool> pickedChips; //map of the picked chips
   final Function valueCallBack; //callBack with the returned value
-   MultySelectChip(this.chips,this.pickedChips,this.valueCallBack);
+   MultiSelectChip(this.chips,this.valueCallBack,{this.pickedChips});
   @override
-  _MultySelectChipState createState() => _MultySelectChipState();
+  _MultiSelectChipState createState() => _MultiSelectChipState();
 }
 
-class _MultySelectChipState extends State<MultySelectChip> {
-  List<Widget> chipList = [];
-
+class _MultiSelectChipState extends State<MultiSelectChip> {
+  List<Widget> chipList ;
+  Map<dynamic, bool> pickedChips = {}; 
+ 
   @override
   Widget build(BuildContext context) {
+    chipList = [];
+    if(pickedChips.isEmpty && widget.pickedChips!=null)
+    pickedChips = widget.pickedChips;// happens only once 
+
     for (var value in widget.chips) {
       chipList.add(FilterChip(
         selectedColor: Colors.blueGrey[500],
-        selected: widget.pickedChips[value] != null && widget.pickedChips[value] == true ? true : false,
-        label: new Text(value),
+        selected: pickedChips[value] != null && pickedChips[value] == true ? true : false,
+        label: new Text(value.toString().split('.')[1]),
         backgroundColor: Colors.blue[200],
 
         // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
         onSelected: (bool bvalue) {
           setState(() {
-            widget.pickedChips[value] = bvalue;
+            pickedChips[value] = bvalue;
             widget.valueCallBack(value);
           });
         },
@@ -32,7 +37,8 @@ class _MultySelectChipState extends State<MultySelectChip> {
       chipList.add(SizedBox(width: 10));
     }
 
-    return Row(
+    return Wrap(
+      direction: Axis.horizontal,
       children: chipList,
     );
   }
@@ -50,16 +56,17 @@ class SelectChip extends StatefulWidget {
 
 class _SelectChipState extends State<SelectChip> {
  
-  List<Widget> chipList = [];
+  List<Widget> chipList ;
 
   @override
   Widget build(BuildContext context) {
+    chipList =[];
     for (var value in widget.chips) {
       chipList.add(FilterChip(
         showCheckmark: false,
         selectedColor: Colors.blueGrey[500],
         selected: widget.pickedValue != null && widget.pickedValue == value ? true : false,
-        label: new Text(value),
+        label: new Text(value.toString().split('.')[1]),
         backgroundColor: Colors.blue[200],
 
         // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
@@ -73,7 +80,8 @@ class _SelectChipState extends State<SelectChip> {
       chipList.add(SizedBox(width: 10));
     }
 
-    return Row(
+    return Wrap(
+      direction: Axis.horizontal,
       children: chipList,
     );
   }
