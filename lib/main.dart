@@ -4,6 +4,7 @@ import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/shadchanProvider.dart';
 import 'package:dating/screens/shadchanSignUpScrenn.dart';
 import 'package:dating/splash-screen.dart';
+import 'package:dating/themes/appTheme.dart';
 import 'package:dating/themes/themeController.dart';
 import 'package:dating/widgets/OutLineButtonMy.dart';
 import 'package:dating/widgets/gradientSwitcher.dart';
@@ -57,8 +58,8 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           theme: ThemeData(
-            primaryColor: Colors.blue,
-            accentColor: Color(0xffaa71f9),
+            primaryColor: AppTheme.primary,
+            accentColor: AppTheme.secondary,
             //primarySwatch:  Colors.blue,
           ),
           localizationsDelegates: [

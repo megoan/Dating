@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dating/themes/appTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -45,6 +46,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
       widget.imageCallBack(image);
     }
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +54,8 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
       children: <Widget>[
         Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: Colors.black12),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppTheme.primary),
               color: Colors.black12,
             ),
             width: widget.width ?? widget.width,
@@ -74,7 +76,10 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                       ])),
         if (widget.image != null)
           Positioned(bottom: 0,
-                      child: Column(
+                      child: Container(
+                        
+                        decoration: BoxDecoration(color: Colors.black38, borderRadius: BorderRadius.circular(5),),
+                        child: Column(
               children: <Widget>[
                 ImageButton(
                   image: widget.image,
@@ -90,6 +95,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                 ),
               ],
             ),
+                      ),
           ),
       ],
     );

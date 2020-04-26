@@ -291,11 +291,17 @@ class _AddPersonState extends State<AddPerson> {
   List lll = new List();
   int _index = 0;
 
+  TextStyle themeTextStyle = new TextStyle(color: AppTheme.textColor);
+  TextStyle titles = new TextStyle(color: AppTheme.textColor, fontSize: 20);
+  Widget title(title) {
+    return Padding(padding: EdgeInsets.all(10), child: Text(title, style: titles));
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      // backgroundColor: AppTheme.primary,
+      backgroundColor: AppTheme.filterBackgroundColor,
       appBar: AppBar(
         title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
       ),
@@ -334,6 +340,7 @@ class _AddPersonState extends State<AddPerson> {
                             key: _formKey,
                             autovalidate: false,
                             child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
@@ -343,31 +350,41 @@ class _AddPersonState extends State<AddPerson> {
                                     //       alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft, child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add at least one image!'))),
                                     // ),
                                     Row(
-                                       crossAxisAlignment: CrossAxisAlignment.center,
-                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        PhotoPickerFlat(
-                                          width: width/2-30,
-                                          height: 220,
-                                          imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
-                                              ? personProvider.newPerson.profileImages[0]
-                                              : null,
-                                          image: _image1,
-                                          imageCallBack: imageCallBack1,
-                                         
+                                        Expanded(
+                                          child: PhotoPickerFlat(
+                                            height: 210,
+                                            imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
+                                                ? personProvider.newPerson.profileImages[0]
+                                                : null,
+                                            image: _image1,
+                                            imageCallBack: imageCallBack1,
+                                          ),
                                         ),
-                                        Container(
-                                        height: 210,
-                                          width: width * 0.5 - 27,
-                                          child: 
-                                            //FIRST NAME
-                                            Column(
+                                        SizedBox(width: 20),
+                                        Expanded(
+                                          child: Container(
+                                            height: 190,
+                                            child:
+                                                //FIRST NAME
+                                                Column(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: <Widget>[
                                                 TextFormField(
+                                                  cursorColor: Colors.white,
+                                                  style: themeTextStyle,
                                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
                                                   decoration: InputDecoration(
-                                                    icon: const Icon(Icons.person),
+                                                    contentPadding: EdgeInsets.all(15),
+
+                                                    border: OutlineInputBorder(
+                                                      borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                                    ),
+                                                    // icon: const Icon(Icons.person),
+                                                    hintStyle: themeTextStyle,
+                                                    labelStyle: themeTextStyle, //TextStyle(color: AppTheme.primary),
                                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
                                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
                                                   ),
@@ -377,9 +394,17 @@ class _AddPersonState extends State<AddPerson> {
                                                 ),
                                                 //LAST NAME
                                                 TextFormField(
+                                                  cursorColor: Colors.white,
+                                                  style: themeTextStyle,
                                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
                                                   decoration: InputDecoration(
-                                                    icon: const Icon(Icons.person),
+                                                    contentPadding: EdgeInsets.all(15),
+                                                    border: OutlineInputBorder(
+                                                      borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                                    ),
+                                                    //icon: const Icon(Icons.person),
+                                                    hintStyle: themeTextStyle,
+                                                    labelStyle: themeTextStyle,
                                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
                                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
                                                   ),
@@ -387,26 +412,47 @@ class _AddPersonState extends State<AddPerson> {
                                                   validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
                                                   onSaved: (val) => personProvider.newPerson.lastName = val,
                                                 ),
-                                                
+
                                                 Row(
                                                   children: <Widget>[
-                                                    SizedBox(
-                                                        width: 35,
-                                                        child: IconButton(
-                                                            icon: FaIcon(FontAwesomeIcons.male),
-                                                            //padding: EdgeInsets.all(5.0),
-                                                            // alignment: Alignment.centerRight,
-                                                            onPressed: null)),
-                                                    Text("Male"),
+                                                    Container(
+                                                      width: 40,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(50),
+                                                        border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.secondary : AppTheme.primary),
+                                                      ),
+                                                      child: IconButton(
+                                                          icon: FaIcon(FontAwesomeIcons.male),
+                                                          color: sSelected == Gender.MALE ? AppTheme.secondary : AppTheme.primary,
+                                                          padding: EdgeInsets.all(5.0),
+                                                          // alignment: Alignment.centerRight,
+                                                          onPressed: () => setState(() {
+                                                                sSelected = Gender.MALE;
+                                                              })),
+                                                    ),
+                                                    Text(
+                                                      "  Boy",
+                                                      style: themeTextStyle,
+                                                    ),
                                                     Spacer(),
-                                                    SizedBox(
-                                                        width: 35,
-                                                        child: IconButton(
-                                                            icon: FaIcon(FontAwesomeIcons.female),
-                                                            //padding: EdgeInsets.all(5.0),
-                                                            //alignment: Alignment.centerRight,
-                                                            onPressed: null)),
-                                                    Text("Female"),
+                                                    Container(
+                                                      width: 40,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(50),
+                                                        border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? AppTheme.secondary : AppTheme.primary),
+                                                      ),
+                                                      child: IconButton(
+                                                          icon: FaIcon(FontAwesomeIcons.female),
+                                                          color: sSelected == Gender.FEMALE ? AppTheme.secondary : AppTheme.primary,
+                                                          padding: EdgeInsets.all(5.0),
+                                                          //alignment: Alignment.centerRight,
+                                                          onPressed: () => setState(() {
+                                                                sSelected = Gender.FEMALE;
+                                                              })),
+                                                    ),
+                                                    Text("  Girl", style: themeTextStyle),
                                                   ],
                                                 ),
                                                 //        Stack(
@@ -458,7 +504,7 @@ class _AddPersonState extends State<AddPerson> {
                                                 // ),
                                               ],
                                             ),
-                                         
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -502,66 +548,56 @@ class _AddPersonState extends State<AddPerson> {
                                     // )
                                   ],
                                 ),
-                                SizedBox(height: 10,),
-                                RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0)),
-                elevation: 4.0,
-                onPressed: () {
-                     showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext builder) {
-                        return 
-                        
-                        Container(
-                            height: MediaQuery.of(context).copyWith().size.height / 2.8,
-                            child: DatePickerWidget(),
-                           );
-                      });
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 50.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Container(
-                            child: Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.date_range,
-                                  size: 25.0,
-                                  color: Colors.teal,
+                                SizedBox(
+                                  height: 30,
                                 ),
-                                SizedBox(width: 10,),
-                                Text(
-                                  " 18-02-2020",
-                                  style: TextStyle(
-                                      color: Colors.teal,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0),
+                                Row(
+                                  children: <Widget>[
+                                     FaIcon(FontAwesomeIcons.globeEurope,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                   
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth')),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      Text(
-                        "החלף",
-                        style: TextStyle(
-                            color: Colors.teal,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0),
-                      ),
-                    ],
-                  ),
-                ),
-                color: Colors.white,
-              ),
-               
-                               
+                                FlatButton(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0), side: BorderSide(color: AppTheme.primary)),
+                                  //color: Colors.black12,
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (BuildContext builder) {
+                                          return Container(
+                                            height: MediaQuery.of(context).copyWith().size.height / 2.8,
+                                            child: DatePickerWidget(),
+                                          );
+                                        });
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: 50.0,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                         Row(
+                                                children: <Widget>[
+                                                  Text(
+                                                    " 18-02-2020",
+                                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
+                                                  ),
+                                                ],
+                                              ),
+                                            
+                                        Text(
+                                          "החלף",
+                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
                                 //BIRTH DAY
                                 // new Row(children: <Widget>[
                                 //   new Expanded(
@@ -587,7 +623,21 @@ class _AddPersonState extends State<AddPerson> {
                                 //     }),
                                 //   )
                                 // ]),
+                                 SizedBox(
+                                  height: 20,
+                                ),
                                 //Country
+                                 Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.date_range,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                   
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
+                                  ],
+                                ),
                                 new FormField<Country>(
                                   builder: (FormFieldState<Country> state) {
                                     countryState = state;
@@ -664,6 +714,10 @@ class _AddPersonState extends State<AddPerson> {
                                   maxLines: null,
                                   maxLength: 70,
                                   decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(5),
+                                    border: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                    ),
                                     icon: const Icon(Icons.short_text),
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
@@ -676,7 +730,11 @@ class _AddPersonState extends State<AddPerson> {
                                 new TextFormField(
                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
                                   maxLines: null,
+                                  minLines: 5,
                                   decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                    ),
                                     icon: const Icon(Icons.format_align_justify),
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
