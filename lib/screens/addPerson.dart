@@ -343,22 +343,26 @@ class _AddPersonState extends State<AddPerson> {
                                     //       alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft, child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add at least one image!'))),
                                     // ),
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                       crossAxisAlignment: CrossAxisAlignment.center,
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         PhotoPickerFlat(
+                                          width: width/2-30,
+                                          height: 220,
                                           imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
                                               ? personProvider.newPerson.profileImages[0]
                                               : null,
                                           image: _image1,
                                           imageCallBack: imageCallBack1,
-                                          photoNum: 1,
+                                         
                                         ),
                                         Container(
-                                          width: width * 0.5 - 24,
-                                          child: Column(children: [
+                                        height: 210,
+                                          width: width * 0.5 - 27,
+                                          child: 
                                             //FIRST NAME
                                             Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: <Widget>[
                                                 TextFormField(
                                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
@@ -383,6 +387,7 @@ class _AddPersonState extends State<AddPerson> {
                                                   validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
                                                   onSaved: (val) => personProvider.newPerson.lastName = val,
                                                 ),
+                                                
                                                 Row(
                                                   children: <Widget>[
                                                     SizedBox(
@@ -453,7 +458,7 @@ class _AddPersonState extends State<AddPerson> {
                                                 // ),
                                               ],
                                             ),
-                                          ]),
+                                         
                                         ),
                                       ],
                                     ),
@@ -497,6 +502,7 @@ class _AddPersonState extends State<AddPerson> {
                                     // )
                                   ],
                                 ),
+                                SizedBox(height: 10,),
                                 RaisedButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)),

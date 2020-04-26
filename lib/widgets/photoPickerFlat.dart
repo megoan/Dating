@@ -10,9 +10,11 @@ class PhotoPickerFlat extends StatefulWidget {
   int photoNum = 0;
   bool small = false;
   String imageUrl;
+  final double width;
+  final double height;
   @override
   _PhotoPickerFlatState createState() => _PhotoPickerFlatState();
-  PhotoPickerFlat({this.image, this.imageCallBack, this.photoNum, this.imageUrl, this.small = false});
+  PhotoPickerFlat({this.image, this.imageCallBack, this.photoNum, this.imageUrl, this.small = false, this.width, this.height});
 }
 
 class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
@@ -49,79 +51,70 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
     return Stack(
       children: <Widget>[
         Container(
-            width: (widget.small) ? 112 : 140,
-            height: (widget.small) ? 112 : 140,
-            child: widget.image != null
-                ? CircleAvatar(
-                    backgroundImage: widget.imageUrl != null ? Image.network(widget.imageUrl) : new FileImage(widget.image),
-                    radius: (widget.small) ? 112 : 140,
-                  )
-                : CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: (widget.small) ? 112 : 140,
-                  )),
-        (widget.image == null)
-            ? ImageButton(small: widget.small, bottom: (widget.small) ? -5 : -5, right: (widget.small) ? -20 : -20, image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo)
-            : ImageButton(
-                small: widget.small,
-                bottom: (widget.small) ? -5 : -5,
-                right: -20,
-                image: widget.image,
-                imageCallBack: () {
-                  widget.imageCallBack(null);
-                },
-                iconData: Icons.close,
-              ),
-        (widget.image == null)
-            ? ImageButton(
-                small: widget.small,
-                bottom: (widget.small) ? -5 : -5,
-                left: (widget.small) ? -20 : -20,
-                image: widget.image,
-                imageCallBack: getGalleryImage,
-                iconData: Icons.image,
-              )
-            : ImageButton(
-                small: widget.small,
-                bottom: (widget.small) ? -5 : -5,
-                left: (widget.small) ? -20 : -20,
-                image: widget.image,
-                imageCallBack: cropImage,
-                iconData: Icons.crop,
-              ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(color: Colors.black12),
+              color: Colors.black12,
+            ),
+            width: widget.width ?? widget.width,
+            height: widget.height ?? widget.height,
+            child: widget.imageUrl != null
+                ? Image.network(widget.imageUrl, fit: BoxFit.cover, height: widget.height, width: widget.width)
+                : widget.image != null
+                    ? Image.file(widget.image, fit: BoxFit.cover, height: widget.height, width: widget.width)
+                    : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ImageButton(image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
+                        ImageButton(
+                          image: widget.image,
+                          imageCallBack: getGalleryImage,
+                          iconData: Icons.image,
+                        )
+                      ])),
+        if (widget.image != null)
+          Positioned(bottom: 0,
+                      child: Column(
+              children: <Widget>[
+                ImageButton(
+                  image: widget.image,
+                  imageCallBack: () {
+                    widget.imageCallBack(null);
+                  },
+                  iconData: Icons.close,
+                ),
+                ImageButton(
+                  image: widget.image,
+                  imageCallBack: cropImage,
+                  iconData: Icons.crop,
+                ),
+              ],
+            ),
+          ),
       ],
     );
   }
 }
 
 class ImageButton extends StatelessWidget {
-  double top;
-  double left;
-  double right;
-  double bottom;
   File image;
   Function imageCallBack;
   IconData iconData;
-  bool small = false;
-  ImageButton({this.right, this.left, this.top, this.bottom, this.image, this.imageCallBack, this.iconData, this.small});
+  ImageButton({this.image, this.imageCallBack, this.iconData});
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: top,
-      right: right,
-      left: left,
-      bottom: bottom,
-      child: RawMaterialButton(
-        onPressed: () {
-          imageCallBack();
-        },
-        child: new Icon(iconData, color: Colors.white, size: (small) ? 15 : 20),
-        shape: new CircleBorder(),
-        elevation: 0,
-        fillColor: Theme.of(context).primaryColor,
-        padding: const EdgeInsets.all(0),
-      ),
+    return RawMaterialButton(
+      onPressed: () {
+        imageCallBack();
+      },
+      constraints: BoxConstraints(minWidth:40,minHeight:40),
+      child: new Icon(iconData, color: Colors.white, size: 20),
+      shape: new CircleBorder(),
+      elevation: 0,
+      fillColor: Theme.of(context).primaryColor,
+      padding: const EdgeInsets.all(0),
+      
     );
   }
 }
