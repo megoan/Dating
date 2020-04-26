@@ -5,10 +5,14 @@ import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/themes/appTheme.dart';
+import 'package:dating/widgets/photoPickerFlat.dart';
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:dating/widgets/photoPicker.dart';
 import 'package:dating/widgets/selectAndMultiSelectChips.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
@@ -331,7 +335,6 @@ class _AddPersonState extends State<AddPerson> {
                             autovalidate: false,
                             child: new Column(
                               children: <Widget>[
-                    
                                 Column(
                                   children: <Widget>[
                                     // Padding(
@@ -343,99 +346,113 @@ class _AddPersonState extends State<AddPerson> {
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        
-                                          PhotoPicker(
-                                            imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
-                                                ? personProvider.newPerson.profileImages[0]
-                                                : null,
-                                            image: _image1,
-                                            imageCallBack: imageCallBack1,
-                                            photoNum: 1,
-                                          ),
-                                        
-                                        Container(
-                                          width: width*0.5-24,
-                                          child: Column(children: [
-                                                    
-                                                       //FIRST NAME
-                                 Column(
-                                   children: <Widget>[
-                                     TextFormField(
-                                        initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
-                                        decoration: InputDecoration(
-                                          icon: const Icon(Icons.person),
-                                          hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
-                                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
+                                        PhotoPickerFlat(
+                                          imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
+                                              ? personProvider.newPerson.profileImages[0]
+                                              : null,
+                                          image: _image1,
+                                          imageCallBack: imageCallBack1,
+                                          photoNum: 1,
                                         ),
-                                        inputFormatters: [new LengthLimitingTextInputFormatter(30)],
-                                        validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                        onSaved: (val) => personProvider.newPerson.firstName = val,
-                                ),
-                                       //LAST NAME
-                                 TextFormField(
-                                    initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
-                                    decoration: InputDecoration(
-                                      icon: const Icon(Icons.person),
-                                      hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
-                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
-                                    ),
-                                    inputFormatters: [new LengthLimitingTextInputFormatter(30)],
-                                    validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                    onSaved: (val) => personProvider.newPerson.lastName = val,
-                                ),
-                                       Stack(
-                                  alignment: Alignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      width: width * 0.3,
-                                      height: 100,
-                                      child: Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  print("male");
-                                                  setState(() {
-                                                    sSelected = Gender.MALE;
-                                                  });
-                                                  personProvider.newPerson.gender = Gender.MALE;
-                                                },
-                                                child: Container(
-                                                  color: Colors.transparent,
+                                        Container(
+                                          width: width * 0.5 - 24,
+                                          child: Column(children: [
+                                            //FIRST NAME
+                                            Column(
+                                              children: <Widget>[
+                                                TextFormField(
+                                                  initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
+                                                  decoration: InputDecoration(
+                                                    icon: const Icon(Icons.person),
+                                                    hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
+                                                    labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
+                                                  ),
+                                                  inputFormatters: [new LengthLimitingTextInputFormatter(30)],
+                                                  validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
+                                                  onSaved: (val) => personProvider.newPerson.firstName = val,
                                                 ),
-                                              ),
+                                                //LAST NAME
+                                                TextFormField(
+                                                  initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
+                                                  decoration: InputDecoration(
+                                                    icon: const Icon(Icons.person),
+                                                    hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
+                                                    labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
+                                                  ),
+                                                  inputFormatters: [new LengthLimitingTextInputFormatter(30)],
+                                                  validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
+                                                  onSaved: (val) => personProvider.newPerson.lastName = val,
+                                                ),
+                                                Row(
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                        width: 35,
+                                                        child: IconButton(
+                                                            icon: FaIcon(FontAwesomeIcons.male),
+                                                            //padding: EdgeInsets.all(5.0),
+                                                            // alignment: Alignment.centerRight,
+                                                            onPressed: null)),
+                                                    Text("Male"),
+                                                    Spacer(),
+                                                    SizedBox(
+                                                        width: 35,
+                                                        child: IconButton(
+                                                            icon: FaIcon(FontAwesomeIcons.female),
+                                                            //padding: EdgeInsets.all(5.0),
+                                                            //alignment: Alignment.centerRight,
+                                                            onPressed: null)),
+                                                    Text("Female"),
+                                                  ],
+                                                ),
+                                                //        Stack(
+                                                //   alignment: Alignment.center,
+                                                //   children: <Widget>[
+                                                //     Container(
+                                                //       width: width * 0.3,
+                                                //       height: 100,
+                                                //       child: Row(
+                                                //           children: <Widget>[
+                                                //             Expanded(
+                                                //               child: GestureDetector(
+                                                //                 onTap: () {
+                                                //                   print("male");
+                                                //                   setState(() {
+                                                //                     sSelected = Gender.MALE;
+                                                //                   });
+                                                //                   personProvider.newPerson.gender = Gender.MALE;
+                                                //                 },
+                                                //                 child: Container(
+                                                //                   color: Colors.transparent,
+                                                //                 ),
+                                                //               ),
+                                                //             ),
+                                                //             Expanded(
+                                                //               child: GestureDetector(
+                                                //                   onTap: () {
+                                                //                     print("female");
+                                                //                     setState(() {
+                                                //                       sSelected = Gender.FEMALE;
+                                                //                     });
+                                                //                     personProvider.newPerson.gender = Gender.FEMALE;
+                                                //                   },
+                                                //                   child: Container(
+                                                //                     color: Colors.transparent,
+                                                //                   )),
+                                                //             )
+                                                //           ],
+                                                //       ),
+                                                //     ),
+                                                //     IgnorePointer(
+                                                //       ignoring: true,
+                                                //       child: Container(
+                                                //           width: width * 0.3,
+                                                //           child: sSelected == Gender.FEMALE ? Image.asset("assets/images/girlpressed.png") : Image.asset("assets/images/boy_pressed.png"),
+                                                //       ),
+                                                //     ),
+                                                //   ],
+                                                // ),
+                                              ],
                                             ),
-                                            Expanded(
-                                              child: GestureDetector(
-                                                  onTap: () {
-                                                    print("female");
-                                                    setState(() {
-                                                      sSelected = Gender.FEMALE;
-                                                    });
-                                                    personProvider.newPerson.gender = Gender.FEMALE;
-                                                  },
-                                                  child: Container(
-                                                    color: Colors.transparent,
-                                                  )),
-                                            )
-                                          ],
-                                      ),
-                                    ),
-                                    IgnorePointer(
-                                      ignoring: true,
-                                      child: Container(
-                                          width: width * 0.3,
-                                          child: sSelected == Gender.FEMALE ? Image.asset("assets/images/girlpressed.png") : Image.asset("assets/images/boy_pressed.png"),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                   ]
-                                   
-                                  ,
-                                 ),
-                              
-                               
                                           ]),
                                         ),
                                       ],
@@ -480,32 +497,90 @@ class _AddPersonState extends State<AddPerson> {
                                     // )
                                   ],
                                 ),
-                
+                                RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                elevation: 4.0,
+                onPressed: () {
+                     showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext builder) {
+                        return 
+                        
+                        Container(
+                            height: MediaQuery.of(context).copyWith().size.height / 2.8,
+                            child: DatePickerWidget(),
+                           );
+                      });
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 50.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.date_range,
+                                  size: 25.0,
+                                  color: Colors.teal,
+                                ),
+                                SizedBox(width: 10,),
+                                Text(
+                                  " 18-02-2020",
+                                  style: TextStyle(
+                                      color: Colors.teal,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "החלף",
+                        style: TextStyle(
+                            color: Colors.teal,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
+                      ),
+                    ],
+                  ),
+                ),
+                color: Colors.white,
+              ),
+               
+                               
                                 //BIRTH DAY
-                                  new Row(children: <Widget>[
-                                  new Expanded(
-                                      child: new TextFormField(
-                                    decoration: new InputDecoration(
-                                      icon: const Icon(Icons.calendar_today),
-                                      hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Please enter a valid date'),
-                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth'),
-                                    ),
-                                    controller: _controller,
-                                    keyboardType: TextInputType.datetime,
-                                    validator: (val) {
-                                      if (isValidDob(val)) return null;
-                                      return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                                    },
-                                    onSaved: (val) => personProvider.newPerson.birthday = convertToDate(val),
-                                  )),
-                                  new IconButton(
-                                    icon: new Icon(Icons.more_horiz),
-                                    tooltip: LocaleText.getLocaleText(MyApp.getLocale(), 'choose date'),
-                                    onPressed: (() async {
-                                      await _chooseDate(context, _controller.text);
-                                    }),
-                                  )
-                                ]),
+                                // new Row(children: <Widget>[
+                                //   new Expanded(
+                                //       child: new TextFormField(
+                                //     decoration: new InputDecoration(
+                                //       icon: const Icon(Icons.calendar_today),
+                                //       hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Please enter a valid date'),
+                                //       labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth'),
+                                //     ),
+                                //     controller: _controller,
+                                //     keyboardType: TextInputType.datetime,
+                                //     validator: (val) {
+                                //       if (isValidDob(val)) return null;
+                                //       return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                //     },
+                                //     onSaved: (val) => personProvider.newPerson.birthday = convertToDate(val),
+                                //   )),
+                                //   new IconButton(
+                                //     icon: new Icon(Icons.more_horiz),
+                                //     tooltip: LocaleText.getLocaleText(MyApp.getLocale(), 'choose date'),
+                                //     onPressed: (() async {
+                                //       await _chooseDate(context, _controller.text);
+                                //     }),
+                                //   )
+                                // ]),
                                 //Country
                                 new FormField<Country>(
                                   builder: (FormFieldState<Country> state) {
