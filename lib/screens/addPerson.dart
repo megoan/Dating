@@ -553,17 +553,17 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                                 Row(
                                   children: <Widget>[
-                                     FaIcon(FontAwesomeIcons.globeEurope,
+                                    Icon(
+                                      Icons.date_range,
                                       size: 25.0,
                                       color: Colors.white,
                                     ),
-                                   
                                     title(LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth')),
                                   ],
                                 ),
                                 FlatButton(
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0), side: BorderSide(color: AppTheme.primary)),
-                                  //color: Colors.black12,
+                                  color: Colors.black12,
                                   onPressed: () {
                                     showModalBottomSheet(
                                         context: context,
@@ -580,18 +580,18 @@ class _AddPersonState extends State<AddPerson> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                         Row(
-                                                children: <Widget>[
-                                                  Text(
-                                                    " 18-02-2020",
-                                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
-                                                  ),
-                                                ],
-                                              ),
-                                            
-                                        Text(
-                                          "החלף",
-                                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              " 18-02-2020",
+                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
+                                            ),
+                                          ],
+                                        ),
+                                        FaIcon(
+                                         FontAwesomeIcons.angleDown,
+                                         size: 20,
+                                         color: Colors.white,
                                         ),
                                       ],
                                     ),
@@ -623,18 +623,17 @@ class _AddPersonState extends State<AddPerson> {
                                 //     }),
                                 //   )
                                 // ]),
-                                 SizedBox(
-                                  height: 20,
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 //Country
-                                 Row(
+                                Row(
                                   children: <Widget>[
-                                    Icon(
-                                      Icons.date_range,
+                                    FaIcon(
+                                      FontAwesomeIcons.globeEurope,
                                       size: 25.0,
                                       color: Colors.white,
                                     ),
-                                   
                                     title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
                                   ],
                                 ),
@@ -647,6 +646,20 @@ class _AddPersonState extends State<AddPerson> {
                                     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                                   },
                                 ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                //Country
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.city,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
+                                  ],
+                                ),
                                 //AREA
                                 if (countryValue == Country.ISRAEL)
                                   new FormField<Area>(
@@ -658,6 +671,19 @@ class _AddPersonState extends State<AddPerson> {
                                       return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                                     },
                                   ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.userFriends,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
+                                  ],
+                                ),
                                 //STATUS
                                 new FormField<Status>(
                                   builder: (FormFieldState<Status> state) {
@@ -669,6 +695,19 @@ class _AddPersonState extends State<AddPerson> {
                                   },
                                 ),
                                 //RELIGIOUS
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.pray,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
+                                  ],
+                                ),
                                 new FormField<Dos>(
                                   builder: (FormFieldState<Dos> state) {
                                     religiosState = state;
@@ -679,6 +718,19 @@ class _AddPersonState extends State<AddPerson> {
                                   },
                                 ),
                                 //HASHKAFA
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.synagogue,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
+                                  ],
+                                ),
                                 new FormField<Hashkafa>(
                                   builder: (FormFieldState<Hashkafa> state) {
                                     hashkafaState = state;
@@ -689,6 +741,19 @@ class _AddPersonState extends State<AddPerson> {
                                   },
                                 ),
                                 //EDA
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.starOfDavid,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
+                                  ],
+                                ),
                                 new FormField<Eda>(
                                   builder: (FormFieldState<Eda> state) {
                                     edaState = state;
@@ -699,6 +764,19 @@ class _AddPersonState extends State<AddPerson> {
                                   },
                                 ),
                                 //SMOKE
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.smoking,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking')),
+                                  ],
+                                ),
                                 new FormField<Smoke>(
                                   builder: (FormFieldState<Smoke> state) {
                                     smokeState = state;
@@ -709,16 +787,32 @@ class _AddPersonState extends State<AddPerson> {
                                   },
                                 ),
                                 //ABOUT ME SHORT
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.short_text,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them short')),
+                                  ],
+                                ),
                                 new TextFormField(
+                                  cursorColor: Colors.white,
+                                                  style: themeTextStyle,
                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.short != null ? personProvider.newPerson.short : "",
                                   maxLines: null,
                                   maxLength: 70,
                                   decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.all(5),
                                     border: OutlineInputBorder(
                                       borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                     ),
-                                    icon: const Icon(Icons.short_text),
+                                    //icon: const Icon(Icons.short_text),
+                                    hintStyle: TextStyle(color: AppTheme.primary),
+                                                    labelStyle: themeTextStyle,
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                                   ),
@@ -727,7 +821,22 @@ class _AddPersonState extends State<AddPerson> {
                                   onSaved: (val) => personProvider.newPerson.short = val,
                                 ),
                                 //ABOUT ME LONG
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.format_align_justify,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them long')),
+                                  ],
+                                ),
                                 new TextFormField(
+                                  cursorColor: Colors.white,
+                                                  style: themeTextStyle,
                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
                                   maxLines: null,
                                   minLines: 5,
@@ -735,7 +844,9 @@ class _AddPersonState extends State<AddPerson> {
                                     border: OutlineInputBorder(
                                       borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                     ),
-                                    icon: const Icon(Icons.format_align_justify),
+                                    //icon: const Icon(Icons.format_align_justify),
+                                    hintStyle: TextStyle(color: AppTheme.primary),
+                                                    labelStyle: themeTextStyle,
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                                   ),
@@ -746,17 +857,24 @@ class _AddPersonState extends State<AddPerson> {
                                   onSaved: (val) => personProvider.newPerson.long = val,
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Row(
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.ruler,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
+                                  ],
+                                ),
+                                 Row(
                                     children: <Widget>[
-                                      Text(
-                                        LocaleText.getLocaleText(MyApp.getLocale(), 'Height'),
-                                      ),
+                                    
                                       Expanded(
                                         child: Slider(
+                                          activeColor: AppTheme.secondary,
                                           min: 1.3,
                                           max: 2.3,
                                           divisions: 130,
@@ -772,20 +890,25 @@ class _AddPersonState extends State<AddPerson> {
                                       ),
                                       Text(
                                         "" + personHeight.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),
+                                        style: themeTextStyle,
                                       )
                                     ],
                                   ),
+                                
+                                    SizedBox(
+                                  height: 10,
                                 ),
-                                SizedBox(
-                                  height: 30,
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.handHoldingHeart,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
+                                  ],
                                 ),
-                                Align(
-                                  alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  child: Text(
-                                    LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                  ),
-                                ),
+                              
                                 if (sSelected == Gender.FEMALE)
                                   MultiSelectChip(SherutGirl.values, (val) => print(val)),
                                 // Container(

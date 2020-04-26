@@ -1,3 +1,4 @@
+import 'package:dating/themes/appTheme.dart';
 import 'package:flutter/material.dart';
 
 class MultiSelectChip extends StatefulWidget {
@@ -21,12 +22,13 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
 
     for (var value in widget.chips) {
       chipList.add(FilterChip(
-        selectedColor: Colors.blueGrey[500],
+        selectedColor: AppTheme.filterBackgroundColor,
+        checkmarkColor: AppTheme.primary,
         selected: pickedChips[value] != null && pickedChips[value] == true ? true : false,
-        label: new Text(value.toString().split('.')[1]),
-        backgroundColor: Colors.blue[200],
+        label: new Text(value.toString().split('.')[1],style: TextStyle(color: AppTheme.primary ),),
+        backgroundColor: AppTheme.filterBackgroundColor,
 
-        // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
+         shape: StadiumBorder(side: BorderSide(color: AppTheme.primary)),
         onSelected: (bool bvalue) {
           setState(() {
             pickedChips[value] = bvalue;
