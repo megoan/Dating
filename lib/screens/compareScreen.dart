@@ -164,6 +164,7 @@ class _CompareScreenState extends State<CompareScreen> {
                   ],
                 ),
               ),
+               Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
               Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.birthdayCake))),
             ],
           ),
@@ -242,6 +243,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.globeEurope))),
           ]),
           //Area
@@ -314,6 +316,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.city))),
           ]),
           //Status
@@ -387,7 +390,9 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+            Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.userFriends))),
+            
           ]),
           //Religious
           Stack(children: [
@@ -459,6 +464,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.torah))),
           ]),
           //Hashkafa
@@ -531,6 +537,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.starOfDavid))),
           ]),
           //Eda
@@ -603,6 +610,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.synagogue))),
           ]),
           //Smoking
@@ -675,6 +683,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.smoking))),
           ]),
           //height
@@ -763,6 +772,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.ruler))),
           ]),
           //sherut
@@ -885,6 +895,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
+             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.handHoldingHeart))),
           ]),
         ],
