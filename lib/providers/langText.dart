@@ -65,7 +65,7 @@ class LocaleText {
       'Form is not valid!  Please review and correct!':'Form is not valid!  Please review and correct!',
       'Age':'Age',
       'Who am I':'Who am I',
-      'What am I looking for':'hat am I looking for',
+      'What am I looking for':'What am I looking for',
       'Status':'Status',
       'Hashkafa':'Hashkafa',
       'Height':'Height',
@@ -73,7 +73,8 @@ class LocaleText {
       'Smoking':'Smoking',
       'Eda':'Eda',
       'Search Name':'Search Name',
-      'Country':'Country'
+      'Country':'Country',
+      
     },
     'he': {
       'name': 'שם',
@@ -147,6 +148,181 @@ class LocaleText {
   };
 
   static String getLocaleText(languageCode,text) {
+    if (_localizedValues[languageCode][text]!=null)
     return _localizedValues[languageCode][text];
+    else
+    return text;
+  }
+
+
+  static Map<String, Map<String, Map<String, String>>> _localizedSelectedValues = {
+    'en': {
+      'Country':{
+        'ISRAEL':"Israel",
+        'AUSTRALIA':'Australia',
+        'CANADA':'Canada',
+        'BELGIUM':'Belgium',
+        'UK':'UK',
+        'USA':'USA',
+        'SWITZERLAND':'Switzerland'
+      },
+      'Area':{
+        'BEER_SHEVA':"Be'er Sheva",
+        'CHUL'      :'chul',
+        'GUSH_DAN'  :'Gush Dan',
+        'HIFA'      :'Haifa',
+        'JERUSALEM' :'Jerusalem',
+        'SHARON'    :'Sharon'
+      },
+      'Status':{
+        'SINGLE':'Single',
+        'ALMAN': 'Widow',
+        'GARUSH':'Divorced'
+      },
+      'Dos':{
+        'MASORTI':'Masorati',
+        'LITE':'lite',
+        'REGULAR':'regular',
+        'VERY':'very',
+        'DOS':'Dos'
+      },
+      'Hashkafa':{
+        'LEUMI':  'Leumi',
+        'CHAREDI':'Charedi',
+        'CHABAD': 'Chabas',
+        'BRESLUV':'Breslav',
+        'CHOZER_BITSHUVA':'Chozer Bitshuva',
+        'JEW':'Jew'
+      },
+      'Eda':{
+        'ASHKENAZI':'Ashkenazi',
+        'SEFARADI':'Sefaradi',
+        'TEMANI':'Temani',
+        'ETYOPI':'Etyopi',
+        'FRENCH':'French',
+        'MIXED':'Mixed',
+      },
+      'Smoke':{
+        'NO':'no',
+        'SOMETIMES':'Sometimes',
+        'TRY_TO_STOP':'Try to stop',
+        'YES':'yes',
+
+      },
+      'SherutGirl':{
+        "ARMY":   "Army",
+        "MECHINA":"Mechina",
+        "ONE_YEAR_SHERUT": "One Year Sherut",
+        "TWO_YEARS_SHERUT":"Two Years Sherut",
+        "MIDRASHA":"Midrasha",
+        "SHLICHUT":"Shlichut",
+        "GURNISHT":"Other"
+
+      },
+      'SherutBoy':{
+        "KRAVI":   "Kravi",
+        "JOBNIK":  "Jobnik",
+        "MECHINA": "Mechina",
+        "HESDER":  "Hesder Yeshiva",
+        "GVOHA":   "Yeshiva Gvoha",
+        "SHERUT":  "Sherut",
+        "SHLICHUT":"Shlichut",
+        "GURNISH": "Other"
+      },
+      'CompareScore':{
+        "NOT_KASHUR":"No way",
+        "MAYBE":     "Could be",
+        "YALA":      "Do it",
+
+      }
+    },
+    'he': {
+        'Country':{
+        'ISRAEL':'ישראל',
+        'AUSTRALIA':'אוסטרליה',
+        'CANADA':'קנדה',
+        'BELGIUM':'בלגיה',
+        'UK':'אנגליה',
+        'USA':'ארצות הברית',
+        'SWITZERLAND':'שוייץ'
+        
+      },
+      'Area':{
+        'BEER_SHEVA':'באר שבע והדרום',
+        'CHUL':'חו"ל',
+        'GUSH_DAN':'גוש דן',
+        'HIFA':'חיפה והצפון',
+        'JERUSALEM':'ירושלים והסביבה',
+        'SHARON':'השרון'
+      },
+      'Status':{
+        'SINGLE':'רווק/ה',
+        'ALMAN': 'אלמנ/ה',
+        'GARUSH':'גרוש/ה'
+      },
+      'Dos':{
+        'MASORTI':'מסורתי',
+        'LITE':   'לייט',
+        'REGULAR':'רגיל',
+        'VERY':   'מאוד',
+        'DOS':    'דוס'
+      },
+      'Hashkafa':{
+        'LEUMI':  'לאומי',
+        'CHAREDI':'חרדי',
+        'CHABAD': 'חבד',
+        'BRESLUV':'ברסלב',
+        'CHOZER_BITSHUVA':'חוזר בתשובה',
+        'JEW':'יהודי'
+      },
+      'Eda':{
+        'ASHKENAZI':'אשכנז',
+        'SEFARADI': 'ספרדי',
+        'TEMANI':   'תמני',
+        'ETYOPI':   'אתיופי',
+        'FRENCH':   'צרפתי',
+        'MIXED':    'מעורב',
+      },
+      'Smoke':{
+        'NO':'לא',
+        'SOMETIMES':'לפעמים',
+        'TRY_TO_STOP':'מנסה להפסיק',
+        'YES':'כן',
+
+      },
+      'SherutGirl':{
+        "ARMY":            "צבא",
+        "MECHINA":         "מכינה",
+        "ONE_YEAR_SHERUT": "שנה שירות",
+        "TWO_YEARS_SHERUT":"שנתים שירות",
+        "MIDRASHA":        "מדרשה",
+        "SHLICHUT":        "שליחות",
+        "GURNISHT":        "אחר"
+
+      },
+      'SherutBoy':{
+        "KRAVI":   "קרבי",
+        "JOBNIK":  "ג'וב",
+        "MECHINA": "מכינה",
+        "HESDER":  "ישיבת הסדר",
+        "GVOHA":   "ישיבה גבוהה",
+        "SHERUT":  "שירות",
+        "SHLICHUT":"שליחות",
+        "GURNISH": "אחר"
+      },
+      'CompareScore':{
+        "NOT_KASHUR":"לא קשור",
+        "MAYBE":     "יכול להיות",
+        "YALA":      "יאלה",
+
+      }
+    },
+
+  };
+    static String getLocaleSelectText(languageCode,select,text) {
+    if (_localizedValues[languageCode][select]!=null&&_localizedValues[languageCode][select][text]!=null)
+    return _localizedValues[languageCode][select][text];
+    else
+    return text;
   }
 }
