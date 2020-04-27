@@ -423,10 +423,10 @@ class _AddPersonState extends State<AddPerson> {
                                                         height: 40,
                                                         decoration: BoxDecoration(
                                                           borderRadius: BorderRadius.circular(50),
-                                                          border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary),
+                                                           border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary),
                                                         ),
                                                         child: IconButton(
-                                                            icon: FaIcon(FontAwesomeIcons.male),
+                                                           icon: FaIcon(FontAwesomeIcons.male),
                                                             color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary,
                                                             padding: EdgeInsets.all(5.0),
                                                             // alignment: Alignment.centerRight,
@@ -1069,7 +1069,10 @@ class _AddPersonState extends State<AddPerson> {
                                     child: Container(
                                       padding: const EdgeInsets.only(top: 14.0),
                                       child: Text(
-                                        LocaleText.getLocaleText(MyApp.getLocale(), 'What are they looking for?'),
+                                        sSelected==Gender.FEMALE?
+                                        LocaleText.getLocaleText(MyApp.getLocale(),'What are she looking for?'):
+                                        LocaleText.getLocaleText(MyApp.getLocale(),'What are he looking for?')
+                                        ,
                                         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25.0),
                                       ),
                                     ),
