@@ -701,7 +701,7 @@ class _AddPersonState extends State<AddPerson> {
                                 Row(
                                   children: <Widget>[
                                     FaIcon(
-                                      FontAwesomeIcons.pray,
+                                      FontAwesomeIcons.torah,
                                       size: 25.0,
                                       color: Colors.white,
                                     ),
@@ -724,7 +724,7 @@ class _AddPersonState extends State<AddPerson> {
                                 Row(
                                   children: <Widget>[
                                     FaIcon(
-                                      FontAwesomeIcons.synagogue,
+                                      FontAwesomeIcons.starOfDavid,
                                       size: 25.0,
                                       color: Colors.white,
                                     ),
@@ -747,7 +747,7 @@ class _AddPersonState extends State<AddPerson> {
                                 Row(
                                   children: <Widget>[
                                     FaIcon(
-                                      FontAwesomeIcons.starOfDavid,
+                                      FontAwesomeIcons.synagogue,
                                       size: 25.0,
                                       color: Colors.white,
                                     ),
