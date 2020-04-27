@@ -1,3 +1,5 @@
+import 'package:dating/main.dart';
+import 'package:dating/providers/langText.dart';
 import 'package:dating/themes/appTheme.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +29,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
         selectedColor: AppTheme.filterBackgroundColor,
         checkmarkColor: AppTheme.primary[300],
         selected: isSelected? true : false,
-        label: new Text(value.toString().split('.')[1],style: TextStyle(color: isSelected?AppTheme.primary[300]: AppTheme.primary ),),
+        label: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), value.toString()),style: TextStyle(color:AppTheme.primary[300] ),),
         backgroundColor: AppTheme.fillColor,
 
          shape: StadiumBorder(side:isSelected ?
@@ -73,7 +75,7 @@ class _SelectChipState extends State<SelectChip> {
         elevation: isSelected?5:0,
         selectedColor: AppTheme.filterBackgroundColor,
         selected:  isSelected? true : false,
-        label:  new Text(value.toString().split('.')[1],style: TextStyle(color: isSelected?AppTheme.primary[300]: AppTheme.primary ),),
+        label:  new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), value.toString()),style: TextStyle(color:AppTheme.primary[300] ),),
         backgroundColor: AppTheme.fillColor,
         shape: StadiumBorder(side:isSelected ?
           BorderSide(color: AppTheme.primary[300]):BorderSide(color: AppTheme.fillColor)),

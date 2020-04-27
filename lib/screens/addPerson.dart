@@ -435,7 +435,7 @@ class _AddPersonState extends State<AddPerson> {
                                                                 })),
                                                       ),
                                                       Text(
-                                                        "  Boy",
+                                                         "  "+LocaleText.getLocaleText(MyApp.getLocale(), 'Boy'),
                                                         style: themeTextStyle,
                                                       ),
                                                       Spacer(),
@@ -455,7 +455,7 @@ class _AddPersonState extends State<AddPerson> {
                                                                   sSelected = Gender.FEMALE;
                                                                 })),
                                                       ),
-                                                      Text("  Girl", style: themeTextStyle),
+                                                      Text("  "+LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: themeTextStyle),
                                                     ],
                                                   ),
                                                   //        Stack(
@@ -556,8 +556,8 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   Row(
                                     children: <Widget>[
-                                      Icon(
-                                        Icons.date_range,
+                                      FaIcon(
+                                        FontAwesomeIcons.birthdayCake,
                                         size: 25.0,
                                         color: Colors.white,
                                       ),

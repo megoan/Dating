@@ -5,6 +5,11 @@ class LocaleText {
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
+      'Boy':'Boy',
+      'Girl':'Girl',
+      'Him':'Him',
+      'Her':'Her',
+      'Like':'Like',
       'Get Started':'Get Started',
       'name': 'name',
       'email':'email',
@@ -77,7 +82,12 @@ class LocaleText {
       
     },
     'he': {
+      'Boy':'בן',
+      'Girl':'בת',
+      'Him':'הוא',
+      'Her':'היא',
       'name': 'שם',
+      'Like':'רוצה',
       'email':'אימייל',
       'Your picture': 'התמונה שלך',
       'Get Started':'התחל',
@@ -324,7 +334,7 @@ class LocaleText {
       String _text= text;
       if(text==null)
       {
-        _select = select.split('.').first;
+        _select = select.split('.').first; 
         _text = select.split('.').last;
       }
 

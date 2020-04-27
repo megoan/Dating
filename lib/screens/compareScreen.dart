@@ -3,6 +3,7 @@ import 'package:dating/models/person.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
+import 'package:dating/themes/appTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +54,7 @@ class _CompareScreenState extends State<CompareScreen> {
       padding: const EdgeInsets.all(8.0),
       decoration: new BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.deepPurple,
+        color: AppTheme.filterBackgroundColor,
       ),
       child: FaIcon(
         _icon,
@@ -89,7 +90,7 @@ class _CompareScreenState extends State<CompareScreen> {
                             border: Border(
                           left: BorderSide(
                             width: 0.5,
-                            color: Colors.deepPurple,
+                            color: AppTheme.filterBackgroundColor,
                           ),
                         )),
                         child: Padding(
@@ -128,7 +129,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         right: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -178,7 +179,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -214,7 +215,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -255,7 +256,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -286,7 +287,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -327,7 +328,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -359,7 +360,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -400,7 +401,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -431,7 +432,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -458,7 +459,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
-            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.pray))),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.torah))),
           ]),
           //Hashkafa
           Stack(children: [
@@ -472,7 +473,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -503,7 +504,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -530,7 +531,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
-            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.synagogue))),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.starOfDavid))),
           ]),
           //Eda
           Stack(children: [
@@ -544,7 +545,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -575,7 +576,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -602,7 +603,7 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
-            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.starOfDavid))),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.synagogue))),
           ]),
           //Smoking
           Stack(children: [
@@ -616,7 +617,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -647,7 +648,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -688,7 +689,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -727,7 +728,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -776,7 +777,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           border: Border(
                         left: BorderSide(
                           width: 0.5,
-                          color: Colors.deepPurple,
+                          color: AppTheme.filterBackgroundColor,
                         ),
                       )),
                       child: Padding(
@@ -825,7 +826,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         border: Border(
                       right: BorderSide(
                         width: 0.5,
-                        color: Colors.deepPurple,
+                        color: AppTheme.filterBackgroundColor,
                       ),
                     )),
                     child: Padding(
@@ -936,7 +937,7 @@ class _CompareScreenState extends State<CompareScreen> {
   Widget build(BuildContext context) {
     screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.deepPurple[500],
+      backgroundColor: AppTheme.filterBackgroundColor,
       // appBar: AppBar(
       //   title: Text("compare"),
       // ),
@@ -969,7 +970,8 @@ class _CompareScreenState extends State<CompareScreen> {
                             children: <Widget>[
                               Text(
                                 widget.myPerson.firstName,
-                                style: TextStyle(fontSize: 25, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                                
+                                style: TextStyle(fontSize: 25, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 height: 15,
@@ -980,8 +982,9 @@ class _CompareScreenState extends State<CompareScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(widget.myPerson.gender == Gender.MALE ? "Him" : "her", style: TextStyle(fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
-                                    Text("Desire", style: TextStyle(fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
+                                    Text(widget.myPerson.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') :
+                                      LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
+                                    Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Like'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
                                   ],
                                 ),
                               )
@@ -990,7 +993,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         ),
                       ),
                     ),
-                    Container(width: 1, color: Colors.deepPurple),
+                    Container(width: 1, color: AppTheme.filterBackgroundColor),
                     Expanded(
                       child: Container(
                         alignment: Alignment.center,
@@ -1004,7 +1007,7 @@ class _CompareScreenState extends State<CompareScreen> {
                             children: <Widget>[
                               Text(
                                 widget.person.firstName,
-                                style: TextStyle(fontSize: 25, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 25, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 height: 15,
@@ -1018,8 +1021,9 @@ class _CompareScreenState extends State<CompareScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(widget.person.gender == Gender.MALE ? "Him" : "her", style: TextStyle(fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
-                                    Text("Desire", style: TextStyle(fontSize: 18, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
+                                    Text(widget.person.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') :
+                                     LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
+                                    Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Like'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
                                   ],
                                 ),
                               )
@@ -1042,7 +1046,7 @@ class _CompareScreenState extends State<CompareScreen> {
                             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30)),
                           )),
                     ),
-                    Container(width: 1, color: Colors.deepPurple),
+                    Container(width: 1, color: AppTheme.filterBackgroundColor),
                     Expanded(
                       child: Container(
                         height: 20,
