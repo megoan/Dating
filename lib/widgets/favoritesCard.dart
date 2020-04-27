@@ -73,7 +73,7 @@ class FavoritesCard extends StatelessWidget {
                                   ),
                                    Row(
                                      children: <Widget>[
-                                       Text(StaticFunctions.getArea(person.area),),
+                                       Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),person.country.toString())),
                                        Icon(Icons.location_on,color:Theme.of(context).primaryColor),
                                      ],
                                    ),

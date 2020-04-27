@@ -1,4 +1,6 @@
-  import 'package:dating/models/person.dart';
+  import 'package:dating/main.dart';
+import 'package:dating/models/person.dart';
+import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:flutter/material.dart';
 
@@ -61,17 +63,14 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(StaticFunctions.getCountry(currentPerson.country)),
+                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),currentPerson.country.toString())),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: currentPerson.countrys
-                        .map((e) => (Text(StaticFunctions.getCountry(e), style: TextStyle(color: (currentPerson.countrys.contains(otherPerson.country)) ? Colors.green : Colors.red))))
+                        .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), style: TextStyle(color: (currentPerson.countrys.contains(otherPerson.country)) ? Colors.green : Colors.red))))
                         .toList())
-                // Text(
-                //   currentPerson.countrys.map((country) => StaticFunctions.getCountry(country)).toList().join('\n'),
-                //   style: TextStyle(color: (currentPerson.countrys.contains(otherPerson.country)) ? Colors.green : Colors.red),
-                // ),
+              
               ],
             )
            
@@ -84,12 +83,12 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
              Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(StaticFunctions.getArea(currentPerson.area)),
+                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),currentPerson.area.toString())),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: currentPerson.areas
-                        .map((e) => (Text(StaticFunctions.getArea(e), style: TextStyle(color: (currentPerson.countrys.contains(otherPerson.country)) ? Colors.green : Colors.red))))
+                        .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), style: TextStyle(color: (currentPerson.countrys.contains(otherPerson.country)) ? Colors.green : Colors.red))))
                         .toList())
               ],
             ),
@@ -100,12 +99,12 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(StaticFunctions.getStatus(currentPerson.status)),
+                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),currentPerson.status.toString())),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: currentPerson.statuses
-                        .map((e) => (Text(StaticFunctions.getStatus(e), style: TextStyle(color: (currentPerson.statuses.contains(otherPerson.status)) ? Colors.green : Colors.red))))
+                        .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), style: TextStyle(color: (currentPerson.statuses.contains(otherPerson.status)) ? Colors.green : Colors.red))))
                         .toList())
               ],
             ),
@@ -117,12 +116,12 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(StaticFunctions.getDos(currentPerson.dos)),
+                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),currentPerson.dos.toString())),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: currentPerson.doses
-                        .map((e) => (Text(StaticFunctions.getDos(e), style: TextStyle(color: (currentPerson.doses.contains(otherPerson.dos)) ? Colors.green : Colors.red))))
+                        .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), style: TextStyle(color: (currentPerson.doses.contains(otherPerson.dos)) ? Colors.green : Colors.red))))
                         .toList())
               ],
             ),
@@ -133,12 +132,12 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(StaticFunctions.getHashkafa(currentPerson.hashkafa)),
+                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),currentPerson.hashkafa.toString())),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: currentPerson.hashkafas
-                        .map((e) => (Text(StaticFunctions.getHashkafa(e), style: TextStyle(color: (currentPerson.hashkafas.contains(otherPerson.hashkafa)) ? Colors.green : Colors.red))))
+                        .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), style: TextStyle(color: (currentPerson.hashkafas.contains(otherPerson.hashkafa)) ? Colors.green : Colors.red))))
                         .toList())
               ],
             ),
@@ -150,12 +149,12 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(StaticFunctions.getEda(currentPerson.eda)),
+                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),currentPerson.eda.toString())),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children:
-                        currentPerson.edas.map((e) => (Text(StaticFunctions.getEda(e), style: TextStyle(color: (currentPerson.edas.contains(otherPerson.eda)) ? Colors.green : Colors.red)))).toList())
+                        currentPerson.edas.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), style: TextStyle(color: (currentPerson.edas.contains(otherPerson.eda)) ? Colors.green : Colors.red)))).toList())
               ],
             ),
           ),
@@ -165,12 +164,12 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(StaticFunctions.getSmoke(currentPerson.smoke)),
+                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),currentPerson.smoke.toString())),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: currentPerson.smoking
-                        .map((e) => (Text(StaticFunctions.getSmoke(e), style: TextStyle(color: (currentPerson.smoking.contains(otherPerson.smoke)) ? Colors.green : Colors.red))))
+                        .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), style: TextStyle(color: (currentPerson.smoking.contains(otherPerson.smoke)) ? Colors.green : Colors.red))))
                         .toList())
               ],
             ),
@@ -203,14 +202,14 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: 
-                  //currentPerson.thereSherutGirl.map((e) => Text(StaticFunctions.getSherutGirl(e))).toList()
+                  
                   currentPerson.gender == Gender.MALE
                       ?currentPerson.mySherutBoy!=null?
-                      currentPerson.mySherutBoy.map((e) => Text(StaticFunctions.getSherutBoy(e))).toList():
+                      currentPerson.mySherutBoy.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()))).toList():
                       []
                       :
                       currentPerson.mySherutGirl!=null?
-                      currentPerson.mySherutGirl.map((e) => Text(StaticFunctions.getSherutGirl(e))).toList():
+                      currentPerson.mySherutGirl.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()))).toList():
                      []
                        ,
                 ),
@@ -222,13 +221,13 @@ Widget personalDetails(screenSize, {bool mainSelected: true}) {
                       children: currentPerson.gender == Gender.MALE
                           ?currentPerson.thereSherutGirl
                               .map((e) => Text(
-                                    StaticFunctions.getSherutGirl(e),
+                                    LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()),
                                     style: TextStyle(color: (otherPerson.thereSherutBoy.contains(e) ? Colors.green : Colors.red)),
                                   ))
                               .toList()
                           : currentPerson.thereSherutBoy
                               .map((e) => Text(
-                                    StaticFunctions.getSherutBoy(e),
+                                    LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()),
                                     style: TextStyle(color: (otherPerson.thereSherutGirl.contains(e) ? Colors.green : Colors.red)),
                                   ))
                               .toList(),
