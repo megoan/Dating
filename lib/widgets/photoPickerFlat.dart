@@ -9,13 +9,13 @@ class PhotoPickerFlat extends StatefulWidget {
   File image;
   Function imageCallBack;
   int photoNum = 0;
-  bool small = false;
+  bool small ;
   String imageUrl;
   final double width;
   final double height;
   @override
   _PhotoPickerFlatState createState() => _PhotoPickerFlatState();
-  PhotoPickerFlat({this.image, this.imageCallBack, this.photoNum, this.imageUrl, this.small = false, this.width, this.height});
+  PhotoPickerFlat({this.image, this.imageCallBack, this.photoNum, this.imageUrl, this.small = true, this.width, this.height});
 }
 
 class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
@@ -71,21 +71,41 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                     : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ImageButton(image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
+                        ImageButton(small: widget.small,image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
                         ImageButton(
+                          small: widget.small,
                           image: widget.image,
                           imageCallBack: getGalleryImage,
                           iconData: Icons.image,
                         )
                       ])),
         if (widget.image != null)
-          Positioned(bottom: 0,
+          widget.small?
+          
+          Positioned(bottom: 0,right: 0,child: Container(
+            width: 40,
+            height: 40,
+            decoration:BoxDecoration(color: AppTheme.primary, 
+            borderRadius:BorderRadius.only( topLeft: Radius.circular(30)),),
+            child: ImageButton(
+                  small: widget.small,
+                  image: widget.image,
+                  imageCallBack: () {
+                    widget.imageCallBack(null);
+                  },
+                  iconData: Icons.close,
+                ),
+          ),)
+
+          :Positioned(bottom: 0,right: 0,
                       child: Container(
                         
-                        decoration: BoxDecoration(color: Colors.black38, borderRadius: BorderRadius.circular(5),),
+                        decoration:BoxDecoration(color: AppTheme.primary, 
+            borderRadius:BorderRadius.only( topLeft: Radius.circular(20)),),
                         child: Column(
               children: <Widget>[
                 ImageButton(
+                  small: widget.small,
                   image: widget.image,
                   imageCallBack: () {
                     widget.imageCallBack(null);
@@ -93,6 +113,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                   iconData: Icons.close,
                 ),
                 ImageButton(
+                  small: widget.small,
                   image: widget.image,
                   imageCallBack: cropImage,
                   iconData: Icons.crop,
@@ -110,7 +131,9 @@ class ImageButton extends StatelessWidget {
   File image;
   Function imageCallBack;
   IconData iconData;
-  ImageButton({this.image, this.imageCallBack, this.iconData});
+  bool small;
+  Color color  ;
+  ImageButton({this.image, this.imageCallBack, this.iconData,this.color = AppTheme.primary ,this.small = true});
 
   @override
   Widget build(BuildContext context) {
@@ -118,11 +141,11 @@ class ImageButton extends StatelessWidget {
       onPressed: () {
         imageCallBack();
       },
-      constraints: BoxConstraints(minWidth:40,minHeight:40),
-      child: new Icon(iconData, color: Colors.white, size: 20),
+      constraints: small?BoxConstraints(minWidth:35,minHeight:35):  BoxConstraints(minWidth:40,minHeight:40),
+      child: new Icon(iconData, color: Colors.white, size: small?  16:20),
       shape: new CircleBorder(),
       elevation: 0,
-      fillColor: Theme.of(context).primaryColor,
+      fillColor:color,
       padding: const EdgeInsets.all(0),
       
     );

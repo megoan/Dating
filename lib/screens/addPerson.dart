@@ -30,6 +30,7 @@ class AddPerson extends StatefulWidget {
 class _AddPersonState extends State<AddPerson> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _secondFormKey = new GlobalKey<FormState>();
 
   Area _area;
   Country _country;
@@ -356,6 +357,7 @@ class _AddPersonState extends State<AddPerson> {
                                         Expanded(
                                           child: PhotoPickerFlat(
                                             height: 210,
+                                            small: false,
                                             imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
                                                 ? personProvider.newPerson.profileImages[0]
                                                 : null,
@@ -589,9 +591,9 @@ class _AddPersonState extends State<AddPerson> {
                                           ],
                                         ),
                                         FaIcon(
-                                         FontAwesomeIcons.angleDown,
-                                         size: 20,
-                                         color: Colors.white,
+                                          FontAwesomeIcons.angleDown,
+                                          size: 20,
+                                          color: Colors.white,
                                         ),
                                       ],
                                     ),
@@ -649,7 +651,6 @@ class _AddPersonState extends State<AddPerson> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                //Country
                                 Row(
                                   children: <Widget>[
                                     FaIcon(
@@ -802,7 +803,7 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                                 new TextFormField(
                                   cursorColor: Colors.white,
-                                                  style: themeTextStyle,
+                                  style: themeTextStyle,
                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.short != null ? personProvider.newPerson.short : "",
                                   maxLines: null,
                                   maxLength: 70,
@@ -812,7 +813,7 @@ class _AddPersonState extends State<AddPerson> {
                                     ),
                                     //icon: const Icon(Icons.short_text),
                                     hintStyle: TextStyle(color: AppTheme.primary),
-                                                    labelStyle: themeTextStyle,
+                                    labelStyle: themeTextStyle,
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                                   ),
@@ -836,7 +837,7 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                                 new TextFormField(
                                   cursorColor: Colors.white,
-                                                  style: themeTextStyle,
+                                  style: themeTextStyle,
                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
                                   maxLines: null,
                                   minLines: 5,
@@ -844,9 +845,9 @@ class _AddPersonState extends State<AddPerson> {
                                     border: OutlineInputBorder(
                                       borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                     ),
-                                    //icon: const Icon(Icons.format_align_justify),
+                                    
                                     hintStyle: TextStyle(color: AppTheme.primary),
-                                                    labelStyle: themeTextStyle,
+                                    labelStyle: themeTextStyle,
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                                   ),
@@ -869,33 +870,32 @@ class _AddPersonState extends State<AddPerson> {
                                     title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
                                   ],
                                 ),
-                                 Row(
-                                    children: <Widget>[
-                                    
-                                      Expanded(
-                                        child: Slider(
-                                          activeColor: AppTheme.secondary,
-                                          min: 1.3,
-                                          max: 2.3,
-                                          divisions: 130,
-                                          label: "" + personHeight.toStringAsFixed(2),
-                                          value: personHeight,
-                                          onChanged: ((newValue) {
-                                            setState(() {
-                                              personHeight = newValue;
-                                              personProvider.newPerson.height = newValue;
-                                            });
-                                          }),
-                                        ),
+                                Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Slider(
+                                        activeColor: AppTheme.secondary,
+                                        min: 1.3,
+                                        max: 2.3,
+                                        divisions: 130,
+                                        label: "" + personHeight.toStringAsFixed(2),
+                                        value: personHeight,
+                                        onChanged: ((newValue) {
+                                          setState(() {
+                                            personHeight = newValue;
+                                            personProvider.newPerson.height = newValue;
+                                          });
+                                        }),
                                       ),
-                                      Text(
-                                        "" + personHeight.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),
-                                        style: themeTextStyle,
-                                      )
-                                    ],
-                                  ),
-                                
-                                    SizedBox(
+                                    ),
+                                    Text(
+                                      "" + personHeight.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),
+                                      style: themeTextStyle,
+                                    )
+                                  ],
+                                ),
+
+                                SizedBox(
                                   height: 10,
                                 ),
                                 Row(
@@ -908,7 +908,7 @@ class _AddPersonState extends State<AddPerson> {
                                     title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
                                   ],
                                 ),
-                              
+
                                 if (sSelected == Gender.FEMALE)
                                   MultiSelectChip(SherutGirl.values, (val) => print(val)),
                                 // Container(
@@ -970,6 +970,64 @@ class _AddPersonState extends State<AddPerson> {
                                 //     ],
                                 //   ),
                                 // ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.cameraRetro,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title("עוד תמונות"),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: PhotoPickerFlat(
+                                        imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
+                                            ? personProvider.newPerson.profileImages[0]
+                                            : null,
+                                        image: _image2,
+                                        imageCallBack: imageCallBack2,
+                                        photoNum: 2,
+                                        height: 150,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                        child: PhotoPickerFlat(
+                                      imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
+                                          ? personProvider.newPerson.profileImages[0]
+                                          : null,
+                                      image: _image3,
+                                      imageCallBack: imageCallBack3,
+                                      photoNum: 3,
+                                      height: 150,
+                                    )),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                        child: PhotoPickerFlat(
+                                      imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
+                                          ? personProvider.newPerson.profileImages[0]
+                                          : null,
+                                      image: _image4,
+                                      imageCallBack: imageCallBack4,
+                                      photoNum: 4,
+                                      height: 150,
+                                    )),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
                               ],
                             ),
                           ),
@@ -986,388 +1044,434 @@ class _AddPersonState extends State<AddPerson> {
                       child: Column(
                         children: <Widget>[
                           Form(
-                            key: _formKey,
+                            key: _secondFormKey,
                             autovalidate: false,
                             child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Container(
-                                  padding: const EdgeInsets.only(top: 14.0),
-                                  child: Text(
-                                    LocaleText.getLocaleText(MyApp.getLocale(), 'What are they looking for?'),
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
+                                Center(
                                   child: Container(
                                     padding: const EdgeInsets.only(top: 14.0),
                                     child: Text(
-                                      LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+                                      LocaleText.getLocaleText(MyApp.getLocale(), 'What are they looking for?'),
+                                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25.0),
                                     ),
                                   ),
-                                ),
-                                CheckboxGroup(
-                                  checked: personProvider.newPerson != null && personProvider.newPerson.countrys != null
-                                      ? personProvider.newPerson.countrys.map((e) => StaticFunctions.getCountry(e)).toList()
-                                      : null,
-                                  labels: Country.values.map((e) => StaticFunctions.getCountry(e)).toList(),
-                                  onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if (personProvider.newPerson.countrys == null) {
-                                        personProvider.newPerson.countrys = [];
-                                      }
-                                      personProvider.newPerson.countrys.add(Country.values[index]);
-                                    } else {
-                                      personProvider.newPerson.countrys.remove(Country.values[index]);
-                                    }
-                                    print("isChecked: $isChecked   label: $label  index: $index");
-                                    setState(() {});
-                                  },
-                                  onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
                                 ),
                                 SizedBox(
                                   height: 20,
                                 ),
-                                if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys.contains(Country.ISRAEL))
-                                  Align(
-                                    alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                    child: Container(
-                                      padding: const EdgeInsets.only(top: 14.0),
-                                      child: Text(
-                                        LocaleText.getLocaleText(MyApp.getLocale(), 'Area'),
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                      ),
+                                //Country
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.globeEurope,
+                                      size: 25.0,
+                                      color: Colors.white,
                                     ),
-                                  ),
-                                if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys.contains(Country.ISRAEL))
-                                  CheckboxGroup(
-                                    checked: personProvider.newPerson != null && personProvider.newPerson.areas != null
-                                        ? personProvider.newPerson.areas.map((e) => StaticFunctions.getArea(e)).toList()
-                                        : null,
-                                    labels: Area.values.map((e) => StaticFunctions.getArea(e)).toList(),
-                                    onChange: (bool isChecked, String label, int index) {
-                                      if (isChecked) {
-                                        if (personProvider.newPerson.areas == null) {
-                                          personProvider.newPerson.areas = [];
-                                        }
-                                        personProvider.newPerson.areas.add(Area.values[index]);
-                                      } else {
-                                        personProvider.newPerson.areas.remove(Area.values[index]);
-                                      }
-                                      print("isChecked: $isChecked   label: $label  index: $index");
-                                      setState(() {});
-                                    },
-                                    onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
+                                  ],
+                                ),
+                                MultiSelectChip(Country.values, (val) => print(val)),
+                                // CheckboxGroup(
+                                //   checked: personProvider.newPerson != null && personProvider.newPerson.countrys != null
+                                //       ? personProvider.newPerson.countrys.map((e) => StaticFunctions.getCountry(e)).toList()
+                                //       : null,
+                                //   labels: Country.values.map((e) => StaticFunctions.getCountry(e)).toList(),
+                                //   onChange: (bool isChecked, String label, int index) {
+                                //     if (isChecked) {
+                                //       if (personProvider.newPerson.countrys == null) {
+                                //         personProvider.newPerson.countrys = [];
+                                //       }
+                                //       personProvider.newPerson.countrys.add(Country.values[index]);
+                                //     } else {
+                                //       personProvider.newPerson.countrys.remove(Country.values[index]);
+                                //     }
+                                //     print("isChecked: $isChecked   label: $label  index: $index");
+                                //     setState(() {});
+                                //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                //   },
+                                // ),
+
                                 if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys.contains(Country.ISRAEL))
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
-                                Align(
-                                  alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 14.0),
-                                    child: Text(
-                                      LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                    ),
-                                  ),
-                                ),
-                                CheckboxGroup(
-                                  checked: personProvider.newPerson != null && personProvider.newPerson.statuses != null
-                                      ? personProvider.newPerson.statuses.map((e) => StaticFunctions.getStatus(e)).toList()
-                                      : null,
-                                  labels: Status.values.map((e) => StaticFunctions.getStatus(e)).toList(),
-                                  onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if (personProvider.newPerson.statuses == null) {
-                                        personProvider.newPerson.statuses = [];
-                                      }
-                                      personProvider.newPerson.statuses.add(Status.values[index]);
-                                    } else {
-                                      personProvider.newPerson.statuses.remove(Status.values[index]);
-                                    }
-                                    print("isChecked: $isChecked   label: $label  index: $index");
-                                    setState(() {});
-                                  },
-                                  onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Align(
-                                  alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 14.0),
-                                    child: Text(
-                                      LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'),
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                    ),
-                                  ),
-                                ),
-                                CheckboxGroup(
-                                  checked:
-                                      personProvider.newPerson != null && personProvider.newPerson.doses != null ? personProvider.newPerson.doses.map((e) => StaticFunctions.getDos(e)).toList() : null,
-                                  labels: Dos.values.map((e) => StaticFunctions.getDos(e)).toList(),
-                                  onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if (personProvider.newPerson.doses == null) {
-                                        personProvider.newPerson.doses = [];
-                                      }
-                                      personProvider.newPerson.doses.add(Dos.values[index]);
-                                    } else {
-                                      personProvider.newPerson.doses.remove(Dos.values[index]);
-                                    }
-                                    print("isChecked: $isChecked   label: $label  index: $index");
-                                    setState(() {});
-                                  },
-                                  onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Align(
-                                  alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 14.0),
-                                    child: Text(
-                                      LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa'),
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                    ),
-                                  ),
-                                ),
-                                CheckboxGroup(
-                                  checked: personProvider.newPerson != null && personProvider.newPerson.hashkafas != null
-                                      ? personProvider.newPerson.hashkafas.map((e) => StaticFunctions.getHashkafa(e)).toList()
-                                      : null,
-                                  labels: Hashkafa.values.map((e) => StaticFunctions.getHashkafa(e)).toList(),
-                                  onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if (personProvider.newPerson.hashkafas == null) {
-                                        personProvider.newPerson.hashkafas = [];
-                                      }
-                                      personProvider.newPerson.hashkafas.add(Hashkafa.values[index]);
-                                    } else {
-                                      personProvider.newPerson.hashkafas.remove(Hashkafa.values[index]);
-                                    }
-                                    print("isChecked: $isChecked   label: $label  index: $index");
-                                    setState(() {});
-                                  },
-                                  onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Align(
-                                  alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 14.0),
-                                    child: Text(
-                                      LocaleText.getLocaleText(MyApp.getLocale(), 'Eda'),
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                    ),
-                                  ),
-                                ),
-                                CheckboxGroup(
-                                  checked:
-                                      personProvider.newPerson != null && personProvider.newPerson.edas != null ? personProvider.newPerson.edas.map((e) => StaticFunctions.getEda(e)).toList() : null,
-                                  labels: Eda.values.map((e) => StaticFunctions.getEda(e)).toList(),
-                                  onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if (personProvider.newPerson.edas == null) {
-                                        personProvider.newPerson.edas = [];
-                                      }
-                                      personProvider.newPerson.edas.add(Eda.values[index]);
-                                    } else {
-                                      personProvider.newPerson.edas.remove(Eda.values[index]);
-                                    }
-                                    print("isChecked: $isChecked   label: $label  index: $index");
-                                    setState(() {});
-                                  },
-                                  onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Align(
-                                  alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 14.0),
-                                    child: Text(
-                                      LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking'),
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                    ),
-                                  ),
-                                ),
-                                CheckboxGroup(
-                                  checked: personProvider.newPerson != null && personProvider.newPerson.smoking != null
-                                      ? personProvider.newPerson.smoking.map((e) => StaticFunctions.getSmoke(e)).toList()
-                                      : null,
-                                  labels: Smoke.values.map((e) => StaticFunctions.getSmoke(e)).toList(),
-                                  onChange: (bool isChecked, String label, int index) {
-                                    if (isChecked) {
-                                      if (personProvider.newPerson.smoking == null) {
-                                        personProvider.newPerson.smoking = [];
-                                      }
-                                      personProvider.newPerson.smoking.add(Smoke.values[index]);
-                                    } else {
-                                      personProvider.newPerson.smoking.remove(Smoke.values[index]);
-                                    }
-                                    print("isChecked: $isChecked   label: $label  index: $index");
-                                    setState(() {});
-                                  },
-                                  onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                if (sSelected == Gender.MALE)
-                                  Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                          child: Container(
-                                            padding: const EdgeInsets.only(top: 14.0),
-                                            child: Text(
-                                              LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
-                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                            ),
-                                          ),
-                                        ),
-                                        CheckboxGroup(
-                                          checked: personProvider.newPerson != null && personProvider.newPerson.thereSherutGirl != null
-                                              ? personProvider.newPerson.thereSherutGirl.map((e) => StaticFunctions.getSherutGirl(e)).toList()
-                                              : null,
-                                          labels: SherutGirl.values.map((e) => StaticFunctions.getSherutGirl(e)).toList(),
-                                          onChange: (bool isChecked, String label, int index) {
-                                            if (isChecked) {
-                                              if (personProvider.newPerson.thereSherutGirl == null) {
-                                                personProvider.newPerson.thereSherutGirl = [];
-                                              }
-                                              personProvider.newPerson.thereSherutGirl.add(SherutGirl.values[index]);
-                                            } else {
-                                              personProvider.newPerson.thereSherutGirl.remove(SherutGirl.values[index]);
-                                            }
-                                            print("isChecked: $isChecked   label: $label  index: $index");
-                                            setState(() {});
-                                          },
-                                          onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                if (sSelected == Gender.FEMALE)
-                                  Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                          child: Container(
-                                            padding: const EdgeInsets.only(top: 14.0),
-                                            child: Text(
-                                              LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
-                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                            ),
-                                          ),
-                                        ),
-                                        CheckboxGroup(
-                                          checked: personProvider.newPerson != null && personProvider.newPerson.thereSherutBoy != null
-                                              ? personProvider.newPerson.thereSherutBoy.map((e) => StaticFunctions.getSherutBoy(e)).toList()
-                                              : null,
-                                          labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(),
-                                          onChange: (bool isChecked, String label, int index) {
-                                            if (isChecked) {
-                                              if (personProvider.newPerson.thereSherutBoy == null) {
-                                                personProvider.newPerson.thereSherutBoy = [];
-                                              }
-                                              personProvider.newPerson.thereSherutBoy.add(SherutBoy.values[index]);
-                                            } else {
-                                              personProvider.newPerson.thereSherutBoy.remove(SherutBoy.values[index]);
-                                            }
-                                            print("isChecked: $isChecked   label: $label  index: $index");
-                                            setState(() {});
-                                          },
-                                          onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Column(
+                                if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys.contains(Country.ISRAEL))
+                                  Row(
                                     children: <Widget>[
-                                      Align(
-                                        alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                        child: Container(
-                                          padding: const EdgeInsets.only(top: 14.0),
-                                          child: Text(
-                                            LocaleText.getLocaleText(MyApp.getLocale(), 'Height'),
-                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                          ),
-                                        ),
+                                      FaIcon(
+                                        FontAwesomeIcons.city,
+                                        size: 25.0,
+                                        color: Colors.white,
                                       ),
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            "" + lookingPersonHeightMin.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),
-                                          ),
-                                          Expanded(
-                                            child: RangeSlider(
-                                              min: 1.0,
-                                              max: 2.3,
-                                              divisions: 130,
-                                              labels: rangeLabels,
-                                              values: rangeValues,
-                                              onChanged: ((newValue) {
-                                                setState(() {
-                                                  rangeValues = newValue;
-                                                  rangeLabels = RangeLabels(newValue.start.toStringAsFixed(2), newValue.end.toStringAsFixed(2));
-                                                  lookingPersonHeightMax = newValue.end;
-                                                  lookingPersonHeightMin = newValue.start;
-                                                  personProvider.newPerson.heightMin = newValue.start;
-                                                  personProvider.newPerson.heightMax = newValue.end;
-                                                });
-                                              }),
-                                            ),
-                                          ),
-                                          Text("" + lookingPersonHeightMax.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'))
-                                        ],
-                                      ),
+                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
                                     ],
                                   ),
-                                ),
+                                if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys.contains(Country.ISRAEL))
+                                  SelectChip(Area.values, (val) => print(val)),
+
+                                // CheckboxGroup(
+                                //   checked: personProvider.newPerson != null && personProvider.newPerson.areas != null
+                                //       ? personProvider.newPerson.areas.map((e) => StaticFunctions.getArea(e)).toList()
+                                //       : null,
+                                //   labels: Area.values.map((e) => StaticFunctions.getArea(e)).toList(),
+                                //   onChange: (bool isChecked, String label, int index) {
+                                //     if (isChecked) {
+                                //       if (personProvider.newPerson.areas == null) {
+                                //         personProvider.newPerson.areas = [];
+                                //       }
+                                //       personProvider.newPerson.areas.add(Area.values[index]);
+                                //     } else {
+                                //       personProvider.newPerson.areas.remove(Area.values[index]);
+                                //     }
+                                //     print("isChecked: $isChecked   label: $label  index: $index");
+                                //     setState(() {});
+                                //   },
+                                //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                // ),
+
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Align(
-                                        alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                        child: Container(
-                                          padding: const EdgeInsets.only(top: 14.0),
-                                          child: Text(
-                                            LocaleText.getLocaleText(MyApp.getLocale(), 'Age'),
-                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                          ),
-                                        ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.userFriends,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
+                                  ],
+                                ),
+                                MultiSelectChip(Status.values, (val) => print(val)),
+                                // CheckboxGroup(
+                                //   checked: personProvider.newPerson != null && personProvider.newPerson.statuses != null
+                                //       ? personProvider.newPerson.statuses.map((e) => StaticFunctions.getStatus(e)).toList()
+                                //       : null,
+                                //   labels: Status.values.map((e) => StaticFunctions.getStatus(e)).toList(),
+                                //   onChange: (bool isChecked, String label, int index) {
+                                //     if (isChecked) {
+                                //       if (personProvider.newPerson.statuses == null) {
+                                //         personProvider.newPerson.statuses = [];
+                                //       }
+                                //       personProvider.newPerson.statuses.add(Status.values[index]);
+                                //     } else {
+                                //       personProvider.newPerson.statuses.remove(Status.values[index]);
+                                //     }
+                                //     print("isChecked: $isChecked   label: $label  index: $index");
+                                //     setState(() {});
+                                //   },
+                                //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                // ),
+                                // SizedBox(
+                                //   height: 20,
+                                // ),
+                                // Align(
+                                //   alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
+                                //   child: Container(
+                                //     padding: const EdgeInsets.only(top: 14.0),
+                                //     child: Text(
+                                //       LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'),
+                                //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+                                //     ),
+                                //   ),
+                                // ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.torah,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
+                                  ],
+                                ),
+                                MultiSelectChip(Dos.values, (val) => print(val)),
+                                // CheckboxGroup(
+                                //   checked:
+                                //       personProvider.newPerson != null && personProvider.newPerson.doses != null ? personProvider.newPerson.doses.map((e) => StaticFunctions.getDos(e)).toList() : null,
+                                //   labels: Dos.values.map((e) => StaticFunctions.getDos(e)).toList(),
+                                //   onChange: (bool isChecked, String label, int index) {
+                                //     if (isChecked) {
+                                //       if (personProvider.newPerson.doses == null) {
+                                //         personProvider.newPerson.doses = [];
+                                //       }
+                                //       personProvider.newPerson.doses.add(Dos.values[index]);
+                                //     } else {
+                                //       personProvider.newPerson.doses.remove(Dos.values[index]);
+                                //     }
+                                //     print("isChecked: $isChecked   label: $label  index: $index");
+                                //     setState(() {});
+                                //   },
+                                //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                // ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.starOfDavid,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
+                                  ],
+                                ),
+                                MultiSelectChip(Hashkafa.values, (val) => print(val)),
+                                // CheckboxGroup(
+                                //   checked: personProvider.newPerson != null && personProvider.newPerson.hashkafas != null
+                                //       ? personProvider.newPerson.hashkafas.map((e) => StaticFunctions.getHashkafa(e)).toList()
+                                //       : null,
+                                //   labels: Hashkafa.values.map((e) => StaticFunctions.getHashkafa(e)).toList(),
+                                //   onChange: (bool isChecked, String label, int index) {
+                                //     if (isChecked) {
+                                //       if (personProvider.newPerson.hashkafas == null) {
+                                //         personProvider.newPerson.hashkafas = [];
+                                //       }
+                                //       personProvider.newPerson.hashkafas.add(Hashkafa.values[index]);
+                                //     } else {
+                                //       personProvider.newPerson.hashkafas.remove(Hashkafa.values[index]);
+                                //     }
+                                //     print("isChecked: $isChecked   label: $label  index: $index");
+                                //     setState(() {});
+                                //   },
+                                //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                // ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.synagogue,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
+                                  ],
+                                ),
+                                MultiSelectChip(Eda.values, (val) => print(val)),
+                                // CheckboxGroup(
+                                //   checked:
+                                //       personProvider.newPerson != null && personProvider.newPerson.edas != null ? personProvider.newPerson.edas.map((e) => StaticFunctions.getEda(e)).toList() : null,
+                                //   labels: Eda.values.map((e) => StaticFunctions.getEda(e)).toList(),
+                                //   onChange: (bool isChecked, String label, int index) {
+                                //     if (isChecked) {
+                                //       if (personProvider.newPerson.edas == null) {
+                                //         personProvider.newPerson.edas = [];
+                                //       }
+                                //       personProvider.newPerson.edas.add(Eda.values[index]);
+                                //     } else {
+                                //       personProvider.newPerson.edas.remove(Eda.values[index]);
+                                //     }
+                                //     print("isChecked: $isChecked   label: $label  index: $index");
+                                //     setState(() {});
+                                //   },
+                                //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                // ),
+                                 SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.smoking,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking')),
+                                  ],
+                                ),
+                               
+                                MultiSelectChip(Smoke.values, (val) => print(val)),
+                                // CheckboxGroup(
+                                //   checked: personProvider.newPerson != null && personProvider.newPerson.smoking != null
+                                //       ? personProvider.newPerson.smoking.map((e) => StaticFunctions.getSmoke(e)).toList()
+                                //       : null,
+                                //   labels: Smoke.values.map((e) => StaticFunctions.getSmoke(e)).toList(),
+                                //   onChange: (bool isChecked, String label, int index) {
+                                //     if (isChecked) {
+                                //       if (personProvider.newPerson.smoking == null) {
+                                //         personProvider.newPerson.smoking = [];
+                                //       }
+                                //       personProvider.newPerson.smoking.add(Smoke.values[index]);
+                                //     } else {
+                                //       personProvider.newPerson.smoking.remove(Smoke.values[index]);
+                                //     }
+                                //     print("isChecked: $isChecked   label: $label  index: $index");
+                                //     setState(() {});
+                                //   },
+                                //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                // ),
+                                 SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.handHoldingHeart,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
+                                  ],
+                                ),
+
+                                if (sSelected == Gender.MALE)
+                                  MultiSelectChip(SherutGirl.values, (val) => print(val))
+                                else
+                                MultiSelectChip(SherutBoy.values, (val) => print(val)),
+                                // SizedBox(
+                                //   height: 20,
+                                // ),
+                                // if (sSelected == Gender.MALE)
+                                //   Container(
+                                //     child: Column(
+                                //       children: <Widget>[
+                                //         Align(
+                                //           alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
+                                //           child: Container(
+                                //             padding: const EdgeInsets.only(top: 14.0),
+                                //             child: Text(
+                                //               LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
+                                //               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+                                //             ),
+                                //           ),
+                                //         ),
+                                //         CheckboxGroup(
+                                //           checked: personProvider.newPerson != null && personProvider.newPerson.thereSherutGirl != null
+                                //               ? personProvider.newPerson.thereSherutGirl.map((e) => StaticFunctions.getSherutGirl(e)).toList()
+                                //               : null,
+                                //           labels: SherutGirl.values.map((e) => StaticFunctions.getSherutGirl(e)).toList(),
+                                //           onChange: (bool isChecked, String label, int index) {
+                                //             if (isChecked) {
+                                //               if (personProvider.newPerson.thereSherutGirl == null) {
+                                //                 personProvider.newPerson.thereSherutGirl = [];
+                                //               }
+                                //               personProvider.newPerson.thereSherutGirl.add(SherutGirl.values[index]);
+                                //             } else {
+                                //               personProvider.newPerson.thereSherutGirl.remove(SherutGirl.values[index]);
+                                //             }
+                                //             print("isChecked: $isChecked   label: $label  index: $index");
+                                //             setState(() {});
+                                //           },
+                                //           onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                //         ),
+                                //         SizedBox(
+                                //           height: 20,
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // if (sSelected == Gender.FEMALE)
+                                //   Container(
+                                //     child: Column(
+                                //       children: <Widget>[
+                                //         Align(
+                                //           alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
+                                //           child: Container(
+                                //             padding: const EdgeInsets.only(top: 14.0),
+                                //             child: Text(
+                                //               LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
+                                //               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
+                                //             ),
+                                //           ),
+                                //         ),
+                                //         CheckboxGroup(
+                                //           checked: personProvider.newPerson != null && personProvider.newPerson.thereSherutBoy != null
+                                //               ? personProvider.newPerson.thereSherutBoy.map((e) => StaticFunctions.getSherutBoy(e)).toList()
+                                //               : null,
+                                //           labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(),
+                                //           onChange: (bool isChecked, String label, int index) {
+                                //             if (isChecked) {
+                                //               if (personProvider.newPerson.thereSherutBoy == null) {
+                                //                 personProvider.newPerson.thereSherutBoy = [];
+                                //               }
+                                //               personProvider.newPerson.thereSherutBoy.add(SherutBoy.values[index]);
+                                //             } else {
+                                //               personProvider.newPerson.thereSherutBoy.remove(SherutBoy.values[index]);
+                                //             }
+                                //             print("isChecked: $isChecked   label: $label  index: $index");
+                                //             setState(() {});
+                                //           },
+                                //           onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
+                                //         ),
+                                    //     SizedBox(
+                                    //       height: 20,
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                  // ),
+                                       SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.ruler,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
+                                  ],
+                                ),
+                              
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "" + lookingPersonHeightMin.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm')
+                                      ,style: themeTextStyle
+                                    ),
+                                    Expanded(
+                                      child: RangeSlider(
+                                        activeColor: AppTheme.secondary,
+                                        min: 1.0,
+                                        max: 2.3,
+                                        divisions: 130,
+                                        labels: rangeLabels,
+                                        values: rangeValues,
+                                        onChanged: ((newValue) {
+                                          setState(() {
+                                            rangeValues = newValue;
+                                            rangeLabels = RangeLabels(newValue.start.toStringAsFixed(2), newValue.end.toStringAsFixed(2));
+                                            lookingPersonHeightMax = newValue.end;
+                                            lookingPersonHeightMin = newValue.start;
+                                            personProvider.newPerson.heightMin = newValue.start;
+                                            personProvider.newPerson.heightMax = newValue.end;
+                                          });
+                                        }),
                                       ),
+                                    ),
+                                    Text("" + lookingPersonHeightMax.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),style: themeTextStyle)
+                                  ],
+                                ),
+                                        SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    FaIcon(
+                                      FontAwesomeIcons.birthdayCake,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'Age')),
+                                  ],
+                                ),
+                              
                                       Row(
                                         children: <Widget>[
                                           Text(
-                                            "" + lookingPersonAgeMin.toStringAsFixed(1),
+                                            "" + lookingPersonAgeMin.toStringAsFixed(1),style: themeTextStyle
                                           ),
                                           Expanded(
                                             child: RangeSlider(
+                                              activeColor: AppTheme.secondary,
                                               min: 18,
                                               max: 99,
                                               divisions: 162,
@@ -1385,36 +1489,56 @@ class _AddPersonState extends State<AddPerson> {
                                               }),
                                             ),
                                           ),
-                                          Text("" + lookingPersonAgeMax.toStringAsFixed(1))
+                                          Text("" + lookingPersonAgeMax.toStringAsFixed(1),style: themeTextStyle)
                                         ],
                                       ),
                                     ],
                                   ),
                                 ),
-                                SizedBox(
+                                   SizedBox(
                                   height: 20,
                                 ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.format_align_justify,
+                                      size: 25.0,
+                                      color: Colors.white,
+                                    ),
+                                    title(LocaleText.getLocaleText(MyApp.getLocale(), 'More info')),
+                                  ],
+                                ),
+                                SizedBox(height: 10,),
                                 new TextFormField(
                                   initialValue: personProvider.newPerson != null && personProvider.newPerson.moreInfo != null ? personProvider.newPerson.moreInfo : "",
-                                  maxLines: null,
+                                      maxLines: null,
+                                      style: themeTextStyle,
+                                  minLines: 5,
                                   onChanged: (value) {
                                     personProvider.newPerson.moreInfo = value;
                                   },
                                   decoration: InputDecoration(
-                                    icon: const Icon(Icons.wb_sunny),
+                                 
+                                  
+                                    border: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                    ),
+                                    
+                                    hintStyle: TextStyle(color: AppTheme.primary),
+                                    labelStyle: themeTextStyle,
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
                                     labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 30,
                                 ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
+                        
+                      
+                    
                   ),
                 )
               ])),
