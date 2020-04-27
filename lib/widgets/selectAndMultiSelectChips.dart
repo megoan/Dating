@@ -21,14 +21,17 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
     pickedChips = widget.pickedChips;// happens only once 
 
     for (var value in widget.chips) {
+      bool isSelected =  pickedChips[value] != null && pickedChips[value] == true;
       chipList.add(FilterChip(
+        elevation: isSelected?5:0,
         selectedColor: AppTheme.filterBackgroundColor,
-        checkmarkColor: AppTheme.primary,
-        selected: pickedChips[value] != null && pickedChips[value] == true ? true : false,
-        label: new Text(value.toString().split('.')[1],style: TextStyle(color: AppTheme.primary ),),
-        backgroundColor: AppTheme.filterBackgroundColor,
+        checkmarkColor: AppTheme.primary[300],
+        selected: isSelected? true : false,
+        label: new Text(value.toString().split('.')[1],style: TextStyle(color: isSelected?AppTheme.primary[300]: AppTheme.primary ),),
+        backgroundColor: AppTheme.fillColor,
 
-         shape: StadiumBorder(side: BorderSide(color: AppTheme.primary)),
+         shape: StadiumBorder(side:isSelected ?
+          BorderSide(color: AppTheme.primary[300]):BorderSide(color: AppTheme.fillColor)),
         onSelected: (bool bvalue) {
           setState(() {
             pickedChips[value] = bvalue;
@@ -64,12 +67,16 @@ class _SelectChipState extends State<SelectChip> {
   Widget build(BuildContext context) {
     chipList =[];
     for (var value in widget.chips) {
+      bool isSelected =  widget.pickedValue != null && widget.pickedValue == value;
       chipList.add(FilterChip(
         showCheckmark: false,
-        selectedColor: Colors.blueGrey[500],
-        selected: widget.pickedValue != null && widget.pickedValue == value ? true : false,
-        label: new Text(value.toString().split('.')[1]),
-        backgroundColor: Colors.blue[200],
+        elevation: isSelected?5:0,
+        selectedColor: AppTheme.filterBackgroundColor,
+        selected:  isSelected? true : false,
+        label:  new Text(value.toString().split('.')[1],style: TextStyle(color: isSelected?AppTheme.primary[300]: AppTheme.primary ),),
+        backgroundColor: AppTheme.fillColor,
+        shape: StadiumBorder(side:isSelected ?
+          BorderSide(color: AppTheme.primary[300]):BorderSide(color: AppTheme.fillColor)),
 
         // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
         onSelected: (bool bvalue) {

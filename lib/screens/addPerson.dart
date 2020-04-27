@@ -420,11 +420,11 @@ class _AddPersonState extends State<AddPerson> {
                                                       height: 40,
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(50),
-                                                        border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.secondary : AppTheme.primary),
+                                                        border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary),
                                                       ),
                                                       child: IconButton(
                                                           icon: FaIcon(FontAwesomeIcons.male),
-                                                          color: sSelected == Gender.MALE ? AppTheme.secondary : AppTheme.primary,
+                                                          color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary,
                                                           padding: EdgeInsets.all(5.0),
                                                           // alignment: Alignment.centerRight,
                                                           onPressed: () => setState(() {
@@ -441,11 +441,11 @@ class _AddPersonState extends State<AddPerson> {
                                                       height: 40,
                                                       decoration: BoxDecoration(
                                                         borderRadius: BorderRadius.circular(50),
-                                                        border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? AppTheme.secondary : AppTheme.primary),
+                                                        border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary),
                                                       ),
                                                       child: IconButton(
                                                           icon: FaIcon(FontAwesomeIcons.female),
-                                                          color: sSelected == Gender.FEMALE ? AppTheme.secondary : AppTheme.primary,
+                                                          color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary,
                                                           padding: EdgeInsets.all(5.0),
                                                           //alignment: Alignment.centerRight,
                                                           onPressed: () => setState(() {

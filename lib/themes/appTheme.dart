@@ -36,5 +36,6 @@ class AppTheme {
   );
 
   static Color filterBackgroundColor = Color(0xff262e4b);
+  static Color fillColor = Color(0xff212842);
   static Color textColor = Colors.white;
 }
