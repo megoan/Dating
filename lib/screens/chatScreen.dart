@@ -7,6 +7,7 @@ import 'package:dating/models/conversationModel.dart';
 import 'package:dating/models/myChatlist.dart';
 import 'package:dating/models/person.dart';
 import 'package:dating/providers/chatProvider.dart';
+import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/screens/profileInfo.dart';
@@ -300,7 +301,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Align(
                     alignment: Alignment.center,
                     child: new Text(
-                   StaticFunctions.getCompareScore(chat.compareScore),
+                   LocaleText.getLocaleSelectText(MyApp.getLocale(),chat.compareScore.toString()),
                       style: new TextStyle(
                         color: Colors.white,
                         fontSize: 18,

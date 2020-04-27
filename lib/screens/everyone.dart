@@ -64,7 +64,7 @@ class _EveryoneState extends State<Everyone> {
       chipList.add(FilterChip(
         selectedColor: Colors.blueGrey[500],
         selected: personProvider.pickedStatus[value] != null && personProvider.pickedStatus[value] == true ? true : false,
-        label: new Text(StaticFunctions.getStatus(value)),
+        label: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
         backgroundColor: Colors.blue[200],
 
         // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
@@ -183,7 +183,7 @@ class _EveryoneState extends State<Everyone> {
                                         items: Country.values.map((Country value) {
                                           return new DropdownMenuItem<Country>(
                                             value: value,
-                                            child: new Text(StaticFunctions.getCountry(value)),
+                                            child: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
                                           );
                                         }).toList(),
                                       ),
@@ -227,7 +227,7 @@ class _EveryoneState extends State<Everyone> {
                                           items: Area.values.map((Area value) {
                                             return new DropdownMenuItem<Area>(
                                               value: value,
-                                              child: new Text(StaticFunctions.getArea(value)),
+                                              child: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
                                             );
                                           }).toList(),
                                         ),

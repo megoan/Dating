@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/main.dart';
 import 'package:dating/models/person.dart';
 import 'package:dating/models/shadchan.dart';
+import 'package:dating/providers/langText.dart';
 
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
@@ -108,9 +109,10 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                              SizedBox(
                                width: 120,
                                       child: 
-                                  (widget.person.area != null) ?Text(StaticFunctions.getArea(widget.person.area)+", "+StaticFunctions.getCountry(widget.person.country), style: TextStyle(fontSize: 15, color: Colors.white)):
+                                  (widget.person.area != null) ?Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString())+
+                                  ", "+LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15, color: Colors.white)):
                                   
-                                  Text(StaticFunctions.getCountry(widget.person.country), style: TextStyle(fontSize: 15, color: Colors.white)),
+                                  Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15, color: Colors.white)),
                             //     ],
                             // ),
                              ),

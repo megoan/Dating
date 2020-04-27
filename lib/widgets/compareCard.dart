@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/models/person.dart';
 import 'package:dating/models/shadchan.dart';
+import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/screens/compareScreen.dart';
@@ -43,7 +44,7 @@ class CompareCard extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: new Text(
-                   StaticFunctions.getCompareScore(personProvider.compareScore(person)),
+                      LocaleText.getLocaleSelectText(MyApp.getLocale(),personProvider.compareScore(person).toString()),
                       style: new TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -98,9 +99,9 @@ class CompareCard extends StatelessWidget {
                         ),
                         Row(
                           children: <Widget>[
-                               if(person.area!=null) Text(StaticFunctions.getArea(person.area),),
+                               if(person.area!=null) Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),person.area.toString()),),
                           if(person.area!=null)Text(", "),
-                                Text(StaticFunctions.getCountry(person.country),),
+                                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),person.country.toString()),),
                             // Text(
                             //   StaticFunctions.getArea(person.area),
                             // ),

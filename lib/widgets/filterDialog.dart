@@ -102,7 +102,7 @@ class _FilterDialogState extends State<FilterDialog> {
                                 items: Country.values.map((Country value) {
                                   return new DropdownMenuItem<Country>(
                                     value: value,
-                                    child: new Text(StaticFunctions.getCountry(value)),
+                                    child: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
                                   );
                                 }).toList(),
                               ),
@@ -146,7 +146,7 @@ class _FilterDialogState extends State<FilterDialog> {
                                   items: Area.values.map((Area value) {
                                     return new DropdownMenuItem<Area>(
                                       value: value,
-                                      child: new Text(StaticFunctions.getArea(value)),
+                                      child: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
                                     );
                                   }).toList(),
                                 ),
@@ -186,7 +186,7 @@ class _FilterDialogState extends State<FilterDialog> {
                                 items: Status.values.map((Status value) {
                                   return new DropdownMenuItem<Status>(
                                     value: value,
-                                    child: new Text(StaticFunctions.getStatus(value)),
+                                    child: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
                                   );
                                 }).toList(),
                               ),

@@ -403,11 +403,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       children: <Widget>[
                          // if(widget.person.area!=null)   Text(StaticFunctions.getArea(widget.person.area), style: TextStyle(fontSize: 18, color: Colors.white)),
                          if(widget.person.area!=null)            Text(
-                          StaticFunctions.getArea(widget.person.area),
+                         LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.area.toString()),
                           style: TextStyle(color: Colors.black54, fontSize: 16),
                         ),
                           if(widget.person.area!=null)     Text(", ",style: TextStyle(color: Colors.black54, fontSize: 16),),
-                                Text(StaticFunctions.getCountry(widget.person.country), style: TextStyle(color: Colors.black54, fontSize: 16),),
+                                Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(color: Colors.black54, fontSize: 16),),
                                
                        
                         SizedBox(width: 4),
@@ -434,7 +434,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             height: 10,
                           ),
                           Text(
-                             StaticFunctions.getStatus(widget.person.status),
+                             LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.status.toString()),
                             style: TextStyle(color: Colors.black54),
                           ),
                           SizedBox(
@@ -443,7 +443,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                           SizedBox(height: 10),
                           Text(
-                            StaticFunctions.getHashkafa(widget.person.hashkafa),
+                            LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.hashkafa.toString()),
                             style: TextStyle(color: Colors.black54),
                           )
                         ]),
@@ -463,7 +463,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
-                              StaticFunctions.getDos(widget.person.dos),
+                              LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.dos.toString()),
                               style: TextStyle(color: Colors.black54),
                             )
                           ],
@@ -475,7 +475,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
-                               StaticFunctions.getSmoke(widget.person.smoke),
+                              LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.smoke.toString()),
                               style: TextStyle(color: Colors.black54),
                             ),
                             SizedBox(
@@ -484,7 +484,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Eda'), style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
                             SizedBox(height: 10),
                             Text(
-                               StaticFunctions.getEda(widget.person.eda),
+                               LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.eda.toString()),
                               style: TextStyle(color: Colors.black54),
                             ),
                           ],
