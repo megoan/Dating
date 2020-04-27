@@ -319,9 +319,17 @@ class LocaleText {
     },
 
   };
-    static String getLocaleSelectText(languageCode,select,text) {
-    if (_localizedValues[languageCode][select]!=null&&_localizedValues[languageCode][select][text]!=null)
-    return _localizedValues[languageCode][select][text];
+    static String getLocaleSelectText(languageCode,String select,{String text}) {
+      String _select= select;
+      String _text= text;
+      if(text==null)
+      {
+        _select = select.split('.').first;
+        _text = select.split('.').last;
+      }
+
+    if (_localizedSelectedValues[languageCode][_select]!=null&&_localizedSelectedValues[languageCode][_select][_text]!=null)
+    return _localizedSelectedValues[languageCode][_select][_text];
     else
     return text;
   }
