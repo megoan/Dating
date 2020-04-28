@@ -197,14 +197,14 @@ class _CompareScreenState extends State<CompareScreen> {
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.myPerson.countrys
+                                children: widget.myPerson.countrys.entries
                                     .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red))))
+                                        maxLines: 3, style: TextStyle(color: (widget.myPerson.countrys[widget.person.country]) ? Colors.green : Colors.red))))
                                     .toList()),
                           )
                           // Text(
                           //   widget.myPerson.countrys.map((country) => country)).toList().join('\n'),
-                          //   style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red),
+                          //   style: TextStyle(color: (widget.myPerson.countrys[widget.person.country]) ? Colors.green : Colors.red),
                           // ),
                         ]),
                       ),
@@ -234,8 +234,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.person.countrys
-                                    .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.countrys.contains(widget.myPerson.country)) ? Colors.green : Colors.red))))
+                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.countrys[widget.myPerson.country]) ? Colors.green : Colors.red))))
                                     .toList()))
                       ]),
                     ),
@@ -276,8 +276,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: widget.myPerson.areas
-                                      .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.countrys.contains(widget.person.country)) ? Colors.green : Colors.red))))
+                                      .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.countrys[widget.person.country]) ? Colors.green : Colors.red))))
                                       .toList())))
                         ]),
                       ),
@@ -307,8 +307,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.person.areas
-                                    .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.countrys.contains(widget.myPerson.country)) ? Colors.green : Colors.red))))
+                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                        maxLines: 3, style: TextStyle(color: (widget.person.countrys[widget.myPerson.country]) ? Colors.green : Colors.red))))
                                     .toList()))
                       ]),
                     ),
@@ -349,8 +349,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.myPerson.statuses
-                                    .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.myPerson.statuses.contains(widget.person.status)) ? Colors.green : Colors.red))))
+                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                        maxLines: 3, style: TextStyle(color: (widget.myPerson.statuses[widget.person.status]) ? Colors.green : Colors.red))))
                                     .toList()),
                           )
                         ]),
@@ -381,8 +381,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.person.statuses
-                                    .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.statuses.contains(widget.myPerson.status)) ? Colors.green : Colors.red))))
+                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                        maxLines: 3, style: TextStyle(color: (widget.person.statuses[widget.myPerson.status]) ? Colors.green : Colors.red))))
                                     .toList()))
                       ]),
                     ),
@@ -424,8 +424,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: widget.myPerson.doses
-                                      .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.doses.contains(widget.person.dos)) ? Colors.green : Colors.red))))
+                                      .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.doses[widget.person.dos]) ? Colors.green : Colors.red))))
                                       .toList())))
                         ]),
                       ),
@@ -455,8 +455,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.person.doses
-                                    .map((e) =>
-                                        (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), maxLines: 3, style: TextStyle(color: (widget.person.doses.contains(widget.myPerson.dos)) ? Colors.green : Colors.red))))
+                                    .entries.map((e) =>
+                                        (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()), maxLines: 3, style: TextStyle(color: (widget.person.doses[widget.myPerson.dos]) ? Colors.green : Colors.red))))
                                     .toList()))
                       ]),
                     ),
@@ -497,8 +497,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: widget.myPerson.hashkafas
-                                      .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.hashkafas.contains(widget.person.hashkafa)) ? Colors.green : Colors.red))))
+                                      .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.hashkafas[widget.person.hashkafa]) ? Colors.green : Colors.red))))
                                       .toList())))
                         ]),
                       ),
@@ -528,8 +528,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.person.hashkafas
-                                    .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.hashkafas.contains(widget.myPerson.hashkafa)) ? Colors.green : Colors.red))))
+                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                        maxLines: 3, style: TextStyle(color: (widget.person.hashkafas[widget.myPerson.hashkafa]) ? Colors.green : Colors.red))))
                                     .toList()))
                       ]),
                     ),
@@ -570,8 +570,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: widget.myPerson.edas
-                                      .map((e) =>
-                                          (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) , maxLines: 3, style: TextStyle(color: (widget.myPerson.edas.contains(widget.person.eda)) ? Colors.green : Colors.red))))
+                                      .entries.map((e) =>
+                                          (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) , maxLines: 3, style: TextStyle(color: (widget.myPerson.edas[widget.person.eda]) ? Colors.green : Colors.red))))
                                       .toList())))
                         ]),
                       ),
@@ -601,8 +601,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.person.edas
-                                    .map((e) =>
-                                        (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) , maxLines: 3, style: TextStyle(color: (widget.person.edas.contains(widget.myPerson.eda)) ? Colors.green : Colors.red))))
+                                    .entries.map((e) =>
+                                        (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) , maxLines: 3, style: TextStyle(color: (widget.person.edas[widget.myPerson.eda]) ? Colors.green : Colors.red))))
                                     .toList()))
                       ]),
                     ),
@@ -643,8 +643,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: widget.myPerson.smoking
-                                      .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.smoking.contains(widget.person.smoke)) ? Colors.green : Colors.red))))
+                                      .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.smoking[widget.person.smoke]) ? Colors.green : Colors.red))))
                                       .toList())))
                         ]),
                       ),
@@ -674,8 +674,8 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.person.smoking
-                                    .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.smoking.contains(widget.myPerson.smoke)) ? Colors.green : Colors.red))))
+                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                        maxLines: 3, style: TextStyle(color: (widget.person.smoking[widget.myPerson.smoke]) ? Colors.green : Colors.red))))
                                     .toList()))
                       ]),
                     ),
@@ -802,8 +802,8 @@ class _CompareScreenState extends State<CompareScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: widget.myPerson.gender == Gender.MALE
-                                ? widget.myPerson.mySherutBoy != null ? widget.myPerson.mySherutBoy.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) , maxLines: 3)).toList() : []
-                                : widget.myPerson.mySherutGirl != null ? widget.myPerson.mySherutGirl.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) , maxLines: 3)).toList() : [],
+                                ? widget.myPerson.mySherutBoy != null ? widget.myPerson.mySherutBoy.entries.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) , maxLines: 3)).toList() : []
+                                : widget.myPerson.mySherutGirl != null ? widget.myPerson.mySherutGirl.entries.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) , maxLines: 3)).toList() : [],
                           ),
                           SizedBox(
                               width: 60,
@@ -812,17 +812,17 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: widget.myPerson.gender == Gender.MALE
                                     ? widget.myPerson.thereSherutGirl
-                                        .map((e) => Text(
+                                        .entries.map((e) => Text(
                                               LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
                                               maxLines: 3,
-                                              style: TextStyle(color: (widget.person.thereSherutBoy.contains(e) ? Colors.green : Colors.red)),
+                                              style: TextStyle(color: (widget.person.thereSherutBoy[e] ? Colors.green : Colors.red)),
                                             ))
                                         .toList()
                                     : widget.myPerson.thereSherutBoy
-                                        .map((e) => Text(
+                                        .entries.map((e) => Text(
                                               LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
                                               maxLines: 3,
-                                              style: TextStyle(color: (widget.person.thereSherutGirl.contains(e) ? Colors.green : Colors.red)),
+                                              style: TextStyle(color: (widget.person.thereSherutGirl[e] ? Colors.green : Colors.red)),
                                             ))
                                         .toList(),
                               )))
@@ -853,7 +853,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           children: widget.person.gender == Gender.MALE
                               ? widget.person.mySherutBoy != null
                                   ? widget.person.mySherutBoy
-                                      .map((e) => Text(
+                                      .entries.map((e) => Text(
                                             LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
                                             maxLines: 3,
                                           ))
@@ -861,7 +861,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                   : []
                               : widget.person.mySherutGirl != null
                                   ? widget.person.mySherutGirl
-                                      .map((e) => Text(
+                                      .entries.map((e) => Text(
                                             LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
                                             maxLines: 3,
                                           ))
@@ -875,17 +875,17 @@ class _CompareScreenState extends State<CompareScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: widget.person.gender == Gender.MALE
                                   ? widget.person.thereSherutGirl
-                                      .map((e) => Text(
+                                      .entries.map((e) => Text(
                                             LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
                                             maxLines: 3,
-                                            style: TextStyle(color: (widget.myPerson.thereSherutBoy.contains(e) ? Colors.green : Colors.red)),
+                                            style: TextStyle(color: (widget.myPerson.thereSherutBoy[e] ? Colors.green : Colors.red)),
                                           ))
                                       .toList()
                                   : widget.person.thereSherutBoy
-                                      .map((e) => Text(
+                                      .entries.map((e) => Text(
                                             LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
                                             maxLines: 3,
-                                            style: TextStyle(color: (widget.myPerson.thereSherutGirl.contains(e) ? Colors.green : Colors.red)),
+                                            style: TextStyle(color: (widget.myPerson.thereSherutGirl[e] ? Colors.green : Colors.red)),
                                           ))
                                       .toList(),
                             ))

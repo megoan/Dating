@@ -412,7 +412,8 @@ class PersonProvider extends ChangeNotifier {
     if (((comparePerson.doses[comparePerson.dos] && comparePerson.doses.length == 1) || (person.doses[person.dos] && person.doses.length == 1)) && comparePerson.dos != person.dos) {
       return CompareScore.NOT_KASHUR;
     }
-    if (comparePerson.smoking.length == 1
+    if (
+      comparePerson.smoking.length == 1
      //&& comparePerson.smoking[0].index == 0 && person.smoke.index > 1 
      ||
         person.smoking.length == 1

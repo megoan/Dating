@@ -1112,11 +1112,11 @@ class _AddPersonState extends State<AddPerson> {
                                   //   },
                                   // ),
 
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys.contains(Country.ISRAEL))
+                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
                                     SizedBox(
                                       height: 10,
                                     ),
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys.contains(Country.ISRAEL))
+                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
                                     Row(
                                       children: <Widget>[
                                         FaIcon(
@@ -1127,7 +1127,7 @@ class _AddPersonState extends State<AddPerson> {
                                         title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
                                       ],
                                     ),
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys.contains(Country.ISRAEL))
+                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
                                     SelectChip(Area.values, (val) => print(val)),
 
                                   // CheckboxGroup(
