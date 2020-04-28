@@ -27,17 +27,17 @@ class PersonProvider extends ChangeNotifier {
       hashkafa: Hashkafa.LEUMI,
       eda: Eda.FRENCH,
       smoke: Smoke.SOMETIMES,
-      mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-      mySherutGirl: [SherutGirl.ONE_YEAR_SHERUT, SherutGirl.MIDRASHA],
-      countrys: [Country.ISRAEL],
-      areas: [Area.GUSH_DAN, Area.JERUSALEM],
-      statuses: [Status.SINGLE],
-      doses: [Dos.REGULAR, Dos.LITE],
-      hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
-      edas: [Eda.ASHKENAZI, Eda.SEFARADI],
-      smoking: [Smoke.YES],
-      thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-      thereSherutBoy: [SherutBoy.GVOHA],
+      mySherutBoy: {SherutBoy.HESDER:true, SherutBoy.JOBNIK:true},
+      mySherutGirl:{SherutGirl.ONE_YEAR_SHERUT:true, SherutGirl.MIDRASHA:true},
+      countrys:{Country.ISRAEL:true},
+      areas:{Area.GUSH_DAN:true, Area.JERUSALEM:true},
+      statuses:{Status.SINGLE:true},
+      doses:{Dos.REGULAR:true, Dos.LITE:true},
+      hashkafas:{Hashkafa.CHOZER_BITSHUVA:true, Hashkafa.CHABAD:true},
+      edas:{Eda.ASHKENAZI:true, Eda.SEFARADI:true},
+      smoking:{Smoke.YES:true},
+      thereSherutGirl:{SherutGirl.MECHINA:true, SherutGirl.MIDRASHA:true, SherutGirl.SHLICHUT:true},
+      thereSherutBoy:{SherutBoy.GVOHA:true},
       heightMin: 1.50,
       heightMax: 1.70,
       ageMin: 23,
@@ -47,7 +47,7 @@ class PersonProvider extends ChangeNotifier {
       requests: 13,
       dates: 3,
       isVisible: true,
-      profileImages: ["https://cdn.pixabay.com/photo/2018/05/15/07/39/girl-3402351_960_720.jpg","https://cdn.pixabay.com/photo/2015/09/09/20/23/baby-933097_960_720.jpg"],
+      profileImages:["https://cdn.pixabay.com/photo/2018/05/15/07/39/girl-3402351_960_720.jpg","https://cdn.pixabay.com/photo/2015/09/09/20/23/baby-933097_960_720.jpg"],
       shadchanID: "5",
     ),
     Person(
@@ -66,17 +66,17 @@ class PersonProvider extends ChangeNotifier {
         hashkafa: Hashkafa.JEW,
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
-        mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        mySherutGirl: [SherutGirl.TWO_YEARS_SHERUT],
-        countrys: [Country.ISRAEL],
-        areas: [Area.GUSH_DAN, Area.JERUSALEM],
-        statuses: [Status.SINGLE],
-        doses: [Dos.REGULAR, Dos.LITE],
-        hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
-        edas: [Eda.ASHKENAZI, Eda.SEFARADI],
-        smoking: [Smoke.TRY_TO_STOP],
-        thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        thereSherutBoy: [SherutBoy.HESDER, SherutBoy.GVOHA],
+        mySherutBoy:{SherutBoy.HESDER:true, SherutBoy.JOBNIK:true},
+        mySherutGirl:{SherutGirl.TWO_YEARS_SHERUT:true},
+        countrys:{Country.ISRAEL:true},
+        areas:{Area.GUSH_DAN:true, Area.JERUSALEM:true},
+        statuses:{Status.SINGLE:true},
+        doses:{Dos.REGULAR:true, Dos.LITE:true},
+        hashkafas:{Hashkafa.CHOZER_BITSHUVA:true, Hashkafa.CHABAD:true},
+        edas:{Eda.ASHKENAZI:true, Eda.SEFARADI:true},
+        smoking:{Smoke.TRY_TO_STOP:true},
+        thereSherutGirl:{SherutGirl.MECHINA:true, SherutGirl.MIDRASHA:true, SherutGirl.SHLICHUT:true},
+        thereSherutBoy:{SherutBoy.HESDER:true, SherutBoy.GVOHA:true},
         heightMin: 1.50,
         heightMax: 1.70,
         ageMin: 23,
@@ -86,7 +86,7 @@ class PersonProvider extends ChangeNotifier {
         requests: 13,
         dates: 3,
         isVisible: true,
-        profileImages: ["https://cdn.pixabay.com/photo/2015/09/09/20/23/baby-933097_960_720.jpg"],
+        profileImages:["https://cdn.pixabay.com/photo/2015/09/09/20/23/baby-933097_960_720.jpg"],
         shadchanID: "4"),
     Person(
         id: "3",
@@ -104,17 +104,17 @@ class PersonProvider extends ChangeNotifier {
         hashkafa: Hashkafa.CHOZER_BITSHUVA,
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
-        mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        mySherutGirl: [SherutGirl.MIDRASHA, SherutGirl.MECHINA, SherutGirl.ARMY],
-        areas: [Area.GUSH_DAN, Area.JERUSALEM],
-        countrys: [Country.ISRAEL],
-        statuses: [Status.SINGLE, Status.ALMAN, Status.GARUSH],
-        doses: [Dos.REGULAR, Dos.LITE, Dos.MASORTI],
-        hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
-        edas: [Eda.ASHKENAZI, Eda.SEFARADI],
-        smoking: [Smoke.YES],
-        thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
-        thereSherutBoy: [SherutBoy.KRAVI, SherutBoy.MECHINA],
+        mySherutBoy:{SherutBoy.HESDER:true, SherutBoy.JOBNIK:true},
+        mySherutGirl:{SherutGirl.MIDRASHA:true, SherutGirl.MECHINA:true, SherutGirl.ARMY:true},
+        areas:{Area.GUSH_DAN:true, Area.JERUSALEM:true},
+        countrys:{Country.ISRAEL:true},
+        statuses:{Status.SINGLE:true, Status.ALMAN:true, Status.GARUSH:true},
+        doses:{Dos.REGULAR:true, Dos.LITE:true, Dos.MASORTI:true},
+        hashkafas:{Hashkafa.CHOZER_BITSHUVA:true, Hashkafa.CHABAD:true},
+        edas:{Eda.ASHKENAZI:true, Eda.SEFARADI:true},
+        smoking:{Smoke.YES:true},
+        thereSherutGirl:{SherutGirl.MECHINA:true, SherutGirl.MIDRASHA:true, SherutGirl.SHLICHUT:true},
+        thereSherutBoy:{SherutBoy.KRAVI:true, SherutBoy.MECHINA:true},
         heightMin: 1.50,
         heightMax: 1.70,
         ageMin: 23,
@@ -124,7 +124,7 @@ class PersonProvider extends ChangeNotifier {
         requests: 13,
         dates: 3,
         isVisible: true,
-        profileImages: ["https://cdn.pixabay.com/photo/2013/11/01/20/23/baby-204185_960_720.jpg"],
+        profileImages:["https://cdn.pixabay.com/photo/2013/11/01/20/23/baby-204185_960_720.jpg"],
         shadchanID: "1"),
     Person(
         id: "4",
@@ -142,15 +142,15 @@ class PersonProvider extends ChangeNotifier {
         hashkafa: Hashkafa.CHABAD,
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
-        mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        countrys: [Country.ISRAEL],
-        areas: [Area.GUSH_DAN, Area.JERUSALEM],
-        statuses: [Status.SINGLE],
-        doses: [Dos.REGULAR, Dos.LITE],
-        hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
-        edas: [Eda.ASHKENAZI, Eda.SEFARADI],
-        smoking: [Smoke.YES],
-        thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
+        mySherutBoy:{SherutBoy.HESDER:true, SherutBoy.JOBNIK:true},
+        countrys:{Country.ISRAEL:true},
+        areas:{Area.GUSH_DAN:true, Area.JERUSALEM:true},
+        statuses:{Status.SINGLE:true},
+        doses:{Dos.REGULAR:true, Dos.LITE:true},
+        hashkafas:{Hashkafa.CHOZER_BITSHUVA:true, Hashkafa.CHABAD:true},
+        edas:{Eda.ASHKENAZI:true, Eda.SEFARADI:true},
+        smoking:{Smoke.YES:true},
+        thereSherutGirl:{SherutGirl.MECHINA:true ,SherutGirl.MIDRASHA:true, SherutGirl.SHLICHUT:true},
         heightMin: 1.50,
         heightMax: 1.70,
         ageMin: 23,
@@ -160,7 +160,7 @@ class PersonProvider extends ChangeNotifier {
         requests: 13,
         dates: 3,
         isVisible: true,
-        profileImages: ["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-roland-1564112798.jpg"],
+        profileImages:["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-roland-1564112798.jpg"],
         shadchanID: "2"),
     Person(
         id: "5",
@@ -178,15 +178,15 @@ class PersonProvider extends ChangeNotifier {
         hashkafa: Hashkafa.CHABAD,
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
-        mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        countrys: [Country.ISRAEL],
-        areas: [Area.GUSH_DAN, Area.JERUSALEM],
-        statuses: [Status.SINGLE],
-        doses: [Dos.REGULAR, Dos.LITE],
-        hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
-        edas: [Eda.ASHKENAZI, Eda.SEFARADI],
-        smoking: [Smoke.YES],
-        thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
+        mySherutBoy:{SherutBoy.HESDER:true, SherutBoy.JOBNIK:true},
+        countrys:{Country.ISRAEL:true},
+        areas:{Area.GUSH_DAN:true, Area.JERUSALEM:true},
+        statuses:{Status.SINGLE:true},
+        doses:{Dos.REGULAR:true, Dos.LITE:true},
+        hashkafas:{Hashkafa.CHOZER_BITSHUVA:true, Hashkafa.CHABAD:true},
+        edas:{Eda.ASHKENAZI:true, Eda.SEFARADI:true},
+        smoking:{Smoke.YES:true},
+        thereSherutGirl:{SherutGirl.MECHINA:true, SherutGirl.MIDRASHA:true, SherutGirl.SHLICHUT:true},
         heightMin: 1.50,
         heightMax: 1.70,
         ageMin: 23,
@@ -196,7 +196,7 @@ class PersonProvider extends ChangeNotifier {
         requests: 13,
         dates: 3,
         isVisible: true,
-        profileImages: ["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-dewey-1564143216.jpg"],
+        profileImages:["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-dewey-1564143216.jpg"],
         shadchanID: "1"),
     Person(
         id: "6",
@@ -214,15 +214,15 @@ class PersonProvider extends ChangeNotifier {
         hashkafa: Hashkafa.CHABAD,
         eda: Eda.FRENCH,
         smoke: Smoke.TRY_TO_STOP,
-        mySherutBoy: [SherutBoy.HESDER, SherutBoy.JOBNIK],
-        countrys: [Country.ISRAEL],
-        areas: [Area.GUSH_DAN, Area.JERUSALEM],
-        statuses: [Status.SINGLE],
-        doses: [Dos.REGULAR, Dos.LITE],
-        hashkafas: [Hashkafa.CHOZER_BITSHUVA, Hashkafa.CHABAD],
-        edas: [Eda.ASHKENAZI, Eda.SEFARADI],
-        smoking: [Smoke.YES],
-        thereSherutGirl: [SherutGirl.MECHINA, SherutGirl.MIDRASHA, SherutGirl.SHLICHUT],
+        mySherutBoy:{SherutBoy.HESDER:true, SherutBoy.JOBNIK:true},
+        countrys:{Country.ISRAEL:true},
+        areas:{Area.GUSH_DAN:true, Area.JERUSALEM:true},
+        statuses:{Status.SINGLE:true},
+        doses:{Dos.REGULAR:true, Dos.LITE:true},
+        hashkafas:{Hashkafa.CHOZER_BITSHUVA:true, Hashkafa.CHABAD:true},
+        edas:{Eda.ASHKENAZI:true, Eda.SEFARADI:true},
+        smoking:{Smoke.YES:true},
+        thereSherutGirl:{SherutGirl.MECHINA:true, SherutGirl.MIDRASHA:true, SherutGirl.SHLICHUT:true},
         heightMin: 1.50,
         heightMax: 1.70,
         ageMin: 23,
@@ -232,7 +232,7 @@ class PersonProvider extends ChangeNotifier {
         requests: 7,
         dates: 8,
         isVisible: true,
-        profileImages: ["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-wells-1564112074.jpg"],
+        profileImages:["https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/unique-boy-names-wells-1564112074.jpg"],
         shadchanID: "1"),
   ];
   List<Person> allPeople = [];
@@ -402,18 +402,23 @@ class PersonProvider extends ChangeNotifier {
     if ((comparePerson.height - person.heightMax > 10) || (person.height - comparePerson.heightMax > 10)) {
       return CompareScore.NOT_KASHUR;
     }
-    if (((comparePerson.edas.contains(comparePerson.eda) && comparePerson.edas.length == 1) || (person.edas.contains(person.eda) && person.edas.length == 1)) && comparePerson.eda != person.eda) {
+    if (((comparePerson.edas[comparePerson.eda] && comparePerson.edas.length == 1) || (person.edas[person.eda] && person.edas.length == 1)) && comparePerson.eda != person.eda) {
       return CompareScore.NOT_KASHUR;
     }
-    if (((comparePerson.hashkafas.contains(comparePerson.hashkafa) && comparePerson.hashkafas.length == 1) || (person.hashkafas.contains(person.hashkafa) && person.hashkafas.length == 1)) &&
+    if (((comparePerson.hashkafas[comparePerson.hashkafa] && comparePerson.hashkafas.length == 1) || (person.hashkafas[person.hashkafa] && person.hashkafas.length == 1)) &&
         comparePerson.hashkafa != person.hashkafa) {
       return CompareScore.NOT_KASHUR;
     }
-    if (((comparePerson.doses.contains(comparePerson.dos) && comparePerson.doses.length == 1) || (person.doses.contains(person.dos) && person.doses.length == 1)) && comparePerson.dos != person.dos) {
+    if (((comparePerson.doses[comparePerson.dos] && comparePerson.doses.length == 1) || (person.doses[person.dos] && person.doses.length == 1)) && comparePerson.dos != person.dos) {
       return CompareScore.NOT_KASHUR;
     }
-    if (comparePerson.smoking.length == 1 && comparePerson.smoking[0].index == 0 && person.smoke.index > 1 ||
-        person.smoking.length == 1 && person.smoking[0].index == 0 && comparePerson.smoke.index > 1) {
+    if (comparePerson.smoking.length == 1
+     //&& comparePerson.smoking[0].index == 0 && person.smoke.index > 1 
+     ||
+        person.smoking.length == 1
+    //&& person.smoking[0].index == 0 
+        && comparePerson.smoke.index > 1) 
+        {
       return CompareScore.NOT_KASHUR;
     }
     //YALLA IFS
@@ -423,41 +428,49 @@ class PersonProvider extends ChangeNotifier {
     LinkedHashSet bbbbb = new LinkedHashSet();
 
     if (comparePerson.gender == Gender.MALE) {
-      for (var item in comparePerson.mySherutBoy) {
+      for (var item in comparePerson.mySherutBoy.keys ) {
+        if(comparePerson.mySherutBoy[item])
         aaa.add(item);
       }
-      for (var item in comparePerson.thereSherutGirl) {
+      for (var item in comparePerson.thereSherutGirl.keys) {
+        if(comparePerson.thereSherutGirl[item])
         bbb.add(item);
       }
-      for (var item in person.mySherutGirl) {
+      for (var item in person.mySherutGirl.keys) {
+        if(comparePerson.mySherutGirl[item])
         aaaaa.add(item);
       }
-      for (var item in person.thereSherutBoy) {
+      for (var item in person.thereSherutBoy.keys) {
+        if(comparePerson.thereSherutBoy[item])
         bbbbb.add(item);
       }
     } else {
-      for (var item in comparePerson.mySherutGirl) {
+      for (var item in comparePerson.mySherutGirl.keys) {
+        if(comparePerson.mySherutGirl[item])
         aaa.add(item);
       }
-      for (var item in comparePerson.thereSherutBoy) {
+      for (var item in comparePerson.thereSherutBoy.keys) {
+        if(comparePerson.thereSherutBoy[item])
         bbb.add(item);
       }
-      for (var item in person.mySherutBoy) {
+      for (var item in person.mySherutBoy.keys) {
+        if(comparePerson.mySherutBoy[item])
         aaaaa.add(item);
       }
-      for (var item in person.thereSherutGirl) {
+      for (var item in person.thereSherutGirl.keys) {
+        if(comparePerson.thereSherutGirl[item])
         bbbbb.add(item);
       }
     }
     if ((pAge > comparePerson.ageMin && pAge < comparePerson.ageMax && cpAge > person.ageMin && cpAge < person.ageMax) && // age compare
-        (person.height > comparePerson.heightMin && person.height < comparePerson.heightMax && comparePerson.height > person.heightMin && comparePerson.height < person.heightMax) && // height compare
-        (person.areas.contains(comparePerson.area) && comparePerson.areas.contains(person.area)) && // area compare
+        (person.height > comparePerson.heightMin && person.height < comparePerson.heightMax && comparePerson.height > person.heightMin && comparePerson.height < person.heightMax)&& // height compare
+        (person.areas[comparePerson.area] && comparePerson.areas[person.area]) && // area compare
 
-        (person.statuses.contains(comparePerson.status) && comparePerson.statuses.contains(person.status)) && // status compare
-        (person.doses.contains(comparePerson.dos) && comparePerson.doses.contains(person.dos)) && // dos compare
-        (person.hashkafas.contains(comparePerson.hashkafa) && comparePerson.hashkafas.contains(person.hashkafa)) && // hashkafa compare
-        (person.edas.contains(comparePerson.eda) && comparePerson.edas.contains(person.eda)) && // eda compare
-        (person.smoking.contains(comparePerson.smoke) && comparePerson.smoking.contains(person.smoke)) && // smoking compare
+        (person.statuses[comparePerson.status] && comparePerson.statuses[person.status]) && // status compare
+        (person.doses[comparePerson.dos] && comparePerson.doses[person.dos]) && // dos compare
+        (person.hashkafas[comparePerson.hashkafa] && comparePerson.hashkafas[person.hashkafa]) && // hashkafa compare
+        (person.edas[comparePerson.eda] && comparePerson.edas[person.eda]) && // eda compare
+        (person.smoking[comparePerson.smoke] && comparePerson.smoking[person.smoke]) && // smoking compare
         aaa.intersection(bbbbb).length > 0 &&
         bbb.intersection(aaaaa).length > 0) {
       return CompareScore.YALA;
