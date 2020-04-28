@@ -244,7 +244,7 @@ class _CompareScreenState extends State<CompareScreen> {
               ),
             ),
              Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
-            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.globeEurope))),
+            Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.globeAsia))),
           ]),
           //Area
           Stack(children: [
@@ -521,7 +521,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         right: 20.0,
                       ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.dos.toString())),
+                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.hashkafa.toString())),
                         SizedBox(
                             width: 60,
                             child: Column(
@@ -594,7 +594,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         right: 20.0,
                       ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.dos.toString())),
+                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.eda.toString())),
                         SizedBox(
                             width: 60,
                             child: Column(
