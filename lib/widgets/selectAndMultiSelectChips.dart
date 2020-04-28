@@ -37,7 +37,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
         onSelected: (bool bvalue) {
           setState(() {
             pickedChips[value] = bvalue;
-            widget.valueCallBack(value);
+            widget.valueCallBack(value,bvalue);
           });
         },
       ));

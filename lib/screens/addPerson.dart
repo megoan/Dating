@@ -346,11 +346,7 @@ class _AddPersonState extends State<AddPerson> {
                                 children: <Widget>[
                                   Column(
                                     children: <Widget>[
-                                      // Padding(
-                                      //   padding: const EdgeInsets.all(8.0),
-                                      //   child: Align(
-                                      //       alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft, child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add at least one image!'))),
-                                      // ),
+                                    
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -458,97 +454,14 @@ class _AddPersonState extends State<AddPerson> {
                                                       Text("  "+LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: themeTextStyle),
                                                     ],
                                                   ),
-                                                  //        Stack(
-                                                  //   alignment: Alignment.center,
-                                                  //   children: <Widget>[
-                                                  //     Container(
-                                                  //       width: width * 0.3,
-                                                  //       height: 100,
-                                                  //       child: Row(
-                                                  //           children: <Widget>[
-                                                  //             Expanded(
-                                                  //               child: GestureDetector(
-                                                  //                 onTap: () {
-                                                  //                   print("male");
-                                                  //                   setState(() {
-                                                  //                     sSelected = Gender.MALE;
-                                                  //                   });
-                                                  //                   personProvider.newPerson.gender = Gender.MALE;
-                                                  //                 },
-                                                  //                 child: Container(
-                                                  //                   color: Colors.transparent,
-                                                  //                 ),
-                                                  //               ),
-                                                  //             ),
-                                                  //             Expanded(
-                                                  //               child: GestureDetector(
-                                                  //                   onTap: () {
-                                                  //                     print("female");
-                                                  //                     setState(() {
-                                                  //                       sSelected = Gender.FEMALE;
-                                                  //                     });
-                                                  //                     personProvider.newPerson.gender = Gender.FEMALE;
-                                                  //                   },
-                                                  //                   child: Container(
-                                                  //                     color: Colors.transparent,
-                                                  //                   )),
-                                                  //             )
-                                                  //           ],
-                                                  //       ),
-                                                  //     ),
-                                                  //     IgnorePointer(
-                                                  //       ignoring: true,
-                                                  //       child: Container(
-                                                  //           width: width * 0.3,
-                                                  //           child: sSelected == Gender.FEMALE ? Image.asset("assets/images/girlpressed.png") : Image.asset("assets/images/boy_pressed.png"),
-                                                  //       ),
-                                                  //     ),
-                                                  //   ],
-                                                  // ),
+                                               
                                                 ],
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      // SizedBox(
-                                      //   height: 20,
-                                      // ),
-                                      // Row(
-                                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      //   children: <Widget>[
-                                      //     // PhotoPicker(
-                                      //     //   imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
-                                      //     //       ? personProvider.newPerson.profileImages[0]
-                                      //     //       : null,
-                                      //     //   image: _image2,
-                                      //     //   imageCallBack: imageCallBack2,
-                                      //     //   photoNum: 2,
-                                      //     //   small: true,
-                                      //     // ),
-                                      //     PhotoPicker(
-                                      //       imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
-                                      //           ? personProvider.newPerson.profileImages[0]
-                                      //           : null,
-                                      //       image: _image3,
-                                      //       imageCallBack: imageCallBack3,
-                                      //       photoNum: 3,
-                                      //       small: true,
-                                      //     ),
-                                      //     PhotoPicker(
-                                      //       imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
-                                      //           ? personProvider.newPerson.profileImages[0]
-                                      //           : null,
-                                      //       image: _image4,
-                                      //       imageCallBack: imageCallBack4,
-                                      //       photoNum: 4,
-                                      //       small: true,
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      // SizedBox(
-                                      //   height: 40,
-                                      // )
+                      
                                     ],
                                   ),
                                   SizedBox(
@@ -911,66 +824,11 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
 
                                   if (sSelected == Gender.FEMALE)
-                                    MultiSelectChip(SherutGirl.values, (val) => print(val)),
-                                  // Container(
-                                  //   child: Column(
-                                  //     children: <Widget>[
-
-                                  //       CheckboxGroup(
-                                  //         checked: personProvider.newPerson != null && personProvider.newPerson.mySherutGirl != null
-                                  //             ? personProvider.newPerson.mySherutGirl.map((e) => StaticFunctions.getSherutGirl(e)).toList()
-                                  //             : null,
-                                  //         labels: SherutGirl.values.map((e) => StaticFunctions.getSherutGirl(e)).toList(),
-                                  //         onChange: (bool isChecked, String label, int index) {
-                                  //           if (isChecked) {
-                                  //             if (personProvider.newPerson.mySherutGirl == null) {
-                                  //               personProvider.newPerson.mySherutGirl = [];
-                                  //             }
-                                  //             personProvider.newPerson.mySherutGirl.add(SherutGirl.values[index]);
-                                  //           } else {
-                                  //             personProvider.newPerson.mySherutGirl.remove(SherutGirl.values[index]);
-                                  //           }
-                                  //           print("isChecked: $isChecked   label: $label  index: $index");
-                                  //           setState(() {});
-                                  //         },
-                                  //         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  //       ),
-                                  //       SizedBox(
-                                  //         height: 20,
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
+                                    MultiSelectChip(SherutGirl.values, (selected,val) =>  personProvider.newPerson.mySherutGirl[selected] = val ,pickedChips: personProvider.newPerson.mySherutGirl),
+                             
                                   if (sSelected == Gender.MALE)
-                                    MultiSelectChip(SherutBoy.values, (val) => print(val)),
-                                  // Container(
-                                  //   child: Column(
-                                  //     children: <Widget>[
-                                  //       CheckboxGroup(
-                                  //         checked: personProvider.newPerson != null && personProvider.newPerson.mySherutBoy != null
-                                  //             ? personProvider.newPerson.mySherutBoy.map((e) => StaticFunctions.getSherutBoy(e)).toList()
-                                  //             : null,
-                                  //         labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(),
-                                  //         onChange: (bool isChecked, String label, int index) {
-                                  //           if (isChecked) {
-                                  //             if (personProvider.newPerson.mySherutBoy == null) {
-                                  //               personProvider.newPerson.mySherutBoy = [];
-                                  //             }
-                                  //             personProvider.newPerson.mySherutBoy.add(SherutBoy.values[index]);
-                                  //           } else {
-                                  //             personProvider.newPerson.mySherutBoy.remove(SherutBoy.values[index]);
-                                  //           }
-                                  //           print("isChecked: $isChecked   label: $label  index: $index");
-                                  //           setState(() {});
-                                  //         },
-                                  //         onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  //       ),
-                                  //       SizedBox(
-                                  //         height: 20,
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
+                                    MultiSelectChip(SherutBoy.values, (val) => print(val),pickedChips: personProvider.newPerson.mySherutBoy,),
+                              
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -1091,26 +949,8 @@ class _AddPersonState extends State<AddPerson> {
                                       title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
                                     ],
                                   ),
-                                  MultiSelectChip(Country.values, (val) => print(val)),
-                                  // CheckboxGroup(
-                                  //   checked: personProvider.newPerson != null && personProvider.newPerson.countrys != null
-                                  //       ? personProvider.newPerson.countrys.map((e) => StaticFunctions.getCountry(e)).toList()
-                                  //       : null,
-                                  //   labels: Country.values.map((e) => StaticFunctions.getCountry(e)).toList(),
-                                  //   onChange: (bool isChecked, String label, int index) {
-                                  //     if (isChecked) {
-                                  //       if (personProvider.newPerson.countrys == null) {
-                                  //         personProvider.newPerson.countrys = [];
-                                  //       }
-                                  //       personProvider.newPerson.countrys.add(Country.values[index]);
-                                  //     } else {
-                                  //       personProvider.newPerson.countrys.remove(Country.values[index]);
-                                  //     }
-                                  //     print("isChecked: $isChecked   label: $label  index: $index");
-                                  //     setState(() {});
-                                  //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  //   },
-                                  // ),
+                                  MultiSelectChip(Country.values, (select,val) => personProvider.newPerson.countrys[select] = val,pickedChips:personProvider.newPerson.countrys),
+                           
 
                                   if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
                                     SizedBox(
@@ -1128,27 +968,8 @@ class _AddPersonState extends State<AddPerson> {
                                       ],
                                     ),
                                   if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
-                                    SelectChip(Area.values, (val) => print(val)),
+                                    MultiSelectChip(Area.values,(select,val) => personProvider.newPerson.areas[select] = val,pickedChips:personProvider.newPerson.areas),
 
-                                  // CheckboxGroup(
-                                  //   checked: personProvider.newPerson != null && personProvider.newPerson.areas != null
-                                  //       ? personProvider.newPerson.areas.map((e) => StaticFunctions.getArea(e)).toList()
-                                  //       : null,
-                                  //   labels: Area.values.map((e) => StaticFunctions.getArea(e)).toList(),
-                                  //   onChange: (bool isChecked, String label, int index) {
-                                  //     if (isChecked) {
-                                  //       if (personProvider.newPerson.areas == null) {
-                                  //         personProvider.newPerson.areas = [];
-                                  //       }
-                                  //       personProvider.newPerson.areas.add(Area.values[index]);
-                                  //     } else {
-                                  //       personProvider.newPerson.areas.remove(Area.values[index]);
-                                  //     }
-                                  //     print("isChecked: $isChecked   label: $label  index: $index");
-                                  //     setState(() {});
-                                  //   },
-                                  //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  // ),
 
                                   SizedBox(
                                     height: 10,
@@ -1163,39 +984,8 @@ class _AddPersonState extends State<AddPerson> {
                                       title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
                                     ],
                                   ),
-                                  MultiSelectChip(Status.values, (val) => print(val)),
-                                  // CheckboxGroup(
-                                  //   checked: personProvider.newPerson != null && personProvider.newPerson.statuses != null
-                                  //       ? personProvider.newPerson.statuses.map((e) => StaticFunctions.getStatus(e)).toList()
-                                  //       : null,
-                                  //   labels: Status.values.map((e) => StaticFunctions.getStatus(e)).toList(),
-                                  //   onChange: (bool isChecked, String label, int index) {
-                                  //     if (isChecked) {
-                                  //       if (personProvider.newPerson.statuses == null) {
-                                  //         personProvider.newPerson.statuses = [];
-                                  //       }
-                                  //       personProvider.newPerson.statuses.add(Status.values[index]);
-                                  //     } else {
-                                  //       personProvider.newPerson.statuses.remove(Status.values[index]);
-                                  //     }
-                                  //     print("isChecked: $isChecked   label: $label  index: $index");
-                                  //     setState(() {});
-                                  //   },
-                                  //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  // ),
-                                  // SizedBox(
-                                  //   height: 20,
-                                  // ),
-                                  // Align(
-                                  //   alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  //   child: Container(
-                                  //     padding: const EdgeInsets.only(top: 14.0),
-                                  //     child: Text(
-                                  //       LocaleText.getLocaleText(MyApp.getLocale(), 'Religious'),
-                                  //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                  MultiSelectChip(Status.values,(select,val) => personProvider.newPerson.statuses[select] = val,pickedChips:personProvider.newPerson.statuses),
+                             
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -1209,25 +999,8 @@ class _AddPersonState extends State<AddPerson> {
                                       title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
                                     ],
                                   ),
-                                  MultiSelectChip(Dos.values, (val) => print(val)),
-                                  // CheckboxGroup(
-                                  //   checked:
-                                  //       personProvider.newPerson != null && personProvider.newPerson.doses != null ? personProvider.newPerson.doses.map((e) => StaticFunctions.getDos(e)).toList() : null,
-                                  //   labels: Dos.values.map((e) => StaticFunctions.getDos(e)).toList(),
-                                  //   onChange: (bool isChecked, String label, int index) {
-                                  //     if (isChecked) {
-                                  //       if (personProvider.newPerson.doses == null) {
-                                  //         personProvider.newPerson.doses = [];
-                                  //       }
-                                  //       personProvider.newPerson.doses.add(Dos.values[index]);
-                                  //     } else {
-                                  //       personProvider.newPerson.doses.remove(Dos.values[index]);
-                                  //     }
-                                  //     print("isChecked: $isChecked   label: $label  index: $index");
-                                  //     setState(() {});
-                                  //   },
-                                  //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  // ),
+                                  MultiSelectChip(Dos.values, (select,val) => personProvider.newPerson.doses[select] = val,pickedChips:personProvider.newPerson.doses),
+                           
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -1241,26 +1014,8 @@ class _AddPersonState extends State<AddPerson> {
                                       title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
                                     ],
                                   ),
-                                  MultiSelectChip(Hashkafa.values, (val) => print(val)),
-                                  // CheckboxGroup(
-                                  //   checked: personProvider.newPerson != null && personProvider.newPerson.hashkafas != null
-                                  //       ? personProvider.newPerson.hashkafas.map((e) => StaticFunctions.getHashkafa(e)).toList()
-                                  //       : null,
-                                  //   labels: Hashkafa.values.map((e) => StaticFunctions.getHashkafa(e)).toList(),
-                                  //   onChange: (bool isChecked, String label, int index) {
-                                  //     if (isChecked) {
-                                  //       if (personProvider.newPerson.hashkafas == null) {
-                                  //         personProvider.newPerson.hashkafas = [];
-                                  //       }
-                                  //       personProvider.newPerson.hashkafas.add(Hashkafa.values[index]);
-                                  //     } else {
-                                  //       personProvider.newPerson.hashkafas.remove(Hashkafa.values[index]);
-                                  //     }
-                                  //     print("isChecked: $isChecked   label: $label  index: $index");
-                                  //     setState(() {});
-                                  //   },
-                                  //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  // ),
+                                  MultiSelectChip(Hashkafa.values,(select,val) => personProvider.newPerson.hashkafas[select] = val,pickedChips:personProvider.newPerson.hashkafas),
+                            
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -1274,25 +1029,8 @@ class _AddPersonState extends State<AddPerson> {
                                       title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
                                     ],
                                   ),
-                                  MultiSelectChip(Eda.values, (val) => print(val)),
-                                  // CheckboxGroup(
-                                  //   checked:
-                                  //       personProvider.newPerson != null && personProvider.newPerson.edas != null ? personProvider.newPerson.edas.map((e) => StaticFunctions.getEda(e)).toList() : null,
-                                  //   labels: Eda.values.map((e) => StaticFunctions.getEda(e)).toList(),
-                                  //   onChange: (bool isChecked, String label, int index) {
-                                  //     if (isChecked) {
-                                  //       if (personProvider.newPerson.edas == null) {
-                                  //         personProvider.newPerson.edas = [];
-                                  //       }
-                                  //       personProvider.newPerson.edas.add(Eda.values[index]);
-                                  //     } else {
-                                  //       personProvider.newPerson.edas.remove(Eda.values[index]);
-                                  //     }
-                                  //     print("isChecked: $isChecked   label: $label  index: $index");
-                                  //     setState(() {});
-                                  //   },
-                                  //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  // ),
+                                  MultiSelectChip(Eda.values,(select,val) => personProvider.newPerson.edas[select] = val,pickedChips:personProvider.newPerson.edas),
+                     
                                    SizedBox(
                                     height: 10,
                                   ),
@@ -1307,26 +1045,8 @@ class _AddPersonState extends State<AddPerson> {
                                     ],
                                   ),
                                  
-                                  MultiSelectChip(Smoke.values, (val) => print(val)),
-                                  // CheckboxGroup(
-                                  //   checked: personProvider.newPerson != null && personProvider.newPerson.smoking != null
-                                  //       ? personProvider.newPerson.smoking.map((e) => StaticFunctions.getSmoke(e)).toList()
-                                  //       : null,
-                                  //   labels: Smoke.values.map((e) => StaticFunctions.getSmoke(e)).toList(),
-                                  //   onChange: (bool isChecked, String label, int index) {
-                                  //     if (isChecked) {
-                                  //       if (personProvider.newPerson.smoking == null) {
-                                  //         personProvider.newPerson.smoking = [];
-                                  //       }
-                                  //       personProvider.newPerson.smoking.add(Smoke.values[index]);
-                                  //     } else {
-                                  //       personProvider.newPerson.smoking.remove(Smoke.values[index]);
-                                  //     }
-                                  //     print("isChecked: $isChecked   label: $label  index: $index");
-                                  //     setState(() {});
-                                  //   },
-                                  //   onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  // ),
+                                  MultiSelectChip(Smoke.values, (select,val) => personProvider.newPerson.smoking[select] = val,pickedChips:personProvider.newPerson.smoking),
+                          
                                    SizedBox(
                                     height: 10,
                                   ),
@@ -1342,90 +1062,10 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
 
                                   if (sSelected == Gender.MALE)
-                                    MultiSelectChip(SherutGirl.values, (val) => print(val))
-                                  else
-                                  MultiSelectChip(SherutBoy.values, (val) => print(val)),
-                                  // SizedBox(
-                                  //   height: 20,
-                                  // ),
-                                  // if (sSelected == Gender.MALE)
-                                  //   Container(
-                                  //     child: Column(
-                                  //       children: <Widget>[
-                                  //         Align(
-                                  //           alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  //           child: Container(
-                                  //             padding: const EdgeInsets.only(top: 14.0),
-                                  //             child: Text(
-                                  //               LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
-                                  //               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //         CheckboxGroup(
-                                  //           checked: personProvider.newPerson != null && personProvider.newPerson.thereSherutGirl != null
-                                  //               ? personProvider.newPerson.thereSherutGirl.map((e) => StaticFunctions.getSherutGirl(e)).toList()
-                                  //               : null,
-                                  //           labels: SherutGirl.values.map((e) => StaticFunctions.getSherutGirl(e)).toList(),
-                                  //           onChange: (bool isChecked, String label, int index) {
-                                  //             if (isChecked) {
-                                  //               if (personProvider.newPerson.thereSherutGirl == null) {
-                                  //                 personProvider.newPerson.thereSherutGirl = [];
-                                  //               }
-                                  //               personProvider.newPerson.thereSherutGirl.add(SherutGirl.values[index]);
-                                  //             } else {
-                                  //               personProvider.newPerson.thereSherutGirl.remove(SherutGirl.values[index]);
-                                  //             }
-                                  //             print("isChecked: $isChecked   label: $label  index: $index");
-                                  //             setState(() {});
-                                  //           },
-                                  //           onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  //         ),
-                                  //         SizedBox(
-                                  //           height: 20,
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //   ),
-                                  // if (sSelected == Gender.FEMALE)
-                                  //   Container(
-                                  //     child: Column(
-                                  //       children: <Widget>[
-                                  //         Align(
-                                  //           alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                  //           child: Container(
-                                  //             padding: const EdgeInsets.only(top: 14.0),
-                                  //             child: Text(
-                                  //               LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut'),
-                                  //               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0),
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //         CheckboxGroup(
-                                  //           checked: personProvider.newPerson != null && personProvider.newPerson.thereSherutBoy != null
-                                  //               ? personProvider.newPerson.thereSherutBoy.map((e) => StaticFunctions.getSherutBoy(e)).toList()
-                                  //               : null,
-                                  //           labels: SherutBoy.values.map((e) => StaticFunctions.getSherutBoy(e)).toList(),
-                                  //           onChange: (bool isChecked, String label, int index) {
-                                  //             if (isChecked) {
-                                  //               if (personProvider.newPerson.thereSherutBoy == null) {
-                                  //                 personProvider.newPerson.thereSherutBoy = [];
-                                  //               }
-                                  //               personProvider.newPerson.thereSherutBoy.add(SherutBoy.values[index]);
-                                  //             } else {
-                                  //               personProvider.newPerson.thereSherutBoy.remove(SherutBoy.values[index]);
-                                  //             }
-                                  //             print("isChecked: $isChecked   label: $label  index: $index");
-                                  //             setState(() {});
-                                  //           },
-                                  //           onSelected: (List<String> checked) => print("checked: ${checked.toString()}"),
-                                  //         ),
-                                      //     SizedBox(
-                                      //       height: 20,
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                    // ),
+                                  MultiSelectChip(SherutGirl.values, (select,val) => personProvider.newPerson.thereSherutGirl[select] = val,pickedChips:personProvider.newPerson.thereSherutGirl),
+                                  if (sSelected == Gender.FEMALE)
+                                  MultiSelectChip(SherutBoy.values, (select,val) => personProvider.newPerson.thereSherutBoy[select] = val,pickedChips:personProvider.newPerson.thereSherutBoy),
+                        
                                          SizedBox(
                                     height: 10,
                                   ),
