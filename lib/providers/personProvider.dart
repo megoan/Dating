@@ -422,41 +422,41 @@ class PersonProvider extends ChangeNotifier {
     LinkedHashSet aaaaa = new LinkedHashSet();
     LinkedHashSet bbbbb = new LinkedHashSet();
 
-    if (comparePerson.gender == Gender.MALE) {
-      for (var item in comparePerson.mySherutBoy.keys ) {
-        if(comparePerson.mySherutBoy[item])
-        aaa.add(item);
-      }
-      for (var item in comparePerson.thereSherutGirl.keys) {
-        if(comparePerson.thereSherutGirl[item])
-        bbb.add(item);
-      }
-      for (var item in person.mySherutGirl.keys) {
-        if(comparePerson.mySherutGirl[item])
-        aaaaa.add(item);
-      }
-      for (var item in person.thereSherutBoy.keys) {
-        if(comparePerson.thereSherutBoy[item])
-        bbbbb.add(item);
-      }
-    } else {
-      for (var item in comparePerson.mySherutGirl.keys) {
-        if(comparePerson.mySherutGirl[item])
-        aaa.add(item);
-      }
-      for (var item in comparePerson.thereSherutBoy.keys) {
-        if(comparePerson.thereSherutBoy[item])
-        bbb.add(item);
-      }
-      for (var item in person.mySherutBoy.keys) {
-        if(comparePerson.mySherutBoy[item])
-        aaaaa.add(item);
-      }
-      for (var item in person.thereSherutGirl.keys) {
-        if(comparePerson.thereSherutGirl[item])
-        bbbbb.add(item);
-      }
-    }
+    // if (comparePerson.gender == Gender.MALE) {
+    //   for (var item in comparePerson.mySherutBoy.keys ) {
+    //     if(comparePerson.mySherutBoy[item])
+    //     aaa.add(item);
+    //   }
+    //   for (var item in comparePerson.thereSherutGirl.keys) {
+    //     if(comparePerson.thereSherutGirl[item])
+    //     bbb.add(item);
+    //   }
+    //   for (var item in person.mySherutGirl.keys) {
+    //     if(comparePerson.mySherutGirl[item])
+    //     aaaaa.add(item);
+    //   }
+    //   for (var item in person.thereSherutBoy.keys) {
+    //     if(comparePerson.thereSherutBoy[item])
+    //     bbbbb.add(item);
+    //   }
+    // } else {
+    //   for (var item in comparePerson.mySherutGirl.keys) {
+    //     if(comparePerson.mySherutGirl[item])
+    //     aaa.add(item);
+    //   }
+    //   for (var item in comparePerson.thereSherutBoy.keys) {
+    //     if(comparePerson.thereSherutBoy[item])
+    //     bbb.add(item);
+    //   }
+    //   for (var item in person.mySherutBoy.keys) {
+    //     if(comparePerson.mySherutBoy[item])
+    //     aaaaa.add(item);
+    //   }
+    //   for (var item in person.thereSherutGirl.keys) {
+    //     if(comparePerson.thereSherutGirl[item])
+    //     bbbbb.add(item);
+    //   }
+    // }
     if ((pAge > comparePerson.ageMin && pAge < comparePerson.ageMax && cpAge > person.ageMin && cpAge < person.ageMax) && // age compare
         (person.height > comparePerson.heightMin && person.height < comparePerson.heightMax && comparePerson.height > person.heightMin && comparePerson.height < person.heightMax)&& // height compare
         (person.areas[comparePerson.area] && comparePerson.areas[person.area]) && // area compare
