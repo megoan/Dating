@@ -485,7 +485,7 @@ class _AddPersonState extends State<AddPerson> {
                                           context: context,
                                           builder: (BuildContext builder) {
                                             return Container(
-                                              height: MediaQuery.of(context).copyWith().size.height / 2.8,
+                                              height: MediaQuery.of(context).copyWith().size.height / 2.6,
                                               child: DatePickerWidget(),
                                             );
                                           });
@@ -499,7 +499,7 @@ class _AddPersonState extends State<AddPerson> {
                                           Row(
                                             children: <Widget>[
                                               Text(
-                                                " 18-02-2020",
+                                                "18-02-2020",
                                                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
                                               ),
                                             ],
