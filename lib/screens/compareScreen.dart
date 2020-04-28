@@ -198,9 +198,9 @@ class _CompareScreenState extends State<CompareScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.myPerson.countrys.entries
-                                    .map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.myPerson.countrys[widget.person.country]) ? Colors.green : Colors.red))))
-                                    .toList()),
+                                    .map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
+                                        maxLines: 3, style: TextStyle(color: (widget.myPerson.countrys[widget.person.country]) ? Colors.green : Colors.red))).toList()
+                                   ),
                           )
                           // Text(
                           //   widget.myPerson.countrys.map((country) => country)).toList().join('\n'),
@@ -277,7 +277,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: widget.myPerson.areas
                                       .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.countrys[widget.person.country]) ? Colors.green : Colors.red))))
+                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.areas[widget.person.areas]) ? Colors.green : Colors.red))))
                                       .toList())))
                         ]),
                       ),
@@ -308,7 +308,7 @@ class _CompareScreenState extends State<CompareScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: widget.person.areas
                                     .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.countrys[widget.myPerson.country]) ? Colors.green : Colors.red))))
+                                        maxLines: 3, style: TextStyle(color: (widget.person.areas[widget.myPerson.areas]) ? Colors.green : Colors.red))))
                                     .toList()))
                       ]),
                     ),

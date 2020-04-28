@@ -402,26 +402,20 @@ class PersonProvider extends ChangeNotifier {
     if ((comparePerson.height - person.heightMax > 10) || (person.height - comparePerson.heightMax > 10)) {
       return CompareScore.NOT_KASHUR;
     }
-    if (((comparePerson.edas[comparePerson.eda] && comparePerson.edas.length == 1) || (person.edas[person.eda] && person.edas.length == 1)) && comparePerson.eda != person.eda) {
-      return CompareScore.NOT_KASHUR;
-    }
-    if (((comparePerson.hashkafas[comparePerson.hashkafa] && comparePerson.hashkafas.length == 1) || (person.hashkafas[person.hashkafa] && person.hashkafas.length == 1)) &&
-        comparePerson.hashkafa != person.hashkafa) {
-      return CompareScore.NOT_KASHUR;
-    }
-    if (((comparePerson.doses[comparePerson.dos] && comparePerson.doses.length == 1) || (person.doses[person.dos] && person.doses.length == 1)) && comparePerson.dos != person.dos) {
-      return CompareScore.NOT_KASHUR;
-    }
-    if (
-      comparePerson.smoking.length == 1
-     //&& comparePerson.smoking[0].index == 0 && person.smoke.index > 1 
-     ||
-        person.smoking.length == 1
-    //&& person.smoking[0].index == 0 
-        && comparePerson.smoke.index > 1) 
-        {
-      return CompareScore.NOT_KASHUR;
-    }
+    // if (((comparePerson.edas[comparePerson.eda] ) || (person.edas[person.eda]  )) && comparePerson.eda != person.eda) {
+    //   return CompareScore.NOT_KASHUR;
+    // }
+    // if (((comparePerson.hashkafas[comparePerson.hashkafa] ) || (person.hashkafas[person.hashkafa] )) &&
+    //     comparePerson.hashkafa != person.hashkafa) {
+    //   return CompareScore.NOT_KASHUR;
+    // }
+    // if (((comparePerson.doses[comparePerson.dos]) || (person.doses[person.dos] )) && comparePerson.dos != person.dos) {
+    //   return CompareScore.NOT_KASHUR;
+    // }
+    // if (comparePerson.smoke.index > 1) 
+    // {
+    //   return CompareScore.NOT_KASHUR;
+    // }
     //YALLA IFS
     LinkedHashSet aaa = new LinkedHashSet();
     LinkedHashSet bbb = new LinkedHashSet();
