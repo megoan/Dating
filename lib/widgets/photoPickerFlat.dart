@@ -55,7 +55,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
         Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppTheme.primary),
+              border: Border.all(color: AppTheme.primary,width: 2.0),
               color: Colors.black12,
             ),
             width: widget.width ?? widget.width,
@@ -79,7 +79,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                           iconData: Icons.image,
                         )
                       ])),
-        if (widget.image != null)
+        if (widget.image != null|| widget.imageUrl!=null)
           widget.small?
           
           Positioned(bottom: 0,right: 0,child: Container(
