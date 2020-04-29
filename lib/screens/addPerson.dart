@@ -40,6 +40,7 @@ class _AddPersonState extends State<AddPerson> {
   Status _status;
   Eda _eda;
   Smoke _smoke;
+  
 
   double personHeight = 1.5;
   double lookingPersonHeightMin = 1;
@@ -52,6 +53,7 @@ class _AddPersonState extends State<AddPerson> {
   String myHeight = "";
   String hisHeight1 = "";
   String hisHeight2 = "";
+  String dateString ="";
   RangeValues rangeValues = RangeValues(1, 2.3);
   RangeLabels rangeLabels = RangeLabels('1', '2.3');
 
@@ -146,26 +148,50 @@ class _AddPersonState extends State<AddPerson> {
     }
   }
 
-  final TextEditingController _controller = new TextEditingController();
-  Future _chooseDate(BuildContext context, String initialDateString) async {
-    var now = new DateTime.now();
-    var initialDate = convertToDate(initialDateString) ?? now;
-    initialDate = (initialDate.year >= 1900 && initialDate.isBefore(now)
-        ? initialDate
-        : now);
+  // final TextEditingController _controller = new TextEditingController();
+  // Future _chooseDate(BuildContext context, String initialDateString) async {
+  //   var now = new DateTime.now();
+  //  var initialDate = convertToDate(initialDateString) ?? now;
+  //   initialDate = (initialDate.year >= 1900 && initialDate.isBefore(now)
+  //       ? initialDate
+  //       : now);
 
-    var result = await showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        firstDate: new DateTime(1900),
-        lastDate: new DateTime.now());
+  //   var result = await showDatePicker(
+  //       context: context,
+  //       initialDate: initialDate,
+  //       firstDate: new DateTime(1900),
+  //       lastDate: new DateTime.now());
 
-    if (result == null) return;
+  //   if (result == null) return;
 
-    setState(() {
-      _controller.text = new DateFormat.yMd().format(result);
-    });
+  //   setState(() {
+  //     _controller.text = new DateFormat.yMd().format(result);
+  //   });
+  // }
+  String dateTimeToStringFormat(_date){
+      DateTime date = _date!=null?_date:DateTime.now();
+      var myday = "";
+      var myMonth = "";
+      if (date.day < 10) {
+        myday += "0" + date.day.toString();
+      } else {
+        myday = "" + date.day.toString();
+      }
+      if (date.month < 10) {
+        myMonth += "0" + date.month.toString();
+      } else {
+        myMonth = "" + date.month.toString();
+      }
+      return "$myday/$myMonth/${date.year}";
   }
+
+    void selectedDate(DateTime date) {
+      setState(() {
+      personProvider.newPerson.birthday = date;
+       dateString =  dateTimeToStringFormat(date);
+      });
+  }
+
 
   DateTime convertToDate(String input) {
     try {
@@ -176,10 +202,20 @@ class _AddPersonState extends State<AddPerson> {
     }
   }
 
-  bool isValidDob(String dob) {
-    if (dob.isEmpty) return false;
+  bool isValidDob(dob) {
+    if (dob.isEmpty||dob==null) 
+    return false;
+
+    if(dob is String)
+    {
     var d = convertToDate(dob);
     return d != null && d.isBefore(new DateTime.now());
+    }
+
+    else if (dob is DateTime)
+    return dob != null && dob.isBefore(new DateTime.now());
+  
+    else return false;
   }
 
   bool isValidPhoneNumber(String input) {
@@ -268,10 +304,9 @@ class _AddPersonState extends State<AddPerson> {
       hashkafaValue = personProvider.newPerson.hashkafa;
       edaValue = personProvider.newPerson.eda;
       smokeValue = personProvider.newPerson.smoke;
+      dateString = dateTimeToStringFormat(personProvider.newPerson.birthday);
 
-      _controller.text = personProvider.newPerson.birthday != null
-          ? new DateFormat.yMd().format(personProvider.newPerson.birthday)
-          : null;
+    
       setState(() {});
       // shadchanProvider = Provider.of<ShadchanProvider>(context);
 
@@ -658,17 +693,20 @@ class _AddPersonState extends State<AddPerson> {
                                             onPressed: () {
                                               showModalBottomSheet(
                                                   context: context,
-                                                  builder:
-                                                      (BuildContext builder) {
-                                                    return Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .copyWith()
-                                                                  .size
-                                                                  .height /
-                                                              2.6,
-                                                      child: DatePickerWidget(),
-                                                    );
+                                                  builder: (BuildContext builder) {
+                                                    var now = new DateTime.now();
+                                                    var initialDate = convertToDate(personProvider.newPerson.birthday != null
+                                                        ? new DateFormat.yMd().format(personProvider.newPerson.birthday): null) ?? now;
+                                                    initialDate = (initialDate .year >=1900 && initialDate.isBefore(now)? initialDate: now);
+                                                    return Container(height: MediaQuery.of(context) .copyWith().size .height / 2.6,
+                                                        child: DatePickerWidget(
+                                                            initialDateTime: initialDate,
+                                                            minDateTime: new DateTime(1900),
+                                                            maxDateTime: new DateTime.now(),
+                                                            onConfirm:(date,arrey)=>selectedDate(date),
+                                                            )
+                                                            );
+                                                            
                                                   });
                                             },
                                             child: Container(
@@ -682,7 +720,7 @@ class _AddPersonState extends State<AddPerson> {
                                                   Row(
                                                     children: <Widget>[
                                                       Text(
-                                                        "18-02-2020",
+                                                        dateString,
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontWeight:
@@ -705,7 +743,9 @@ class _AddPersonState extends State<AddPerson> {
                                           ),
                                           if (dateWrong)
                                             Text(
-                                              LocaleText.getLocaleText(MyApp.getLocale(),'This field is required'), 
+                                              LocaleText.getLocaleText(
+                                                  MyApp.getLocale(),
+                                                  'This field is required'),
                                               style: TextStyle(
                                                   color: Colors.red,
                                                   fontSize: 12),
@@ -714,13 +754,12 @@ class _AddPersonState extends State<AddPerson> {
                                       );
                                     },
                                     validator: (val) {
-                                      if (isValidDob(val)) return null;
+                                      if (isValidDob(personProvider.newPerson.birthday)) 
+                                      return null;
                                       setState(() {
                                         dateWrong = true;
                                       });
-                                      return LocaleText.getLocaleText(
-                                          MyApp.getLocale(),
-                                          'This field is required');
+                                      return LocaleText.getLocaleText(  MyApp.getLocale(),'This field is required');
                                     },
                                   ),
 
