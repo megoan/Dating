@@ -405,20 +405,10 @@ class _AddPersonState extends State<AddPerson> {
                                         child: PhotoPickerFlat(
                                           height: 210,
                                           small: false,
-                                          imageUrl: personProvider
-                                                          .newPerson !=
-                                                      null &&
-                                                  personProvider.newPerson
-                                                          .profileImages !=
-                                                      null &&
-                                                  personProvider
-                                                          .newPerson
-                                                          .profileImages
-                                                          .length >
-                                                      0
-                                              ? personProvider.newPerson
-                                                  .profileImages[0]
-                                              : null,
+                                          imageUrl: personProvider.newPerson != null &&
+                                          personProvider.newPerson.profileImages !=null &&
+                                          personProvider.newPerson.profileImages.length >0
+                                          ? personProvider.newPerson.profileImages[0]: null,
                                           image: _image1,
                                           imageCallBack: imageCallBack1,
                                         ),
