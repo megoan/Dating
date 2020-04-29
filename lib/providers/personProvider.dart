@@ -484,7 +484,8 @@ class PersonProvider extends ChangeNotifier {
     }
   }
 
-  Future<String> addPerson(Person person) {
+  Future<String> 
+  addPerson(Person person) {
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       allPeopleDataBase.add(person);
       notifyListeners();
