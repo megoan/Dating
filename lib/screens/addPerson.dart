@@ -395,271 +395,267 @@ class _AddPersonState extends State<AddPerson> {
                               child: new Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Column(
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: PhotoPickerFlat(
-                                              height: 210,
-                                              small: false,
-                                              imageUrl: personProvider
-                                                              .newPerson !=
-                                                          null &&
-                                                      personProvider.newPerson
-                                                              .profileImages !=
-                                                          null &&
-                                                      personProvider
-                                                              .newPerson
-                                                              .profileImages
-                                                              .length >
-                                                          0
-                                                  ? personProvider.newPerson
-                                                      .profileImages[0]
-                                                  : null,
-                                              image: _image1,
-                                              imageCallBack: imageCallBack1,
-                                            ),
-                                          ),
-                                          SizedBox(width: 20),
-                                          Expanded(
-                                            child: Container(
-                                              height: 190,
-                                              child:
-                                                  //FIRST NAME
-                                                  Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                      Expanded(
+                                        child: PhotoPickerFlat(
+                                          height: 210,
+                                          small: false,
+                                          imageUrl: personProvider
+                                                          .newPerson !=
+                                                      null &&
+                                                  personProvider.newPerson
+                                                          .profileImages !=
+                                                      null &&
+                                                  personProvider
+                                                          .newPerson
+                                                          .profileImages
+                                                          .length >
+                                                      0
+                                              ? personProvider.newPerson
+                                                  .profileImages[0]
+                                              : null,
+                                          image: _image1,
+                                          imageCallBack: imageCallBack1,
+                                        ),
+                                      ),
+                                      SizedBox(width: 20),
+                                      Expanded(
+                                        child: Container(
+                                          height: 190,
+                                          child:
+                                              //FIRST NAME
+                                              Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                            children: <Widget>[
+                                              TextFormField(
+                                                cursorColor: Colors.white,
+                                                style: themeTextStyle,
+                                                initialValue: personProvider
+                                                                .newPerson !=
+                                                            null &&
+                                                        personProvider
+                                                                .newPerson
+                                                                .firstName !=
+                                                            null
+                                                    ? personProvider
+                                                        .newPerson.firstName
+                                                    : "",
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      EdgeInsets.all(15),
+
+                                                  border:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        const BorderRadius
+                                                                .all(
+                                                            Radius.circular(
+                                                                30.0)),
+                                                  ),
+                                                  // icon: const Icon(Icons.person),
+                                                  hintStyle: themeTextStyle,
+                                                  labelStyle:
+                                                      themeTextStyle, //TextStyle(color: AppTheme.primary),
+                                                  hintText: LocaleText
+                                                      .getLocaleText(
+                                                          MyApp.getLocale(),
+                                                          'Plony'),
+                                                  labelText: LocaleText
+                                                      .getLocaleText(
+                                                          MyApp.getLocale(),
+                                                          'First name'),
+                                                ),
+                                                inputFormatters: [
+                                                  new LengthLimitingTextInputFormatter(
+                                                      30)
+                                                ],
+                                                validator: (val) => val
+                                                        .isEmpty
+                                                    ? LocaleText.getLocaleText(
+                                                        MyApp.getLocale(),
+                                                        'This field is required')
+                                                    : null,
+                                                onSaved: (val) =>
+                                                    personProvider.newPerson
+                                                        .firstName = val,
+                                              ),
+                                              //LAST NAME
+                                              TextFormField(
+                                                cursorColor: Colors.white,
+                                                style: themeTextStyle,
+                                                initialValue: personProvider
+                                                                .newPerson !=
+                                                            null &&
+                                                        personProvider
+                                                                .newPerson
+                                                                .lastName !=
+                                                            null
+                                                    ? personProvider
+                                                        .newPerson.lastName
+                                                    : "",
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      EdgeInsets.all(15),
+                                                  border:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        const BorderRadius
+                                                                .all(
+                                                            Radius.circular(
+                                                                30.0)),
+                                                  ),
+                                                  //icon: const Icon(Icons.person),
+                                                  hintStyle: themeTextStyle,
+                                                  labelStyle:
+                                                      themeTextStyle,
+                                                  hintText: LocaleText
+                                                      .getLocaleText(
+                                                          MyApp.getLocale(),
+                                                          'Almony'),
+                                                  labelText: LocaleText
+                                                      .getLocaleText(
+                                                          MyApp.getLocale(),
+                                                          'Last name'),
+                                                ),
+                                                inputFormatters: [
+                                                  new LengthLimitingTextInputFormatter(
+                                                      30)
+                                                ],
+                                                validator: (val) => val
+                                                        .isEmpty
+                                                    ? LocaleText.getLocaleText(
+                                                        MyApp.getLocale(),
+                                                        'This field is required')
+                                                    : null,
+                                                onSaved: (val) =>
+                                                    personProvider.newPerson
+                                                        .lastName = val,
+                                              ),
+
+                                              Row(
                                                 children: <Widget>[
-                                                  TextFormField(
-                                                    cursorColor: Colors.white,
-                                                    style: themeTextStyle,
-                                                    initialValue: personProvider
-                                                                    .newPerson !=
-                                                                null &&
-                                                            personProvider
-                                                                    .newPerson
-                                                                    .firstName !=
-                                                                null
-                                                        ? personProvider
-                                                            .newPerson.firstName
-                                                        : "",
-                                                    decoration: InputDecoration(
-                                                      contentPadding:
-                                                          EdgeInsets.all(15),
-
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                    .all(
-                                                                Radius.circular(
-                                                                    30.0)),
-                                                      ),
-                                                      // icon: const Icon(Icons.person),
-                                                      hintStyle: themeTextStyle,
-                                                      labelStyle:
-                                                          themeTextStyle, //TextStyle(color: AppTheme.primary),
-                                                      hintText: LocaleText
-                                                          .getLocaleText(
-                                                              MyApp.getLocale(),
-                                                              'Plony'),
-                                                      labelText: LocaleText
-                                                          .getLocaleText(
-                                                              MyApp.getLocale(),
-                                                              'First name'),
+                                                  Container(
+                                                    width: 40,
+                                                    height: 40,
+                                                    decoration:
+                                                        BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(50),
+                                                      border: Border.all(
+                                                          width: sSelected ==
+                                                                  Gender
+                                                                      .MALE
+                                                              ? 2.0
+                                                              : 1.5,
+                                                          color: sSelected ==
+                                                                  Gender
+                                                                      .MALE
+                                                              ? AppTheme
+                                                                      .primary[
+                                                                  300]
+                                                              : AppTheme
+                                                                  .primary),
                                                     ),
-                                                    inputFormatters: [
-                                                      new LengthLimitingTextInputFormatter(
-                                                          30)
-                                                    ],
-                                                    validator: (val) => val
-                                                            .isEmpty
-                                                        ? LocaleText.getLocaleText(
-                                                            MyApp.getLocale(),
-                                                            'This field is required')
-                                                        : null,
-                                                    onSaved: (val) =>
-                                                        personProvider.newPerson
-                                                            .firstName = val,
+                                                    child: IconButton(
+                                                        icon: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .male),
+                                                        color: sSelected ==
+                                                                Gender.MALE
+                                                            ? AppTheme
+                                                                    .primary[
+                                                                300]
+                                                            : AppTheme
+                                                                .primary,
+                                                        padding:
+                                                            EdgeInsets.all(
+                                                                5.0),
+                                                        // alignment: Alignment.centerRight,
+                                                        onPressed: () =>
+                                                            setState(() {
+                                                              sSelected =
+                                                                  Gender
+                                                                      .MALE;
+                                                            })),
                                                   ),
-                                                  //LAST NAME
-                                                  TextFormField(
-                                                    cursorColor: Colors.white,
+                                                  Text(
+                                                    "  " +
+                                                        LocaleText
+                                                            .getLocaleText(
+                                                                MyApp
+                                                                    .getLocale(),
+                                                                'Boy'),
                                                     style: themeTextStyle,
-                                                    initialValue: personProvider
-                                                                    .newPerson !=
-                                                                null &&
-                                                            personProvider
-                                                                    .newPerson
-                                                                    .lastName !=
-                                                                null
-                                                        ? personProvider
-                                                            .newPerson.lastName
-                                                        : "",
-                                                    decoration: InputDecoration(
-                                                      contentPadding:
-                                                          EdgeInsets.all(15),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                    .all(
-                                                                Radius.circular(
-                                                                    30.0)),
-                                                      ),
-                                                      //icon: const Icon(Icons.person),
-                                                      hintStyle: themeTextStyle,
-                                                      labelStyle:
-                                                          themeTextStyle,
-                                                      hintText: LocaleText
-                                                          .getLocaleText(
-                                                              MyApp.getLocale(),
-                                                              'Almony'),
-                                                      labelText: LocaleText
-                                                          .getLocaleText(
-                                                              MyApp.getLocale(),
-                                                              'Last name'),
+                                                  ),
+                                                  Spacer(),
+                                                  Container(
+                                                    width: 40,
+                                                    height: 40,
+                                                    decoration:
+                                                        BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(50),
+                                                      border: Border.all(
+                                                          width: sSelected ==
+                                                                  Gender
+                                                                      .FEMALE
+                                                              ? 2.0
+                                                              : 1.5,
+                                                          color: sSelected ==
+                                                                  Gender
+                                                                      .FEMALE
+                                                              ? AppTheme
+                                                                      .primary[
+                                                                  300]
+                                                              : AppTheme
+                                                                  .primary),
                                                     ),
-                                                    inputFormatters: [
-                                                      new LengthLimitingTextInputFormatter(
-                                                          30)
-                                                    ],
-                                                    validator: (val) => val
-                                                            .isEmpty
-                                                        ? LocaleText.getLocaleText(
-                                                            MyApp.getLocale(),
-                                                            'This field is required')
-                                                        : null,
-                                                    onSaved: (val) =>
-                                                        personProvider.newPerson
-                                                            .lastName = val,
+                                                    child: IconButton(
+                                                        icon: FaIcon(
+                                                            FontAwesomeIcons
+                                                                .female),
+                                                        color: sSelected ==
+                                                                Gender
+                                                                    .FEMALE
+                                                            ? AppTheme
+                                                                    .primary[
+                                                                300]
+                                                            : AppTheme
+                                                                .primary,
+                                                        padding:
+                                                            EdgeInsets.all(
+                                                                5.0),
+                                                        //alignment: Alignment.centerRight,
+                                                        onPressed: () =>
+                                                            setState(() {
+                                                              sSelected =
+                                                                  Gender
+                                                                      .FEMALE;
+                                                            })),
                                                   ),
-
-                                                  Row(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        width: 40,
-                                                        height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(50),
-                                                          border: Border.all(
-                                                              width: sSelected ==
-                                                                      Gender
-                                                                          .MALE
-                                                                  ? 2.0
-                                                                  : 1.5,
-                                                              color: sSelected ==
-                                                                      Gender
-                                                                          .MALE
-                                                                  ? AppTheme
-                                                                          .primary[
-                                                                      300]
-                                                                  : AppTheme
-                                                                      .primary),
-                                                        ),
-                                                        child: IconButton(
-                                                            icon: FaIcon(
-                                                                FontAwesomeIcons
-                                                                    .male),
-                                                            color: sSelected ==
-                                                                    Gender.MALE
-                                                                ? AppTheme
-                                                                        .primary[
-                                                                    300]
-                                                                : AppTheme
-                                                                    .primary,
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    5.0),
-                                                            // alignment: Alignment.centerRight,
-                                                            onPressed: () =>
-                                                                setState(() {
-                                                                  sSelected =
-                                                                      Gender
-                                                                          .MALE;
-                                                                })),
-                                                      ),
-                                                      Text(
-                                                        "  " +
-                                                            LocaleText
-                                                                .getLocaleText(
-                                                                    MyApp
-                                                                        .getLocale(),
-                                                                    'Boy'),
-                                                        style: themeTextStyle,
-                                                      ),
-                                                      Spacer(),
-                                                      Container(
-                                                        width: 40,
-                                                        height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(50),
-                                                          border: Border.all(
-                                                              width: sSelected ==
-                                                                      Gender
-                                                                          .FEMALE
-                                                                  ? 2.0
-                                                                  : 1.5,
-                                                              color: sSelected ==
-                                                                      Gender
-                                                                          .FEMALE
-                                                                  ? AppTheme
-                                                                          .primary[
-                                                                      300]
-                                                                  : AppTheme
-                                                                      .primary),
-                                                        ),
-                                                        child: IconButton(
-                                                            icon: FaIcon(
-                                                                FontAwesomeIcons
-                                                                    .female),
-                                                            color: sSelected ==
-                                                                    Gender
-                                                                        .FEMALE
-                                                                ? AppTheme
-                                                                        .primary[
-                                                                    300]
-                                                                : AppTheme
-                                                                    .primary,
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    5.0),
-                                                            //alignment: Alignment.centerRight,
-                                                            onPressed: () =>
-                                                                setState(() {
-                                                                  sSelected =
-                                                                      Gender
-                                                                          .FEMALE;
-                                                                })),
-                                                      ),
-                                                      Text(
-                                                          "  " +
-                                                              LocaleText
-                                                                  .getLocaleText(
-                                                                      MyApp
-                                                                          .getLocale(),
-                                                                      'Girl'),
-                                                          style:
-                                                              themeTextStyle),
-                                                    ],
-                                                  ),
+                                                  Text(
+                                                      "  " +
+                                                          LocaleText
+                                                              .getLocaleText(
+                                                                  MyApp
+                                                                      .getLocale(),
+                                                                  'Girl'),
+                                                      style:
+                                                          themeTextStyle),
                                                 ],
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ),
