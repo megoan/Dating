@@ -32,6 +32,7 @@ class _AddPersonState extends State<AddPerson> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<FormState> _secondFormKey = new GlobalKey<FormState>();
 
+  bool dateWrong = false;
   Area _area;
   Country _country;
   Dos _religious;
@@ -149,9 +150,15 @@ class _AddPersonState extends State<AddPerson> {
   Future _chooseDate(BuildContext context, String initialDateString) async {
     var now = new DateTime.now();
     var initialDate = convertToDate(initialDateString) ?? now;
-    initialDate = (initialDate.year >= 1900 && initialDate.isBefore(now) ? initialDate : now);
+    initialDate = (initialDate.year >= 1900 && initialDate.isBefore(now)
+        ? initialDate
+        : now);
 
-    var result = await showDatePicker(context: context, initialDate: initialDate, firstDate: new DateTime(1900), lastDate: new DateTime.now());
+    var result = await showDatePicker(
+        context: context,
+        initialDate: initialDate,
+        firstDate: new DateTime(1900),
+        lastDate: new DateTime.now());
 
     if (result == null) return;
 
@@ -181,12 +188,14 @@ class _AddPersonState extends State<AddPerson> {
   }
 
   bool isValidEmail(String input) {
-    final RegExp regex = new RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+    final RegExp regex = new RegExp(
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
     return regex.hasMatch(input);
   }
 
   void showMessage(String message, [MaterialColor color = Colors.red]) {
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
+    _scaffoldKey.currentState.showSnackBar(
+        new SnackBar(backgroundColor: color, content: new Text(message)));
   }
 
   void _submitForm() async {
@@ -203,7 +212,8 @@ class _AddPersonState extends State<AddPerson> {
     });
 //LocaleText.getLocaleText(MyApp.getLocale(), "Female") ;
     if (!form.validate()) {
-      showMessage(LocaleText.getLocaleText(MyApp.getLocale(), "Form is not valid!  Please review and correct!"));
+      showMessage(LocaleText.getLocaleText(
+          MyApp.getLocale(), "Form is not valid!  Please review and correct!"));
     } else {
       //This invokes each onSaved event
       form.save();
@@ -230,15 +240,18 @@ class _AddPersonState extends State<AddPerson> {
       personProvider = Provider.of<PersonProvider>(context);
       print(widget.update);
       if (widget.update == null || !widget.update) {
-        personProvider.newPerson = new Person(shadchanID: personProvider.shadchanProvider.myShadchan.id);
+        personProvider.newPerson = new Person(
+            shadchanID: personProvider.shadchanProvider.myShadchan.id);
       } else {
         personHeight = personProvider.newPerson.height;
         lookingPersonHeightMin = personProvider.newPerson.heightMin;
         lookingPersonHeightMax = personProvider.newPerson.heightMax;
         lookingPersonAgeMin = personProvider.newPerson.ageMin;
         lookingPersonAgeMax = personProvider.newPerson.ageMax;
-        rangeValuesAge = RangeValues(personProvider.newPerson.ageMin, personProvider.newPerson.ageMax);
-        rangeValues = RangeValues(personProvider.newPerson.heightMin, personProvider.newPerson.heightMax);
+        rangeValuesAge = RangeValues(
+            personProvider.newPerson.ageMin, personProvider.newPerson.ageMax);
+        rangeValues = RangeValues(personProvider.newPerson.heightMin,
+            personProvider.newPerson.heightMax);
       }
       _area = personProvider.newPerson.area;
       _country = personProvider.newPerson.country;
@@ -256,7 +269,9 @@ class _AddPersonState extends State<AddPerson> {
       edaValue = personProvider.newPerson.eda;
       smokeValue = personProvider.newPerson.smoke;
 
-      _controller.text = personProvider.newPerson.birthday != null ? new DateFormat.yMd().format(personProvider.newPerson.birthday) : null;
+      _controller.text = personProvider.newPerson.birthday != null
+          ? new DateFormat.yMd().format(personProvider.newPerson.birthday)
+          : null;
       setState(() {});
       // shadchanProvider = Provider.of<ShadchanProvider>(context);
 
@@ -295,14 +310,15 @@ class _AddPersonState extends State<AddPerson> {
   TextStyle themeTextStyle = new TextStyle(color: AppTheme.textColor);
   TextStyle titles = new TextStyle(color: AppTheme.textColor, fontSize: 20);
   Widget title(title) {
-    return Padding(padding: EdgeInsets.all(10), child: Text(title, style: titles));
+    return Padding(
+        padding: EdgeInsets.all(10), child: Text(title, style: titles));
   }
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
-          child: Scaffold(
+      child: Scaffold(
         backgroundColor: AppTheme.filterBackgroundColor,
         // appBar: AppBar(
         //   title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
@@ -346,17 +362,29 @@ class _AddPersonState extends State<AddPerson> {
                                 children: <Widget>[
                                   Column(
                                     children: <Widget>[
-                                    
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           Expanded(
                                             child: PhotoPickerFlat(
                                               height: 210,
                                               small: false,
-                                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
-                                                  ? personProvider.newPerson.profileImages[0]
+                                              imageUrl: personProvider
+                                                              .newPerson !=
+                                                          null &&
+                                                      personProvider.newPerson
+                                                              .profileImages !=
+                                                          null &&
+                                                      personProvider
+                                                              .newPerson
+                                                              .profileImages
+                                                              .length >
+                                                          0
+                                                  ? personProvider.newPerson
+                                                      .profileImages[0]
                                                   : null,
                                               image: _image1,
                                               imageCallBack: imageCallBack1,
@@ -369,47 +397,113 @@ class _AddPersonState extends State<AddPerson> {
                                               child:
                                                   //FIRST NAME
                                                   Column(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: <Widget>[
                                                   TextFormField(
                                                     cursorColor: Colors.white,
                                                     style: themeTextStyle,
-                                                    initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
+                                                    initialValue: personProvider
+                                                                    .newPerson !=
+                                                                null &&
+                                                            personProvider
+                                                                    .newPerson
+                                                                    .firstName !=
+                                                                null
+                                                        ? personProvider
+                                                            .newPerson.firstName
+                                                        : "",
                                                     decoration: InputDecoration(
-                                                      contentPadding: EdgeInsets.all(15),
+                                                      contentPadding:
+                                                          EdgeInsets.all(15),
 
-                                                      border: OutlineInputBorder(
-                                                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                    .all(
+                                                                Radius.circular(
+                                                                    30.0)),
                                                       ),
                                                       // icon: const Icon(Icons.person),
                                                       hintStyle: themeTextStyle,
-                                                      labelStyle: themeTextStyle, //TextStyle(color: AppTheme.primary),
-                                                      hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
-                                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
+                                                      labelStyle:
+                                                          themeTextStyle, //TextStyle(color: AppTheme.primary),
+                                                      hintText: LocaleText
+                                                          .getLocaleText(
+                                                              MyApp.getLocale(),
+                                                              'Plony'),
+                                                      labelText: LocaleText
+                                                          .getLocaleText(
+                                                              MyApp.getLocale(),
+                                                              'First name'),
                                                     ),
-                                                    inputFormatters: [new LengthLimitingTextInputFormatter(30)],
-                                                    validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                                    onSaved: (val) => personProvider.newPerson.firstName = val,
+                                                    inputFormatters: [
+                                                      new LengthLimitingTextInputFormatter(
+                                                          30)
+                                                    ],
+                                                    validator: (val) => val
+                                                            .isEmpty
+                                                        ? LocaleText.getLocaleText(
+                                                            MyApp.getLocale(),
+                                                            'This field is required')
+                                                        : null,
+                                                    onSaved: (val) =>
+                                                        personProvider.newPerson
+                                                            .firstName = val,
                                                   ),
                                                   //LAST NAME
                                                   TextFormField(
                                                     cursorColor: Colors.white,
                                                     style: themeTextStyle,
-                                                    initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
+                                                    initialValue: personProvider
+                                                                    .newPerson !=
+                                                                null &&
+                                                            personProvider
+                                                                    .newPerson
+                                                                    .lastName !=
+                                                                null
+                                                        ? personProvider
+                                                            .newPerson.lastName
+                                                        : "",
                                                     decoration: InputDecoration(
-                                                      contentPadding: EdgeInsets.all(15),
-                                                      border: OutlineInputBorder(
-                                                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                                      contentPadding:
+                                                          EdgeInsets.all(15),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                    .all(
+                                                                Radius.circular(
+                                                                    30.0)),
                                                       ),
                                                       //icon: const Icon(Icons.person),
                                                       hintStyle: themeTextStyle,
-                                                      labelStyle: themeTextStyle,
-                                                      hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
-                                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
+                                                      labelStyle:
+                                                          themeTextStyle,
+                                                      hintText: LocaleText
+                                                          .getLocaleText(
+                                                              MyApp.getLocale(),
+                                                              'Almony'),
+                                                      labelText: LocaleText
+                                                          .getLocaleText(
+                                                              MyApp.getLocale(),
+                                                              'Last name'),
                                                     ),
-                                                    inputFormatters: [new LengthLimitingTextInputFormatter(30)],
-                                                    validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                                    onSaved: (val) => personProvider.newPerson.lastName = val,
+                                                    inputFormatters: [
+                                                      new LengthLimitingTextInputFormatter(
+                                                          30)
+                                                    ],
+                                                    validator: (val) => val
+                                                            .isEmpty
+                                                        ? LocaleText.getLocaleText(
+                                                            MyApp.getLocale(),
+                                                            'This field is required')
+                                                        : null,
+                                                    onSaved: (val) =>
+                                                        personProvider.newPerson
+                                                            .lastName = val,
                                                   ),
 
                                                   Row(
@@ -417,51 +511,121 @@ class _AddPersonState extends State<AddPerson> {
                                                       Container(
                                                         width: 40,
                                                         height: 40,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(50),
-                                                           border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(50),
+                                                          border: Border.all(
+                                                              width: sSelected ==
+                                                                      Gender
+                                                                          .MALE
+                                                                  ? 2.0
+                                                                  : 1.5,
+                                                              color: sSelected ==
+                                                                      Gender
+                                                                          .MALE
+                                                                  ? AppTheme
+                                                                          .primary[
+                                                                      300]
+                                                                  : AppTheme
+                                                                      .primary),
                                                         ),
                                                         child: IconButton(
-                                                           icon: FaIcon(FontAwesomeIcons.male),
-                                                            color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary,
-                                                            padding: EdgeInsets.all(5.0),
+                                                            icon: FaIcon(
+                                                                FontAwesomeIcons
+                                                                    .male),
+                                                            color: sSelected ==
+                                                                    Gender.MALE
+                                                                ? AppTheme
+                                                                        .primary[
+                                                                    300]
+                                                                : AppTheme
+                                                                    .primary,
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    5.0),
                                                             // alignment: Alignment.centerRight,
-                                                            onPressed: () => setState(() {
-                                                                  sSelected = Gender.MALE;
+                                                            onPressed: () =>
+                                                                setState(() {
+                                                                  sSelected =
+                                                                      Gender
+                                                                          .MALE;
                                                                 })),
                                                       ),
                                                       Text(
-                                                         "  "+LocaleText.getLocaleText(MyApp.getLocale(), 'Boy'),
+                                                        "  " +
+                                                            LocaleText
+                                                                .getLocaleText(
+                                                                    MyApp
+                                                                        .getLocale(),
+                                                                    'Boy'),
                                                         style: themeTextStyle,
                                                       ),
                                                       Spacer(),
                                                       Container(
                                                         width: 40,
                                                         height: 40,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(50),
-                                                          border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(50),
+                                                          border: Border.all(
+                                                              width: sSelected ==
+                                                                      Gender
+                                                                          .FEMALE
+                                                                  ? 2.0
+                                                                  : 1.5,
+                                                              color: sSelected ==
+                                                                      Gender
+                                                                          .FEMALE
+                                                                  ? AppTheme
+                                                                          .primary[
+                                                                      300]
+                                                                  : AppTheme
+                                                                      .primary),
                                                         ),
                                                         child: IconButton(
-                                                            icon: FaIcon(FontAwesomeIcons.female),
-                                                            color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary,
-                                                            padding: EdgeInsets.all(5.0),
+                                                            icon: FaIcon(
+                                                                FontAwesomeIcons
+                                                                    .female),
+                                                            color: sSelected ==
+                                                                    Gender
+                                                                        .FEMALE
+                                                                ? AppTheme
+                                                                        .primary[
+                                                                    300]
+                                                                : AppTheme
+                                                                    .primary,
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    5.0),
                                                             //alignment: Alignment.centerRight,
-                                                            onPressed: () => setState(() {
-                                                                  sSelected = Gender.FEMALE;
+                                                            onPressed: () =>
+                                                                setState(() {
+                                                                  sSelected =
+                                                                      Gender
+                                                                          .FEMALE;
                                                                 })),
                                                       ),
-                                                      Text("  "+LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: themeTextStyle),
+                                                      Text(
+                                                          "  " +
+                                                              LocaleText
+                                                                  .getLocaleText(
+                                                                      MyApp
+                                                                          .getLocale(),
+                                                                      'Girl'),
+                                                          style:
+                                                              themeTextStyle),
                                                     ],
                                                   ),
-                                               
                                                 ],
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                      
                                     ],
                                   ),
                                   SizedBox(
@@ -474,44 +638,90 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Date of Birth')),
                                     ],
                                   ),
-                                  FlatButton(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0), side: BorderSide(color: AppTheme.primary)),
-                                    color: Colors.black12,
-                                    onPressed: () {
-                                      showModalBottomSheet(
-                                          context: context,
-                                          builder: (BuildContext builder) {
-                                            return Container(
-                                              height: MediaQuery.of(context).copyWith().size.height / 2.6,
-                                              child: DatePickerWidget(),
-                                            );
-                                          });
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 50.0,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  FormField(
+                                    builder: (FormFieldState<dynamic> field) {
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: <Widget>[
-                                          Row(
-                                            children: <Widget>[
-                                              Text(
-                                                "18-02-2020",
-                                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
+                                          FlatButton(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                side: BorderSide(
+                                                    color: AppTheme.primary)),
+                                            color: Colors.black12,
+                                            onPressed: () {
+                                              showModalBottomSheet(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext builder) {
+                                                    return Container(
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .copyWith()
+                                                                  .size
+                                                                  .height /
+                                                              2.6,
+                                                      child: DatePickerWidget(),
+                                                    );
+                                                  });
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              height: 50.0,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Text(
+                                                        "18-02-2020",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 18.0),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  FaIcon(
+                                                    FontAwesomeIcons.angleDown,
+                                                    size: 20,
+                                                    color: Colors.white,
+                                                  ),
+                                                ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                          FaIcon(
-                                            FontAwesomeIcons.angleDown,
-                                            size: 20,
-                                            color: Colors.white,
+                                          SizedBox(
+                                            height: 5,
                                           ),
+                                          if (dateWrong)
+                                            Text(
+                                              LocaleText.getLocaleText(MyApp.getLocale(),'This field is required'), 
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 12),
+                                            ),
                                         ],
-                                      ),
-                                    ),
+                                      );
+                                    },
+                                    validator: (val) {
+                                      if (isValidDob(val)) return null;
+                                      setState(() {
+                                        dateWrong = true;
+                                      });
+                                      return LocaleText.getLocaleText(
+                                          MyApp.getLocale(),
+                                          'This field is required');
+                                    },
                                   ),
 
                                   //BIRTH DAY
@@ -550,16 +760,23 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Country')),
                                     ],
                                   ),
                                   new FormField<Country>(
                                     builder: (FormFieldState<Country> state) {
                                       countryState = state;
-                                      return SelectChip(Country.values, (country) => _country = country, pickedValue: _country);
+                                      return SelectChip(Country.values,
+                                          (country) => _country = country,
+                                          pickedValue: _country);
                                     },
                                     validator: (val) {
-                                      return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      return val != null
+                                          ? null
+                                          : LocaleText.getLocaleText(
+                                              MyApp.getLocale(),
+                                              'This field is required');
                                     },
                                   ),
                                   SizedBox(
@@ -572,7 +789,8 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Area')),
                                     ],
                                   ),
                                   //AREA
@@ -580,10 +798,16 @@ class _AddPersonState extends State<AddPerson> {
                                     new FormField<Area>(
                                       builder: (FormFieldState<Area> state) {
                                         areaState = state;
-                                        return SelectChip(Area.values, (area) => _area = area, pickedValue: _area);
+                                        return SelectChip(
+                                            Area.values, (area) => _area = area,
+                                            pickedValue: _area);
                                       },
                                       validator: (val) {
-                                        return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                        return val != null
+                                            ? null
+                                            : LocaleText.getLocaleText(
+                                                MyApp.getLocale(),
+                                                'This field is required');
                                       },
                                     ),
                                   SizedBox(
@@ -596,17 +820,24 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Status')),
                                     ],
                                   ),
                                   //STATUS
                                   new FormField<Status>(
                                     builder: (FormFieldState<Status> state) {
                                       statusState = state;
-                                      return SelectChip(Status.values, (status) => _status = status, pickedValue: _status);
+                                      return SelectChip(Status.values,
+                                          (status) => _status = status,
+                                          pickedValue: _status);
                                     },
                                     validator: (val) {
-                                      return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      return val != null
+                                          ? null
+                                          : LocaleText.getLocaleText(
+                                              MyApp.getLocale(),
+                                              'This field is required');
                                     },
                                   ),
                                   //RELIGIOUS
@@ -620,16 +851,23 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Religious')),
                                     ],
                                   ),
                                   new FormField<Dos>(
                                     builder: (FormFieldState<Dos> state) {
                                       religiosState = state;
-                                      return SelectChip(Dos.values, (val) => _religious = val, pickedValue: _religious);
+                                      return SelectChip(
+                                          Dos.values, (val) => _religious = val,
+                                          pickedValue: _religious);
                                     },
                                     validator: (val) {
-                                      return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      return val != null
+                                          ? null
+                                          : LocaleText.getLocaleText(
+                                              MyApp.getLocale(),
+                                              'This field is required');
                                     },
                                   ),
                                   //HASHKAFA
@@ -643,16 +881,23 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Hashkafa')),
                                     ],
                                   ),
                                   new FormField<Hashkafa>(
                                     builder: (FormFieldState<Hashkafa> state) {
                                       hashkafaState = state;
-                                      return SelectChip(Hashkafa.values, (val) => _hashkafa = val, pickedValue: _hashkafa);
+                                      return SelectChip(Hashkafa.values,
+                                          (val) => _hashkafa = val,
+                                          pickedValue: _hashkafa);
                                     },
                                     validator: (val) {
-                                      return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      return val != null
+                                          ? null
+                                          : LocaleText.getLocaleText(
+                                              MyApp.getLocale(),
+                                              'This field is required');
                                     },
                                   ),
                                   //EDA
@@ -666,16 +911,23 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Eda')),
                                     ],
                                   ),
                                   new FormField<Eda>(
                                     builder: (FormFieldState<Eda> state) {
                                       edaState = state;
-                                      return SelectChip(Eda.values, (val) => _eda = val, pickedValue: _eda);
+                                      return SelectChip(
+                                          Eda.values, (val) => _eda = val,
+                                          pickedValue: _eda);
                                     },
                                     validator: (val) {
-                                      return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      return val != null
+                                          ? null
+                                          : LocaleText.getLocaleText(
+                                              MyApp.getLocale(),
+                                              'This field is required');
                                     },
                                   ),
                                   //SMOKE
@@ -689,16 +941,23 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Smoking')),
                                     ],
                                   ),
                                   new FormField<Smoke>(
                                     builder: (FormFieldState<Smoke> state) {
                                       smokeState = state;
-                                      return SelectChip(Smoke.values, (val) => _smoke = val, pickedValue: _smoke);
+                                      return SelectChip(
+                                          Smoke.values, (val) => _smoke = val,
+                                          pickedValue: _smoke);
                                     },
                                     validator: (val) {
-                                      return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      return val != null
+                                          ? null
+                                          : LocaleText.getLocaleText(
+                                              MyApp.getLocale(),
+                                              'This field is required');
                                     },
                                   ),
                                   //ABOUT ME SHORT
@@ -712,28 +971,48 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them short')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(),
+                                          'About them short')),
                                     ],
                                   ),
                                   new TextFormField(
                                     cursorColor: Colors.white,
                                     style: themeTextStyle,
-                                    initialValue: personProvider.newPerson != null && personProvider.newPerson.short != null ? personProvider.newPerson.short : "",
+                                    initialValue: personProvider.newPerson !=
+                                                null &&
+                                            personProvider.newPerson.short !=
+                                                null
+                                        ? personProvider.newPerson.short
+                                        : "",
                                     maxLines: null,
                                     maxLength: 70,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(30.0)),
                                       ),
                                       //icon: const Icon(Icons.short_text),
-                                      hintStyle: TextStyle(color: AppTheme.primary),
+                                      hintStyle:
+                                          TextStyle(color: AppTheme.primary),
                                       labelStyle: themeTextStyle,
-                                      hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
-                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
+                                      hintText: LocaleText.getLocaleText(
+                                          MyApp.getLocale(),
+                                          'About them short'),
+                                      labelText: LocaleText.getLocaleText(
+                                          MyApp.getLocale(),
+                                          'About them short'),
                                     ),
-                                    inputFormatters: [new LengthLimitingTextInputFormatter(70)],
-                                    validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                    onSaved: (val) => personProvider.newPerson.short = val,
+                                    inputFormatters: [
+                                      new LengthLimitingTextInputFormatter(70)
+                                    ],
+                                    validator: (val) => val.isEmpty
+                                        ? LocaleText.getLocaleText(
+                                            MyApp.getLocale(),
+                                            'This field is required')
+                                        : null,
+                                    onSaved: (val) =>
+                                        personProvider.newPerson.short = val,
                                   ),
                                   //ABOUT ME LONG
                                   SizedBox(
@@ -746,30 +1025,45 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them long')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(),
+                                          'About them long')),
                                     ],
                                   ),
                                   new TextFormField(
                                     cursorColor: Colors.white,
                                     style: themeTextStyle,
-                                    initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
+                                    initialValue:
+                                        personProvider.newPerson != null &&
+                                                personProvider.newPerson.long !=
+                                                    null
+                                            ? personProvider.newPerson.long
+                                            : "",
                                     maxLines: null,
                                     minLines: 5,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(30.0)),
                                       ),
-                                      
-                                      hintStyle: TextStyle(color: AppTheme.primary),
+                                      hintStyle:
+                                          TextStyle(color: AppTheme.primary),
                                       labelStyle: themeTextStyle,
-                                      hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
-                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
+                                      hintText: LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'About them long'),
+                                      labelText: LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'About them long'),
                                     ),
                                     // inputFormatters: [
                                     //   new LengthLimitingTextInputFormatter(500)
                                     // ],
-                                    validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                    onSaved: (val) => personProvider.newPerson.long = val,
+                                    validator: (val) => val.isEmpty
+                                        ? LocaleText.getLocaleText(
+                                            MyApp.getLocale(),
+                                            'This field is required')
+                                        : null,
+                                    onSaved: (val) =>
+                                        personProvider.newPerson.long = val,
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -781,7 +1075,8 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Height')),
                                     ],
                                   ),
                                   Row(
@@ -792,18 +1087,24 @@ class _AddPersonState extends State<AddPerson> {
                                           min: 1.3,
                                           max: 2.3,
                                           divisions: 130,
-                                          label: "" + personHeight.toStringAsFixed(2),
+                                          label: "" +
+                                              personHeight.toStringAsFixed(2),
                                           value: personHeight,
                                           onChanged: ((newValue) {
                                             setState(() {
                                               personHeight = newValue;
-                                              personProvider.newPerson.height = newValue;
+                                              personProvider.newPerson.height =
+                                                  newValue;
                                             });
                                           }),
                                         ),
                                       ),
                                       Text(
-                                        "" + personHeight.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),
+                                        "" +
+                                            personHeight.toStringAsFixed(2) +
+                                            " " +
+                                            LocaleText.getLocaleText(
+                                                MyApp.getLocale(), 'm'),
                                         style: themeTextStyle,
                                       )
                                     ],
@@ -819,51 +1120,73 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Sherut')),
                                     ],
                                   ),
 
                                   if (sSelected == Gender.FEMALE)
-                                    MultiSelectChip(SherutGirl.values, (selected,val) =>  personProvider.newPerson.mySherutGirl[selected] = val ,pickedChips: personProvider.newPerson.mySherutGirl),
-                             
+                                    MultiSelectChip(
+                                        SherutGirl.values,
+                                        (selected, val) => personProvider
+                                            .newPerson
+                                            .mySherutGirl[selected] = val,
+                                        pickedChips: personProvider
+                                            .newPerson.mySherutGirl),
+
                                   if (sSelected == Gender.MALE)
-                                    MultiSelectChip(SherutBoy.values, (val) => print(val),pickedChips: personProvider.newPerson.mySherutBoy,),
-                              
+                                    MultiSelectChip(
+                                      SherutBoy.values,
+                                      (val) => print(val),
+                                      pickedChips:
+                                          personProvider.newPerson.mySherutBoy,
+                                    ),
+
                                   SizedBox(
                                     height: 10,
                                   ),
                                   Row(
                                     children: <Widget>[
-                                       title("עוד תמונות"),
-                                            SizedBox(
-                                    width: 10,
-                                  ),
+                                      title("עוד תמונות"),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
                                       FaIcon(
                                         FontAwesomeIcons.cameraRetro,
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                       SizedBox(
-                                    width: 10,
-                                  ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
                                       FaIcon(
                                         FontAwesomeIcons.handPeace,
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                     
                                     ],
                                   ),
-                                   SizedBox(
+                                  SizedBox(
                                     height: 10,
                                   ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       Expanded(
                                         child: PhotoPickerFlat(
-                                          imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
-                                              ? personProvider.newPerson.profileImages[0]
+                                          imageUrl: personProvider.newPerson !=
+                                                      null &&
+                                                  personProvider.newPerson
+                                                          .profileImages !=
+                                                      null &&
+                                                  personProvider
+                                                          .newPerson
+                                                          .profileImages
+                                                          .length >
+                                                      1
+                                              ? personProvider
+                                                  .newPerson.profileImages[0]
                                               : null,
                                           image: _image2,
                                           imageCallBack: imageCallBack2,
@@ -876,9 +1199,19 @@ class _AddPersonState extends State<AddPerson> {
                                       ),
                                       Expanded(
                                           child: PhotoPickerFlat(
-                                        imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
-                                            ? personProvider.newPerson.profileImages[0]
-                                            : null,
+                                        imageUrl:
+                                            personProvider.newPerson != null &&
+                                                    personProvider.newPerson
+                                                            .profileImages !=
+                                                        null &&
+                                                    personProvider
+                                                            .newPerson
+                                                            .profileImages
+                                                            .length >
+                                                        2
+                                                ? personProvider
+                                                    .newPerson.profileImages[0]
+                                                : null,
                                         image: _image3,
                                         imageCallBack: imageCallBack3,
                                         photoNum: 3,
@@ -889,9 +1222,19 @@ class _AddPersonState extends State<AddPerson> {
                                       ),
                                       Expanded(
                                           child: PhotoPickerFlat(
-                                        imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
-                                            ? personProvider.newPerson.profileImages[0]
-                                            : null,
+                                        imageUrl:
+                                            personProvider.newPerson != null &&
+                                                    personProvider.newPerson
+                                                            .profileImages !=
+                                                        null &&
+                                                    personProvider
+                                                            .newPerson
+                                                            .profileImages
+                                                            .length >
+                                                        3
+                                                ? personProvider
+                                                    .newPerson.profileImages[0]
+                                                : null,
                                         image: _image4,
                                         imageCallBack: imageCallBack4,
                                         photoNum: 4,
@@ -927,11 +1270,17 @@ class _AddPersonState extends State<AddPerson> {
                                     child: Container(
                                       padding: const EdgeInsets.only(top: 14.0),
                                       child: Text(
-                                        sSelected==Gender.FEMALE?
-                                        LocaleText.getLocaleText(MyApp.getLocale(),'What are she looking for?'):
-                                        LocaleText.getLocaleText(MyApp.getLocale(),'What are he looking for?')
-                                        ,
-                                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25.0),
+                                        sSelected == Gender.FEMALE
+                                            ? LocaleText.getLocaleText(
+                                                MyApp.getLocale(),
+                                                'What are she looking for?')
+                                            : LocaleText.getLocaleText(
+                                                MyApp.getLocale(),
+                                                'What are he looking for?'),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 25.0),
                                       ),
                                     ),
                                   ),
@@ -946,17 +1295,28 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Country')),
                                     ],
                                   ),
-                                  MultiSelectChip(Country.values, (select,val) => personProvider.newPerson.countrys[select] = val,pickedChips:personProvider.newPerson.countrys),
-                           
+                                  MultiSelectChip(
+                                      Country.values,
+                                      (select, val) => personProvider
+                                          .newPerson.countrys[select] = val,
+                                      pickedChips:
+                                          personProvider.newPerson.countrys),
 
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
+                                  if (personProvider.newPerson.countrys !=
+                                          null &&
+                                      personProvider
+                                          .newPerson.countrys[Country.ISRAEL])
                                     SizedBox(
                                       height: 10,
                                     ),
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
+                                  if (personProvider.newPerson.countrys !=
+                                          null &&
+                                      personProvider
+                                          .newPerson.countrys[Country.ISRAEL])
                                     Row(
                                       children: <Widget>[
                                         FaIcon(
@@ -964,12 +1324,20 @@ class _AddPersonState extends State<AddPerson> {
                                           size: 25.0,
                                           color: Colors.white,
                                         ),
-                                        title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
+                                        title(LocaleText.getLocaleText(
+                                            MyApp.getLocale(), 'Area')),
                                       ],
                                     ),
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
-                                    MultiSelectChip(Area.values,(select,val) => personProvider.newPerson.areas[select] = val,pickedChips:personProvider.newPerson.areas),
-
+                                  if (personProvider.newPerson.countrys !=
+                                          null &&
+                                      personProvider
+                                          .newPerson.countrys[Country.ISRAEL])
+                                    MultiSelectChip(
+                                        Area.values,
+                                        (select, val) => personProvider
+                                            .newPerson.areas[select] = val,
+                                        pickedChips:
+                                            personProvider.newPerson.areas),
 
                                   SizedBox(
                                     height: 10,
@@ -981,11 +1349,17 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Status')),
                                     ],
                                   ),
-                                  MultiSelectChip(Status.values,(select,val) => personProvider.newPerson.statuses[select] = val,pickedChips:personProvider.newPerson.statuses),
-                             
+                                  MultiSelectChip(
+                                      Status.values,
+                                      (select, val) => personProvider
+                                          .newPerson.statuses[select] = val,
+                                      pickedChips:
+                                          personProvider.newPerson.statuses),
+
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -996,11 +1370,17 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Religious')),
                                     ],
                                   ),
-                                  MultiSelectChip(Dos.values, (select,val) => personProvider.newPerson.doses[select] = val,pickedChips:personProvider.newPerson.doses),
-                           
+                                  MultiSelectChip(
+                                      Dos.values,
+                                      (select, val) => personProvider
+                                          .newPerson.doses[select] = val,
+                                      pickedChips:
+                                          personProvider.newPerson.doses),
+
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -1011,11 +1391,17 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Hashkafa')),
                                     ],
                                   ),
-                                  MultiSelectChip(Hashkafa.values,(select,val) => personProvider.newPerson.hashkafas[select] = val,pickedChips:personProvider.newPerson.hashkafas),
-                            
+                                  MultiSelectChip(
+                                      Hashkafa.values,
+                                      (select, val) => personProvider
+                                          .newPerson.hashkafas[select] = val,
+                                      pickedChips:
+                                          personProvider.newPerson.hashkafas),
+
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -1026,12 +1412,18 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Eda')),
                                     ],
                                   ),
-                                  MultiSelectChip(Eda.values,(select,val) => personProvider.newPerson.edas[select] = val,pickedChips:personProvider.newPerson.edas),
-                     
-                                   SizedBox(
+                                  MultiSelectChip(
+                                      Eda.values,
+                                      (select, val) => personProvider
+                                          .newPerson.edas[select] = val,
+                                      pickedChips:
+                                          personProvider.newPerson.edas),
+
+                                  SizedBox(
                                     height: 10,
                                   ),
                                   Row(
@@ -1041,13 +1433,19 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Smoking')),
                                     ],
                                   ),
-                                 
-                                  MultiSelectChip(Smoke.values, (select,val) => personProvider.newPerson.smoking[select] = val,pickedChips:personProvider.newPerson.smoking),
-                          
-                                   SizedBox(
+
+                                  MultiSelectChip(
+                                      Smoke.values,
+                                      (select, val) => personProvider
+                                          .newPerson.smoking[select] = val,
+                                      pickedChips:
+                                          personProvider.newPerson.smoking),
+
+                                  SizedBox(
                                     height: 10,
                                   ),
                                   Row(
@@ -1057,16 +1455,29 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Sherut')),
                                     ],
                                   ),
 
                                   if (sSelected == Gender.MALE)
-                                  MultiSelectChip(SherutGirl.values, (select,val) => personProvider.newPerson.thereSherutGirl[select] = val,pickedChips:personProvider.newPerson.thereSherutGirl),
+                                    MultiSelectChip(
+                                        SherutGirl.values,
+                                        (select, val) => personProvider
+                                            .newPerson
+                                            .thereSherutGirl[select] = val,
+                                        pickedChips: personProvider
+                                            .newPerson.thereSherutGirl),
                                   if (sSelected == Gender.FEMALE)
-                                  MultiSelectChip(SherutBoy.values, (select,val) => personProvider.newPerson.thereSherutBoy[select] = val,pickedChips:personProvider.newPerson.thereSherutBoy),
-                        
-                                         SizedBox(
+                                    MultiSelectChip(
+                                        SherutBoy.values,
+                                        (select, val) => personProvider
+                                            .newPerson
+                                            .thereSherutBoy[select] = val,
+                                        pickedChips: personProvider
+                                            .newPerson.thereSherutBoy),
+
+                                  SizedBox(
                                     height: 10,
                                   ),
                                   Row(
@@ -1076,16 +1487,21 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Height')),
                                     ],
                                   ),
-                                
+
                                   Row(
                                     children: <Widget>[
                                       Text(
-                                        "" + lookingPersonHeightMin.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm')
-                                        ,style: themeTextStyle
-                                      ),
+                                          "" +
+                                              lookingPersonHeightMin
+                                                  .toStringAsFixed(2) +
+                                              " " +
+                                              LocaleText.getLocaleText(
+                                                  MyApp.getLocale(), 'm'),
+                                          style: themeTextStyle),
                                       Expanded(
                                         child: RangeSlider(
                                           activeColor: AppTheme.secondary,
@@ -1097,19 +1513,34 @@ class _AddPersonState extends State<AddPerson> {
                                           onChanged: ((newValue) {
                                             setState(() {
                                               rangeValues = newValue;
-                                              rangeLabels = RangeLabels(newValue.start.toStringAsFixed(2), newValue.end.toStringAsFixed(2));
-                                              lookingPersonHeightMax = newValue.end;
-                                              lookingPersonHeightMin = newValue.start;
-                                              personProvider.newPerson.heightMin = newValue.start;
-                                              personProvider.newPerson.heightMax = newValue.end;
+                                              rangeLabels = RangeLabels(
+                                                  newValue.start
+                                                      .toStringAsFixed(2),
+                                                  newValue.end
+                                                      .toStringAsFixed(2));
+                                              lookingPersonHeightMax =
+                                                  newValue.end;
+                                              lookingPersonHeightMin =
+                                                  newValue.start;
+                                              personProvider.newPerson
+                                                  .heightMin = newValue.start;
+                                              personProvider.newPerson
+                                                  .heightMax = newValue.end;
                                             });
                                           }),
                                         ),
                                       ),
-                                      Text("" + lookingPersonHeightMax.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),style: themeTextStyle)
+                                      Text(
+                                          "" +
+                                              lookingPersonHeightMax
+                                                  .toStringAsFixed(2) +
+                                              " " +
+                                              LocaleText.getLocaleText(
+                                                  MyApp.getLocale(), 'm'),
+                                          style: themeTextStyle)
                                     ],
                                   ),
-                                          SizedBox(
+                                  SizedBox(
                                     height: 30,
                                   ),
                                   Row(
@@ -1119,85 +1550,103 @@ class _AddPersonState extends State<AddPerson> {
                                         size: 25.0,
                                         color: Colors.white,
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Age')),
+                                      title(LocaleText.getLocaleText(
+                                          MyApp.getLocale(), 'Age')),
                                     ],
                                   ),
-                                
-                                        Row(
-                                          children: <Widget>[
-                                            Text(
-                                              "" + lookingPersonAgeMin.toStringAsFixed(1),style: themeTextStyle
-                                            ),
-                                            Expanded(
-                                              child: RangeSlider(
-                                                activeColor: AppTheme.secondary,
-                                                min: 18,
-                                                max: 99,
-                                                divisions: 162,
-                                                labels: rangeLabelsAge,
-                                                values: rangeValuesAge,
-                                                onChanged: ((newValue) {
-                                                  setState(() {
-                                                    rangeValuesAge = newValue;
-                                                    rangeLabelsAge = RangeLabels(newValue.start.toStringAsFixed(1), newValue.end.toStringAsFixed(1));
-                                                    lookingPersonAgeMax = newValue.end;
-                                                    lookingPersonAgeMin = newValue.start;
-                                                    personProvider.newPerson.ageMin = newValue.start;
-                                                    personProvider.newPerson.ageMax = newValue.end;
-                                                  });
-                                                }),
-                                              ),
-                                            ),
-                                            Text("" + lookingPersonAgeMax.toStringAsFixed(1),style: themeTextStyle)
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                     SizedBox(
-                                    height: 20,
-                                  ),
+
                                   Row(
                                     children: <Widget>[
-                                      Icon(
-                                        Icons.format_align_justify,
-                                        size: 25.0,
-                                        color: Colors.white,
+                                      Text(
+                                          "" +
+                                              lookingPersonAgeMin
+                                                  .toStringAsFixed(1),
+                                          style: themeTextStyle),
+                                      Expanded(
+                                        child: RangeSlider(
+                                          activeColor: AppTheme.secondary,
+                                          min: 18,
+                                          max: 99,
+                                          divisions: 162,
+                                          labels: rangeLabelsAge,
+                                          values: rangeValuesAge,
+                                          onChanged: ((newValue) {
+                                            setState(() {
+                                              rangeValuesAge = newValue;
+                                              rangeLabelsAge = RangeLabels(
+                                                  newValue.start
+                                                      .toStringAsFixed(1),
+                                                  newValue.end
+                                                      .toStringAsFixed(1));
+                                              lookingPersonAgeMax =
+                                                  newValue.end;
+                                              lookingPersonAgeMin =
+                                                  newValue.start;
+                                              personProvider.newPerson.ageMin =
+                                                  newValue.start;
+                                              personProvider.newPerson.ageMax =
+                                                  newValue.end;
+                                            });
+                                          }),
+                                        ),
                                       ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'More info')),
+                                      Text(
+                                          "" +
+                                              lookingPersonAgeMax
+                                                  .toStringAsFixed(1),
+                                          style: themeTextStyle)
                                     ],
-                                  ),
-                                  SizedBox(height: 10,),
-                                  new TextFormField(
-                                    initialValue: personProvider.newPerson != null && personProvider.newPerson.moreInfo != null ? personProvider.newPerson.moreInfo : "",
-                                        maxLines: null,
-                                        style: themeTextStyle,
-                                    minLines: 5,
-                                    onChanged: (value) {
-                                      personProvider.newPerson.moreInfo = value;
-                                    },
-                                    decoration: InputDecoration(
-                                   
-                                    
-                                      border: OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                      ),
-                                      
-                                      hintStyle: TextStyle(color: AppTheme.primary),
-                                      labelStyle: themeTextStyle,
-                                      hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
-                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 30,
                                   ),
                                 ],
                               ),
                             ),
-                          
-                        
-                      
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.format_align_justify,
+                                  size: 25.0,
+                                  color: Colors.white,
+                                ),
+                                title(LocaleText.getLocaleText(
+                                    MyApp.getLocale(), 'More info')),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            new TextFormField(
+                              initialValue: personProvider.newPerson != null &&
+                                      personProvider.newPerson.moreInfo != null
+                                  ? personProvider.newPerson.moreInfo
+                                  : "",
+                              maxLines: null,
+                              style: themeTextStyle,
+                              minLines: 5,
+                              onChanged: (value) {
+                                personProvider.newPerson.moreInfo = value;
+                              },
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(30.0)),
+                                ),
+                                hintStyle: TextStyle(color: AppTheme.primary),
+                                labelStyle: themeTextStyle,
+                                hintText: LocaleText.getLocaleText(
+                                    MyApp.getLocale(), 'More info'),
+                                labelText: LocaleText.getLocaleText(
+                                    MyApp.getLocale(), 'More info'),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   )
                 ])),
