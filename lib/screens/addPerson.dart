@@ -32,7 +32,6 @@ class _AddPersonState extends State<AddPerson> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<FormState> _secondFormKey = new GlobalKey<FormState>();
 
- 
   Area _area;
   Country _country;
   Dos _religious;
@@ -72,9 +71,9 @@ class _AddPersonState extends State<AddPerson> {
     //     _image4 = null;
     //   });
     // } else {
-      setState(() {
-        _image1 = image;
-      });
+    setState(() {
+      _image1 = image;
+    });
     // }
   }
 
@@ -91,9 +90,9 @@ class _AddPersonState extends State<AddPerson> {
       //     _image1 = image;
       //   });
       // } else {
-        setState(() {
-          _image2 = image;
-        });
+      setState(() {
+        _image2 = image;
+      });
       // }
     }
   }
@@ -109,7 +108,7 @@ class _AddPersonState extends State<AddPerson> {
       //   setState(() {
       //     _image1 = image;
       //   });
-      // } else 
+      // } else
       if (_image2 == null) {
         setState(() {
           _image2 = image;
@@ -133,7 +132,7 @@ class _AddPersonState extends State<AddPerson> {
       //     _image1 = image;
       //   });
       // } else
-       if (_image2 == null) {
+      if (_image2 == null) {
         setState(() {
           _image2 = image;
         });
@@ -226,32 +225,30 @@ class _AddPersonState extends State<AddPerson> {
   }
 
   void showMessage(String message, [MaterialColor color = Colors.red]) {
-   // _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
+    // _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
   }
 
-  bool _submitForm()  {
+  bool _submitForm() {
     final FormState form = _formKey.currentState;
-    setState(() {
-      areaState.didChange(areaValue);
-      countryState.didChange(countryValue);
-      statusState.didChange(statusValue);
-      religiosState.didChange(religiosValue);
-      edaState.didChange(edaValue);
-      hashkafaState.didChange(hashkafaValue);
-      smokeState.didChange(smokeValue);
-    });
+    // setState(() {
+    //   countryState.didChange(countryValue);
+    //   areaState.didChange(areaValue);
+    //   statusState.didChange(statusValue);
+    //   religiosState.didChange(religiosValue);
+    //   edaState.didChange(edaValue);
+    //   hashkafaState.didChange(hashkafaValue);
+    //   smokeState.didChange(smokeValue);
+    // });
     if (!form.validate()) {
-      showMessage(LocaleText.getLocaleText(MyApp.getLocale(), "Form is not valid!  Please review and correct!"));
+      //showMessage(LocaleText.getLocaleText(MyApp.getLocale(), "Form is not valid!  Please review and correct!"));
       return false;
     } else {
       //This invokes each onSaved event
       form.save();
-     return true;
-
-      
+      return true;
     }
   }
-  
+
   void _submitSecondForm() async {
     final FormState form = _secondFormKey.currentState;
 
@@ -278,7 +275,6 @@ class _AddPersonState extends State<AddPerson> {
   bool isInit = true;
   bool isLoading = true;
   bool missingImage = false;
-  bool dateWrong = false;
   @override
   void didChangeDependencies() async {
     if (isInit) {
@@ -304,13 +300,6 @@ class _AddPersonState extends State<AddPerson> {
       _eda = personProvider.newPerson.eda;
       _smoke = personProvider.newPerson.smoke;
       sSelected = personProvider.newPerson.gender;
-      areaValue = personProvider.newPerson.area;
-      countryValue = personProvider.newPerson.country;
-      statusValue = personProvider.newPerson.status;
-      religiosValue = personProvider.newPerson.dos;
-      hashkafaValue = personProvider.newPerson.hashkafa;
-      edaValue = personProvider.newPerson.eda;
-      smokeValue = personProvider.newPerson.smoke;
       dateString = dateTimeToStringFormat(personProvider.newPerson.birthday);
 
       setState(() {});
@@ -322,27 +311,6 @@ class _AddPersonState extends State<AddPerson> {
     //getAllPeople()
   }
 
-  Area areaValue;
-  var areaState;
-
-  Country countryValue;
-  var countryState;
-
-  Status statusValue;
-  var statusState;
-
-  Dos religiosValue;
-  var religiosState;
-
-  Hashkafa hashkafaValue;
-  var hashkafaState;
-
-  Eda edaValue;
-  var edaState;
-
-  Smoke smokeValue;
-  var smokeState;
-
   TextFormField tff;
   Map map1 = new Map();
   List lll = new List();
@@ -350,7 +318,7 @@ class _AddPersonState extends State<AddPerson> {
 
   TextStyle themeTextStyle = new TextStyle(color: AppTheme.textColor);
   TextStyle titles = new TextStyle(color: AppTheme.textColor, fontSize: 20);
-  
+
   Widget title(title) {
     return Padding(padding: EdgeInsets.all(10), child: Text(title, style: titles));
   }
@@ -369,27 +337,24 @@ class _AddPersonState extends State<AddPerson> {
                 type: StepperType.horizontal,
                 currentStep: _index,
                 onStepTapped: (index) {
-                  if (index == 1){
-                    if (_submitForm()) 
-                  setState(() {
-                    _index = index;
-                  });
+                  if (index == 1) {
+                    if (_submitForm())
+                      setState(() {
+                        _index = index;
+                      });
                   }
-                  
                 },
                 onStepCancel: () {
                   Navigator.of(context).pop();
                 },
                 onStepContinue: () {
-                  if (_index == 0){
-
-                    if (_submitForm()) 
-                    setState(() {_index++; });
-
-                  }
-                  
-                  else if (_index == 1) {
-                 _submitSecondForm();
+                  if (_index == 0) {
+                    if (_submitForm())
+                      setState(() {
+                        _index++;
+                      });
+                  } else if (_index == 1) {
+                    _submitSecondForm();
                   }
                 },
                 steps: [
@@ -412,31 +377,31 @@ class _AddPersonState extends State<AddPerson> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Expanded(
-                                        child: FormField( 
+                                        child: FormField(
                                           builder: (FormFieldState<dynamic> field) {
-                                      return PhotoPickerFlat(
-                                            height: 210,
-                                            small: false,
-                                            imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
-                                                ? personProvider.newPerson.profileImages[0]
-                                                : null,
-                                            image: _image1,
-                                            imageCallBack: imageCallBack1,
-                                          );},
+                                            return PhotoPickerFlat(
+                                              height: 210,
+                                              small: false,
+                                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
+                                                  ? personProvider.newPerson.profileImages[0]
+                                                  : null,
+                                              image: _image1,
+                                              imageCallBack: imageCallBack1,
+                                            );
+                                          },
                                           validator: (val) {
-                                      if (_image1!=null) 
-                                      {
-                                        setState(() {
-                                        missingImage = false;
-                                      });
-                                         return null;
-                                      }
-                                     
-                                      setState(() {
-                                        missingImage = true;
-                                      });
-                                      return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                                    },
+                                            if (_image1 != null) {
+                                              setState(() {
+                                                missingImage = false;
+                                              });
+                                              return null;
+                                            }
+
+                                            setState(() {
+                                              missingImage = true;
+                                            });
+                                            return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                          },
                                         ),
                                       ),
                                       SizedBox(width: 20),
@@ -537,9 +502,8 @@ class _AddPersonState extends State<AddPerson> {
                                       ),
                                     ],
                                   ),
-                                  if ( missingImage)
-                                  Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required')
-                                  ,style: TextStyle(color: Colors.red, fontSize: 12)),
+                                  if (missingImage)
+                                    Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'), style: TextStyle(color: Colors.red, fontSize: 12)),
                                   SizedBox(
                                     height: 30,
                                   ),
@@ -554,7 +518,7 @@ class _AddPersonState extends State<AddPerson> {
                                     ],
                                   ),
                                   FormField(
-                                    builder: (FormFieldState<dynamic> field) {
+                                    builder: (FormFieldState<dynamic> state) {
                                       return Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
@@ -602,30 +566,20 @@ class _AddPersonState extends State<AddPerson> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          if (dateWrong)
-                                            Text(
-                                              LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'),
-                                              style: TextStyle(color: Colors.red, fontSize: 12),
-                                            ),
+                                          state.hasError
+                                              ? Text(
+                                                  state.errorText,
+                                                  style: TextStyle(color: Colors.red, fontSize: 12),
+                                                )
+                                              : Container()
                                         ],
                                       );
                                     },
                                     validator: (val) {
-                                      if (isValidDob(personProvider.newPerson.birthday)) 
-                                      {
-                                        setState(() {
-                                        dateWrong = false;
-                                      });
+                                      if (isValidDob(personProvider.newPerson.birthday)) {
                                         return null;
-                                      }
-                                      
-                                      setState(() {
-                                        dateWrong = true;
-                                      });
-                                      return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      } else
+                                        return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                                     },
                                   ),
                                   SizedBox(
@@ -644,17 +598,34 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Country>(
                                     builder: (FormFieldState<Country> state) {
-                                      countryState = state;
-                                      return SelectChip(Country.values, (country) => _country = country, pickedValue: _country);
+                                     
+                                      return Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SelectChip(Country.values, (country) {
+                                            
+                                            state.didChange(country);
+                                            setState(() {
+                                              _country = country;
+                                            });
+                                          }, pickedValue: _country),
+                                          state.hasError
+                                              ? Text(
+                                                  state.errorText,
+                                                  style: TextStyle(color: Colors.red, fontSize: 12),
+                                                )
+                                              : Container()
+                                        ],
+                                      );
                                     },
                                     validator: (val) {
-                                      return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      return val != null || _country!=null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                                     },
                                   ),
-                                  SizedBox(
+                                  if (_country == Country.ISRAEL)SizedBox(
                                     height: 10,
                                   ),
-                                  Row(
+                                  if (_country == Country.ISRAEL)Row(
                                     children: <Widget>[
                                       FaIcon(
                                         FontAwesomeIcons.city,
@@ -665,11 +636,24 @@ class _AddPersonState extends State<AddPerson> {
                                     ],
                                   ),
                                   //AREA
-                                  if (countryValue == Country.ISRAEL)
+                                  if (_country == Country.ISRAEL)
                                     new FormField<Area>(
                                       builder: (FormFieldState<Area> state) {
-                                        areaState = state;
-                                        return SelectChip(Area.values, (area) => _area = area, pickedValue: _area);
+                                        return Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            SelectChip(Area.values, (area) {
+                                              _area = area;
+                                              state.didChange(area);
+                                            }, pickedValue: _area),
+                                            state.hasError
+                                                ? Text(
+                                                    state.errorText,
+                                                    style: TextStyle(color: Colors.red, fontSize: 12),
+                                                  )
+                                                : Container()
+                                          ],
+                                        );
                                       },
                                       validator: (val) {
                                         return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -691,8 +675,21 @@ class _AddPersonState extends State<AddPerson> {
                                   //STATUS
                                   new FormField<Status>(
                                     builder: (FormFieldState<Status> state) {
-                                      statusState = state;
-                                      return SelectChip(Status.values, (status) => _status = status, pickedValue: _status);
+                                      return Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SelectChip(Status.values, (status) {
+                                            _status = status;
+                                            state.didChange(status);
+                                          }, pickedValue: _status),
+                                          state.hasError
+                                              ? Text(
+                                                  state.errorText,
+                                                  style: TextStyle(color: Colors.red, fontSize: 12),
+                                                )
+                                              : Container()
+                                        ],
+                                      );
                                     },
                                     validator: (val) {
                                       return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -714,8 +711,21 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Dos>(
                                     builder: (FormFieldState<Dos> state) {
-                                      religiosState = state;
-                                      return SelectChip(Dos.values, (val) => _religious = val, pickedValue: _religious);
+                                      return Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          SelectChip(Dos.values, (val) {
+                                            _religious = val;
+                                            state.didChange(val);
+                                          }, pickedValue: _religious),
+                                          state.hasError
+                                              ? Text(
+                                                  state.errorText,
+                                                  style: TextStyle(color: Colors.red, fontSize: 12),
+                                                )
+                                              : Container()
+                                        ],
+                                      );
                                     },
                                     validator: (val) {
                                       return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -737,8 +747,20 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Hashkafa>(
                                     builder: (FormFieldState<Hashkafa> state) {
-                                      hashkafaState = state;
-                                      return SelectChip(Hashkafa.values, (val) => _hashkafa = val, pickedValue: _hashkafa);
+                                      return Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                        SelectChip(Hashkafa.values, (val) {
+                                          _hashkafa = val;
+                                          state.didChange(val);
+                                        }, pickedValue: _hashkafa),
+                                        state.hasError
+                                            ? Text(
+                                                state.errorText,
+                                                style: TextStyle(color: Colors.red, fontSize: 12),
+                                              )
+                                            : Container()
+                                      ]);
                                     },
                                     validator: (val) {
                                       return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -760,8 +782,20 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Eda>(
                                     builder: (FormFieldState<Eda> state) {
-                                      edaState = state;
-                                      return SelectChip(Eda.values, (val) => _eda = val, pickedValue: _eda);
+                                      return Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                        SelectChip(Eda.values, (val) {
+                                          _eda = val;
+                                          state.didChange(val);
+                                        }, pickedValue: _eda),
+                                        state.hasError
+                                            ? Text(
+                                                state.errorText,
+                                                style: TextStyle(color: Colors.red, fontSize: 12),
+                                              )
+                                            : Container()
+                                      ]);
                                     },
                                     validator: (val) {
                                       return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -783,8 +817,18 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Smoke>(
                                     builder: (FormFieldState<Smoke> state) {
-                                      smokeState = state;
-                                      return SelectChip(Smoke.values, (val) => _smoke = val, pickedValue: _smoke);
+                                       return Column(
+                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          
+                                          SelectChip(Hashkafa.values, (val){_smoke = val;state.didChange(val);} , pickedValue: _smoke),
+                                           state.hasError
+                                           ? Text(
+                                                    state.errorText,
+                                                    style: TextStyle(color: Colors.red,fontSize: 12),
+                                                  )
+                                                : Container()
+                                        ]);
                                     },
                                     validator: (val) {
                                       return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
