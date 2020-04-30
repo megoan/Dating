@@ -60,7 +60,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
             ),
             width: widget.width ?? widget.width,
             height: widget.height ?? widget.height,
-            child: widget.imageUrl != null
+            child: widget.imageUrl != null  
                 ? ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(widget.imageUrl, fit: BoxFit.cover, height: widget.height, width: widget.width))
