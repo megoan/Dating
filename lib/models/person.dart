@@ -32,12 +32,12 @@ class Person {
   // List<SherutBoy> mySherutBoy = new List<SherutBoy> ();
   // List<SherutGirl> mySherutGirl = new List<SherutGirl>();
   //------looking for info-----------------
-  Map<Area,bool>    areas =    new Map<Area,bool> ();
-  Map<Country,bool> countrys = new Map<Country,bool> ();
+  Map<Area,bool>    areas =     new Map<Area,bool> ();
+  Map<Country,bool> countrys =  new Map<Country,bool> ();
   Map<Status,bool>  statuses =  new Map<Status,bool> ();
   Map<Dos,bool>     doses =     new Map<Dos,bool> ();
-  Map<Hashkafa,bool>hashkafas =new Map<Hashkafa,bool> ();
-  Map<Eda,bool>     edas =     new Map<Eda,bool> ();
+  Map<Hashkafa,bool>hashkafas = new Map<Hashkafa,bool> ();
+  Map<Eda,bool>     edas =      new Map<Eda,bool> ();
   Map<Smoke,bool>   smoking =   new Map<Smoke,bool> ();
   // List<Area>     areas =new List<Area>();
   // List<Country>  countrys=new List<Country>();
@@ -106,4 +106,5 @@ class Person {
       this.moreInfo="",
       
       });
+      
 }

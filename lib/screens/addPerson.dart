@@ -63,18 +63,9 @@ class _AddPersonState extends State<AddPerson> {
   File _image3;
   File _image4;
   void imageCallBack1(var image) {
-    // if (image == null) {
-    //   setState(() {
-    //     _image1 = _image2;
-    //     _image2 = _image3;
-    //     _image3 = _image4;
-    //     _image4 = null;
-    //   });
-    // } else {
     setState(() {
       _image1 = image;
     });
-    // }
   }
 
   void imageCallBack2(var image) {
@@ -85,15 +76,9 @@ class _AddPersonState extends State<AddPerson> {
         _image4 = null;
       });
     } else {
-      // if (_image1 == null) {
-      //   setState(() {
-      //     _image1 = image;
-      //   });
-      // } else {
       setState(() {
         _image2 = image;
       });
-      // }
     }
   }
 
@@ -104,11 +89,6 @@ class _AddPersonState extends State<AddPerson> {
         _image4 = null;
       });
     } else {
-      // if (_image1 == null) {
-      //   setState(() {
-      //     _image1 = image;
-      //   });
-      // } else
       if (_image2 == null) {
         setState(() {
           _image2 = image;
@@ -127,11 +107,6 @@ class _AddPersonState extends State<AddPerson> {
         _image4 = null;
       });
     } else {
-      // if (_image1 == null) {
-      //   setState(() {
-      //     _image1 = image;
-      //   });
-      // } else
       if (_image2 == null) {
         setState(() {
           _image2 = image;
@@ -148,26 +123,6 @@ class _AddPersonState extends State<AddPerson> {
     }
   }
 
-  // final TextEditingController _controller = new TextEditingController();
-  // Future _chooseDate(BuildContext context, String initialDateString) async {
-  //   var now = new DateTime.now();
-  //  var initialDate = convertToDate(initialDateString) ?? now;
-  //   initialDate = (initialDate.year >= 1900 && initialDate.isBefore(now)
-  //       ? initialDate
-  //       : now);
-
-  //   var result = await showDatePicker(
-  //       context: context,
-  //       initialDate: initialDate,
-  //       firstDate: new DateTime(1900),
-  //       lastDate: new DateTime.now());
-
-  //   if (result == null) return;
-
-  //   setState(() {
-  //     _controller.text = new DateFormat.yMd().format(result);
-  //   });
-  // }
   String dateTimeToStringFormat(_date) {
     DateTime date = _date != null ? _date : DateTime.now();
     var myday = "";
@@ -203,13 +158,12 @@ class _AddPersonState extends State<AddPerson> {
 
   bool isValidDob(dob) {
     if (dob == null) return false;
-    if (dob.isEmpty) return false;
-
+    DateTime now = new DateTime.now();
     if (dob is String) {
-      var d = convertToDate(dob);
-      return d != null && d.isBefore(new DateTime.now());
+      DateTime currentDate = convertToDate(dob);
+      return currentDate != null && currentDate.isBefore(new DateTime(now.year - 18, now.month, now.day));
     } else if (dob is DateTime)
-      return dob != null && dob.isBefore(new DateTime.now());
+      return dob != null && dob.isBefore(new DateTime(now.year - 18, now.month, now.day));
     else
       return false;
   }
@@ -230,15 +184,6 @@ class _AddPersonState extends State<AddPerson> {
 
   bool _submitForm() {
     final FormState form = _formKey.currentState;
-    // setState(() {
-    //   countryState.didChange(countryValue);
-    //   areaState.didChange(areaValue);
-    //   statusState.didChange(statusValue);
-    //   religiosState.didChange(religiosValue);
-    //   edaState.didChange(edaValue);
-    //   hashkafaState.didChange(hashkafaValue);
-    //   smokeState.didChange(smokeValue);
-    // });
     if (!form.validate()) {
       //showMessage(LocaleText.getLocaleText(MyApp.getLocale(), "Form is not valid!  Please review and correct!"));
       return false;
@@ -283,6 +228,15 @@ class _AddPersonState extends State<AddPerson> {
       print(widget.update);
       if (widget.update == null || !widget.update) {
         personProvider.newPerson = new Person(shadchanID: personProvider.shadchanProvider.myShadchan.id);
+        personProvider.newPerson.areas = new Map<Area, bool>();
+        personProvider.newPerson.countrys = new Map<Country, bool>();
+        personProvider.newPerson.doses = new Map<Dos, bool>();
+        personProvider.newPerson.hashkafas = new Map<Hashkafa, bool>();
+        personProvider.newPerson.statuses =  new Map<Status, bool>(); 
+        personProvider.newPerson.edas = new Map<Eda, bool>();
+        personProvider.newPerson.smoking = new Map<Smoke, bool>();
+        personProvider.newPerson.mySherutBoy = new Map<SherutBoy, bool>();
+        personProvider.newPerson.mySherutGirl = new Map<SherutGirl, bool>();
       } else {
         personHeight = personProvider.newPerson.height;
         lookingPersonHeightMin = personProvider.newPerson.heightMin;
@@ -598,12 +552,10 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Country>(
                                     builder: (FormFieldState<Country> state) {
-                                     
                                       return Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           SelectChip(Country.values, (country) {
-                                            
                                             state.didChange(country);
                                             setState(() {
                                               _country = country;
@@ -619,22 +571,24 @@ class _AddPersonState extends State<AddPerson> {
                                       );
                                     },
                                     validator: (val) {
-                                      return val != null || _country!=null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                      return val != null || _country != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                                     },
                                   ),
-                                  if (_country == Country.ISRAEL)SizedBox(
-                                    height: 10,
-                                  ),
-                                  if (_country == Country.ISRAEL)Row(
-                                    children: <Widget>[
-                                      FaIcon(
-                                        FontAwesomeIcons.city,
-                                        size: 25.0,
-                                        color: Colors.white,
-                                      ),
-                                      title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
-                                    ],
-                                  ),
+                                  if (_country == Country.ISRAEL)
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  if (_country == Country.ISRAEL)
+                                    Row(
+                                      children: <Widget>[
+                                        FaIcon(
+                                          FontAwesomeIcons.city,
+                                          size: 25.0,
+                                          color: Colors.white,
+                                        ),
+                                        title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
+                                      ],
+                                    ),
                                   //AREA
                                   if (_country == Country.ISRAEL)
                                     new FormField<Area>(
@@ -747,9 +701,7 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Hashkafa>(
                                     builder: (FormFieldState<Hashkafa> state) {
-                                      return Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
+                                      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
                                         SelectChip(Hashkafa.values, (val) {
                                           _hashkafa = val;
                                           state.didChange(val);
@@ -782,9 +734,7 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Eda>(
                                     builder: (FormFieldState<Eda> state) {
-                                      return Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
+                                      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
                                         SelectChip(Eda.values, (val) {
                                           _eda = val;
                                           state.didChange(val);
@@ -817,18 +767,18 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   new FormField<Smoke>(
                                     builder: (FormFieldState<Smoke> state) {
-                                       return Column(
-                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          
-                                          SelectChip(Hashkafa.values, (val){_smoke = val;state.didChange(val);} , pickedValue: _smoke),
-                                           state.hasError
-                                           ? Text(
-                                                    state.errorText,
-                                                    style: TextStyle(color: Colors.red,fontSize: 12),
-                                                  )
-                                                : Container()
-                                        ]);
+                                      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+                                        SelectChip(Smoke.values, (val) {
+                                          _smoke = val;
+                                          state.didChange(val);
+                                        }, pickedValue: _smoke),
+                                        state.hasError
+                                            ? Text(
+                                                state.errorText,
+                                                style: TextStyle(color: Colors.red, fontSize: 12),
+                                              )
+                                            : Container()
+                                      ]);
                                     },
                                     validator: (val) {
                                       return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
@@ -961,7 +911,7 @@ class _AddPersonState extends State<AddPerson> {
                                   if (sSelected == Gender.MALE)
                                     MultiSelectChip(
                                       SherutBoy.values,
-                                      (val) => print(val),
+                                      (selected, val) => personProvider.newPerson.mySherutBoy[selected] = val,
                                       pickedChips: personProvider.newPerson.mySherutBoy,
                                     ),
 
@@ -1085,11 +1035,11 @@ class _AddPersonState extends State<AddPerson> {
                                   ),
                                   MultiSelectChip(Country.values, (select, val) => personProvider.newPerson.countrys[select] = val, pickedChips: personProvider.newPerson.countrys),
 
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
+                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL]==true)
                                     SizedBox(
                                       height: 10,
                                     ),
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
+                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL]==true)
                                     Row(
                                       children: <Widget>[
                                         FaIcon(
@@ -1100,7 +1050,7 @@ class _AddPersonState extends State<AddPerson> {
                                         title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
                                       ],
                                     ),
-                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL])
+                                  if (personProvider.newPerson.countrys != null && personProvider.newPerson.countrys[Country.ISRAEL]==true)
                                     MultiSelectChip(Area.values, (select, val) => personProvider.newPerson.areas[select] = val, pickedChips: personProvider.newPerson.areas),
 
                                   SizedBox(
