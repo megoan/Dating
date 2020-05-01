@@ -102,14 +102,14 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
         if (widget.image != null || widget.imageUrl != null)
          if ( widget.small)
                Positioned(
-                  bottom: widget.circle? 2:0,
-                  right: widget.circle? 2:0,
+                  bottom: widget.circle? 5:0,
+                  right: widget.circle? 5:0,
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    width: widget.circle? 30:40,
+                    height: widget.circle? 30:40,
                     decoration: BoxDecoration(
                       color: AppTheme.primary,
-                      borderRadius: widget.circle? BorderRadius.only(topLeft: Radius.circular(30),bottomRight:Radius.circular(30) )
+                      borderRadius: widget.circle? BorderRadius.only(topLeft: Radius.circular(20),bottomRight:Radius.circular(20) )
                       : BorderRadius.only(topLeft: Radius.circular(10),bottomRight:Radius.circular(5) ),
                     ),
                     child: ImageButton(
@@ -125,14 +125,14 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                 if (widget.image != null || widget.imageUrl != null)
                if ( widget.small)
                     Positioned(
-                  bottom: widget.circle? 2:0,
-                  left: widget.circle? 2:0,
+                  bottom: widget.circle? 5:0,
+                  left: widget.circle? 5:0,
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    width: widget.circle? 30:40,
+                    height: widget.circle? 30:40,
                     decoration: BoxDecoration(
                       color: AppTheme.primary,
-                      borderRadius: widget.circle?BorderRadius.only(bottomLeft: Radius.circular(30),topRight:Radius.circular(30) ):
+                      borderRadius: widget.circle?BorderRadius.only(bottomLeft: Radius.circular(20),topRight:Radius.circular(20) ):
                       BorderRadius.only(topRight:Radius.circular(10),bottomLeft: Radius.circular(5), ),
                     ),
                     child: ImageButton(

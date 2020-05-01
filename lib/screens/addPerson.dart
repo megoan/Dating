@@ -953,7 +953,7 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                                 Expanded(
                                     child: PhotoPickerFlat(
-                                      circle: false,
+                                      circle: true,
                                   imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
                                       ? personProvider.newPerson.profileImages[0]
                                       : null,
