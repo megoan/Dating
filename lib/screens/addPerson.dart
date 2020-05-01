@@ -1,23 +1,17 @@
 import 'dart:io';
-
 import 'package:dating/models/person.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
-import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/themes/appTheme.dart';
 import 'package:dating/widgets/photoPickerFlat.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
-import 'package:dating/widgets/photoPicker.dart';
 import 'package:dating/widgets/selectAndMultiSelectChips.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'dart:async';
 import 'package:intl/intl.dart';
-import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:provider/provider.dart';
-
 import '../main.dart';
 
 class AddPerson extends StatefulWidget {
@@ -28,14 +22,8 @@ class AddPerson extends StatefulWidget {
 }
 
 class _AddPersonState extends State<AddPerson> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<FormState> _secondFormKey = new GlobalKey<FormState>();
-  // ScrollController scrollController1 = new ScrollController();
-  // ScrollController scrollController2 = ScrollController(initialScrollOffset: 0.0);
-
-  // double controllerOffset1 = 0.0;
-  // double controllerOffset2 = 0.0;
   double personHeight = 1.5;
   double lookingPersonHeightMin = 1;
   double lookingPersonHeightMax = 2.3;
@@ -181,8 +169,6 @@ class _AddPersonState extends State<AddPerson> {
   bool _submitForm() {
     final FormState form = _formKey.currentState;
     if (!form.validate()) {
-      // scrollController1.animateTo(controllerOffset1, duration: Duration(milliseconds: 1000), curve: Curves.ease);
-      // controllerOffset1 = 0.0;
       return false;
     } else {
       form.save();
@@ -194,9 +180,6 @@ class _AddPersonState extends State<AddPerson> {
     final FormState form = _secondFormKey.currentState;
 
     if (!form.validate()) {
-      //  scrollController2.animateTo(controllerOffset2, duration: Duration(milliseconds: 1000), curve: Curves.ease);
-      //   controllerOffset2 = 0.0;
-
     } else {
       //This invokes each onSaved event
       form.save();
@@ -940,6 +923,7 @@ class _AddPersonState extends State<AddPerson> {
                               children: <Widget>[
                                 Expanded(
                                   child: PhotoPickerFlat(
+                                    circle: true,
                                     imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
                                         ? personProvider.newPerson.profileImages[0]
                                         : null,
@@ -953,7 +937,9 @@ class _AddPersonState extends State<AddPerson> {
                                   width: 10,
                                 ),
                                 Expanded(
+                                  
                                     child: PhotoPickerFlat(
+                                      circle: true,
                                   imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
                                       ? personProvider.newPerson.profileImages[0]
                                       : null,
@@ -967,6 +953,7 @@ class _AddPersonState extends State<AddPerson> {
                                 ),
                                 Expanded(
                                     child: PhotoPickerFlat(
+                                      circle: false,
                                   imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
                                       ? personProvider.newPerson.profileImages[0]
                                       : null,

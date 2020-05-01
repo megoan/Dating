@@ -9,13 +9,14 @@ class PhotoPickerFlat extends StatefulWidget {
   File image;
   Function imageCallBack;
   int photoNum = 0;
-  bool small ;
+  bool small;
+  bool circle;
   String imageUrl;
   final double width;
   final double height;
   @override
   _PhotoPickerFlatState createState() => _PhotoPickerFlatState();
-  PhotoPickerFlat({this.image, this.imageCallBack, this.photoNum, this.imageUrl, this.small = true, this.width, this.height});
+  PhotoPickerFlat({this.image, this.imageCallBack, this.photoNum, this.imageUrl, this.small = true, this.width, this.height, this.circle = false});
 }
 
 class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
@@ -46,82 +47,132 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
       widget.imageCallBack(image);
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: AppTheme.primary,width: 2.0),
-              color: Colors.black12,
-            ),
-            width: widget.width ?? widget.width,
-            height: widget.height ?? widget.height,
-            child: widget.imageUrl != null  
-                ? ClipRRect(
+        !widget.circle
+            ? Container(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(widget.imageUrl, fit: BoxFit.cover, height: widget.height, width: widget.width))
-                : widget.image != null
-                    ? ClipRRect(
-                       borderRadius: BorderRadius.circular(10),
-                      child: Image.file(widget.image, fit: BoxFit.cover, height: widget.height, width: widget.width))
-                    : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ImageButton(small: widget.small,image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
+                  border: Border.all(color: AppTheme.primary, width: 2.0),
+                  color: Colors.black12,
+                ),
+                width: widget.width ?? widget.width,
+                height: widget.height ?? widget.height,
+                child: widget.imageUrl != null
+                    ? ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.network(widget.imageUrl, fit: BoxFit.cover, height: widget.height, width: widget.width))
+                    : widget.image != null
+                        ? ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.file(widget.image, fit: BoxFit.cover, height: widget.height, width: widget.width))
+                        : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                            ImageButton(small: widget.small, image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
+                            ImageButton(
+                              small: widget.small,
+                              image: widget.image,
+                              imageCallBack: getGalleryImage,
+                              iconData: Icons.image,
+                            )
+                          ]))
+            : Container(
+                decoration: BoxDecoration(
+                 
+                  border: Border.all(color: AppTheme.primary, width: 2.0),
+                 shape: BoxShape.circle
+                ),
+                width: (widget.small) ? 110 : 140,
+                height: (widget.small) ? 110 : 140,
+                child: widget.image != null
+                    ? CircleAvatar(
+                        backgroundColor: Colors.black12,
+                        backgroundImage: widget.imageUrl != null ? Image.network(widget.imageUrl) : new FileImage(widget.image),
+                      )
+                    : CircleAvatar(
+                        backgroundColor: Colors.black12,
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          ImageButton(small: widget.small, image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
+                          ImageButton(
+                            small: widget.small,
+                            image: widget.image,
+                            imageCallBack: getGalleryImage,
+                            iconData: Icons.image,
+                          )
+                        ]),
+                      )),
+        if (widget.image != null || widget.imageUrl != null)
+         if ( widget.small)
+               Positioned(
+                  bottom: widget.circle? 2:0,
+                  right: widget.circle? 2:0,
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: AppTheme.primary,
+                      borderRadius: widget.circle? BorderRadius.only(topLeft: Radius.circular(30),bottomRight:Radius.circular(30) )
+                      : BorderRadius.only(topLeft: Radius.circular(10),bottomRight:Radius.circular(5) ),
+                    ),
+                    child: ImageButton(
+                      small: widget.small,
+                      image: widget.image,
+                      imageCallBack: () {
+                        widget.imageCallBack(null);
+                      },
+                      iconData: Icons.close,
+                    ),
+                  ),
+                ),
+                if (widget.image != null || widget.imageUrl != null)
+               if ( widget.small)
+                    Positioned(
+                  bottom: widget.circle? 2:0,
+                  left: widget.circle? 2:0,
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: AppTheme.primary,
+                      borderRadius: widget.circle?BorderRadius.only(bottomLeft: Radius.circular(30),topRight:Radius.circular(30) ):
+                      BorderRadius.only(topRight:Radius.circular(10),bottomLeft: Radius.circular(5), ),
+                    ),
+                    child: ImageButton(
+                      small: widget.small,
+                      image: widget.image,
+                      imageCallBack: cropImage,
+                     
+                      iconData: Icons.crop,
+                    ),
+                  ),
+                ),
+                if (widget.image != null || widget.imageUrl != null)
+              if ( !widget.small) Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppTheme.primary,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20)),
+                    ),
+                    child: Column(
+                      children: <Widget>[
                         ImageButton(
                           small: widget.small,
                           image: widget.image,
-                          imageCallBack: getGalleryImage,
-                          iconData: Icons.image,
-                        )
-                      ])),
-        if (widget.image != null|| widget.imageUrl!=null)
-          widget.small?
-          
-          Positioned(bottom: 0,right: 0,child: Container(
-            width: 40,
-            height: 40,
-            decoration:BoxDecoration(color: AppTheme.primary, 
-            borderRadius:BorderRadius.only( topLeft: Radius.circular(30)),),
-            child: ImageButton(
-                  small: widget.small,
-                  image: widget.image,
-                  imageCallBack: () {
-                    widget.imageCallBack(null);
-                  },
-                  iconData: Icons.close,
+                          imageCallBack: () {
+                            widget.imageCallBack(null);
+                          },
+                          iconData: Icons.close,
+                        ),
+                        ImageButton(
+                          small: widget.small,
+                          image: widget.image,
+                          imageCallBack: cropImage,
+                          iconData: Icons.crop,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-          ),)
-
-          :Positioned(bottom: 0,right: 0,
-                      child: Container(
-                        
-                        decoration:BoxDecoration(color: AppTheme.primary, 
-            borderRadius:BorderRadius.only( topLeft: Radius.circular(20)),),
-                        child: Column(
-              children: <Widget>[
-                ImageButton(
-                  small: widget.small,
-                  image: widget.image,
-                  imageCallBack: () {
-                    widget.imageCallBack(null);
-                  },
-                  iconData: Icons.close,
-                ),
-                ImageButton(
-                  small: widget.small,
-                  image: widget.image,
-                  imageCallBack: cropImage,
-                  iconData: Icons.crop,
-                ),
-              ],
-            ),
-                      ),
-          ),
       ],
     );
   }
@@ -132,8 +183,8 @@ class ImageButton extends StatelessWidget {
   Function imageCallBack;
   IconData iconData;
   bool small;
-  Color color  ;
-  ImageButton({this.image, this.imageCallBack, this.iconData,this.color = AppTheme.primary ,this.small = true});
+  Color color;
+  ImageButton({this.image, this.imageCallBack, this.iconData, this.color = AppTheme.primary, this.small = true});
 
   @override
   Widget build(BuildContext context) {
@@ -141,13 +192,12 @@ class ImageButton extends StatelessWidget {
       onPressed: () {
         imageCallBack();
       },
-      constraints: small?BoxConstraints(minWidth:35,minHeight:35):  BoxConstraints(minWidth:40,minHeight:40),
-      child: new Icon(iconData, color: Colors.white, size: small?  16:20),
+      constraints: small ? BoxConstraints(minWidth: 35, minHeight: 35) : BoxConstraints(minWidth: 40, minHeight: 40),
+      child: new Icon(iconData, color: Colors.white, size: small ? 16 : 20),
       shape: new CircleBorder(),
       elevation: 0,
-      fillColor:color,
+      fillColor: color,
       padding: const EdgeInsets.all(0),
-      
     );
   }
 }

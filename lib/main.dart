@@ -5,7 +5,6 @@ import 'package:dating/providers/shadchanProvider.dart';
 import 'package:dating/screens/shadchanSignUpScrenn.dart';
 import 'package:dating/splash-screen.dart';
 import 'package:dating/themes/appTheme.dart';
-import 'package:dating/themes/themeController.dart';
 import 'package:dating/widgets/OutLineButtonMy.dart';
 import 'package:dating/widgets/gradientSwitcher.dart';
 import 'package:dating/widgets/loader.dart';
