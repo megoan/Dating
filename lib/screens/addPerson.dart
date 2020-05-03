@@ -24,8 +24,8 @@ class AddPerson extends StatefulWidget {
 class _AddPersonState extends State<AddPerson> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<FormState> _secondFormKey = new GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> _scaffoldState = new GlobalKey<ScaffoldState>();
-  final GlobalKey<ScaffoldState> _secondScaffoldState = new GlobalKey<ScaffoldState>(); 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  //final GlobalKey<ScaffoldState> _secondScaffoldState = new GlobalKey<ScaffoldState>(); 
   double personHeight = 1.5;
   double lookingPersonHeightMin = 1;
   double lookingPersonHeightMax = 2.3;
@@ -165,7 +165,7 @@ class _AddPersonState extends State<AddPerson> {
   }
 
   void showMessage(String message, [MaterialColor color = Colors.red]) {
-    // _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
+     _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
   }
 
   bool _submitForm() {
@@ -259,6 +259,7 @@ class _AddPersonState extends State<AddPerson> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: AppTheme.filterBackgroundColor,
         // appBar: AppBar(
         //   title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
@@ -273,6 +274,8 @@ class _AddPersonState extends State<AddPerson> {
                   setState(() {
                     _index = index;
                   });
+                  else
+                  showMessage("hey, what are you doing!! 2");
               } else
                 setState(() {
                   _index = index;
@@ -287,12 +290,14 @@ class _AddPersonState extends State<AddPerson> {
                   setState(() {
                     _index++;
                   });
+                  else
+                  showMessage("hey, what are you doing!!");
               } else if (_index == 1) {
             bool formIsFinished = await _submitSecondForm();
             if (formIsFinished)
             print("should be a popup");
             else
-            //showMessage();
+            showMessage("hey, what are you doing!! 3 ");
               }
             },
             steps: [
