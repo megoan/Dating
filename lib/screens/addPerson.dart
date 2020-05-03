@@ -24,6 +24,8 @@ class AddPerson extends StatefulWidget {
 class _AddPersonState extends State<AddPerson> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<FormState> _secondFormKey = new GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldState = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _secondScaffoldState = new GlobalKey<ScaffoldState>(); 
   double personHeight = 1.5;
   double lookingPersonHeightMin = 1;
   double lookingPersonHeightMax = 2.3;
@@ -176,10 +178,11 @@ class _AddPersonState extends State<AddPerson> {
     }
   }
 
-  void _submitSecondForm() async {
+  Future<bool> _submitSecondForm() async {
     final FormState form = _secondFormKey.currentState;
 
     if (!form.validate()) {
+      return false;
     } else {
       //This invokes each onSaved event
       form.save();
@@ -189,7 +192,7 @@ class _AddPersonState extends State<AddPerson> {
         await personProvider.addPerson(personProvider.newPerson);
       }
 
-      Navigator.pop(context);
+     return true;
     }
   }
 
@@ -278,14 +281,18 @@ class _AddPersonState extends State<AddPerson> {
             onStepCancel: () {
               Navigator.of(context).pop();
             },
-            onStepContinue: () {
+            onStepContinue: () async {
               if (_index == 0) {
                 if (_submitForm())
                   setState(() {
                     _index++;
                   });
               } else if (_index == 1) {
-                _submitSecondForm();
+            bool formIsFinished = await _submitSecondForm();
+            if (formIsFinished)
+            print("should be a popup");
+            else
+            //showMessage();
               }
             },
             steps: [
@@ -293,9 +300,7 @@ class _AddPersonState extends State<AddPerson> {
                 isActive: _index == 0,
                 title: Text('פרטי מועמד'),
                 content: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+                  child: 
                       Form(
                         key: _formKey,
                         autovalidate: false,
@@ -970,8 +975,7 @@ class _AddPersonState extends State<AddPerson> {
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                   
                 ),
               ),
               Step(
