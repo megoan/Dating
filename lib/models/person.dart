@@ -19,6 +19,7 @@ class Person {
   DateTime birthday;
   String short;
   String long;
+  String phone;
   double height=1.5;
   Area area;
   Country country=Country.ISRAEL;
@@ -80,6 +81,7 @@ class Person {
       this.dos,
       this.hashkafa,
       this.eda,
+      this.phone,
       this.smoke,
       this.mySherutBoy,
       this.mySherutGirl,

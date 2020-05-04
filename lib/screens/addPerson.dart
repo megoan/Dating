@@ -197,9 +197,59 @@ class _AddPersonState extends State<AddPerson> {
     }
   }
 
-  PersonProvider personProvider;
+  void showFinishDialog() {
+    showDialog<Null>(
+      context: context,
+      builder: (BuildContext context) {
+        return new SimpleDialog(
+          title: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                FontAwesomeIcons.checkCircle,
+                size: 50.0,
+                color: Colors.green,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                "What's next?",
+                style: TextStyle(fontSize: 18),
+              ),
+            ],
+          ),
+          children: <Widget>[
+            new FlatButton(
+              textColor: AppTheme.primary,
+              child: Text(
+                'Add new Person',
+                style: TextStyle(fontSize: 18),
+              ),
+              onPressed: () {
+                int count = 0;
+                Navigator.of(context).popUntil((_) => count++ >= 2);
+                Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new AddPerson()));
+              },
+            ),
+            new FlatButton(
+              textColor: AppTheme.primary,
+              child: Text(
+                'Back to Home',
+                style: TextStyle(fontSize: 18),
+              ),
+              onPressed: () {
+                int count = 0;
+                Navigator.of(context).popUntil((_) => count++ >= 2);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-  // ShadchanProvider shadchanProvider;
+  PersonProvider personProvider;
 
   bool isInit = true;
   bool isLoading = true;
@@ -275,7 +325,9 @@ class _AddPersonState extends State<AddPerson> {
                     _index = index;
                   });
                 else
-                  showMessage("hey, what are you doing!! 2",Colors.red[200]);
+                  showMessage(
+                    "hey, what are you doing!! 2",
+                  );
               } else
                 setState(() {
                   _index = index;
@@ -291,13 +343,19 @@ class _AddPersonState extends State<AddPerson> {
                     _index++;
                   });
                 else
-                  showMessage("hey, what are you doing!!",Colors.red[200]);
+                  showMessage(
+                    "hey, what are you doing!!",
+                  );
               } else if (_index == 1) {
                 bool formIsFinished = await _submitSecondForm();
-                if (formIsFinished)
-                  print("should be a popup");
+                if (formIsFinished) if (widget.update != null && widget.update)
+                  Navigator.of(context).pop();
                 else
-                  showMessage("hey, what are you doing!! 3 ",Colors.red[200]);
+                  showFinishDialog();
+                else
+                  showMessage(
+                    "hey, what are you doing!! 3 ",
+                  );
               }
             },
             steps: [
@@ -423,7 +481,7 @@ class _AddPersonState extends State<AddPerson> {
                                         ),
                                         Text(
                                           "  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Boy'),
-                                          style: sSelected == Gender.MALE ? themeTextStyle:TextStyle(color:Colors.white60),
+                                          style: sSelected == Gender.MALE ? themeTextStyle : TextStyle(color: Colors.white60),
                                         ),
                                         Spacer(),
                                         Container(
@@ -442,7 +500,7 @@ class _AddPersonState extends State<AddPerson> {
                                                     sSelected = Gender.FEMALE;
                                                   })),
                                         ),
-                                        Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style:  sSelected == Gender.FEMALE ?themeTextStyle:TextStyle(color:Colors.white60)),
+                                        Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: sSelected == Gender.FEMALE ? themeTextStyle : TextStyle(color: Colors.white60)),
                                       ],
                                     ),
                                   ],
@@ -467,7 +525,6 @@ class _AddPersonState extends State<AddPerson> {
                                     : null,
                                 image: _image2,
                                 imageCallBack: imageCallBack2,
-                                
                                 height: 150,
                               ),
                             ),
@@ -482,7 +539,6 @@ class _AddPersonState extends State<AddPerson> {
                                   : null,
                               image: _image3,
                               imageCallBack: imageCallBack3,
-                              
                               height: 150,
                             )),
                             SizedBox(
@@ -496,7 +552,6 @@ class _AddPersonState extends State<AddPerson> {
                                   : null,
                               image: _image4,
                               imageCallBack: imageCallBack4,
-                             
                               height: 150,
                             )),
                           ],
@@ -514,7 +569,6 @@ class _AddPersonState extends State<AddPerson> {
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth')),
                           ],
                         ),
-
                         FormField(
                           builder: (FormFieldState<dynamic> state) {
                             return Column(
@@ -579,7 +633,44 @@ class _AddPersonState extends State<AddPerson> {
                               return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
                           },
                         ),
+
                         SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.phone,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Phone')),
+                          ],
+                        ),
+                        TextFormField(
+                          cursorColor: Colors.white,
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          initialValue: personProvider.newPerson != null && personProvider.newPerson.phone != null ? personProvider.newPerson.phone : "",
+                          keyboardType: TextInputType.phone,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(15),
+                            filled: true,
+                            fillColor: Colors.black12,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                              borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                            hintStyle: TextStyle(color: AppTheme.primary[300]),
+                            hintText: LocaleText.getLocaleText(MyApp.getLocale(), '000-0000000'),
+                          ),
+                          validator: (val) => isValidPhoneNumber(val) ?null: LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required')  ,
+                          onSaved: (val) => personProvider.newPerson.phone = val,
+                        ),
+
+                      SizedBox(
                           height: 10,
                         ),
                         //Country
