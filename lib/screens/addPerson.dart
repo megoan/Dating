@@ -25,7 +25,7 @@ class _AddPersonState extends State<AddPerson> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<FormState> _secondFormKey = new GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  //final GlobalKey<ScaffoldState> _secondScaffoldState = new GlobalKey<ScaffoldState>(); 
+  //final GlobalKey<ScaffoldState> _secondScaffoldState = new GlobalKey<ScaffoldState>();
   double personHeight = 1.5;
   double lookingPersonHeightMin = 1;
   double lookingPersonHeightMax = 2.3;
@@ -48,6 +48,7 @@ class _AddPersonState extends State<AddPerson> {
   File _image2;
   File _image3;
   File _image4;
+  
   void imageCallBack1(var image) {
     setState(() {
       _image1 = image;
@@ -165,7 +166,7 @@ class _AddPersonState extends State<AddPerson> {
   }
 
   void showMessage(String message, [MaterialColor color = Colors.red]) {
-     _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
   }
 
   bool _submitForm() {
@@ -192,7 +193,7 @@ class _AddPersonState extends State<AddPerson> {
         await personProvider.addPerson(personProvider.newPerson);
       }
 
-     return true;
+      return true;
     }
   }
 
@@ -261,11 +262,10 @@ class _AddPersonState extends State<AddPerson> {
       child: Scaffold(
         key: _scaffoldKey,
         backgroundColor: AppTheme.filterBackgroundColor,
-        // appBar: AppBar(
-        //   title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
-        // ),
+        appBar: AppBar(
+          title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
+        ),
         body: Stepper(
-           
             type: StepperType.horizontal,
             currentStep: _index,
             onStepTapped: (index) {
@@ -274,7 +274,7 @@ class _AddPersonState extends State<AddPerson> {
                   setState(() {
                     _index = index;
                   });
-                  else
+                else
                   showMessage("hey, what are you doing!! 2");
               } else
                 setState(() {
@@ -290,14 +290,14 @@ class _AddPersonState extends State<AddPerson> {
                   setState(() {
                     _index++;
                   });
-                  else
+                else
                   showMessage("hey, what are you doing!!");
               } else if (_index == 1) {
-            bool formIsFinished = await _submitSecondForm();
-            if (formIsFinished)
-            print("should be a popup");
-            else
-            showMessage("hey, what are you doing!! 3 ");
+                bool formIsFinished = await _submitSecondForm();
+                if (formIsFinished)
+                  print("should be a popup");
+                else
+                  showMessage("hey, what are you doing!! 3 ");
               }
             },
             steps: [
@@ -305,682 +305,736 @@ class _AddPersonState extends State<AddPerson> {
                 isActive: _index == 0,
                 title: Text('פרטי מועמד'),
                 content: Container(
-                  child: 
-                      Form(
-                        key: _formKey,
-                        autovalidate: false,
-                        child: new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Form(
+                    key: _formKey,
+                    autovalidate: false,
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Expanded(
-                                  child: FormField(
-                                    builder: (FormFieldState<dynamic> field) {
-                                      return PhotoPickerFlat(
-                                        height: 210,
-                                        small: false,
-                                        imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
-                                            ? personProvider.newPerson.profileImages[0]
-                                            : null,
-                                        image: _image1,
-                                        imageCallBack: imageCallBack1,
-                                      );
-                                    },
-                                    validator: (val) {
-                                      if (_image1 != null || personProvider.newPerson.profileImages != null) {
-                                        setState(() {
-                                          missingImage = false;
-                                        });
-                                        return null;
-                                      }
+                            Expanded(
+                              child: FormField(
+                                builder: (FormFieldState<dynamic> field) {
+                                  return PhotoPickerFlat(
+                                    height: 210,
+                                    small: false,
+                                    imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
+                                        ? personProvider.newPerson.profileImages[0]
+                                        : null,
+                                    image: _image1,
+                                    imageCallBack: imageCallBack1,
+                                  );
+                                },
+                                validator: (val) {
+                                  if (_image1 != null || personProvider.newPerson.profileImages != null) {
+                                    setState(() {
+                                      missingImage = false;
+                                    });
+                                    return null;
+                                  }
 
-                                      setState(() {
-                                        missingImage = true;
-                                      });
-                                      return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                                    },
-                                  ),
+                                  setState(() {
+                                    missingImage = true;
+                                  });
+                                  return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                                },
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            Expanded(
+                              child: Container(
+                                height: 200,
+                                child:
+                                    //FIRST NAME
+                                    Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    TextFormField(
+                                      cursorColor: Colors.white,
+                                      style: themeTextStyle,
+                                      initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(15),
+
+                                        border: OutlineInputBorder(
+                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                        ),
+                                        // icon: const Icon(Icons.person),
+                                        hintStyle: themeTextStyle,
+                                        labelStyle: themeTextStyle, //TextStyle(color: AppTheme.primary),
+                                        hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
+                                        labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
+                                      ),
+                                      inputFormatters: [new LengthLimitingTextInputFormatter(30)],
+                                      validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
+                                      onSaved: (val) => personProvider.newPerson.firstName = val,
+                                    ),
+                                    //LAST NAME
+                                    TextFormField(
+                                      cursorColor: Colors.white,
+                                      style: themeTextStyle,
+                                      initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(15),
+                                        border: OutlineInputBorder(
+                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                        ),
+                                        //icon: const Icon(Icons.person),
+                                        hintStyle: themeTextStyle,
+                                        labelStyle: themeTextStyle,
+                                        hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
+                                        labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
+                                      ),
+                                      inputFormatters: [new LengthLimitingTextInputFormatter(30)],
+                                      validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
+                                      onSaved: (val) => personProvider.newPerson.lastName = val,
+                                    ),
+
+                                    Row(
+                                      children: <Widget>[
+                                        Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(50),
+                                            border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary),
+                                          ),
+                                          child: IconButton(
+                                              icon: FaIcon(FontAwesomeIcons.male),
+                                              color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary,
+                                              padding: EdgeInsets.all(5.0),
+                                              // alignment: Alignment.centerRight,
+                                              onPressed: () => setState(() {
+                                                    sSelected = Gender.MALE;
+                                                  })),
+                                        ),
+                                        Text(
+                                          "  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Boy'),
+                                          style: themeTextStyle,
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(50),
+                                            border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary),
+                                          ),
+                                          child: IconButton(
+                                              icon: FaIcon(FontAwesomeIcons.female),
+                                              color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary,
+                                              padding: EdgeInsets.all(5.0),
+                                              //alignment: Alignment.centerRight,
+                                              onPressed: () => setState(() {
+                                                    sSelected = Gender.FEMALE;
+                                                  })),
+                                        ),
+                                        Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: themeTextStyle),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(width: 20),
-                                Expanded(
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (missingImage)
+                        Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'), style: TextStyle(color: Colors.red, fontSize: 12)),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Expanded(
+                              child: PhotoPickerFlat(
+                                circle: true,
+                                imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
+                                    ? personProvider.newPerson.profileImages[0]
+                                    : null,
+                                image: _image2,
+                                imageCallBack: imageCallBack2,
+                                photoNum: 2,
+                                height: 150,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: PhotoPickerFlat(
+                              circle: true,
+                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
+                                  ? personProvider.newPerson.profileImages[0]
+                                  : null,
+                              image: _image3,
+                              imageCallBack: imageCallBack3,
+                              photoNum: 3,
+                              height: 150,
+                            )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                child: PhotoPickerFlat(
+                              circle: true,
+                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
+                                  ? personProvider.newPerson.profileImages[0]
+                                  : null,
+                              image: _image4,
+                              imageCallBack: imageCallBack4,
+                              photoNum: 4,
+                              height: 150,
+                            )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.birthdayCake,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth')),
+                          ],
+                        ),
+
+                        FormField(
+                          builder: (FormFieldState<dynamic> state) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                FlatButton(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0), side: BorderSide(color: AppTheme.primary)),
+                                  color: Colors.black12,
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (BuildContext builder) {
+                                          var now = new DateTime.now();
+                                          var initialDate = convertToDate(personProvider.newPerson.birthday != null ? new DateFormat.yMd().format(personProvider.newPerson.birthday) : null) ?? now;
+                                          initialDate = (initialDate.year >= 1900 && initialDate.isBefore(now) ? initialDate : now);
+                                          return Container(
+                                              height: MediaQuery.of(context).copyWith().size.height / 2.6,
+                                              child: DatePickerWidget(
+                                                initialDateTime: initialDate,
+                                                minDateTime: new DateTime(1900),
+                                                maxDateTime: new DateTime.now(),
+                                                onConfirm: (date, arrey) => selectedDate(date),
+                                              ));
+                                        });
+                                  },
                                   child: Container(
-                                    height: 200,
-                                    child:
-                                        //FIRST NAME
-                                        Column(
+                                    alignment: Alignment.center,
+                                    height: 50.0,
+                                    child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
-                                        TextFormField(
-                                          cursorColor: Colors.white,
-                                          style: themeTextStyle,
-                                          initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
-                                          decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.all(15),
-
-                                            border: OutlineInputBorder(
-                                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                            ),
-                                            // icon: const Icon(Icons.person),
-                                            hintStyle: themeTextStyle,
-                                            labelStyle: themeTextStyle, //TextStyle(color: AppTheme.primary),
-                                            hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
-                                            labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
-                                          ),
-                                          inputFormatters: [new LengthLimitingTextInputFormatter(30)],
-                                          validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                          onSaved: (val) => personProvider.newPerson.firstName = val,
-                                        ),
-                                        //LAST NAME
-                                        TextFormField(
-                                          cursorColor: Colors.white,
-                                          style: themeTextStyle,
-                                          initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
-                                          decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.all(15),
-                                            border: OutlineInputBorder(
-                                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                            ),
-                                            //icon: const Icon(Icons.person),
-                                            hintStyle: themeTextStyle,
-                                            labelStyle: themeTextStyle,
-                                            hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
-                                            labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
-                                          ),
-                                          inputFormatters: [new LengthLimitingTextInputFormatter(30)],
-                                          validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                                          onSaved: (val) => personProvider.newPerson.lastName = val,
-                                        ),
-
                                         Row(
                                           children: <Widget>[
-                                            Container(
-                                              width: 40,
-                                              height: 40,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(50),
-                                                border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary),
-                                              ),
-                                              child: IconButton(
-                                                  icon: FaIcon(FontAwesomeIcons.male),
-                                                  color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary,
-                                                  padding: EdgeInsets.all(5.0),
-                                                  // alignment: Alignment.centerRight,
-                                                  onPressed: () => setState(() {
-                                                        sSelected = Gender.MALE;
-                                                      })),
-                                            ),
                                             Text(
-                                              "  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Boy'),
-                                              style: themeTextStyle,
+                                              dateString,
+                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
                                             ),
-                                            Spacer(),
-                                            Container(
-                                              width: 40,
-                                              height: 40,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(50),
-                                                border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary),
-                                              ),
-                                              child: IconButton(
-                                                  icon: FaIcon(FontAwesomeIcons.female),
-                                                  color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary,
-                                                  padding: EdgeInsets.all(5.0),
-                                                  //alignment: Alignment.centerRight,
-                                                  onPressed: () => setState(() {
-                                                        sSelected = Gender.FEMALE;
-                                                      })),
-                                            ),
-                                            Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: themeTextStyle),
                                           ],
+                                        ),
+                                        FaIcon(
+                                          FontAwesomeIcons.angleDown,
+                                          size: 20,
+                                          color: Colors.white,
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
+                                state.hasError
+                                    ? Text(
+                                        state.errorText,
+                                        style: TextStyle(color: Colors.red, fontSize: 12),
+                                      )
+                                    : Container()
                               ],
+                            );
+                          },
+                          validator: (val) {
+                            if (isValidDob(personProvider.newPerson.birthday)) {
+                              return null;
+                            } else
+                              return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        //Country
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.globeEurope,
+                              size: 25.0,
+                              color: Colors.white,
                             ),
-                            if (missingImage)
-                              Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'), style: TextStyle(color: Colors.red, fontSize: 12)),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.birthdayCake,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth')),
-                              ],
-                            ),
-                            FormField(
-                              builder: (FormFieldState<dynamic> state) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    FlatButton(
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0), side: BorderSide(color: AppTheme.primary)),
-                                      color: Colors.black12,
-                                      onPressed: () {
-                                        showModalBottomSheet(
-                                            context: context,
-                                            builder: (BuildContext builder) {
-                                              var now = new DateTime.now();
-                                              var initialDate =
-                                                  convertToDate(personProvider.newPerson.birthday != null ? new DateFormat.yMd().format(personProvider.newPerson.birthday) : null) ?? now;
-                                              initialDate = (initialDate.year >= 1900 && initialDate.isBefore(now) ? initialDate : now);
-                                              return Container(
-                                                  height: MediaQuery.of(context).copyWith().size.height / 2.6,
-                                                  child: DatePickerWidget(
-                                                    initialDateTime: initialDate,
-                                                    minDateTime: new DateTime(1900),
-                                                    maxDateTime: new DateTime.now(),
-                                                    onConfirm: (date, arrey) => selectedDate(date),
-                                                  ));
-                                            });
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 50.0,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: <Widget>[
-                                            Row(
-                                              children: <Widget>[
-                                                Text(
-                                                  dateString,
-                                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
-                                                ),
-                                              ],
-                                            ),
-                                            FaIcon(
-                                              FontAwesomeIcons.angleDown,
-                                              size: 20,
-                                              color: Colors.white,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    state.hasError
-                                        ? Text(
-                                            state.errorText,
-                                            style: TextStyle(color: Colors.red, fontSize: 12),
-                                          )
-                                        : Container()
-                                  ],
-                                );
-                              },
-                              validator: (val) {
-                                if (isValidDob(personProvider.newPerson.birthday)) {
-                                  return null;
-                                } else
-                                  return LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                              },
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            //Country
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.globeEurope,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
-                              ],
-                            ),
-                            new FormField<Country>(
-                              builder: (FormFieldState<Country> state) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SelectChip(Country.values, (country) {
-                                      //state.didChange(country);
-                                      setState(() {
-                                        personProvider.newPerson.country = country;
-                                      });
-                                    }, pickedValue: personProvider.newPerson.country),
-                                    state.hasError
-                                        ? Text(
-                                            state.errorText,
-                                            style: TextStyle(color: Colors.red, fontSize: 12),
-                                          )
-                                        : Container()
-                                  ],
-                                );
-                              },
-                              validator: (val) {
-                                return personProvider.newPerson.country != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                              },
-                            ),
-                            if (personProvider.newPerson.country == Country.ISRAEL)
-                              SizedBox(
-                                height: 10,
-                              ),
-                            if (personProvider.newPerson.country == Country.ISRAEL)
-                              Row(
-                                children: <Widget>[
-                                  FaIcon(
-                                    FontAwesomeIcons.city,
-                                    size: 25.0,
-                                    color: Colors.white,
-                                  ),
-                                  title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
-                                ],
-                              ),
-                            //AREA
-                            if (personProvider.newPerson.country == Country.ISRAEL)
-                              new FormField<Area>(
-                                builder: (FormFieldState<Area> state) {
-                                  return Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      SelectChip(Area.values, (area) {
-                                        personProvider.newPerson.area = area;
-                                        // state.didChange(area);
-                                      }, pickedValue: personProvider.newPerson.area),
-                                      state.hasError
-                                          ? Text(
-                                              state.errorText,
-                                              style: TextStyle(color: Colors.red, fontSize: 12),
-                                            )
-                                          : Container()
-                                    ],
-                                  );
-                                },
-                                validator: (val) {
-                                  return personProvider.newPerson.area != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                                },
-                              ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.userFriends,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
-                              ],
-                            ),
-                            //STATUS
-                            new FormField<Status>(
-                              builder: (FormFieldState<Status> state) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SelectChip(Status.values, (status) {
-                                      personProvider.newPerson.status = status;
-                                      //state.didChange(status);
-                                    }, pickedValue: personProvider.newPerson.status),
-                                    state.hasError
-                                        ? Text(
-                                            state.errorText,
-                                            style: TextStyle(color: Colors.red, fontSize: 12),
-                                          )
-                                        : Container()
-                                  ],
-                                );
-                              },
-                              validator: (val) {
-                                return personProvider.newPerson.status != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                              },
-                            ),
-                            //RELIGIOUS
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.torah,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
-                              ],
-                            ),
-                            new FormField<Dos>(
-                              builder: (FormFieldState<Dos> state) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SelectChip(Dos.values, (val) {
-                                      personProvider.newPerson.dos = val;
-                                      //state.didChange(val);
-                                    }, pickedValue: personProvider.newPerson.dos),
-                                    state.hasError
-                                        ? Text(
-                                            state.errorText,
-                                            style: TextStyle(color: Colors.red, fontSize: 12),
-                                          )
-                                        : Container()
-                                  ],
-                                );
-                              },
-                              validator: (val) {
-                                return personProvider.newPerson.dos != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                              },
-                            ),
-                            //HASHKAFA
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.starOfDavid,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
-                              ],
-                            ),
-                            new FormField<Hashkafa>(
-                              builder: (FormFieldState<Hashkafa> state) {
-                                return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-                                  SelectChip(Hashkafa.values, (val) {
-                                    personProvider.newPerson.hashkafa = val;
-                                    //state.didChange(val);
-                                  }, pickedValue: personProvider.newPerson.hashkafa),
-                                  state.hasError
-                                      ? Text(
-                                          state.errorText,
-                                          style: TextStyle(color: Colors.red, fontSize: 12),
-                                        )
-                                      : Container()
-                                ]);
-                              },
-                              validator: (val) {
-                                return personProvider.newPerson.hashkafa != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                              },
-                            ),
-                            //EDA
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.synagogue,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
-                              ],
-                            ),
-                            new FormField<Eda>(
-                              builder: (FormFieldState<Eda> state) {
-                                return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-                                  SelectChip(Eda.values, (val) {
-                                    personProvider.newPerson.eda = val;
-                                    //state.didChange(val);
-                                  }, pickedValue: personProvider.newPerson.eda),
-                                  state.hasError
-                                      ? Text(
-                                          state.errorText,
-                                          style: TextStyle(color: Colors.red, fontSize: 12),
-                                        )
-                                      : Container()
-                                ]);
-                              },
-                              validator: (val) {
-                                return personProvider.newPerson.eda != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                              },
-                            ),
-                            //SMOKE
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.smoking,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking')),
-                              ],
-                            ),
-                            new FormField<Smoke>(
-                              builder: (FormFieldState<Smoke> state) {
-                                return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-                                  SelectChip(Smoke.values, (val) {
-                                    personProvider.newPerson.smoke = val;
-                                    //state.didChange(val);
-                                  }, pickedValue: personProvider.newPerson.smoke),
-                                  state.hasError
-                                      ? Text(
-                                          state.errorText,
-                                          style: TextStyle(color: Colors.red, fontSize: 12),
-                                        )
-                                      : Container()
-                                ]);
-                              },
-                              validator: (val) {
-                                return personProvider.newPerson.smoke != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                              },
-                            ),
-                            //ABOUT ME SHORT
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.short_text,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them short')),
-                              ],
-                            ),
-                            new TextFormField(
-                              cursorColor: Colors.white,
-                              style: themeTextStyle,
-                              initialValue: personProvider.newPerson != null && personProvider.newPerson.short != null ? personProvider.newPerson.short : "",
-                              maxLines: null,
-                              maxLength: 70,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                ),
-                                //icon: const Icon(Icons.short_text),
-                                hintStyle: TextStyle(color: AppTheme.primary),
-                                labelStyle: themeTextStyle,
-                                hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
-                                labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
-                              ),
-                              inputFormatters: [new LengthLimitingTextInputFormatter(70)],
-                              validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                              onSaved: (val) => personProvider.newPerson.short = val,
-                            ),
-                            //ABOUT ME LONG
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.format_align_justify,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them long')),
-                              ],
-                            ),
-                            new TextFormField(
-                              cursorColor: Colors.white,
-                              style: themeTextStyle,
-                              initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
-                              maxLines: null,
-                              minLines: 5,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                ),
-                                hintStyle: TextStyle(color: AppTheme.primary),
-                                labelStyle: themeTextStyle,
-                                hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
-                                labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
-                              ),
-                              // inputFormatters: [
-                              //   new LengthLimitingTextInputFormatter(500)
-                              // ],
-                              //validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
-                              onSaved: (val) => personProvider.newPerson.long = val,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.ruler,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Slider(
-                                    activeColor: AppTheme.secondary,
-                                    min: 1.3,
-                                    max: 2.3,
-                                    divisions: 130,
-                                    label: "" + personHeight.toStringAsFixed(2),
-                                    value: personHeight,
-                                    onChanged: ((newValue) {
-                                      setState(() {
-                                        personHeight = newValue;
-                                        personProvider.newPerson.height = newValue;
-                                      });
-                                    }),
-                                  ),
-                                ),
-                                Text(
-                                  "" + personHeight.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),
-                                  style: themeTextStyle,
-                                )
-                              ],
-                            ),
-
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                FaIcon(
-                                  FontAwesomeIcons.handHoldingHeart,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
-                              ],
-                            ),
-
-                            if (sSelected == Gender.FEMALE)
-                              MultiSelectChip(SherutGirl.values, (selected, val) => personProvider.newPerson.mySherutGirl[selected] = val, pickedChips: personProvider.newPerson.mySherutGirl),
-
-                            if (sSelected == Gender.MALE)
-                              MultiSelectChip(
-                                SherutBoy.values,
-                                (selected, val) => personProvider.newPerson.mySherutBoy[selected] = val,
-                                pickedChips: personProvider.newPerson.mySherutBoy,
-                              ),
-
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                title("עוד תמונות"),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                FaIcon(
-                                  FontAwesomeIcons.cameraRetro,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                FaIcon(
-                                  FontAwesomeIcons.handPeace,
-                                  size: 25.0,
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Expanded(
-                                  child: PhotoPickerFlat(
-                                    circle: true,
-                                    imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
-                                        ? personProvider.newPerson.profileImages[0]
-                                        : null,
-                                    image: _image2,
-                                    imageCallBack: imageCallBack2,
-                                    photoNum: 2,
-                                    height: 150,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  
-                                    child: PhotoPickerFlat(
-                                      circle: true,
-                                  imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
-                                      ? personProvider.newPerson.profileImages[0]
-                                      : null,
-                                  image: _image3,
-                                  imageCallBack: imageCallBack3,
-                                  photoNum: 3,
-                                  height: 150,
-                                )),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                    child: PhotoPickerFlat(
-                                      circle: true,
-                                  imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
-                                      ? personProvider.newPerson.profileImages[0]
-                                      : null,
-                                  image: _image4,
-                                  imageCallBack: imageCallBack4,
-                                  photoNum: 4,
-                                  height: 150,
-                                )),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
                           ],
                         ),
-                      ),
-                   
+                        new FormField<Country>(
+                          builder: (FormFieldState<Country> state) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SelectChip(Country.values, (country) {
+                                  //state.didChange(country);
+                                  setState(() {
+                                    personProvider.newPerson.country = country;
+                                  });
+                                }, pickedValue: personProvider.newPerson.country),
+                                state.hasError
+                                    ? Text(
+                                        state.errorText,
+                                        style: TextStyle(color: Colors.red, fontSize: 12),
+                                      )
+                                    : Container()
+                              ],
+                            );
+                          },
+                          validator: (val) {
+                            return personProvider.newPerson.country != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                          },
+                        ),
+                        if (personProvider.newPerson.country == Country.ISRAEL)
+                          SizedBox(
+                            height: 10,
+                          ),
+                        if (personProvider.newPerson.country == Country.ISRAEL)
+                          Row(
+                            children: <Widget>[
+                              FaIcon(
+                                FontAwesomeIcons.city,
+                                size: 25.0,
+                                color: Colors.white,
+                              ),
+                              title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
+                            ],
+                          ),
+                        //AREA
+                        if (personProvider.newPerson.country == Country.ISRAEL)
+                          new FormField<Area>(
+                            builder: (FormFieldState<Area> state) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SelectChip(Area.values, (area) {
+                                    personProvider.newPerson.area = area;
+                                    // state.didChange(area);
+                                  }, pickedValue: personProvider.newPerson.area),
+                                  state.hasError
+                                      ? Text(
+                                          state.errorText,
+                                          style: TextStyle(color: Colors.red, fontSize: 12),
+                                        )
+                                      : Container()
+                                ],
+                              );
+                            },
+                            validator: (val) {
+                              return personProvider.newPerson.area != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                            },
+                          ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.userFriends,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
+                          ],
+                        ),
+                        //STATUS
+                        new FormField<Status>(
+                          builder: (FormFieldState<Status> state) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SelectChip(Status.values, (status) {
+                                  personProvider.newPerson.status = status;
+                                  //state.didChange(status);
+                                }, pickedValue: personProvider.newPerson.status),
+                                state.hasError
+                                    ? Text(
+                                        state.errorText,
+                                        style: TextStyle(color: Colors.red, fontSize: 12),
+                                      )
+                                    : Container()
+                              ],
+                            );
+                          },
+                          validator: (val) {
+                            return personProvider.newPerson.status != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                          },
+                        ),
+                        //RELIGIOUS
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.torah,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
+                          ],
+                        ),
+                        new FormField<Dos>(
+                          builder: (FormFieldState<Dos> state) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SelectChip(Dos.values, (val) {
+                                  personProvider.newPerson.dos = val;
+                                  
+                                }, pickedValue: personProvider.newPerson.dos),
+                                state.hasError
+                                    ? Text(
+                                        state.errorText,
+                                        style: TextStyle(color: Colors.red, fontSize: 12),
+                                      )
+                                    : Container()
+                              ],
+                            );
+                          },
+                          validator: (val) {
+                            return personProvider.newPerson.dos != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                          },
+                        ),
+                        //HASHKAFA
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.starOfDavid,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
+                          ],
+                        ),
+                        new FormField<Hashkafa>(
+                          builder: (FormFieldState<Hashkafa> state) {
+                            return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+                              SelectChip(Hashkafa.values, (val) {
+                                personProvider.newPerson.hashkafa = val;
+                                //state.didChange(val);
+                              }, pickedValue: personProvider.newPerson.hashkafa),
+                              state.hasError
+                                  ? Text(
+                                      state.errorText,
+                                      style: TextStyle(color: Colors.red, fontSize: 12),
+                                    )
+                                  : Container()
+                            ]);
+                          },
+                          validator: (val) {
+                            return personProvider.newPerson.hashkafa != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                          },
+                        ),
+                        //EDA
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.synagogue,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
+                          ],
+                        ),
+                        new FormField<Eda>(
+                          builder: (FormFieldState<Eda> state) {
+                            return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+                              SelectChip(Eda.values, (val) {
+                                personProvider.newPerson.eda = val;
+                                //state.didChange(val);
+                              }, pickedValue: personProvider.newPerson.eda),
+                              state.hasError
+                                  ? Text(
+                                      state.errorText,
+                                      style: TextStyle(color: Colors.red, fontSize: 12),
+                                    )
+                                  : Container()
+                            ]);
+                          },
+                          validator: (val) {
+                            return personProvider.newPerson.eda != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                          },
+                        ),
+                        //SMOKE
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.smoking,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking')),
+                          ],
+                        ),
+                        new FormField<Smoke>(
+                          builder: (FormFieldState<Smoke> state) {
+                            return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+                              SelectChip(Smoke.values, (val) {
+                                personProvider.newPerson.smoke = val;
+                                //state.didChange(val);
+                              }, pickedValue: personProvider.newPerson.smoke),
+                              state.hasError
+                                  ? Text(
+                                      state.errorText,
+                                      style: TextStyle(color: Colors.red, fontSize: 12),
+                                    )
+                                  : Container()
+                            ]);
+                          },
+                          validator: (val) {
+                            return personProvider.newPerson.smoke != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
+                          },
+                        ),
+                        //ABOUT ME SHORT
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.short_text,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them short')),
+                          ],
+                        ),
+                        new TextFormField(
+                          cursorColor: Colors.white,
+                          style: themeTextStyle,
+                          initialValue: personProvider.newPerson != null && personProvider.newPerson.short != null ? personProvider.newPerson.short : "",
+                          maxLines: null,
+                          maxLength: 70,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                            //icon: const Icon(Icons.short_text),
+                            hintStyle: TextStyle(color: AppTheme.primary),
+                            labelStyle: themeTextStyle,
+                            hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
+                            labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
+                          ),
+                          inputFormatters: [new LengthLimitingTextInputFormatter(70)],
+                          validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
+                          onSaved: (val) => personProvider.newPerson.short = val,
+                        ),
+                        //ABOUT ME LONG
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.format_align_justify,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them long')),
+                          ],
+                        ),
+                        new TextFormField(
+                          
+                          cursorColor: Colors.white,
+                          style: themeTextStyle,
+                          initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
+                          maxLines: null,
+                          minLines: 5,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.black12,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                              borderSide:   BorderSide(color:AppTheme.primary, width: 0.6),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                            hintStyle: TextStyle(color: AppTheme.primary[300]),
+                            //labelStyle: themeTextStyle,
+                            hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
+                            //labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
+                          ),
+                          // inputFormatters: [
+                          //   new LengthLimitingTextInputFormatter(500)
+                          // ],
+                          //validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
+                          onSaved: (val) => personProvider.newPerson.long = val,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.ruler,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Slider(
+                                activeColor: AppTheme.secondary,
+                                min: 1.3,
+                                max: 2.3,
+                                divisions: 130,
+                                label: "" + personHeight.toStringAsFixed(2),
+                                value: personHeight,
+                                onChanged: ((newValue) {
+                                  setState(() {
+                                    personHeight = newValue;
+                                    personProvider.newPerson.height = newValue;
+                                  });
+                                }),
+                              ),
+                            ),
+                            Text(
+                              "" + personHeight.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'),
+                              style: themeTextStyle,
+                            )
+                          ],
+                        ),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FaIcon(
+                              FontAwesomeIcons.handHoldingHeart,
+                              size: 25.0,
+                              color: Colors.white,
+                            ),
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
+                          ],
+                        ),
+
+                        if (sSelected == Gender.FEMALE)
+                          MultiSelectChip(SherutGirl.values, (selected, val) => personProvider.newPerson.mySherutGirl[selected] = val, pickedChips: personProvider.newPerson.mySherutGirl),
+
+                        if (sSelected == Gender.MALE)
+                          MultiSelectChip(
+                            SherutBoy.values,
+                            (selected, val) => personProvider.newPerson.mySherutBoy[selected] = val,
+                            pickedChips: personProvider.newPerson.mySherutBoy,
+                          ),
+
+                        // SizedBox(
+                        //   height: 10,
+                        // ),
+                        // Row(
+                        //   children: <Widget>[
+                        //     title("עוד תמונות"),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     FaIcon(
+                        //       FontAwesomeIcons.cameraRetro,
+                        //       size: 25.0,
+                        //       color: Colors.white,
+                        //     ),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     FaIcon(
+                        //       FontAwesomeIcons.handPeace,
+                        //       size: 25.0,
+                        //       color: Colors.white,
+                        //     ),
+                        //   ],
+                        // ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: <Widget>[
+                        //     Expanded(
+                        //       child: PhotoPickerFlat(
+                        //         circle: true,
+                        //         imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
+                        //             ? personProvider.newPerson.profileImages[0]
+                        //             : null,
+                        //         image: _image2,
+                        //         imageCallBack: imageCallBack2,
+                        //         photoNum: 2,
+                        //         height: 150,
+                        //       ),
+                        //     ),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     Expanded(
+
+                        //         child: PhotoPickerFlat(
+                        //           circle: true,
+                        //       imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
+                        //           ? personProvider.newPerson.profileImages[0]
+                        //           : null,
+                        //       image: _image3,
+                        //       imageCallBack: imageCallBack3,
+                        //       photoNum: 3,
+                        //       height: 150,
+                        //     )),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     Expanded(
+                        //         child: PhotoPickerFlat(
+                        //           circle: true,
+                        //       imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
+                        //           ? personProvider.newPerson.profileImages[0]
+                        //           : null,
+                        //       image: _image4,
+                        //       imageCallBack: imageCallBack4,
+                        //       photoNum: 4,
+                        //       height: 150,
+                        //     )),
+                        //   ],
+                        // ),
+
+                        SizedBox(
+                          height: 30,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Step(
