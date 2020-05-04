@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 class PhotoPickerFlat extends StatefulWidget {
   File image;
   Function imageCallBack;
-  int photoNum = 0;
+
   bool small;
   bool circle;
   String imageUrl;
@@ -16,7 +16,7 @@ class PhotoPickerFlat extends StatefulWidget {
   final double height;
   @override
   _PhotoPickerFlatState createState() => _PhotoPickerFlatState();
-  PhotoPickerFlat({this.image, this.imageCallBack, this.photoNum, this.imageUrl, this.small = true, this.width, this.height, this.circle = false});
+  PhotoPickerFlat({this.image, this.imageCallBack, this.imageUrl, this.small = true, this.width, this.height, this.circle = false});
 }
 
 class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
@@ -50,36 +50,12 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        !widget.circle
-            ? Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppTheme.primary, width: 2.0),
-                  color: Colors.black12,
-                ),
-                width: widget.width ?? widget.width,
-                height: widget.height ?? widget.height,
-                child: widget.imageUrl != null
-                    ? ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.network(widget.imageUrl, fit: BoxFit.cover, height: widget.height, width: widget.width))
-                    : widget.image != null
-                        ? ClipRRect(borderRadius: BorderRadius.circular(8), child: Image.file(widget.image, fit: BoxFit.cover, height: widget.height, width: widget.width))
-                        : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                            ImageButton(small: widget.small, image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
-                            ImageButton(
-                              small: widget.small,
-                              image: widget.image,
-                              imageCallBack: getGalleryImage,
-                              iconData: Icons.image,
-                            )
-                          ]))
-            : Container(
-                decoration: BoxDecoration(
-                 
-                  border: Border.all(color: AppTheme.primary, width: 2.0),
-                 shape: BoxShape.circle
-                ),
+    return 
+        widget.circle?  
+        Stack(
+          children: [
+            Container(
+                decoration: BoxDecoration(border: Border.all(color: AppTheme.primary, width: 2.0), shape: BoxShape.circle),
                 width: (widget.small) ? 110 : 140,
                 height: (widget.small) ? 110 : 140,
                 child: widget.image != null
@@ -99,82 +75,111 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                           )
                         ]),
                       )),
-        if (widget.image != null || widget.imageUrl != null)
-         if ( widget.small)
-               Positioned(
-                  bottom: widget.circle? 5:0,
-                  right: widget.circle? 5:0,
-                  child: Container(
-                    width: widget.circle? 30:40,
-                    height: widget.circle? 30:40,
-                    decoration: BoxDecoration(
-                      color: AppTheme.primary,
-                      borderRadius: widget.circle? BorderRadius.only(topLeft: Radius.circular(20),bottomRight:Radius.circular(20) )
-                      : BorderRadius.only(topLeft: Radius.circular(10),bottomRight:Radius.circular(5) ),
-                    ),
-                    child: ImageButton(
-                      small: widget.small,
-                      image: widget.image,
-                      imageCallBack: () {
-                        widget.imageCallBack(null);
-                      },
-                      iconData: Icons.close,
-                    ),
+            if (widget.image != null || widget.imageUrl != null)
+              Positioned(
+                bottom: widget.circle ? 5 : 0,
+                right: widget.circle ? 5 : 0,
+                child: Container(
+                  width: widget.circle ? 30 : 40,
+                  height: widget.circle ? 30 : 40,
+                  decoration: BoxDecoration(
+                    color: AppTheme.primary,
+                    borderRadius: widget.circle
+                        ? BorderRadius.only(topLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+                        : BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(5)),
+                  ),
+                  child: ImageButton(
+                    small: widget.small,
+                    image: widget.image,
+                    imageCallBack: () {
+                      widget.imageCallBack(null);
+                    },
+                    iconData: Icons.close,
                   ),
                 ),
-                if (widget.image != null || widget.imageUrl != null)
-               if ( widget.small)
-                    Positioned(
-                  bottom: widget.circle? 5:0,
-                  left: widget.circle? 5:0,
-                  child: Container(
-                    width: widget.circle? 30:40,
-                    height: widget.circle? 30:40,
-                    decoration: BoxDecoration(
-                      color: AppTheme.primary,
-                      borderRadius: widget.circle?BorderRadius.only(bottomLeft: Radius.circular(20),topRight:Radius.circular(20) ):
-                      BorderRadius.only(topRight:Radius.circular(10),bottomLeft: Radius.circular(5), ),
-                    ),
-                    child: ImageButton(
-                      small: widget.small,
-                      image: widget.image,
-                      imageCallBack: cropImage,
-                     
-                      iconData: Icons.crop,
-                    ),
+              ),
+            if (widget.image != null || widget.imageUrl != null)
+              Positioned(
+                bottom: widget.circle ? 5 : 0,
+                left: widget.circle ? 5 : 0,
+                child: Container(
+                  width: widget.circle ? 30 : 40,
+                  height: widget.circle ? 30 : 40,
+                  decoration: BoxDecoration(
+                    color: AppTheme.primary,
+                    borderRadius: widget.circle
+                        ? BorderRadius.only(bottomLeft: Radius.circular(20), topRight: Radius.circular(20))
+                        : BorderRadius.only(
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                  ),
+                  child: ImageButton(
+                    small: widget.small,
+                    image: widget.image,
+                    imageCallBack: cropImage,
+                    iconData: Icons.crop,
                   ),
                 ),
-                if (widget.image != null || widget.imageUrl != null)
-              if ( !widget.small) Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppTheme.primary,
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20)),
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        ImageButton(
-                          small: widget.small,
-                          image: widget.image,
-                          imageCallBack: () {
-                            widget.imageCallBack(null);
-                          },
-                          iconData: Icons.close,
-                        ),
-                        ImageButton(
-                          small: widget.small,
-                          image: widget.image,
-                          imageCallBack: cropImage,
-                          iconData: Icons.crop,
-                        ),
-                      ],
-                    ),
+              ),
+          ],
+        )
+        :Stack(
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: AppTheme.primary, width: 2.0),
+                  color: Colors.black12,
+                ),
+                width: widget.width ?? widget.width,
+                height: widget.height ?? widget.height,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: widget.imageUrl != null
+                        ? Image.network(widget.imageUrl, fit: BoxFit.cover, height: widget.height, width: widget.width)
+                        : widget.image != null
+                            ? Image.file(widget.image, fit: BoxFit.cover, height: widget.height, width: widget.width)
+                            : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                ImageButton(small: widget.small, image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
+                                ImageButton(
+                                  small: widget.small,
+                                  image: widget.image,
+                                  imageCallBack: getGalleryImage,
+                                  iconData: Icons.image,
+                                )
+                              ]))),
+            if (widget.image != null || widget.imageUrl != null)
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppTheme.primary,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20)),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      ImageButton(
+                        small: widget.small,
+                        image: widget.image,
+                        imageCallBack: () {
+                          widget.imageCallBack(null);
+                        },
+                        iconData: Icons.close,
+                      ),
+                      ImageButton(
+                        small: widget.small,
+                        image: widget.image,
+                        imageCallBack: cropImage,
+                        iconData: Icons.crop,
+                      ),
+                    ],
                   ),
                 ),
-      ],
-    );
+              ),
+          ],
+        ) ;
   }
 }
 

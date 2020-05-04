@@ -48,7 +48,7 @@ class _AddPersonState extends State<AddPerson> {
   File _image2;
   File _image3;
   File _image4;
-  
+
   void imageCallBack1(var image) {
     setState(() {
       _image1 = image;
@@ -165,7 +165,7 @@ class _AddPersonState extends State<AddPerson> {
     return regex.hasMatch(input);
   }
 
-  void showMessage(String message, [MaterialColor color = Colors.red]) {
+  void showMessage(String message, [MaterialColor color = Colors.blue]) {
     _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
   }
 
@@ -275,7 +275,7 @@ class _AddPersonState extends State<AddPerson> {
                     _index = index;
                   });
                 else
-                  showMessage("hey, what are you doing!! 2");
+                  showMessage("hey, what are you doing!! 2",Colors.red[200]);
               } else
                 setState(() {
                   _index = index;
@@ -291,13 +291,13 @@ class _AddPersonState extends State<AddPerson> {
                     _index++;
                   });
                 else
-                  showMessage("hey, what are you doing!!");
+                  showMessage("hey, what are you doing!!",Colors.red[200]);
               } else if (_index == 1) {
                 bool formIsFinished = await _submitSecondForm();
                 if (formIsFinished)
                   print("should be a popup");
                 else
-                  showMessage("hey, what are you doing!! 3 ");
+                  showMessage("hey, what are you doing!! 3 ",Colors.red[200]);
               }
             },
             steps: [
@@ -358,12 +358,17 @@ class _AddPersonState extends State<AddPerson> {
                                       initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.all(15),
-
+                                        filled: true,
+                                        fillColor: Colors.black12,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                          borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                                        ),
                                         border: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                         ),
-                                        // icon: const Icon(Icons.person),
-                                        hintStyle: themeTextStyle,
+
+                                        hintStyle: TextStyle(color: AppTheme.primary[300]),
                                         labelStyle: themeTextStyle, //TextStyle(color: AppTheme.primary),
                                         hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
                                         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
@@ -378,12 +383,17 @@ class _AddPersonState extends State<AddPerson> {
                                       style: themeTextStyle,
                                       initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
                                       decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.black12,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                          borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                                        ),
                                         contentPadding: EdgeInsets.all(15),
                                         border: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                         ),
-                                        //icon: const Icon(Icons.person),
-                                        hintStyle: themeTextStyle,
+                                        hintStyle: TextStyle(color: AppTheme.primary[300]),
                                         labelStyle: themeTextStyle,
                                         hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
                                         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
@@ -413,7 +423,7 @@ class _AddPersonState extends State<AddPerson> {
                                         ),
                                         Text(
                                           "  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Boy'),
-                                          style: themeTextStyle,
+                                          style: sSelected == Gender.MALE ? themeTextStyle:TextStyle(color:Colors.white60),
                                         ),
                                         Spacer(),
                                         Container(
@@ -432,7 +442,7 @@ class _AddPersonState extends State<AddPerson> {
                                                     sSelected = Gender.FEMALE;
                                                   })),
                                         ),
-                                        Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: themeTextStyle),
+                                        Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style:  sSelected == Gender.FEMALE ?themeTextStyle:TextStyle(color:Colors.white60)),
                                       ],
                                     ),
                                   ],
@@ -442,7 +452,7 @@ class _AddPersonState extends State<AddPerson> {
                           ],
                         ),
                         if (missingImage)
-                        Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'), style: TextStyle(color: Colors.red, fontSize: 12)),
+                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'), style: TextStyle(color: Colors.red, fontSize: 12)),
                         SizedBox(
                           height: 20,
                         ),
@@ -457,7 +467,7 @@ class _AddPersonState extends State<AddPerson> {
                                     : null,
                                 image: _image2,
                                 imageCallBack: imageCallBack2,
-                                photoNum: 2,
+                                
                                 height: 150,
                               ),
                             ),
@@ -472,7 +482,7 @@ class _AddPersonState extends State<AddPerson> {
                                   : null,
                               image: _image3,
                               imageCallBack: imageCallBack3,
-                              photoNum: 3,
+                              
                               height: 150,
                             )),
                             SizedBox(
@@ -486,7 +496,7 @@ class _AddPersonState extends State<AddPerson> {
                                   : null,
                               image: _image4,
                               imageCallBack: imageCallBack4,
-                              photoNum: 4,
+                             
                               height: 150,
                             )),
                           ],
@@ -703,7 +713,6 @@ class _AddPersonState extends State<AddPerson> {
                               children: <Widget>[
                                 SelectChip(Dos.values, (val) {
                                   personProvider.newPerson.dos = val;
-                                  
                                 }, pickedValue: personProvider.newPerson.dos),
                                 state.hasError
                                     ? Text(
@@ -838,14 +847,19 @@ class _AddPersonState extends State<AddPerson> {
                           maxLines: null,
                           maxLength: 70,
                           decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.black12,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                              borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
                             //icon: const Icon(Icons.short_text),
-                            hintStyle: TextStyle(color: AppTheme.primary),
-                            labelStyle: themeTextStyle,
+                            hintStyle: TextStyle(color: AppTheme.primary[300]),
+
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
-                            labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                           ),
                           inputFormatters: [new LengthLimitingTextInputFormatter(70)],
                           validator: (val) => val.isEmpty ? LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required') : null,
@@ -866,7 +880,6 @@ class _AddPersonState extends State<AddPerson> {
                           ],
                         ),
                         new TextFormField(
-                          
                           cursorColor: Colors.white,
                           style: themeTextStyle,
                           initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
@@ -877,15 +890,13 @@ class _AddPersonState extends State<AddPerson> {
                             fillColor: Colors.black12,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide:   BorderSide(color:AppTheme.primary, width: 0.6),
+                              borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
                             hintStyle: TextStyle(color: AppTheme.primary[300]),
-                            //labelStyle: themeTextStyle,
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
-                            //labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                           ),
                           // inputFormatters: [
                           //   new LengthLimitingTextInputFormatter(500)
@@ -1297,13 +1308,17 @@ class _AddPersonState extends State<AddPerson> {
                           personProvider.newPerson.moreInfo = value;
                         },
                         decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.black12,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                            borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                           ),
-                          hintStyle: TextStyle(color: AppTheme.primary),
-                          labelStyle: themeTextStyle,
+                          hintStyle: TextStyle(color: AppTheme.primary[300]),
                           hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
-                          labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
                         ),
                       ),
                       SizedBox(
