@@ -4,6 +4,7 @@ import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/themes/appTheme.dart';
+import 'package:dating/themes/colorManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -32,19 +33,21 @@ class _CompareScreenState extends State<CompareScreen> {
 
   Widget avatarPhoto(screenSize, {bool mainSelected: true}) {
     return Container(
-        // width: mainSelected? (screenSize.width* 0.333)-8:(screenSize.width * 0.666)-4,
-        //   height:  200,
-        width: (screenSize.width / 2) - 5,
-        height: (screenSize.width / 2) - 5,
-        decoration: new BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius:
-                mainSelected ? BorderRadius.only(bottomLeft: Radius.circular(30), topLeft: Radius.circular(30)) : BorderRadius.only(bottomRight: Radius.circular(30), topRight: Radius.circular(30)),
-            image: new DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  mainSelected ? widget.myPerson.profileImages[0] : widget.person.profileImages[0],
-                ))));
+      // width: mainSelected? (screenSize.width* 0.333)-8:(screenSize.width * 0.666)-4,
+      //   height:  200,
+      width: (screenSize.width / 2) - 5,
+      height: (screenSize.width / 2) - 5,
+      decoration: new BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: mainSelected ? BorderRadius.only(bottomLeft: Radius.circular(30), topLeft: Radius.circular(30)) : BorderRadius.only(bottomRight: Radius.circular(30), topRight: Radius.circular(30)),
+        image: new DecorationImage(
+          fit: BoxFit.cover,
+          image: NetworkImage(
+            mainSelected ? widget.myPerson.profileImages[0] : widget.person.profileImages[0],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget circleIcon(IconData _icon) {
@@ -65,9 +68,7 @@ class _CompareScreenState extends State<CompareScreen> {
   }
 
   Widget personalDetails(screenSize, {bool mainSelected: true}) {
-    TextStyle agestyle = TextStyle(
-        fontSize: 17,
-        color: StaticFunctions.getAge(widget.person.birthday) <= widget.myPerson.ageMax && StaticFunctions.getAge(widget.person.birthday) >= widget.myPerson.ageMin ? Colors.green : Colors.red);
+    TextStyle agestyle = TextStyle(fontSize: 17, color: StaticFunctions.getAge(widget.person.birthday) <= widget.myPerson.ageMax && StaticFunctions.getAge(widget.person.birthday) >= widget.myPerson.ageMin ? Colors.green : Colors.red);
     TextStyle heightStyle = TextStyle(fontSize: 17, color: widget.person.height <= widget.myPerson.heightMax && widget.person.height >= widget.myPerson.heightMin ? Colors.green : Colors.red);
 
     return Container(
@@ -164,7 +165,14 @@ class _CompareScreenState extends State<CompareScreen> {
                   ],
                 ),
               ),
-               Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+              Positioned.fill(
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: AppTheme.filterBackgroundColor,
+                        width: 1,
+                      ))),
               Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.birthdayCake))),
             ],
           ),
@@ -191,16 +199,10 @@ class _CompareScreenState extends State<CompareScreen> {
                           right: 15.0,
                         ),
                         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.myPerson.country.toString())),
+                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.myPerson.country.toString())),
                           SizedBox(
                             width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.myPerson.countrys.entries
-                                    .map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: widget.myPerson.countrys[widget.person.country]==true? Colors.green : Colors.red))).toList()
-                                   ),
+                            child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.myPerson.countrys.entries.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: widget.myPerson.countrys[widget.person.country] == true ? Colors.green : Colors.red))).toList()),
                           )
                           // Text(
                           //   widget.myPerson.countrys.map((country) => country)).toList().join('\n'),
@@ -226,24 +228,20 @@ class _CompareScreenState extends State<CompareScreen> {
                         left: 5.0,
                         right: 20.0,
                       ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString())),
-                        SizedBox(
-                            width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.person.countrys
-                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                        maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.countrys[widget.myPerson.country])==true? Colors.green : Colors.red))))
-                                    .toList()))
-                      ]),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.person.country.toString())), SizedBox(width: 60, child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.person.countrys.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: (widget.person.countrys[widget.myPerson.country]) == true ? Colors.green : Colors.red)))).toList()))]),
                     ),
                   ))
                 ],
               ),
             ),
-             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.globeAsia))),
           ]),
           //Area
@@ -268,18 +266,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           left: 10.0,
                           right: 15.0,
                         ),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.myPerson.area.toString())),
-                          SizedBox(
-                              width: 60,
-                              child: (Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: widget.myPerson.areas
-                                      .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.areas[widget.person.areas])==true? Colors.green : Colors.red))))
-                                      .toList())))
-                        ]),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.myPerson.area.toString())), SizedBox(width: 60, child: (Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.myPerson.areas.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.myPerson.areas[widget.person.areas]) == true ? Colors.green : Colors.red)))).toList())))]),
                       ),
                     ),
                   ),
@@ -299,24 +286,20 @@ class _CompareScreenState extends State<CompareScreen> {
                         left: 5.0,
                         right: 20.0,
                       ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.area.toString())),
-                        SizedBox(
-                            width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.person.areas
-                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.areas[widget.myPerson.areas])==true? Colors.green : Colors.red))))
-                                    .toList()))
-                      ]),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.person.area.toString())), SizedBox(width: 60, child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.person.areas.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.person.areas[widget.myPerson.areas]) == true ? Colors.green : Colors.red)))).toList()))]),
                     ),
                   ))
                 ],
               ),
             ),
-             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.city))),
           ]),
           //Status
@@ -342,16 +325,10 @@ class _CompareScreenState extends State<CompareScreen> {
                           right: 15.0,
                         ),
                         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.myPerson.status.toString())),
+                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.myPerson.status.toString())),
                           SizedBox(
                             width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.myPerson.statuses
-                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.myPerson.statuses[widget.person.status])==true? Colors.green : Colors.red))))
-                                    .toList()),
+                            child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.myPerson.statuses.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.myPerson.statuses[widget.person.status]) == true ? Colors.green : Colors.red)))).toList()),
                           )
                         ]),
                       ),
@@ -373,26 +350,21 @@ class _CompareScreenState extends State<CompareScreen> {
                         left: 5.0,
                         right: 20.0,
                       ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.status.toString())),
-                        SizedBox(
-                            width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.person.statuses
-                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.statuses[widget.myPerson.status])==true? Colors.green : Colors.red))))
-                                    .toList()))
-                      ]),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.person.status.toString())), SizedBox(width: 60, child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.person.statuses.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.person.statuses[widget.myPerson.status]) == true ? Colors.green : Colors.red)))).toList()))]),
                     ),
                   ))
                 ],
               ),
             ),
-            Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.userFriends))),
-            
           ]),
           //Religious
           Stack(children: [
@@ -416,18 +388,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           left: 10.0,
                           right: 15.0,
                         ),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.myPerson.dos.toString())),
-                          SizedBox(
-                              width: 60,
-                              child: (Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: widget.myPerson.doses
-                                      .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.doses[widget.person.dos])==true? Colors.green : Colors.red))))
-                                      .toList())))
-                        ]),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.myPerson.dos.toString())), SizedBox(width: 60, child: (Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.myPerson.doses.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.myPerson.doses[widget.person.dos]) == true ? Colors.green : Colors.red)))).toList())))]),
                       ),
                     ),
                   ),
@@ -447,24 +408,20 @@ class _CompareScreenState extends State<CompareScreen> {
                         left: 5.0,
                         right: 20.0,
                       ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.dos.toString())),
-                        SizedBox(
-                            width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.person.doses
-                                    .entries.map((e) =>
-                                        (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.person.doses[widget.myPerson.dos])==true? Colors.green : Colors.red))))
-                                    .toList()))
-                      ]),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.person.dos.toString())), SizedBox(width: 60, child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.person.doses.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.person.doses[widget.myPerson.dos]) == true ? Colors.green : Colors.red)))).toList()))]),
                     ),
                   ))
                 ],
               ),
             ),
-             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.torah))),
           ]),
           //Hashkafa
@@ -489,18 +446,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           left: 10.0,
                           right: 15.0,
                         ),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.myPerson.hashkafa.toString())),
-                          SizedBox(
-                              width: 60,
-                              child: (Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: widget.myPerson.hashkafas
-                                      .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.hashkafas[widget.person.hashkafa])==true? Colors.green : Colors.red))))
-                                      .toList())))
-                        ]),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.myPerson.hashkafa.toString())), SizedBox(width: 60, child: (Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.myPerson.hashkafas.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.myPerson.hashkafas[widget.person.hashkafa]) == true ? Colors.green : Colors.red)))).toList())))]),
                       ),
                     ),
                   ),
@@ -520,24 +466,20 @@ class _CompareScreenState extends State<CompareScreen> {
                         left: 5.0,
                         right: 20.0,
                       ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.hashkafa.toString())),
-                        SizedBox(
-                            width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.person.hashkafas
-                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.hashkafas[widget.myPerson.hashkafa])==true? Colors.green : Colors.red))))
-                                    .toList()))
-                      ]),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.person.hashkafa.toString())), SizedBox(width: 60, child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.person.hashkafas.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.person.hashkafas[widget.myPerson.hashkafa]) == true ? Colors.green : Colors.red)))).toList()))]),
                     ),
                   ))
                 ],
               ),
             ),
-             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.starOfDavid))),
           ]),
           //Eda
@@ -562,18 +504,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           left: 10.0,
                           right: 15.0,
                         ),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.myPerson.eda.toString())),
-                          SizedBox(
-                              width: 60,
-                              child: (Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: widget.myPerson.edas
-                                      .entries.map((e) =>
-                                          (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) , maxLines: 3, style: TextStyle(color: (widget.myPerson.edas[widget.person.eda])==true? Colors.green : Colors.red))))
-                                      .toList())))
-                        ]),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.myPerson.eda.toString())), SizedBox(width: 60, child: (Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.myPerson.edas.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.myPerson.edas[widget.person.eda]) == true ? Colors.green : Colors.red)))).toList())))]),
                       ),
                     ),
                   ),
@@ -593,24 +524,20 @@ class _CompareScreenState extends State<CompareScreen> {
                         left: 5.0,
                         right: 20.0,
                       ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.eda.toString())),
-                        SizedBox(
-                            width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.person.edas
-                                    .entries.map((e) =>
-                                        (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) , maxLines: 3, style: TextStyle(color: (widget.person.edas[widget.myPerson.eda])==true? Colors.green : Colors.red))))
-                                    .toList()))
-                      ]),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.person.eda.toString())), SizedBox(width: 60, child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.person.edas.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.person.edas[widget.myPerson.eda]) == true ? Colors.green : Colors.red)))).toList()))]),
                     ),
                   ))
                 ],
               ),
             ),
-             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.synagogue))),
           ]),
           //Smoking
@@ -635,18 +562,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           left: 10.0,
                           right: 15.0,
                         ),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                          Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.myPerson.smoke.toString())),
-                          SizedBox(
-                              width: 60,
-                              child: (Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: widget.myPerson.smoking
-                                      .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                          maxLines: 3, style: TextStyle(color: (widget.myPerson.smoking[widget.person.smoke])==true? Colors.green : Colors.red))))
-                                      .toList())))
-                        ]),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.myPerson.smoke.toString())), SizedBox(width: 60, child: (Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.myPerson.smoking.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.myPerson.smoking[widget.person.smoke]) == true ? Colors.green : Colors.red)))).toList())))]),
                       ),
                     ),
                   ),
@@ -666,24 +582,20 @@ class _CompareScreenState extends State<CompareScreen> {
                         left: 5.0,
                         right: 20.0,
                       ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-                        Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.smoke.toString())),
-                        SizedBox(
-                            width: 60,
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widget.person.smoking
-                                    .entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
-                                        maxLines: 3, style: TextStyle(color: (widget.person.smoking[widget.myPerson.smoke])==true? Colors.green : Colors.red))))
-                                    .toList()))
-                      ]),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), widget.person.smoke.toString())), SizedBox(width: 60, child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: widget.person.smoking.entries.map((e) => (Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3, style: TextStyle(color: (widget.person.smoking[widget.myPerson.smoke]) == true ? Colors.green : Colors.red)))).toList()))]),
                     ),
                   ))
                 ],
               ),
             ),
-             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.smoking))),
           ]),
           //height
@@ -772,7 +684,14 @@ class _CompareScreenState extends State<CompareScreen> {
                 ],
               ),
             ),
-             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.ruler))),
           ]),
           //sherut
@@ -801,9 +720,7 @@ class _CompareScreenState extends State<CompareScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: widget.myPerson.gender == Gender.MALE
-                                ? widget.myPerson.mySherutBoy != null ? widget.myPerson.mySherutBoy.entries.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) , maxLines: 3)).toList() : []
-                                : widget.myPerson.mySherutGirl != null ? widget.myPerson.mySherutGirl.entries.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) , maxLines: 3)).toList() : [],
+                            children: widget.myPerson.gender == Gender.MALE ? widget.myPerson.mySherutBoy != null ? widget.myPerson.mySherutBoy.entries.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3)).toList() : [] : widget.myPerson.mySherutGirl != null ? widget.myPerson.mySherutGirl.entries.map((e) => Text(LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()), maxLines: 3)).toList() : [],
                           ),
                           SizedBox(
                               width: 60,
@@ -811,18 +728,18 @@ class _CompareScreenState extends State<CompareScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: widget.myPerson.gender == Gender.MALE
-                                    ? widget.myPerson.thereSherutGirl
-                                        .entries.map((e) => Text(
-                                              LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
+                                    ? widget.myPerson.thereSherutGirl.entries
+                                        .map((e) => Text(
+                                              LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()),
                                               maxLines: 3,
-                                              style: TextStyle(color: (widget.person.thereSherutBoy[e]==true ? Colors.green : Colors.red)),
+                                              style: TextStyle(color: (widget.person.thereSherutBoy[e] == true ? Colors.green : Colors.red)),
                                             ))
                                         .toList()
-                                    : widget.myPerson.thereSherutBoy
-                                        .entries.map((e) => Text(
-                                              LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
+                                    : widget.myPerson.thereSherutBoy.entries
+                                        .map((e) => Text(
+                                              LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()),
                                               maxLines: 3,
-                                              style: TextStyle(color: (widget.person.thereSherutGirl[e]==true ? Colors.green : Colors.red)),
+                                              style: TextStyle(color: (widget.person.thereSherutGirl[e] == true ? Colors.green : Colors.red)),
                                             ))
                                         .toList(),
                               )))
@@ -852,17 +769,17 @@ class _CompareScreenState extends State<CompareScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: widget.person.gender == Gender.MALE
                               ? widget.person.mySherutBoy != null
-                                  ? widget.person.mySherutBoy
-                                      .entries.map((e) => Text(
-                                            LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
+                                  ? widget.person.mySherutBoy.entries
+                                      .map((e) => Text(
+                                            LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()),
                                             maxLines: 3,
                                           ))
                                       .toList()
                                   : []
                               : widget.person.mySherutGirl != null
-                                  ? widget.person.mySherutGirl
-                                      .entries.map((e) => Text(
-                                            LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
+                                  ? widget.person.mySherutGirl.entries
+                                      .map((e) => Text(
+                                            LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()),
                                             maxLines: 3,
                                           ))
                                       .toList()
@@ -874,29 +791,35 @@ class _CompareScreenState extends State<CompareScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: widget.person.gender == Gender.MALE
-                                  ? widget.person.thereSherutGirl
-                                      .entries.map((e) => Text(
-                                            LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
+                                  ? widget.person.thereSherutGirl.entries
+                                      .map((e) => Text(
+                                            LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()),
                                             maxLines: 3,
-                                            style: TextStyle(color: (widget.myPerson.thereSherutBoy[e]==true ? Colors.green : Colors.red)),
+                                            style: TextStyle(color: (widget.myPerson.thereSherutBoy[e] == true ? Colors.green : Colors.red)),
                                           ))
                                       .toList()
-                                  : widget.person.thereSherutBoy
-                                      .entries.map((e) => Text(
-                                            LocaleText.getLocaleSelectText(MyApp.getLocale(),e.key.toString()) ,
+                                  : widget.person.thereSherutBoy.entries
+                                      .map((e) => Text(
+                                            LocaleText.getLocaleSelectText(MyApp.getLocale(), e.key.toString()),
                                             maxLines: 3,
-                                            style: TextStyle(color: (widget.myPerson.thereSherutGirl[e]==true ? Colors.green : Colors.red)),
+                                            style: TextStyle(color: (widget.myPerson.thereSherutGirl[e] == true ? Colors.green : Colors.red)),
                                           ))
                                       .toList(),
-                            )
-                            )
+                            ))
                       ]),
                     ),
                   ))
                 ],
               ),
             ),
-             Positioned.fill( child: Align(alignment: Alignment.center,child: Container(alignment: Alignment.center ,color: AppTheme.filterBackgroundColor,width: 1,))),
+            Positioned.fill(
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: AppTheme.filterBackgroundColor,
+                      width: 1,
+                    ))),
             Positioned.fill(child: Align(alignment: Alignment.center, child: circleIcon(FontAwesomeIcons.handHoldingHeart))),
           ]),
         ],
@@ -949,7 +872,7 @@ class _CompareScreenState extends State<CompareScreen> {
   Widget build(BuildContext context) {
     screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: AppTheme.filterBackgroundColor,
+      backgroundColor: ColorManager().theme.filterBackgroundColor,
       // appBar: AppBar(
       //   title: Text("compare"),
       // ),
@@ -982,21 +905,21 @@ class _CompareScreenState extends State<CompareScreen> {
                             children: <Widget>[
                               Text(
                                 widget.myPerson.firstName,
-                                
                                 style: TextStyle(fontSize: 25, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 height: 15,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 18.0,
-                          right: 15.0,),
+                                padding: const EdgeInsets.only(
+                                  left: 18.0,
+                                  right: 15.0,
+                                ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(widget.myPerson.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') :
-                                      LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
-                                    Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Like'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
+                                    Text(widget.myPerson.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') : LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
+                                    Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Like'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
                                   ],
                                 ),
                               )
@@ -1026,15 +949,13 @@ class _CompareScreenState extends State<CompareScreen> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                  
                                   left: 12.0,
                                   right: 20.0,
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(widget.person.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') :
-                                     LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
+                                    Text(widget.person.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') : LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
                                     Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Like'), style: TextStyle(fontSize: 18, color: AppTheme.filterBackgroundColor, fontWeight: FontWeight.bold)),
                                   ],
                                 ),
