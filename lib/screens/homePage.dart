@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final TextEditingController _filter = new TextEditingController();
   PageController controller = PageController(
     initialPage: 0,
@@ -30,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   var currentIndex = 0;
   var selectedIndex = 0;
   bool isInit = true;
-  bool searchMode=false;
+  bool searchMode = false;
   PersonProvider personProvider;
   //String _lastSelected = 'TAB: 0';
   void _selectedTab(int index) {
@@ -45,26 +44,26 @@ class _HomePageState extends State<HomePage> {
   }
 
   void addPersonScreen() {
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new AddPerson())).then((value) {setState(() {
-      
-    });});
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => new AddPerson())).then((value) {
+      setState(() {});
+    });
   }
-
-
 
   @override
   void didChangeDependencies() {
     if (isInit) {
       isInit = false;
       personProvider = Provider.of<PersonProvider>(context);
-     personProvider.shadchanProvider.getMyShadchanByID();
+      personProvider.shadchanProvider.getMyShadchanByID();
     }
 
     super.didChangeDependencies();
   }
-  Widget getEveruone(){
+
+  Widget getEveruone() {
     return Everyone();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,43 +77,53 @@ class _HomePageState extends State<HomePage> {
         ),
         appBar: AppBar(
           // centerTitle: true,
-          title: searchMode? TextField(
-          style: TextStyle(color:Theme.of(context).accentColor),
-          controller: _filter,
-          autofocus: true,
-          onChanged: (value){
-            personProvider.updateNameFilter(value);
-              setState(() {
-                
-              });
-          },
-          decoration: new InputDecoration(
-            //border: InputBorder.none,
-            //contentPadding: EdgeInsets.all(20),
-            filled: true,
-            fillColor: Colors.white,
-            hintStyle: TextStyle(
-              color: Theme.of(context).accentColor,
-            ),
-            prefixIcon: new Icon(
-              Icons.search,
-              color: Theme.of(context).accentColor,
-            ),
-            hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            
-            //       focusedBorder: OutlineInputBorder(
-            // //  borderSide: BorderSide(color: Colors.white),
-            //   borderRadius: BorderRadius.circular(30),
-            // ),
-            // enabledBorder: UnderlineInputBorder(
-            // //  borderSide: BorderSide(color: Colors.white),
-            //   borderRadius: BorderRadius.circular(30),
-            // ),
-          ),
-        ):Text('Cool Group'),//_appBarTitle,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(
+                  Icons.ac_unit,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  MyApp.setTheme(context);
+                })
+          ],
+          title: searchMode
+              ? TextField(
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                  controller: _filter,
+                  autofocus: true,
+                  onChanged: (value) {
+                    personProvider.updateNameFilter(value);
+                    setState(() {});
+                  },
+                  decoration: new InputDecoration(
+                    //border: InputBorder.none,
+                    //contentPadding: EdgeInsets.all(20),
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintStyle: TextStyle(
+                      color: Theme.of(context).accentColor,
+                    ),
+                    prefixIcon: new Icon(
+                      Icons.search,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+
+                    //       focusedBorder: OutlineInputBorder(
+                    // //  borderSide: BorderSide(color: Colors.white),
+                    //   borderRadius: BorderRadius.circular(30),
+                    // ),
+                    // enabledBorder: UnderlineInputBorder(
+                    // //  borderSide: BorderSide(color: Colors.white),
+                    //   borderRadius: BorderRadius.circular(30),
+                    // ),
+                  ),
+                )
+              : Text('Cool Group'), //_appBarTitle,
           // actions: <Widget>[
           //  if(selectedIndex==1) IconButton(
           //     icon:searchMode? Icon(Icons.close):Icon(Icons.search),
@@ -123,13 +132,13 @@ class _HomePageState extends State<HomePage> {
           //        personProvider.updateNameFilter("");
           //        searchMode=false;
           //     setState(() {
-                
+
           //     });
           //     }:
           //     (){
           //        searchMode=true;
           //        setState(() {
-                   
+
           //        });
           //     },
           //   ),
@@ -148,7 +157,7 @@ class _HomePageState extends State<HomePage> {
           //       ).then((value)async{
           //          await personProvider.getAllPeople();
           //         setState(() {
-                  
+
           //   });
           //       });
           //     },
@@ -224,7 +233,7 @@ class _HomePageState extends State<HomePage> {
           selectedIndex: selectedIndex,
           centerItemText: 'A',
           color: Colors.grey,
-          selectedColor:  Theme.of(context).primaryColor,
+          selectedColor: Theme.of(context).primaryColor,
           notchedShape: CircularNotchedRectangle(),
           onTabSelected: _selectedTab,
           backgroundColor: Colors.white,
@@ -234,7 +243,7 @@ class _HomePageState extends State<HomePage> {
             FABBottomAppBarItem(iconData: Icons.people, text: LocaleText.getLocaleText(MyApp.getLocale(), "Everyone")),
             FABBottomAppBarItem(iconData: Icons.star, text: LocaleText.getLocaleText(MyApp.getLocale(), "Favorites")),
             FABBottomAppBarItem(iconData: Icons.chat, text: LocaleText.getLocaleText(MyApp.getLocale(), "My Chats")),
-          ],//'Search Name'
+          ], //'Search Name'
         ),
       ),
       //)

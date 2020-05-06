@@ -5,6 +5,7 @@ import 'package:dating/providers/shadchanProvider.dart';
 import 'package:dating/screens/shadchanSignUpScrenn.dart';
 import 'package:dating/splash-screen.dart';
 import 'package:dating/themes/appTheme.dart';
+import 'package:dating/themes/colorManager.dart';
 import 'package:dating/widgets/OutLineButtonMy.dart';
 import 'package:dating/widgets/gradientSwitcher.dart';
 import 'package:dating/widgets/loader.dart';
@@ -17,16 +18,26 @@ import 'package:provider/provider.dart';
 import 'dart:ui' as ui;
 
 Locale local;
-void main(){
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Provider.debugCheckInvalidValueType = null;
-  runApp(MyApp(
+  ColorManager.mYTHEME = MYTHEME.LIGHT;
 
-  ));
+  Provider.debugCheckInvalidValueType = null;
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-
+class MyApp extends StatefulWidget {
+   static void setTheme(BuildContext context){
+     if (ColorManager.mYTHEME == MYTHEME.DARK) {
+        ColorManager.mYTHEME = MYTHEME.LIGHT;
+     }
+     else{
+        ColorManager.mYTHEME = MYTHEME.DARK;
+     }
+   
+     _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
+    state.setState(() {});
+  }
   MyApp() {
     local = Locale('he');
   }
@@ -42,10 +53,14 @@ class MyApp extends StatelessWidget {
     }
   }
 
-  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+ 
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
         providers: [
           Provider<ChatProvider>(create: (_) => ChatProvider()),
@@ -57,8 +72,8 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           theme: ThemeData(
-            primaryColor: AppTheme.primary,
-            accentColor: AppTheme.secondary,
+            primaryColor: ColorManager().theme.primary,
+            accentColor: ColorManager().theme.secondary,
             //primarySwatch:  Colors.blue,
           ),
           localizationsDelegates: [
@@ -73,10 +88,7 @@ class MyApp extends StatelessWidget {
           ],
           locale: local,
           title: 'Flutter Demo',
-
-          routes: <String, WidgetBuilder>{
-            '/homepage': (BuildContext context) => ShadchanSignUpScreen(),
-            '/landingpage': (BuildContext context) => LandingPage()},
+          routes: <String, WidgetBuilder>{'/homepage': (BuildContext context) => ShadchanSignUpScreen(), '/landingpage': (BuildContext context) => LandingPage()},
           home: FutureBuilder(
             future: FirebaseAuth.instance.currentUser(),
             builder: (ctx, authResultSnapshot) => authResultSnapshot.connectionState == ConnectionState.waiting
@@ -89,7 +101,6 @@ class MyApp extends StatelessWidget {
           ),
         ));
   }
-  // );
 }
 //}
 
@@ -151,13 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final PhoneVerificationFailed verifiedFailed = (AuthException exception) {
       print('${exception.message}');
     };
-    await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: this.phoneCode.text + " " + this.phoneNo,
-        codeAutoRetrievalTimeout: autoRetrieve,
-        codeSent: smsCodeSent,
-        timeout: const Duration(seconds: 5),
-        verificationCompleted: verifiedSuccess,
-        verificationFailed: verifiedFailed);
+    await FirebaseAuth.instance.verifyPhoneNumber(phoneNumber: this.phoneCode.text + " " + this.phoneNo, codeAutoRetrievalTimeout: autoRetrieve, codeSent: smsCodeSent, timeout: const Duration(seconds: 5), verificationCompleted: verifiedSuccess, verificationFailed: verifiedFailed);
   }
 
   Future<bool> smsCodeDialog(BuildContext context) {
@@ -218,9 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var isInit = false;
   @override
   void didChangeDependencies() {
-    if (!isInit) {
-    
-    }
+    if (!isInit) {}
     isInit = true;
 
     super.didChangeDependencies();

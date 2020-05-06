@@ -3,6 +3,7 @@ import 'package:dating/models/person.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/themes/appTheme.dart';
+import 'package:dating/themes/colorManager.dart';
 import 'package:dating/widgets/photoPickerFlat.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:dating/widgets/selectAndMultiSelectChips.dart';
@@ -221,7 +222,7 @@ class _AddPersonState extends State<AddPerson> {
           ),
           children: <Widget>[
             new FlatButton(
-              textColor: AppTheme.primary,
+              textColor: ColorManager().theme.primary,
               child: Text(
                 'Add new Person',
                 style: TextStyle(fontSize: 18),
@@ -233,7 +234,7 @@ class _AddPersonState extends State<AddPerson> {
               },
             ),
             new FlatButton(
-              textColor: AppTheme.primary,
+              textColor: ColorManager().theme.primary,
               child: Text(
                 'Back to Home',
                 style: TextStyle(fontSize: 18),
@@ -299,8 +300,8 @@ class _AddPersonState extends State<AddPerson> {
   List lll = new List();
   int _index = 0;
 
-  TextStyle themeTextStyle = new TextStyle(color: AppTheme.textColor);
-  TextStyle titles = new TextStyle(color: AppTheme.textColor, fontSize: 20);
+  TextStyle themeTextStyle = new TextStyle(color: ColorManager().theme.textColor);
+  TextStyle titles = new TextStyle(color: ColorManager().theme.textColor, fontSize: 20);
 
   Widget title(title) {
     return Padding(padding: EdgeInsets.all(10), child: Text(title, style: titles));
@@ -311,7 +312,7 @@ class _AddPersonState extends State<AddPerson> {
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
-        backgroundColor: AppTheme.filterBackgroundColor,
+        backgroundColor: ColorManager().theme.filterBackgroundColor,
         appBar: AppBar(
           title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
         ),
@@ -379,9 +380,7 @@ class _AddPersonState extends State<AddPerson> {
                                   return PhotoPickerFlat(
                                     height: 210,
                                     small: false,
-                                    imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0
-                                        ? personProvider.newPerson.profileImages[0]
-                                        : null,
+                                    imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 0 ? personProvider.newPerson.profileImages[0] : null,
                                     image: _image1,
                                     imageCallBack: imageCallBack1,
                                   );
@@ -420,14 +419,14 @@ class _AddPersonState extends State<AddPerson> {
                                         fillColor: Colors.black12,
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                          borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                                          borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
                                         ),
                                         border: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                         ),
 
-                                        hintStyle: TextStyle(color: AppTheme.primary[300]),
-                                        labelStyle: themeTextStyle, //TextStyle(color: AppTheme.primary),
+                                        hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                                        labelStyle: themeTextStyle, //TextStyle(color: ColorManager().theme.primary),
                                         hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
                                         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
                                       ),
@@ -445,13 +444,13 @@ class _AddPersonState extends State<AddPerson> {
                                         fillColor: Colors.black12,
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                          borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                                          borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
                                         ),
                                         contentPadding: EdgeInsets.all(15),
                                         border: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                         ),
-                                        hintStyle: TextStyle(color: AppTheme.primary[300]),
+                                        hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
                                         labelStyle: themeTextStyle,
                                         hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
                                         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
@@ -468,11 +467,11 @@ class _AddPersonState extends State<AddPerson> {
                                           height: 40,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary),
+                                            border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary),
                                           ),
                                           child: IconButton(
                                               icon: FaIcon(FontAwesomeIcons.male),
-                                              color: sSelected == Gender.MALE ? AppTheme.primary[300] : AppTheme.primary,
+                                              color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
                                               padding: EdgeInsets.all(5.0),
                                               // alignment: Alignment.centerRight,
                                               onPressed: () => setState(() {
@@ -489,11 +488,11 @@ class _AddPersonState extends State<AddPerson> {
                                           height: 40,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary),
+                                            border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary),
                                           ),
                                           child: IconButton(
                                               icon: FaIcon(FontAwesomeIcons.female),
-                                              color: sSelected == Gender.FEMALE ? AppTheme.primary[300] : AppTheme.primary,
+                                              color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
                                               padding: EdgeInsets.all(5.0),
                                               //alignment: Alignment.centerRight,
                                               onPressed: () => setState(() {
@@ -520,9 +519,7 @@ class _AddPersonState extends State<AddPerson> {
                             Expanded(
                               child: PhotoPickerFlat(
                                 circle: true,
-                                imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1
-                                    ? personProvider.newPerson.profileImages[0]
-                                    : null,
+                                imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 1 ? personProvider.newPerson.profileImages[0] : null,
                                 image: _image2,
                                 imageCallBack: imageCallBack2,
                                 height: 150,
@@ -534,9 +531,7 @@ class _AddPersonState extends State<AddPerson> {
                             Expanded(
                                 child: PhotoPickerFlat(
                               circle: true,
-                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2
-                                  ? personProvider.newPerson.profileImages[0]
-                                  : null,
+                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 2 ? personProvider.newPerson.profileImages[0] : null,
                               image: _image3,
                               imageCallBack: imageCallBack3,
                               height: 150,
@@ -547,9 +542,7 @@ class _AddPersonState extends State<AddPerson> {
                             Expanded(
                                 child: PhotoPickerFlat(
                               circle: true,
-                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3
-                                  ? personProvider.newPerson.profileImages[0]
-                                  : null,
+                              imageUrl: personProvider.newPerson != null && personProvider.newPerson.profileImages != null && personProvider.newPerson.profileImages.length > 3 ? personProvider.newPerson.profileImages[0] : null,
                               image: _image4,
                               imageCallBack: imageCallBack4,
                               height: 150,
@@ -575,7 +568,7 @@ class _AddPersonState extends State<AddPerson> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 FlatButton(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0), side: BorderSide(color: AppTheme.primary)),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0), side: BorderSide(color: ColorManager().theme.primary)),
                                   color: Colors.black12,
                                   onPressed: () {
                                     showModalBottomSheet(
@@ -658,19 +651,19 @@ class _AddPersonState extends State<AddPerson> {
                             fillColor: Colors.black12,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                              borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
-                            hintStyle: TextStyle(color: AppTheme.primary[300]),
+                            hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), '000-0000000'),
                           ),
-                          validator: (val) => isValidPhoneNumber(val) ?null: LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required')  ,
+                          validator: (val) => isValidPhoneNumber(val) ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'),
                           onSaved: (val) => personProvider.newPerson.phone = val,
                         ),
 
-                      SizedBox(
+                        SizedBox(
                           height: 10,
                         ),
                         //Country
@@ -942,13 +935,13 @@ class _AddPersonState extends State<AddPerson> {
                             fillColor: Colors.black12,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                              borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
                             //icon: const Icon(Icons.short_text),
-                            hintStyle: TextStyle(color: AppTheme.primary[300]),
+                            hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
 
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                           ),
@@ -981,12 +974,12 @@ class _AddPersonState extends State<AddPerson> {
                             fillColor: Colors.black12,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                              borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
-                            hintStyle: TextStyle(color: AppTheme.primary[300]),
+                            hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                           ),
                           // inputFormatters: [
@@ -1012,7 +1005,7 @@ class _AddPersonState extends State<AddPerson> {
                           children: <Widget>[
                             Expanded(
                               child: Slider(
-                                activeColor: AppTheme.secondary,
+                                activeColor: ColorManager().theme.secondary,
                                 min: 1.3,
                                 max: 2.3,
                                 divisions: 130,
@@ -1155,9 +1148,7 @@ class _AddPersonState extends State<AddPerson> {
                               child: Container(
                                 padding: const EdgeInsets.only(top: 14.0),
                                 child: Text(
-                                  sSelected == Gender.FEMALE
-                                      ? LocaleText.getLocaleText(MyApp.getLocale(), 'What are she looking for?')
-                                      : LocaleText.getLocaleText(MyApp.getLocale(), 'What are he looking for?'),
+                                  sSelected == Gender.FEMALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'What are she looking for?') : LocaleText.getLocaleText(MyApp.getLocale(), 'What are he looking for?'),
                                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25.0),
                                 ),
                               ),
@@ -1310,7 +1301,7 @@ class _AddPersonState extends State<AddPerson> {
                                 Text("" + lookingPersonHeightMin.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'), style: themeTextStyle),
                                 Expanded(
                                   child: RangeSlider(
-                                    activeColor: AppTheme.secondary,
+                                    activeColor: ColorManager().theme.secondary,
                                     min: 1.0,
                                     max: 2.3,
                                     divisions: 130,
@@ -1350,7 +1341,7 @@ class _AddPersonState extends State<AddPerson> {
                                 Text("" + lookingPersonAgeMin.toStringAsFixed(1), style: themeTextStyle),
                                 Expanded(
                                   child: RangeSlider(
-                                    activeColor: AppTheme.secondary,
+                                    activeColor: ColorManager().theme.secondary,
                                     min: 18,
                                     max: 99,
                                     divisions: 162,
@@ -1403,12 +1394,12 @@ class _AddPersonState extends State<AddPerson> {
                           fillColor: Colors.black12,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: AppTheme.primary, width: 0.6),
+                            borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                           ),
-                          hintStyle: TextStyle(color: AppTheme.primary[300]),
+                          hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
                           hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
                         ),
                       ),
