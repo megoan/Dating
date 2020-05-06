@@ -3,7 +3,9 @@ import 'package:dating/models/person.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
+import 'package:dating/themes/colorManager.dart';
 import 'package:dating/widgets/personListCard2.dart';
+import 'package:dating/widgets/selectAndMultiSelectChips.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,31 +16,22 @@ class Everyone extends StatefulWidget {
 }
 
 class _EveryoneState extends State<Everyone> {
+  
   PersonProvider personProvider;
-
-  // ShadchanProvider shadchanProvider;
   final TextEditingController _filter = new TextEditingController();
   bool isInit = true;
   bool isLoading = true;
-  FormFieldState<Country> countryState;
-
-  var _country;
-
-  Country countryValue;
-  Map map1 = new Map();
-
-  FormFieldState<Area> areaState;
-
-  var _area;
-
-  Area areaValue;
   bool showFilter = false;
-  FormFieldState<Status> statusState;
   double lookingPersonAgeMin = 18;
   double lookingPersonAgeMax = 99;
   RangeValues rangeValuesAge = RangeValues(18, 99);
   RangeLabels rangeLabelsAge = RangeLabels('18', '99');
-  TextStyle titleStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
+  TextStyle titles = new TextStyle(color: ColorManager().theme.textColor, fontSize: 18);
+  
+  Widget title(title) {
+    return Padding(padding: EdgeInsets.all(5), child: Text(title, style: titles));
+  }
+
 
   @override
   void didChangeDependencies() async {
@@ -57,34 +50,12 @@ class _EveryoneState extends State<Everyone> {
     //getAllPeople()
   }
 
-  List<Widget> setChips(_enumValus) {
-    List<Widget> chipList = [];
-
-    for (var value in _enumValus) {
-      chipList.add(FilterChip(
-        selectedColor: Colors.blueGrey[500],
-        selected: personProvider.pickedStatus[value] != null && personProvider.pickedStatus[value] == true ? true : false,
-        label: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
-        backgroundColor: Colors.blue[200],
-
-        // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
-        onSelected: (bool bvalue) {
-          setState(() {
-            personProvider.pickedStatus[value] = bvalue;
-            print(personProvider.pickedStatus[value]);
-          });
-        },
-      ));
-      chipList.add(SizedBox(width: 10));
-    }
-
-    return chipList;
-  }
-
   @override
   Widget build(BuildContext context) {
     try {
-      return (isLoading)
+      return Container( 
+        color: ColorManager().theme.fillColor,
+        child: (isLoading)
           ? Center(
               child: CircularProgressIndicator(),
             )
@@ -92,14 +63,14 @@ class _EveryoneState extends State<Everyone> {
               ? Column(
                   children: <Widget>[
                     Container(
-                      color: Colors.grey[300],
+                      color: ColorManager().theme.filterBackgroundColor,
                       child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                           child: Row(
                             children: <Widget>[
                               Expanded(
                                 child: TextField(
-                                  style: TextStyle(color: Theme.of(context).accentColor),
+                                  style: TextStyle(color: ColorManager().theme.textColor),
                                   controller: _filter,
                                   autofocus: true,
                                   onChanged: (value) {
@@ -109,13 +80,11 @@ class _EveryoneState extends State<Everyone> {
                                   decoration: new InputDecoration(
                                     contentPadding: EdgeInsets.all(0),
                                     filled: true,
-                                    fillColor: Colors.white,
-                                    hintStyle: TextStyle(
-                                      color: Theme.of(context).accentColor,
-                                    ),
+                                    fillColor: Colors.black12,
+                                     hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
                                     prefixIcon: new Icon(
                                       Icons.search,
-                                      color: Theme.of(context).accentColor,
+                                      color:  ColorManager().theme.textColor,
                                     ),
                                     hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
                                     border: OutlineInputBorder(
@@ -124,8 +93,9 @@ class _EveryoneState extends State<Everyone> {
                                   ),
                                 ),
                               ),
+                              
                               IconButton(
-                                icon: Icon(showFilter ? Icons.close : Icons.filter_list),
+                                icon: Icon(showFilter ? Icons.close : Icons.filter_list,color:  ColorManager().theme.textColor,),
                                 onPressed: () {
                                   setState(() {
                                     showFilter = !showFilter;
@@ -136,179 +106,40 @@ class _EveryoneState extends State<Everyone> {
                           )),
                     ),
                     if (showFilter)
-                      Container(
-                        color: Colors.grey[300],
-                        //                     decoration: new BoxDecoration(
-
-                        // borderRadius: new BorderRadius.only(
-                        //   bottomLeft: const Radius.circular(40.0),
-                        //   bottomRight: const Radius.circular(40.0),
-                        // )),
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                    Container(
+                        color: ColorManager().theme.filterBackgroundColor,
+                     
+                        padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
-                              style: titleStyle,
+                            //country
+                         
+                            title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
+                          
+                            MultiSelectChip(Country.values,(selected, val) { personProvider.pickedCountry[selected] = val;if (selected == Country.ISRAEL)setState(() {});},pickedChips:  personProvider.pickedCountry,),
+                            //area
+                            if (personProvider.pickedCountry[Country.ISRAEL]==true)
+                            
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
+                                MultiSelectChip(Area.values,(selected, val) => personProvider.pickedArea[selected] = val,pickedChips:  personProvider.pickedArea,),
+                              ],
                             ),
-                            new FormField<Country>(
-                              builder: (FormFieldState<Country> state) {
-                                countryState = state;
-                                return InputDecorator(
-                                  decoration: InputDecoration(
-                                   // border: OutlineInputBorder(borderRadius:BorderRadius.all(Radius.circular(100.0)) ),
-                                    // icon: const Icon(Icons.location_on),
-                                    // labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Country'),
-                                    errorText: state.hasError ? state.errorText : null,
-                                  ),
-                                  isEmpty: _country == null,
-                                  child: new DropdownButtonHideUnderline(
-                                    child: Listener(
-                                      onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                      child: new DropdownButton<Country>(
-                                        value: _country,
-                                        isDense: true,
-                                        onChanged: (Country newValue) {
-                                          // map1["date"]= {newValue.toString():state};
-                                          //lll.add(state);
-                                          countryValue = newValue;
-                                          map1.putIfAbsent(newValue, () => state);
-                                          setState(() {
-                                            personProvider.pickedCountry = newValue;
-                                            _country = newValue;
-                                            state.didChange(newValue);
-                                          });
-                                        },
-                                        items: Country.values.map((Country value) {
-                                          return new DropdownMenuItem<Country>(
-                                            value: value,
-                                            child: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
-                                          );
-                                        }).toList(),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                              validator: (val) {
-                                return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                              },
-                            ),
-                            //AREA
-                            if (countryValue == Country.ISRAEL)
-                              new FormField<Area>(
-                                builder: (FormFieldState<Area> state) {
-                                  areaState = state;
-                                  return InputDecorator(
-                                    decoration: InputDecoration(
-                                      // icon: const Icon(Icons.location_on),
-                                      labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Area'),
-                                      errorText: state.hasError ? state.errorText : null,
-                                    ),
-                                    isEmpty: _area == null,
-                                    child: new DropdownButtonHideUnderline(
-                                      child: Listener(
-                                        onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                                        child: new DropdownButton<Area>(
-                                          value: _area,
-                                          isDense: true,
-                                          onChanged: (Area newValue) {
-                                            // map1["date"]= {newValue.toString():state};
-                                            //lll.add(state);
-                                            areaValue = newValue;
-                                            map1.putIfAbsent(newValue, () => state);
-                                            setState(() {
-                                              personProvider.pickedArea = newValue;
-                                              _area = newValue;
-                                              state.didChange(newValue);
-                                            });
-                                          },
-                                          items: Area.values.map((Area value) {
-                                            return new DropdownMenuItem<Area>(
-                                              value: value,
-                                              child: new Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),value.toString())),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                validator: (val) {
-                                  return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                                },
-                              ),
-                            // //STATUS
-                            // new FormField<Status>(
-                            //   builder: (FormFieldState<Status> state) {
-                            //     statusState = state;
-                            //     return InputDecorator(
-                            //       decoration: InputDecoration(
-                            //         icon: const Icon(Icons.people),
-                            //         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
-                            //         errorText: state.hasError ? state.errorText : null,
-                            //       ),
-                            //       isEmpty: _status == null,
-                            //       child: new DropdownButtonHideUnderline(
-                            //         child: Listener(
-                            //           onPointerDown: (_) => FocusScope.of(context).unfocus(),
-                            //           child: new DropdownButton<Status>(
-                            //             value: _status,
-                            //             isDense: true,
-                            //             onChanged: (Status newValue) {
-                            //               statusValue = newValue;
-                            //               setState(() {
-                            //                 // personProvider.pickedStatus = newValue;
-                            //                 _status = newValue;
-                            //                 state.didChange(newValue);
-                            //               });
-                            //             },
-                            //             items: Status.values.map((Status value) {
-                            //               return new DropdownMenuItem<Status>(
-                            //                 value: value,
-                            //                 child: new Text(StaticFunctions.getStatus(value)),
-                            //               );
-                            //             }).toList(),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     );
-                            //   },
-                            //   validator: (val) {
-                            //     return val != null ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required');
-                            //   },
-                            // ),
-                            SizedBox(height: 20),
-                            Text(
-                              LocaleText.getLocaleText(MyApp.getLocale(), 'Status'),
-                              style: titleStyle,
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: setChips(Status.values),
-                            ),
-                            SizedBox(height: 20),
-                            Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Align(
-                                    alignment: MyApp.getLocale() == "he" ? Alignment.topRight : Alignment.topLeft,
-                                    child: Container(
-                                      child: Text(
-                                        LocaleText.getLocaleText(MyApp.getLocale(), 'Age'),
-                                        style: titleStyle,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 5),
-                                  Row(
-                                    children: <Widget>[
+                            //status
+                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
+                            MultiSelectChip(Status.values,(selected, val) => personProvider.pickedStatus[selected] = val,pickedChips:  personProvider.pickedStatus,),
+                            //age
+                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Age')),
+                            Row( children: <Widget>[
                                       Text(
-                                        "" + lookingPersonAgeMin.toStringAsFixed(1),
+                                        "" + lookingPersonAgeMin.toStringAsFixed(1),style: TextStyle(color: ColorManager().theme.textColor),
                                       ),
                                       Expanded(
                                         child: RangeSlider(
+                                          activeColor: ColorManager().theme.secondary,
                                           min: 18,
                                           max: 99,
                                           divisions: 162,
@@ -326,40 +157,36 @@ class _EveryoneState extends State<Everyone> {
                                           }),
                                         ),
                                       ),
-                                      Text("" + lookingPersonAgeMax.toStringAsFixed(1))
+                                      Text("" + lookingPersonAgeMax.toStringAsFixed(1),style: TextStyle(color: ColorManager().theme.textColor))
                                     ],
                                   ),
-                                  SizedBox(height: 20),
-                                  Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+                            //actions
+                            SizedBox(height: 20,),
+                            Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
                                     FlatButton(
                                         onPressed: () {
                                           setState(() {
-                                            
-                                        countryValue = null;
-                                          _country = personProvider.pickedCountry = null;
-                                          _area = personProvider.pickedArea = null;
+                                          personProvider.pickedCountry = {};
+                                          personProvider.pickedArea = {};
                                           personProvider.pickedStatus = {};
                                           lookingPersonAgeMin = personProvider.ageMin = 18;
                                           lookingPersonAgeMax = personProvider.ageMax = 99;
                                           rangeValuesAge = RangeValues(18, 99);
                                             });
                                         },
-                                        child: Text("נקה")),
+                                        child: Text("נקה",style: TextStyle(color: ColorManager().theme.textColor),),),
                                     RaisedButton(
                                       onPressed: (){
                                         setState(() {
                                           showFilter= false;
                                         });
                                       },
-                                      color: Colors.blue,
-                                      textColor: Colors.white,
+                                      color:  ColorManager().theme.secondary,
+                                      textColor: ColorManager().theme.textColor,
                                       child: Text("חפש"),
                                     )
                                   ]),
-                                  SizedBox(height: 10),
-                                ],
-                              ),
-                            ),
+                            
                           ],
                         ),
                       ),
@@ -373,7 +200,7 @@ class _EveryoneState extends State<Everyone> {
                     ),
                   ],
                 )
-              : Container();
+              : Container());
     } catch (e) {
       setState(() {});
 

@@ -245,8 +245,8 @@ class PersonProvider extends ChangeNotifier {
   
   double ageMax=99;
   double ageMin=18;
-  Area pickedArea;
-  Country pickedCountry;
+  Map<Area,bool> pickedArea;
+  Map<Country,bool> pickedCountry = {};
   Map<Status,bool> pickedStatus={};
   List<Gender> genders = [];
   List<Country> countrys = [];

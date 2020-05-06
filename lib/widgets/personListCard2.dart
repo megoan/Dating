@@ -109,7 +109,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                              SizedBox(
                                width: 120,
                                       child: 
-                                  (widget.person.area != null) ?Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString())+
+                                  (widget.person.area != null) ?Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.area.toString())+
                                   ", "+LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15, color: Colors.white)):
                                   
                                   Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15, color: Colors.white)),
