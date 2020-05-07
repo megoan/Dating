@@ -4,7 +4,6 @@ import 'package:dating/screens/addPerson.dart';
 import 'package:dating/screens/shadchanList.dart';
 import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/widgets/fABBottomAppBarItem.dart';
-import 'package:dating/widgets/filterDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
