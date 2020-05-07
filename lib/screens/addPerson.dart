@@ -294,12 +294,7 @@ class _AddPersonState extends State<AddPerson> {
     super.didChangeDependencies();
     //getAllPeople()
   }
-
-  TextFormField tff;
-  Map map1 = new Map();
-  List lll = new List();
   int _index = 0;
-
   TextStyle themeTextStyle = new TextStyle(color: ColorManager().theme.textColor);
   TextStyle titles = new TextStyle(color: ColorManager().theme.textColor, fontSize: 20);
 
