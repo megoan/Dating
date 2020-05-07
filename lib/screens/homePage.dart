@@ -1,9 +1,12 @@
+import 'package:animations/animations.dart';
 import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/screens/addPerson.dart';
 import 'package:dating/screens/shadchanList.dart';
+import 'package:dating/themes/colorManager.dart';
 import 'package:dating/themes/lightTheme.dart';
 import 'package:dating/widgets/fABBottomAppBarItem.dart';
+import 'package:dating/widgets/filterPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,8 +31,9 @@ class _HomePageState extends State<HomePage> {
   var currentIndex = 0;
   var selectedIndex = 0;
   bool isInit = true;
-  bool searchMode = false;
+  bool searchMode = true;
   PersonProvider personProvider;
+  ContainerTransitionType _transitionType = ContainerTransitionType.fadeThrough;
   //String _lastSelected = 'TAB: 0';
   void _selectedTab(int index) {
     setState(() {
@@ -74,95 +78,70 @@ class _HomePageState extends State<HomePage> {
           onPressed: addPersonScreen,
           child: Icon(Icons.person_add),
         ),
-        appBar: AppBar(
-          // centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(
-                  Icons.ac_unit,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  MyApp.setTheme(context);
-                })
-          ],
-          title: searchMode
-              ? TextField(
-                  style: TextStyle(color: Theme.of(context).accentColor),
-                  controller: _filter,
-                  autofocus: true,
-                  onChanged: (value) {
-                    personProvider.updateNameFilter(value);
-                    setState(() {});
-                  },
-                  decoration: new InputDecoration(
-                    //border: InputBorder.none,
-                    //contentPadding: EdgeInsets.all(20),
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintStyle: TextStyle(
-                      color: Theme.of(context).accentColor,
-                    ),
-                    prefixIcon: new Icon(
-                      Icons.search,
-                      color: Theme.of(context).accentColor,
-                    ),
-                    hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-
-                    //       focusedBorder: OutlineInputBorder(
-                    // //  borderSide: BorderSide(color: Colors.white),
-                    //   borderRadius: BorderRadius.circular(30),
-                    // ),
-                    // enabledBorder: UnderlineInputBorder(
-                    // //  borderSide: BorderSide(color: Colors.white),
-                    //   borderRadius: BorderRadius.circular(30),
-                    // ),
-                  ),
-                )
-              : Text('Cool Group'), //_appBarTitle,
-          // actions: <Widget>[
-          //  if(selectedIndex==1) IconButton(
-          //     icon:searchMode? Icon(Icons.close):Icon(Icons.search),
-          //     onPressed:searchMode? (){
-          //       _filter.clear();
-          //        personProvider.updateNameFilter("");
-          //        searchMode=false;
-          //     setState(() {
-
-          //     });
-          //     }:
-          //     (){
-          //        searchMode=true;
-          //        setState(() {
-
-          //        });
-          //     },
-          //   ),
-          //   // IconButton(
-          //   //   icon: Icon(Icons.sort),
-          //   //   onPressed: (){},
-
-          //   // ),
-          //    if(selectedIndex==1) IconButton(
-          //     icon: Icon(Icons.filter_list),
-          //     onPressed: () {
-          //       showDialog(context: context,
-          //       builder: (_) => Dialog(
-          //         child: FilterDialog(),
-          //       ),
-          //       ).then((value)async{
-          //          await personProvider.getAllPeople();
-          //         setState(() {
-
-          //   });
-          //       });
-          //     },
-          //   ),
-          // ],
-        ),
+        appBar: selectedIndex == 1
+            ? AppBar(
+                automaticallyImplyLeading: false,
+                titleSpacing: 0,
+                title: _OpenContainerWrapper(
+                    transitionType: _transitionType,
+                    closedBuilder: (BuildContext _, VoidCallback openContainer) {
+                      return Container(
+                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+                        color: ColorManager().theme.filterBackgroundColor,
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                style: TextStyle(color: ColorManager().theme.textColor),
+                                controller: _filter,
+                                autofocus: true,
+                                onChanged: (value) {
+                                  personProvider.updateNameFilter(value);
+                                  setState(() {});
+                                },
+                                decoration: new InputDecoration(
+                                  contentPadding: EdgeInsets.all(0),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                                    borderSide: BorderSide(color: ColorManager().theme.primary, width: 1),
+                                  ),
+                                  hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                                  prefixIcon: new Icon(
+                                    Icons.search,
+                                    color: ColorManager().theme.textColor,
+                                  ),
+                                  hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                                icon: Icon(
+                                  Icons.filter_list,
+                                  color: ColorManager().theme.textColor,
+                                ),
+                                onPressed: () => openContainer()),
+                          ],
+                        ),
+                      );
+                    }),
+              )
+            : AppBar(
+                // centerTitle: true,
+                actions: <Widget>[
+                  IconButton(
+                      icon: Icon(
+                        Icons.ac_unit,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        MyApp.setTheme(context);
+                      })
+                ],
+                title: Text('Cool Group'),
+              ),
         body: PageView(
           onPageChanged: (index) {
             setState(() {
@@ -246,6 +225,28 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       //)
+    );
+  }
+}
+
+class _OpenContainerWrapper extends StatelessWidget {
+  const _OpenContainerWrapper({
+    this.closedBuilder,
+    this.transitionType,
+  });
+
+  final OpenContainerBuilder closedBuilder;
+  final ContainerTransitionType transitionType;
+
+  @override
+  Widget build(BuildContext context) {
+    return OpenContainer(
+      transitionType: transitionType,
+      openBuilder: (BuildContext context, VoidCallback _) {
+        return EveryBodyFilter();
+      },
+      tappable: false,
+      closedBuilder: closedBuilder,
     );
   }
 }

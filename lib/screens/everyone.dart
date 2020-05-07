@@ -8,27 +8,27 @@ import 'package:dating/widgets/personListCard2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class _OpenContainerWrapper extends StatelessWidget {
-  const _OpenContainerWrapper({
-    this.closedBuilder,
-    this.transitionType,
-  });
+// class _OpenContainerWrapper extends StatelessWidget {
+//   const _OpenContainerWrapper({
+//     this.closedBuilder,
+//     this.transitionType,
+//   });
 
-  final OpenContainerBuilder closedBuilder;
-  final ContainerTransitionType transitionType;
+//   final OpenContainerBuilder closedBuilder;
+//   final ContainerTransitionType transitionType;
 
-  @override
-  Widget build(BuildContext context) {
-    return OpenContainer(
-      transitionType: transitionType,
-      openBuilder: (BuildContext context, VoidCallback _) {
-        return EveryBodyFilter();
-      },
-      tappable: false,
-      closedBuilder: closedBuilder,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return OpenContainer(
+//       transitionType: transitionType,
+//       openBuilder: (BuildContext context, VoidCallback _) {
+//         return EveryBodyFilter();
+//       },
+//       tappable: false,
+//       closedBuilder: closedBuilder,
+//     );
+//   }
+// }
 
 class Everyone extends StatefulWidget {
   @override
@@ -37,8 +37,8 @@ class Everyone extends StatefulWidget {
 
 class _EveryoneState extends State<Everyone> {
   PersonProvider personProvider;
-  final TextEditingController _filter = new TextEditingController();
-  ContainerTransitionType _transitionType = ContainerTransitionType.fadeThrough;
+  // final TextEditingController _filter = new TextEditingController();
+  // ContainerTransitionType _transitionType = ContainerTransitionType.fadeThrough;
   bool isInit = true;
   bool isLoading = true;
   // double lookingPersonAgeMin = 18;
@@ -80,55 +80,54 @@ class _EveryoneState extends State<Everyone> {
               : personProvider.allPeople.length > 0
                   ? Column(
                       children: <Widget>[
-                        _OpenContainerWrapper(
+                        // _OpenContainerWrapper(
                           
-                            transitionType: _transitionType,
-                            closedBuilder: (BuildContext _, VoidCallback openContainer) {
-                              return Container(
-                                padding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-                                color: ColorManager().theme.filterBackgroundColor,
-                                child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextField(
-                                style: TextStyle(color: ColorManager().theme.textColor),
-                                controller: _filter,
-                                autofocus: true,
-                                onChanged: (value) {
-                                  personProvider.updateNameFilter(value);
-                                  setState(() {});
-                                },
-                                decoration: new InputDecoration(
-                                  contentPadding: EdgeInsets.all(0),
-                                  // filled: true,
-                                  // fillColor: Colors.black12,
-                                     enabledBorder: OutlineInputBorder(
-                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                          borderSide: BorderSide(color: ColorManager().theme.primary, width: 1),
-                                        ),
-                                  hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
-                                  prefixIcon: new Icon(
-                                    Icons.search,
-                                    color: ColorManager().theme.textColor,
-                                  ),
-                                  hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                  ),
-                                ),
-                            ),
-                          ),
-                           IconButton(
-                                    icon: Icon(
-                                     Icons.filter_list,
-                                      color: ColorManager().theme.textColor,
-                                    ),
-                                    onPressed: () => openContainer()),
+                        //     transitionType: _transitionType,
+                        //     closedBuilder: (BuildContext _, VoidCallback openContainer) {
+                        //       return Container(
+                        //         padding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+                        //         color: ColorManager().theme.filterBackgroundColor,
+                        //         child: Row(
+                        // children: <Widget>[
+                        //   Expanded(
+                        //     child: TextField(
+                        //         style: TextStyle(color: ColorManager().theme.textColor),
+                        //         controller: _filter,
+                        //         autofocus: true,
+                        //         onChanged: (value) {
+                        //           personProvider.updateNameFilter(value);
+                        //           setState(() {});
+                        //         },
+                        //         decoration: new InputDecoration(
+                        //           contentPadding: EdgeInsets.all(0),
+                                  
+                        //              enabledBorder: OutlineInputBorder(
+                        //                   borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                        //                   borderSide: BorderSide(color: ColorManager().theme.primary, width: 1),
+                        //                 ),
+                        //           hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                        //           prefixIcon: new Icon(
+                        //             Icons.search,
+                        //             color: ColorManager().theme.textColor,
+                        //           ),
+                        //           hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
+                        //           border: OutlineInputBorder(
+                        //             borderRadius: BorderRadius.circular(30.0),
+                        //           ),
+                        //         ),
+                        //     ),
+                        //   ),
+                        //    IconButton(
+                        //             icon: Icon(
+                        //              Icons.filter_list,
+                        //               color: ColorManager().theme.textColor,
+                        //             ),
+                        //             onPressed: () => openContainer()),
                         
                           
-                        ],
-                            ),
-                              );}),
+                        // ],
+                        //     ),
+                        //       );}),
                         Expanded(
                           child: GridView.builder(
                               itemCount: personProvider.allPeople.length,
