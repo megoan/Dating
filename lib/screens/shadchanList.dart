@@ -15,8 +15,8 @@ class _ShadchanListState extends State<ShadchanList> {
   ShadchanProvider shadchanProvider;
 
   bool isInit=true;
-
   bool isLoading = true;
+  
   void reset()async{
      isLoading = true;
      setState(() {
