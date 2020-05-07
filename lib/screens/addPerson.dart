@@ -157,7 +157,7 @@ class _AddPersonState extends State<AddPerson> {
   }
 
   bool isValidPhoneNumber(String input) {
-    final RegExp regex = new RegExp(r'^\(\d\d\d\)\d\d\d\-\d\d\d\d$');
+    final RegExp regex = new RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
     return regex.hasMatch(input);
   }
 
