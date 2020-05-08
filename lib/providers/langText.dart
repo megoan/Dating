@@ -40,7 +40,6 @@ class LocaleText {
       'About them short':'About them short',
       'About them long':'About them long',
       'Height':'Height',
-
       'First name is required':'First name is required',
       'Last name is required':'Last name is required',
       'Date of Birth is required':'Date of Birth is required',
@@ -71,12 +70,6 @@ class LocaleText {
       'Age':'Age',
       'Who am I':'Who am I',
       'What am I looking for':'What am I looking for',
-      'Status':'Status',
-      'Hashkafa':'Hashkafa',
-      'Height':'Height',
-      'Religious':'Religious',
-      'Smoking':'Smoking',
-      'Eda':'Eda',
       'Search Name':'Search Name',
       'Country':'Country',
       
