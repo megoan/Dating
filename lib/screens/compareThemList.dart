@@ -186,7 +186,9 @@ class _CompareThemListState extends State<CompareThemList> {
                             children: <Widget>[
                               Text(
                                 LocaleText.getLocaleText(MyApp.getLocale(), 'My list'),
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                                style: TextStyle(
+                                  //color: Theme.of(context).primaryColor
+                                  ),
                               ),
                             ],
                           ),
@@ -227,7 +229,9 @@ class _CompareThemListState extends State<CompareThemList> {
                             children: <Widget>[
                               Text(
                                 LocaleText.getLocaleText(MyApp.getLocale(), 'Favorites'),
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                                style: TextStyle(
+                                  //color: Theme.of(context).primaryColor
+                                  ),
                               ),
                             ],
                           ),
@@ -268,7 +272,9 @@ class _CompareThemListState extends State<CompareThemList> {
                             children: <Widget>[
                               Text(
                                 LocaleText.getLocaleText(MyApp.getLocale(), 'Everyone'),
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                                style: TextStyle(
+                                  //color: Theme.of(context).primaryColor
+                                  ),
                               ),
                             ],
                           ),

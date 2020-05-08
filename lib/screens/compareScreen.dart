@@ -57,7 +57,7 @@ class _CompareScreenState extends State<CompareScreen> {
       padding: const EdgeInsets.all(8.0),
       decoration: new BoxDecoration(
         shape: BoxShape.circle,
-        color: ColorManager().theme.filterBackgroundColor,
+       // color: ColorManager().theme.filterBackgroundColor,
       ),
       child: FaIcon(
         _icon,
@@ -72,7 +72,7 @@ class _CompareScreenState extends State<CompareScreen> {
     TextStyle heightStyle = TextStyle(fontSize: 17, color: widget.person.height <= widget.myPerson.heightMax && widget.person.height >= widget.myPerson.heightMin ? Colors.green : Colors.red);
 
     return Container(
-      color: Colors.white,
+     // color: Colors.white,
       //width: mainSelected? (screenSize.width* 0.666)-0.5:(screenSize.width * 0.333)-0.5,
       // width: (screenSize.width / 2) - 0.5,
 
@@ -82,7 +82,7 @@ class _CompareScreenState extends State<CompareScreen> {
           Stack(
             children: [
               Container(
-                color: Colors.grey[200],
+                //color: Colors.grey[200],
                 child: Row(
                   children: <Widget>[
                     Expanded(
@@ -91,7 +91,7 @@ class _CompareScreenState extends State<CompareScreen> {
                             border: Border(
                           left: BorderSide(
                             width: 0.5,
-                            color: ColorManager().theme.filterBackgroundColor,
+                            //color: ColorManager().theme.filterBackgroundColor,
                           ),
                         )),
                         child: Padding(
@@ -921,7 +921,9 @@ class _CompareScreenState extends State<CompareScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(widget.myPerson.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') : LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, color: ColorManager().theme.filterBackgroundColor, fontWeight: FontWeight.bold)),
+                                    Text(widget.myPerson.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') : LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18,
+                                    //color: ColorManager().theme.filterBackgroundColor,
+                                     fontWeight: FontWeight.bold)),
                                     Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Like'), style: TextStyle(fontSize: 18,
                                    //  color: ColorManager().theme.filterBackgroundColor,
                                       fontWeight: FontWeight.bold)),
@@ -964,7 +966,9 @@ class _CompareScreenState extends State<CompareScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Text(widget.person.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') : LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, color: ColorManager().theme.filterBackgroundColor, fontWeight: FontWeight.bold)),
+                                    Text(widget.person.gender == Gender.MALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'Him') : LocaleText.getLocaleText(MyApp.getLocale(), 'Her'), style: TextStyle(fontSize: 18, 
+                                   // color: ColorManager().theme.filterBackgroundColor,
+                                     fontWeight: FontWeight.bold)),
                                     Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Like'), style: TextStyle(fontSize: 18,
                                     // color: ColorManager().theme.filterBackgroundColor,
                                       fontWeight: FontWeight.bold)),

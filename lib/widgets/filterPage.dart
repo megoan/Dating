@@ -20,7 +20,9 @@ class _EveryBodyFilterState extends State<EveryBodyFilter> {
   double lookingPersonAgeMax = 99;
   RangeValues rangeValuesAge = RangeValues(18, 99);
   RangeLabels rangeLabelsAge = RangeLabels('18', '99');
-  TextStyle titles = new TextStyle(color: ColorManager().theme.textColor, fontSize: 22);
+  TextStyle titles = new TextStyle(
+    //color: ColorManager().theme.textColor,
+     fontSize: 22);
   Widget title(title) {
     return Padding(padding: EdgeInsets.all(5), child: Text(title, style: titles));
   }
