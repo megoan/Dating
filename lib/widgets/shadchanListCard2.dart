@@ -36,7 +36,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: Colors.grey[100],
+       // color: Colors.grey[100],
         child: ClipPath(
            clipper: ShapeBorderClipper(shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
@@ -46,14 +46,16 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
       border: Border(
           
       //  top: BorderSide(width: 16.0, color: Colors.lightBlue.shade50),
-          right: BorderSide(width: 12.0, color: Theme.of(context).primaryColor,),
+          right: BorderSide(width: 12.0, 
+          //color: Theme.of(context).primaryColor,
+          ),
       ),
   ),
             child: Column(
               children: <Widget>[
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      //color: Colors.white,
                       borderRadius: BorderRadius.only(
                            topLeft: Radius.circular(15.0),
                            topRight: Radius.circular(15.0),
@@ -103,7 +105,10 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                                       Text(StaticFunctions.getAge(widget.person.birthday).toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ),
                                   ],
                                 ),
-                                 Text(widget.person.short,style: TextStyle(color: Colors.grey),),
+                                 Text(widget.person.short,style: TextStyle(
+                                   //color: Colors.grey
+                                   )
+                                   ,),
                                 // Row(
                                 //   children: <Widget>[
                                 //     Text(
@@ -127,7 +132,9 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                                widget.person.isVisible=!widget.person.isVisible;
                               });
                             },
-                            child: Icon(widget.person.isVisible?Icons.visibility:Icons.visibility_off,color: Colors.black54,)),
+                            child: Icon(widget.person.isVisible?Icons.visibility:Icons.visibility_off,
+                            //color: Colors.black54,
+                            ),),
                         )
                     ],
                   ),
@@ -141,7 +148,9 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: <Widget>[
-                             Text(LocaleText.getLocaleText(MyApp.getLocale(), 'viewes'),style: TextStyle(color: Colors.grey),),
+                             Text(LocaleText.getLocaleText(MyApp.getLocale(), 'viewes'),style: TextStyle(
+                               //color: Colors.grey
+                               ),),
                             Text(
                               widget.person.views.toString(),
                               style: TextStyle(
@@ -153,7 +162,9 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                       ),
                       Column(
                         children: <Widget>[
-                           Text(LocaleText.getLocaleText(MyApp.getLocale(), 'requests'),style: TextStyle(color: Colors.grey),),
+                           Text(LocaleText.getLocaleText(MyApp.getLocale(), 'requests'),style: TextStyle(
+                             //color: Colors.grey
+                             ),),
                           Text(
                             widget.person.requests.toString(),
                             style: TextStyle(
@@ -164,11 +175,15 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                       ),
                       Column(
                         children: <Widget>[
-                           Text(LocaleText.getLocaleText(MyApp.getLocale(), 'dates'),style: TextStyle(color: Colors.grey),),
+                           Text(LocaleText.getLocaleText(MyApp.getLocale(), 'dates'),style: TextStyle(
+                             //color: Colors.grey
+                             ),),
                           Text(
                             widget.person.dates.toString(),
                             style: TextStyle(
-                                fontSize: 20, color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                                // color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.bold),
                           ),
                          
                         ],
@@ -181,7 +196,9 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                       child: Container(
                         child: Row(
                           children: <Widget>[
-                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),style: TextStyle(color: Theme.of(context).accentColor),),
+                            Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),style: TextStyle(
+                              //color: Theme.of(context).accentColor
+                              ),),
                           ],
                         ),
                       ),
@@ -190,7 +207,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                               ),
                      borderSide: BorderSide(
                        
-                  color: Theme.of(context).accentColor, //Color of the border
+                  //color: Theme.of(context).accentColor, //Color of the border
                   style: BorderStyle.solid, //Style of the border
                   width: 1, //width of the border
                 ),),
