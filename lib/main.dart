@@ -20,7 +20,7 @@ import 'dart:ui' as ui;
 Locale local;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  ColorManager.mYTHEME = MYTHEME.LIGHT;
+  ColorManager.mYTHEME = MYTHEME.DARK;
 
   Provider.debugCheckInvalidValueType = null;
   runApp(MyApp());
