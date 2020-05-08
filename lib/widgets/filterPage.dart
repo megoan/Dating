@@ -38,8 +38,10 @@ class _EveryBodyFilterState extends State<EveryBodyFilter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager().theme.filterBackgroundColor,
-      appBar: AppBar(backgroundColor: ColorManager().theme.filterBackgroundColor,),
+      //backgroundColor: ColorManager().theme.filterBackgroundColor,
+      appBar: AppBar(
+        //backgroundColor: ColorManager().theme.filterBackgroundColor,
+        ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
@@ -82,11 +84,13 @@ class _EveryBodyFilterState extends State<EveryBodyFilter> {
               children: <Widget>[
                 Text(
                   "" + lookingPersonAgeMin.toStringAsFixed(1),
-                  style: TextStyle(color: ColorManager().theme.textColor),
+                  style: TextStyle(
+                    //color: ColorManager().theme.textColor
+                    ),
                 ),
                 Expanded(
                   child: RangeSlider(
-                    activeColor: ColorManager().theme.secondary,
+                    //activeColor: ColorManager().theme.secondary,
                     min: 18,
                     max: 99,
                     divisions: 162,
@@ -104,7 +108,9 @@ class _EveryBodyFilterState extends State<EveryBodyFilter> {
                     }),
                   ),
                 ),
-                Text("" + lookingPersonAgeMax.toStringAsFixed(1), style: TextStyle(color: ColorManager().theme.textColor))
+                Text("" + lookingPersonAgeMax.toStringAsFixed(1), style: TextStyle(
+                  //color: ColorManager().theme.textColor
+                  ))
               ],
             ),
           
@@ -126,11 +132,13 @@ class _EveryBodyFilterState extends State<EveryBodyFilter> {
                   shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                  color: ColorManager().theme.secondary,
-                  textColor: ColorManager().theme.textColor,
+                 // color: ColorManager().theme.secondary,
+                  //textColor: ColorManager().theme.textColor,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text("חפש",style: TextStyle(color: ColorManager().theme.textColor,fontSize: 18)),
+                    child: Text("חפש",style: TextStyle(
+                     // color: ColorManager().theme.textColor,
+                      fontSize: 18)),
                   ),
                 ),
              FlatButton(
@@ -146,7 +154,9 @@ class _EveryBodyFilterState extends State<EveryBodyFilter> {
                   },
                   child: Text(
                     "נקה",
-                    style: TextStyle(color: ColorManager().theme.textColor,fontSize: 18),
+                    style: TextStyle(
+                      //color: ColorManager().theme.textColor,
+                      fontSize: 18),
                   ),
                 ),
               
