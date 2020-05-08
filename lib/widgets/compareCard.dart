@@ -34,7 +34,7 @@ class CompareCard extends StatelessWidget {
                   height: 70,
                   padding: EdgeInsets.all(1),
                   decoration: new BoxDecoration(
-                    color: Theme.of(context).accentColor,
+                    //color: Theme.of(context).accentColor,
                     borderRadius: BorderRadius.circular(35),
                   ),
                   constraints: BoxConstraints(
@@ -46,7 +46,7 @@ class CompareCard extends StatelessWidget {
                     child: new Text(
                       LocaleText.getLocaleSelectText(MyApp.getLocale(),personProvider.compareScore(person).toString()),
                       style: new TextStyle(
-                        color: Colors.white,
+                        //color: Colors.white,
                         fontSize: 18,
                       ),
                       textAlign: TextAlign.center,
@@ -105,7 +105,9 @@ class CompareCard extends StatelessWidget {
                             // Text(
                             //   StaticFunctions.getArea(person.area),
                             // ),
-                            Icon(Icons.location_on, color: Theme.of(context).primaryColor),
+                            Icon(Icons.location_on,
+                            // color: Theme.of(context).primaryColor
+                             ),
                           ],
                         ),
                       ],

@@ -27,8 +27,7 @@ class ChatCard extends StatelessWidget {
                                         height: 70,
                                         child: CircleAvatar(
                                           radius: 70,
-                                          backgroundColor:
-                                              Theme.of(context).primaryColor,
+                                         // backgroundColor:  Theme.of(context).primaryColor,
                                         ),
                                       ),
                                       Container(
@@ -55,7 +54,7 @@ class ChatCard extends StatelessWidget {
                                            
                                             CircleAvatar(
                                               radius: 5,
-                                              backgroundColor: Colors.green,
+                                             // backgroundColor: Colors.green,
                                             ),
                                           ],
                                         ),
@@ -69,7 +68,7 @@ class ChatCard extends StatelessWidget {
                                            
                                             CircleAvatar(
                                               radius: 5,
-                                              backgroundColor: Colors.green,
+                                             // backgroundColor: Colors.green,
                                             ),
                                           ],
                                         ),

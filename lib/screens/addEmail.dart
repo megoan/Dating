@@ -33,7 +33,9 @@ class _AddEmailState extends State<AddEmail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Text('My email is',style: TextStyle(fontSize: 35,color: Theme.of(context).primaryColor),),
+                Text('My email is',style: TextStyle(fontSize: 35,
+                //color: Theme.of(context).primaryColor
+                ),),
                 TextField(
                   style: TextStyle(fontSize: 24),
                   decoration: InputDecoration(
@@ -56,7 +58,8 @@ class _AddEmailState extends State<AddEmail> {
                   },
                 ),
                 GradientButton.getGradiantButton(context, addUserEmail,
-                    'CONTINUE', Colors.black, 20, verifyEnabled),
+                    'CONTINUE', Colors.black,
+                     20, verifyEnabled),
               ],
             ),
           ),

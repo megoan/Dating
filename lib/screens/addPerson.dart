@@ -167,7 +167,9 @@ class _AddPersonState extends State<AddPerson> {
   }
 
   void showMessage(String message, [MaterialColor color = Colors.blue]) {
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(backgroundColor: color, content: new Text(message)));
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(
+      //backgroundColor: color,
+       content: new Text(message)));
   }
 
   bool _submitForm() {
@@ -209,7 +211,7 @@ class _AddPersonState extends State<AddPerson> {
               Icon(
                 FontAwesomeIcons.checkCircle,
                 size: 50.0,
-                color: Colors.green,
+                //color: Colors.green,
               ),
               SizedBox(
                 height: 20.0,
@@ -222,7 +224,7 @@ class _AddPersonState extends State<AddPerson> {
           ),
           children: <Widget>[
             new FlatButton(
-              textColor: ColorManager().theme.primary,
+              //textColor: ColorManager().theme.primary,
               child: Text(
                 'Add new Person',
                 style: TextStyle(fontSize: 18),
@@ -234,7 +236,7 @@ class _AddPersonState extends State<AddPerson> {
               },
             ),
             new FlatButton(
-              textColor: ColorManager().theme.primary,
+              //textColor: ColorManager().theme.primary,
               child: Text(
                 'Back to Home',
                 style: TextStyle(fontSize: 18),
@@ -295,8 +297,12 @@ class _AddPersonState extends State<AddPerson> {
     //getAllPeople()
   }
   int _index = 0;
-  TextStyle themeTextStyle = new TextStyle(color: ColorManager().theme.textColor);
-  TextStyle titles = new TextStyle(color: ColorManager().theme.textColor, fontSize: 20);
+  TextStyle themeTextStyle = new TextStyle(
+    //color: ColorManager().theme.textColor
+    );
+  TextStyle titles = new TextStyle(
+    //color: ColorManager().theme.textColor,
+     fontSize: 20);
 
   Widget title(title) {
     return Padding(padding: EdgeInsets.all(10), child: Text(title, style: titles));
@@ -307,7 +313,7 @@ class _AddPersonState extends State<AddPerson> {
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
-        backgroundColor: ColorManager().theme.filterBackgroundColor,
+        //backgroundColor: ColorManager().theme.filterBackgroundColor,
         appBar: AppBar(
           title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
         ),
@@ -405,7 +411,7 @@ class _AddPersonState extends State<AddPerson> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     TextFormField(
-                                      cursorColor: Colors.white,
+                                      //cursorColor: Colors.white,
                                       style: themeTextStyle,
                                       initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
                                       decoration: InputDecoration(
@@ -414,13 +420,17 @@ class _AddPersonState extends State<AddPerson> {
                                         fillColor: Colors.black12,
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                          borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
+                                          borderSide: BorderSide(
+                                            //color: ColorManager().theme.primary,
+                                             width: 0.6),
                                         ),
                                         border: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                         ),
 
-                                        hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                                        hintStyle: TextStyle(
+                                          //color: ColorManager().theme.primary[300]
+                                          ),
                                         labelStyle: themeTextStyle, //TextStyle(color: ColorManager().theme.primary),
                                         hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
                                         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
@@ -431,7 +441,7 @@ class _AddPersonState extends State<AddPerson> {
                                     ),
                                     //LAST NAME
                                     TextFormField(
-                                      cursorColor: Colors.white,
+                                      //cursorColor: Colors.white,
                                       style: themeTextStyle,
                                       initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
                                       decoration: InputDecoration(
@@ -439,13 +449,17 @@ class _AddPersonState extends State<AddPerson> {
                                         fillColor: Colors.black12,
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                          borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
+                                          borderSide: BorderSide(
+                                            //color: ColorManager().theme.primary,
+                                             width: 0.6),
                                         ),
                                         contentPadding: EdgeInsets.all(15),
                                         border: OutlineInputBorder(
                                           borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                                         ),
-                                        hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                                        hintStyle: TextStyle(
+                                          //color: ColorManager().theme.primary[300]
+                                          ),
                                         labelStyle: themeTextStyle,
                                         hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
                                         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
@@ -462,11 +476,13 @@ class _AddPersonState extends State<AddPerson> {
                                           height: 40,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary),
+                                            border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, 
+                                            //color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary
+                                            ),
                                           ),
                                           child: IconButton(
                                               icon: FaIcon(FontAwesomeIcons.male),
-                                              color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
+                                              //color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
                                               padding: EdgeInsets.all(5.0),
                                               // alignment: Alignment.centerRight,
                                               onPressed: () => setState(() {
@@ -475,7 +491,9 @@ class _AddPersonState extends State<AddPerson> {
                                         ),
                                         Text(
                                           "  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Boy'),
-                                          style: sSelected == Gender.MALE ? themeTextStyle : TextStyle(color: Colors.white60),
+                                          style: sSelected == Gender.MALE ? themeTextStyle : TextStyle(
+                                            //color: Colors.white60
+                                            ),
                                         ),
                                         Spacer(),
                                         Container(
@@ -483,18 +501,22 @@ class _AddPersonState extends State<AddPerson> {
                                           height: 40,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5, color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary),
+                                            border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5,
+                                             //color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary
+                                             ),
                                           ),
                                           child: IconButton(
                                               icon: FaIcon(FontAwesomeIcons.female),
-                                              color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
+                                              //color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
                                               padding: EdgeInsets.all(5.0),
                                               //alignment: Alignment.centerRight,
                                               onPressed: () => setState(() {
                                                     sSelected = Gender.FEMALE;
                                                   })),
                                         ),
-                                        Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: sSelected == Gender.FEMALE ? themeTextStyle : TextStyle(color: Colors.white60)),
+                                        Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: sSelected == Gender.FEMALE ? themeTextStyle : TextStyle(
+                                          //color: Colors.white60
+                                          )),
                                       ],
                                     ),
                                   ],
@@ -504,7 +526,9 @@ class _AddPersonState extends State<AddPerson> {
                           ],
                         ),
                         if (missingImage)
-                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'), style: TextStyle(color: Colors.red, fontSize: 12)),
+                          Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'), style: TextStyle(
+                            //color: Colors.red, fontSize: 12
+                            )),
                         SizedBox(
                           height: 20,
                         ),
@@ -552,7 +576,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.birthdayCake,
                               size: 25.0,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Date of Birth')),
                           ],
@@ -563,8 +587,10 @@ class _AddPersonState extends State<AddPerson> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 FlatButton(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0), side: BorderSide(color: ColorManager().theme.primary)),
-                                  color: Colors.black12,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0), side: BorderSide(
+                                    //color: ColorManager().theme.primary
+                                    )),
+                                  //color: Colors.black12,
                                   onPressed: () {
                                     showModalBottomSheet(
                                         context: context,
@@ -592,14 +618,16 @@ class _AddPersonState extends State<AddPerson> {
                                           children: <Widget>[
                                             Text(
                                               dateString,
-                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
+                                              style: TextStyle(
+                                               // color: Colors.white,
+                                                 fontWeight: FontWeight.bold, fontSize: 18.0),
                                             ),
                                           ],
                                         ),
                                         FaIcon(
                                           FontAwesomeIcons.angleDown,
                                           size: 20,
-                                          color: Colors.white,
+                                          //color: Colors.white,
                                         ),
                                       ],
                                     ),
@@ -608,7 +636,9 @@ class _AddPersonState extends State<AddPerson> {
                                 state.hasError
                                     ? Text(
                                         state.errorText,
-                                        style: TextStyle(color: Colors.red, fontSize: 12),
+                                        style: TextStyle(
+                                          //color: Colors.red,
+                                           fontSize: 12),
                                       )
                                     : Container()
                               ],
@@ -630,28 +660,36 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.phone,
                               size: 25.0,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Phone')),
                           ],
                         ),
                         TextFormField(
-                          cursorColor: Colors.white,
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          //cursorColor: Colors.white,
+                          style: TextStyle(
+                            //color: Colors.white,
+                             fontSize: 18
+                            ),
                           initialValue: personProvider.newPerson != null && personProvider.newPerson.phone != null ? personProvider.newPerson.phone : "",
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(15),
                             filled: true,
-                            fillColor: Colors.black12,
+                            //fillColor: Colors.black12,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
+                              borderSide: BorderSide(
+                                
+                               // color: ColorManager().theme.primary,
+                                 width: 0.6),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
-                            hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                            hintStyle: TextStyle(
+                              //color: ColorManager().theme.primary[300]
+                              ),
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), '000-0000000'),
                           ),
                           validator: (val) => isValidPhoneNumber(val) ? null : LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'),
@@ -667,7 +705,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.globeEurope,
                               size: 25.0,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
                           ],
@@ -686,7 +724,9 @@ class _AddPersonState extends State<AddPerson> {
                                 state.hasError
                                     ? Text(
                                         state.errorText,
-                                        style: TextStyle(color: Colors.red, fontSize: 12),
+                                        style: TextStyle(
+                                          //color: Colors.red, 
+                                          fontSize: 12),
                                       )
                                     : Container()
                               ],
@@ -706,7 +746,7 @@ class _AddPersonState extends State<AddPerson> {
                               FaIcon(
                                 FontAwesomeIcons.city,
                                 size: 25.0,
-                                color: Colors.white,
+                                //color: Colors.white,
                               ),
                               title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
                             ],
@@ -725,7 +765,9 @@ class _AddPersonState extends State<AddPerson> {
                                   state.hasError
                                       ? Text(
                                           state.errorText,
-                                          style: TextStyle(color: Colors.red, fontSize: 12),
+                                          style: TextStyle(
+                                            //color: Colors.red,
+                                             fontSize: 12),
                                         )
                                       : Container()
                                 ],
@@ -743,7 +785,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.userFriends,
                               size: 25.0,
-                              color: Colors.white,
+                             // color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
                           ],
@@ -761,7 +803,9 @@ class _AddPersonState extends State<AddPerson> {
                                 state.hasError
                                     ? Text(
                                         state.errorText,
-                                        style: TextStyle(color: Colors.red, fontSize: 12),
+                                        style: TextStyle(
+                                          //color: Colors.red,
+                                           fontSize: 12),
                                       )
                                     : Container()
                               ],
@@ -780,7 +824,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.torah,
                               size: 25.0,
-                              color: Colors.white,
+                             // color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
                           ],
@@ -796,7 +840,9 @@ class _AddPersonState extends State<AddPerson> {
                                 state.hasError
                                     ? Text(
                                         state.errorText,
-                                        style: TextStyle(color: Colors.red, fontSize: 12),
+                                        style: TextStyle(
+                                         // color: Colors.red, 
+                                          fontSize: 12),
                                       )
                                     : Container()
                               ],
@@ -815,7 +861,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.starOfDavid,
                               size: 25.0,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
                           ],
@@ -830,7 +876,9 @@ class _AddPersonState extends State<AddPerson> {
                               state.hasError
                                   ? Text(
                                       state.errorText,
-                                      style: TextStyle(color: Colors.red, fontSize: 12),
+                                      style: TextStyle(
+                                       // color: Colors.red, 
+                                        fontSize: 12),
                                     )
                                   : Container()
                             ]);
@@ -848,7 +896,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.synagogue,
                               size: 25.0,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
                           ],
@@ -863,7 +911,9 @@ class _AddPersonState extends State<AddPerson> {
                               state.hasError
                                   ? Text(
                                       state.errorText,
-                                      style: TextStyle(color: Colors.red, fontSize: 12),
+                                      style: TextStyle(
+                                        //color: Colors.red, 
+                                        fontSize: 12),
                                     )
                                   : Container()
                             ]);
@@ -881,7 +931,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.smoking,
                               size: 25.0,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking')),
                           ],
@@ -896,7 +946,9 @@ class _AddPersonState extends State<AddPerson> {
                               state.hasError
                                   ? Text(
                                       state.errorText,
-                                      style: TextStyle(color: Colors.red, fontSize: 12),
+                                      style: TextStyle(
+                                       // color: Colors.red, 
+                                        fontSize: 12),
                                     )
                                   : Container()
                             ]);
@@ -914,7 +966,7 @@ class _AddPersonState extends State<AddPerson> {
                             Icon(
                               Icons.short_text,
                               size: 25.0,
-                              color: Colors.white,
+                             // color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them short')),
                           ],
@@ -927,16 +979,20 @@ class _AddPersonState extends State<AddPerson> {
                           maxLength: 70,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black12,
+                            //fillColor: Colors.black12,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
+                              borderSide: BorderSide(
+                               // color: ColorManager().theme.primary,
+                               width: 0.6),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
                             //icon: const Icon(Icons.short_text),
-                            hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                            hintStyle: TextStyle(
+                             // color:  ColorManager().theme.primary[300]
+                            ),
 
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                           ),
@@ -953,28 +1009,32 @@ class _AddPersonState extends State<AddPerson> {
                             Icon(
                               Icons.format_align_justify,
                               size: 25.0,
-                              color: Colors.white,
+                             // color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'About them long')),
                           ],
                         ),
                         new TextFormField(
-                          cursorColor: Colors.white,
+                          //cursorColor: Colors.white,
                           style: themeTextStyle,
                           initialValue: personProvider.newPerson != null && personProvider.newPerson.long != null ? personProvider.newPerson.long : "",
                           maxLines: null,
                           minLines: 5,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black12,
+                            //fillColor: Colors.black12,
                             enabledBorder: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
+                              borderSide: BorderSide(
+                                //color: ColorManager().theme.primary, 
+                                width: 0.6),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
-                            hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                            hintStyle: TextStyle(
+                              //color: ColorManager().theme.primary[300]
+                              ),
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                           ),
                           // inputFormatters: [
@@ -991,7 +1051,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.ruler,
                               size: 25.0,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
                           ],
@@ -1000,7 +1060,7 @@ class _AddPersonState extends State<AddPerson> {
                           children: <Widget>[
                             Expanded(
                               child: Slider(
-                                activeColor: ColorManager().theme.secondary,
+                                //activeColor: ColorManager().theme.secondary,
                                 min: 1.3,
                                 max: 2.3,
                                 divisions: 130,
@@ -1029,7 +1089,7 @@ class _AddPersonState extends State<AddPerson> {
                             FaIcon(
                               FontAwesomeIcons.handHoldingHeart,
                               size: 25.0,
-                              color: Colors.white,
+                              //color: Colors.white,
                             ),
                             title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
                           ],
@@ -1144,7 +1204,9 @@ class _AddPersonState extends State<AddPerson> {
                                 padding: const EdgeInsets.only(top: 14.0),
                                 child: Text(
                                   sSelected == Gender.FEMALE ? LocaleText.getLocaleText(MyApp.getLocale(), 'What are she looking for?') : LocaleText.getLocaleText(MyApp.getLocale(), 'What are he looking for?'),
-                                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25.0),
+                                  style: TextStyle(fontWeight: FontWeight.bold, 
+                                  //color: Colors.white,
+                                   fontSize: 25.0),
                                 ),
                               ),
                             ),
@@ -1157,7 +1219,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.globeEurope,
                                   size: 25.0,
-                                  color: Colors.white,
+                                  //color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Country')),
                               ],
@@ -1174,7 +1236,7 @@ class _AddPersonState extends State<AddPerson> {
                                   FaIcon(
                                     FontAwesomeIcons.city,
                                     size: 25.0,
-                                    color: Colors.white,
+                                   // color: Colors.white,
                                   ),
                                   title(LocaleText.getLocaleText(MyApp.getLocale(), 'Area')),
                                 ],
@@ -1190,7 +1252,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.userFriends,
                                   size: 25.0,
-                                  color: Colors.white,
+                                //  color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Status')),
                               ],
@@ -1205,7 +1267,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.torah,
                                   size: 25.0,
-                                  color: Colors.white,
+                                 // color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Religious')),
                               ],
@@ -1220,7 +1282,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.starOfDavid,
                                   size: 25.0,
-                                  color: Colors.white,
+                                //  color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Hashkafa')),
                               ],
@@ -1235,7 +1297,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.synagogue,
                                   size: 25.0,
-                                  color: Colors.white,
+                                //  color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Eda')),
                               ],
@@ -1250,7 +1312,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.smoking,
                                   size: 25.0,
-                                  color: Colors.white,
+                                //  color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Smoking')),
                               ],
@@ -1266,7 +1328,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.handHoldingHeart,
                                   size: 25.0,
-                                  color: Colors.white,
+                                //  color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Sherut')),
                               ],
@@ -1285,7 +1347,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.ruler,
                                   size: 25.0,
-                                  color: Colors.white,
+                                //  color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Height')),
                               ],
@@ -1296,7 +1358,7 @@ class _AddPersonState extends State<AddPerson> {
                                 Text("" + lookingPersonHeightMin.toStringAsFixed(2) + " " + LocaleText.getLocaleText(MyApp.getLocale(), 'm'), style: themeTextStyle),
                                 Expanded(
                                   child: RangeSlider(
-                                    activeColor: ColorManager().theme.secondary,
+                                   // activeColor: ColorManager().theme.secondary,
                                     min: 1.0,
                                     max: 2.3,
                                     divisions: 130,
@@ -1325,7 +1387,7 @@ class _AddPersonState extends State<AddPerson> {
                                 FaIcon(
                                   FontAwesomeIcons.birthdayCake,
                                   size: 25.0,
-                                  color: Colors.white,
+                                 // color: Colors.white,
                                 ),
                                 title(LocaleText.getLocaleText(MyApp.getLocale(), 'Age')),
                               ],
@@ -1336,7 +1398,7 @@ class _AddPersonState extends State<AddPerson> {
                                 Text("" + lookingPersonAgeMin.toStringAsFixed(1), style: themeTextStyle),
                                 Expanded(
                                   child: RangeSlider(
-                                    activeColor: ColorManager().theme.secondary,
+                                   // activeColor: ColorManager().theme.secondary,
                                     min: 18,
                                     max: 99,
                                     divisions: 162,
@@ -1368,7 +1430,7 @@ class _AddPersonState extends State<AddPerson> {
                           Icon(
                             Icons.format_align_justify,
                             size: 25.0,
-                            color: Colors.white,
+                           // color: Colors.white,
                           ),
                           title(LocaleText.getLocaleText(MyApp.getLocale(), 'More info')),
                         ],
@@ -1386,15 +1448,19 @@ class _AddPersonState extends State<AddPerson> {
                         },
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Colors.black12,
+                          //fillColor: Colors.black12,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                            borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
+                            borderSide: BorderSide(
+                              //color: ColorManager().theme.primary,
+                               width: 0.6),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                           ),
-                          hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                          hintStyle: TextStyle(
+                            //color: ColorManager().theme.primary[300]
+                            ),
                           hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'More info'),
                         ),
                       ),

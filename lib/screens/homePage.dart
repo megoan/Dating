@@ -247,6 +247,8 @@ class _OpenContainerWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
+      // closedColor: Colors.amber,
+      // openColor: Colors.black,
       transitionType: transitionType,
       openBuilder: (BuildContext context, VoidCallback _) {
         return EveryBodyFilter();

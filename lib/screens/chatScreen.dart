@@ -62,26 +62,28 @@ class _ChatScreenState extends State<ChatScreen> {
         return Container();
         break;
       case MessageStatus.SENT:
-        return Icon(Icons.check, size: 20, color: Colors.grey);
+        return Icon(Icons.check, size: 20,
+        // color: Colors.grey
+         );
         break;
       case MessageStatus.RECIEVED:
         return Icon(
           Icons.done_all,
           size: 20,
-          color: Colors.grey,
+         // color: Colors.grey,
         );
         break;
       case MessageStatus.READ:
         return Icon(
           Icons.done_all,
-          color: Colors.blue,
+        //  color: Colors.blue,
           size: 20,
         );
         break;
       case MessageStatus.SENDING:
         return Icon(
           Icons.access_time,
-          color: Colors.grey,
+        //  color: Colors.grey,
           size: 20,
         );
         break;
@@ -99,14 +101,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
     BubbleStyle styleSomebody = BubbleStyle(
       nip:alsoMine?null: MyApp.getLocale() != "he" ? BubbleNip.rightTop : BubbleNip.leftTop,
-      color: Colors.white,
+     // color: Colors.white,
       elevation: 1 * px,
       margin: BubbleEdges.only(top: 8.0, right: 50.0),
       alignment: Alignment.topLeft,
     );
     BubbleStyle styleMe = BubbleStyle(
       nip: alsoMine?null:MyApp.getLocale() != "he" ? BubbleNip.leftTop : BubbleNip.rightTop,
-      color: Color.fromARGB(255, 199, 230, 255),
+     // color: Color.fromARGB(255, 199, 230, 255),
       elevation: 1 * px,
       margin: BubbleEdges.only(top: 8.0, left: 50.0),
       alignment: Alignment.topRight,
@@ -124,7 +126,9 @@ class _ChatScreenState extends State<ChatScreen> {
               if (chat.chatType == ChatType.GROUP && !me)
                 Text(
                   chat.senderName,
-                  style: TextStyle(color: getRandomColor(chat.senderName)),
+                  style: TextStyle(
+                   // color: getRandomColor(chat.senderName)
+                    ),
                 ),
               Text(chat.message),
               SizedBox(height: 3,),
@@ -134,7 +138,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   if (me && chat.chatType != ChatType.GROUP) SizedBox(width: 5),
                   Text(
                     StaticFunctions.getChatTime(chat.createdAt),
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                    style: TextStyle(fontSize: 12,
+                    // color: Colors.grey
+                     ),
                   ),
                 ],
               ),
@@ -153,11 +159,13 @@ class _ChatScreenState extends State<ChatScreen> {
               if (chat.chatType == ChatType.GROUP && !me)
                 Text(
                   chat.senderName,
-                  style: TextStyle(color: getRandomColor(chat.senderName)),
+                  style: TextStyle(
+                    color: getRandomColor(chat.senderName)
+                    ),
                 ),
               Card(
                 elevation: 2,
-                color: Colors.blue[50],
+               // color: Colors.blue[50],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -188,7 +196,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             alignment: Alignment.center,
                             child: Text(
                               chat.p1Name,
-                              style: TextStyle(fontSize: 16, color: Colors.blue),
+                              style: TextStyle(fontSize: 16,
+                              // color: Colors.blue
+                               ),
                             )),
                       ],
                     ),
@@ -201,7 +211,9 @@ class _ChatScreenState extends State<ChatScreen> {
               Text(chat.message),
               Text(
                 StaticFunctions.getChatTime(chat.createdAt),
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+                style: TextStyle(fontSize: 12,
+                //color: Colors.grey
+                ),
               ),
             ],
           ),
@@ -219,11 +231,13 @@ class _ChatScreenState extends State<ChatScreen> {
               if (chat.chatType == ChatType.GROUP && !me)
                 Text(
                   chat.senderName,
-                  style: TextStyle(color: getRandomColor(chat.senderName)),
+                  style: TextStyle(
+                    //color: getRandomColor(chat.senderName)
+                    ),
                 ),
               Card(
                 elevation: 2,
-                color: Colors.blue[50],
+                //color: Colors.blue[50],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -259,7 +273,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                     alignment: Alignment.center,
                                     child: Text(
                                       chat.p1Name,
-                                      style: TextStyle(fontSize: 16, color: Colors.blue),
+                                      style: TextStyle(fontSize: 16,
+                                      // color: Colors.blue
+                                       ),
                                     )),
                               ],
                             ),
@@ -276,7 +292,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                     alignment: Alignment.center,
                                     child: Text(
                                       chat.p2Name,
-                                      style: TextStyle(fontSize: 16, color: Colors.blue),
+                                      style: TextStyle(fontSize: 16, 
+                                      //color: Colors.blue
+                                      ),
                                     )),
                               ],
                             ),
@@ -289,7 +307,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   height: 70,
                   padding: EdgeInsets.all(1),
                   decoration: new BoxDecoration(
-                    color: Colors.blue,
+                   // color: Colors.blue,
                     borderRadius: BorderRadius.circular(35),
                   ),
                   constraints: BoxConstraints(
@@ -301,7 +319,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: new Text(
                    LocaleText.getLocaleSelectText(MyApp.getLocale(),chat.compareScore.toString()),
                       style: new TextStyle(
-                        color: Colors.white,
+                       // color: Colors.white,
                         fontSize: 18,
                       ),
                       textAlign: TextAlign.center,
@@ -321,7 +339,9 @@ class _ChatScreenState extends State<ChatScreen> {
               Text(chat.message),
               Text(
                 StaticFunctions.getChatTime(chat.createdAt),
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+                style: TextStyle(fontSize: 12, 
+              //  color: Colors.grey
+                ),
               ),
             ],
           ),
@@ -334,13 +354,15 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFe8dfd8),
+    //  backgroundColor: Color(0xFFe8dfd8),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(63.0),
         child: AppBar(
           // backgroundColor: Color(0xFF128C7E),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
+            icon: Icon(Icons.arrow_back, 
+            //color: Colors.white
+            ),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
           titleSpacing: 0,
@@ -351,11 +373,15 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             title: Text(
               (myChatList.chatType==ChatType.GROUP) ? myChatList.groupName : myChatList.shadchanName,
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              style: TextStyle(
+               // color: Colors.white,
+                 fontSize: 18),
             ),
             subtitle: Text(
               StaticFunctions.getChatTime(myChatList.lastMessageTime),
-              style: TextStyle(color: Colors.white.withOpacity(.7)),
+              style: TextStyle(
+                //color: Colors.white.withOpacity(.7)
+                ),
             ),
           ),
           // actions: <Widget>[
@@ -492,7 +518,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               padding: EdgeInsets.all(12),
                               margin: EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                               // color: Colors.white,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Row(
@@ -525,7 +551,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                           border: InputBorder.none,
                                           hintText: 'Type a message',
                                           //contentPadding: EdgeInsets.only(left: 5),
-                                          hintStyle: TextStyle(color: Colors.grey, fontSize: 18)),
+                                          hintStyle: TextStyle(
+                                            //color: Colors.grey,
+                                             fontSize: 18)),
                                     ),
                                   ),
                                   
@@ -545,7 +573,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 child: Container(
                                   height: 20,
                                   width: 30,
-                                  color: Colors.white,
+                                  //color: Colors.white,
                                 ),
                               ),
                             )
@@ -581,10 +609,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                       child: Container(
                       padding: EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                          color: Colors.blue, shape: BoxShape.circle),
+                         // color: Colors.blue, 
+                          shape: BoxShape.circle),
                       child: Icon(
                         Icons.send,
-                        color: Colors.white,
+                        //color: Colors.white,
                         size: 32,
                       ),
                     ),

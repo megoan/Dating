@@ -39,7 +39,9 @@ Widget conversation(BuildContext context, ConversationModel conversation) {
                     ),
                     Text(
                       conversation.message,
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(
+                        //color: Colors.grey
+                        ),
                     ),
                   ],
                 ),
@@ -52,16 +54,17 @@ Widget conversation(BuildContext context, ConversationModel conversation) {
                     Text(
                       conversation.date,
                       style: TextStyle(
-                          color: conversation.messageCout > 0
-                              ? Color(0xFF25D366)
-                              : Colors.grey),
+                        //  color: conversation.messageCout > 0 ? Color(0xFF25D366) : Colors.grey
+                          ),
                     ),
                     conversation.messageCout > 0
                         ? Chip(
-                            backgroundColor: Color(0xFF25D366),
+                          //  backgroundColor: Color(0xFF25D366),
                             label: Text(
                               '${conversation.messageCout}',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                              //  color: Colors.white
+                                ),
                             ),
                           )
                         : Text(''),
@@ -74,7 +77,7 @@ Widget conversation(BuildContext context, ConversationModel conversation) {
             width: 330,
             height: 1,
             margin: EdgeInsets.only(left: 56, top: 21),
-            color: Colors.grey.withOpacity(.2),
+           // color: Colors.grey.withOpacity(.2),
           )
         ],
       ),

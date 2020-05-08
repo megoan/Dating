@@ -13,13 +13,17 @@ class ChatCardWhats extends StatelessWidget {
       case ContentType.ABOUT:
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 1),
-          child: Icon(Icons.person_pin,color: Colors.grey,),
+          child: Icon(Icons.person_pin,
+         // color: Colors.grey,
+          ),
         );
         break;
       case ContentType.COMPARE:
          return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 1),
-          child: Icon(Icons.people,color: Colors.grey,),
+          child: Icon(Icons.people,
+        //  color: Colors.grey,
+          ),
         );
         break;
       case ContentType.JOINED:
@@ -48,8 +52,8 @@ class ChatCardWhats extends StatelessWidget {
                 ),
                 new ListTile(
                   leading: new CircleAvatar(
-                    foregroundColor: Theme.of(context).primaryColor,
-                    backgroundColor: Colors.grey,
+                   // foregroundColor: Theme.of(context).primaryColor,
+                   // backgroundColor: Colors.grey,
                     backgroundImage: new NetworkImage(  myChatList.thereIcon,),
                   ),
                   title: new Row(
@@ -61,7 +65,9 @@ class ChatCardWhats extends StatelessWidget {
                       ),
                       new Text(
                       StaticFunctions.getChatTime(myChatList.lastMessageTime),
-                        style: new TextStyle(color: (myChatList.unread>0)?Theme.of(context).accentColor:Colors.grey, fontSize: 14.0),
+                        style: new TextStyle(
+                         // color: (myChatList.unread>0)?Theme.of(context).accentColor:Colors.grey,
+                           fontSize: 14.0),
                       ),
                     ],
                   ),
@@ -79,7 +85,9 @@ class ChatCardWhats extends StatelessWidget {
                                                             child: new Text(
                                   myChatList.lastMessage.message,
                                    overflow: TextOverflow.ellipsis,
-                                  style: new TextStyle(color: Colors.grey, fontSize: 15.0),
+                                  style: new TextStyle(
+                                   // color: Colors.grey, 
+                                    fontSize: 15.0),
                                 ),
                               ),
                               
@@ -88,13 +96,15 @@ class ChatCardWhats extends StatelessWidget {
                         ),
                       if(myChatList.unread>0)  Container(
                         decoration: new BoxDecoration(
-                    color: Theme.of(context).accentColor, //new Color.fromRGBO(255, 0, 0, 0.0),
+                    //color: Theme.of(context).accentColor, //new Color.fromRGBO(255, 0, 0, 0.0),
                     borderRadius: new BorderRadius.all(
                      Radius.circular(30)
                   ),),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 2),
-                          child: Text(myChatList.unread.toString(),style: TextStyle(color:Colors.white),),
+                          child: Text(myChatList.unread.toString(),style: TextStyle(
+                            //color:Colors.white
+                            ),),
                         ),)
                       ],
                     ),

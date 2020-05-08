@@ -84,7 +84,9 @@ class _CompareThemListState extends State<CompareThemList> {
       appBar: AppBar(
           // backgroundColor: Color(0xFF128C7E),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
+            icon: Icon(Icons.arrow_back,
+            // color: Colors.white
+             ),
             onPressed: () => Navigator.of(context).maybePop(),
           ),
           titleSpacing: 0,
@@ -95,11 +97,15 @@ class _CompareThemListState extends State<CompareThemList> {
             ),
             title: Text(
              widget.myPerson.firstName,
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              style: TextStyle(
+                //color: Colors.white,
+                 fontSize: 18),
             ),
             subtitle: Text(
               LocaleText.getLocaleText(MyApp.getLocale(), 'Compare To')+":",
-              style: TextStyle(color: Colors.white.withOpacity(.7)),
+              style: TextStyle(
+                //color: Colors.white.withOpacity(.7)
+                ),
             ),
           ),
           // actions: <Widget>[
@@ -147,7 +153,7 @@ class _CompareThemListState extends State<CompareThemList> {
         child: Column(
           children: <Widget>[
             Container(
-              color: Colors.grey[200],
+              //color: Colors.grey[200],
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -160,8 +166,10 @@ class _CompareThemListState extends State<CompareThemList> {
                             //      myListSelected=!myListSelected;
                             // });
                           },
-                          color: Theme.of(context).primaryColor,
-                          child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'My list'), style: TextStyle(color: Colors.white)),
+                          //color: Theme.of(context).primaryColor,
+                          child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'My list'), style: TextStyle(
+                            //color: Colors.white
+                            )),
                           shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))),
                     if (!myListSelected)
                       OutlineButton(
@@ -187,7 +195,7 @@ class _CompareThemListState extends State<CompareThemList> {
                           borderRadius: new BorderRadius.circular(30.0),
                         ),
                         borderSide: BorderSide(
-                          color: Theme.of(context).primaryColor, //Color of the border
+                          //color: Theme.of(context).primaryColor, //Color of the border
                           style: BorderStyle.solid, //Style of the border
                           width: 1, //width of the border
                         ),
@@ -199,8 +207,10 @@ class _CompareThemListState extends State<CompareThemList> {
                             //    myFavoritesSelected=!myFavoritesSelected;
                             // });
                           },
-                          color: Theme.of(context).primaryColor,
-                          child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Favorites'), style: TextStyle(color: Colors.white)),
+                          //color: Theme.of(context).primaryColor,
+                          child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Favorites'), style: TextStyle(
+                            //color: Colors.white
+                            )),
                           shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))),
                     if (!myFavoritesSelected)
                       OutlineButton(
@@ -226,7 +236,7 @@ class _CompareThemListState extends State<CompareThemList> {
                           borderRadius: new BorderRadius.circular(30.0),
                         ),
                         borderSide: BorderSide(
-                          color: Theme.of(context).primaryColor, //Color of the border
+                          //color: Theme.of(context).primaryColor, //Color of the border
                           style: BorderStyle.solid, //Style of the border
                           width: 1, //width of the border
                         ),
@@ -238,8 +248,10 @@ class _CompareThemListState extends State<CompareThemList> {
                             //    allSelected=!allSelected;
                             // });
                           },
-                          color: Theme.of(context).primaryColor,
-                          child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Everyone'), style: TextStyle(color: Colors.white)),
+                          //color: Theme.of(context).primaryColor,
+                          child: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Everyone'), style: TextStyle(
+                            //color: Colors.white
+                            )),
                           shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))),
                     if (!allSelected)
                       OutlineButton(
@@ -265,7 +277,7 @@ class _CompareThemListState extends State<CompareThemList> {
                           borderRadius: new BorderRadius.circular(30.0),
                         ),
                         borderSide: BorderSide(
-                          color: Theme.of(context).primaryColor, //Color of the border
+                          //color: Theme.of(context).primaryColor, //Color of the border
                           style: BorderStyle.solid, //Style of the border
                           width: 1, //width of the border
                         ),
