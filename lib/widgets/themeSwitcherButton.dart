@@ -102,8 +102,12 @@ class _FancyFabState extends State<FancyFab> with SingleTickerProviderStateMixin
     // )).value,
       onPressed: animate,
       tooltip: 'Toggle',
-      child: (Theme.of(context).brightness!=Brightness.light)? HighLightedIcon(Icons.wb_sunny,color: Theme.of(context).accentColor,):
-      HighLightedIcon(Icons.brightness_3,color: Theme.of(context).accentColor,),
+      child: (Theme.of(context).brightness!=Brightness.light)? HighLightedIcon(Icons.wb_sunny,
+      //color: Theme.of(context).accentColor,
+      ):
+      HighLightedIcon(Icons.brightness_3,
+      //color: Theme.of(context).accentColor,
+      ),
 
     );
   }

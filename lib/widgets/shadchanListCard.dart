@@ -12,12 +12,12 @@ class ShadchanListCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      color: Colors.grey[300],
+      //color: Colors.grey[300],
       child: Column(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-                color: Colors.red[50],
+                //color: Colors.red[50],
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15.0),
                     topRight: Radius.circular(15.0))),
@@ -34,7 +34,7 @@ class ShadchanListCard extends StatelessWidget {
                         height: 78,
                         child: CircleAvatar(
                           radius: 100,
-                          backgroundColor: Theme.of(context).primaryColor,
+                          //backgroundColor: Theme.of(context).primaryColor,
                         ),
                       ),
                       Container(
@@ -90,7 +90,8 @@ class ShadchanListCard extends StatelessWidget {
                         "500",
                         style: TextStyle(
                             fontSize: 20,
-                            color: Theme.of(context).primaryColor),
+                            //color: Theme.of(context).primaryColor
+                            ),
                       ),
                       Text(LocaleText.getLocaleText(MyApp.getLocale(), 'viewes'))
                     ],
@@ -101,7 +102,9 @@ class ShadchanListCard extends StatelessWidget {
                     Text(
                       "50",
                       style: TextStyle(
-                          fontSize: 20, color: Theme.of(context).primaryColor),
+                          fontSize: 20,
+                          // color: Theme.of(context).primaryColor
+                          ),
                     ),
                     Text("requests")
                   ],
@@ -111,7 +114,9 @@ class ShadchanListCard extends StatelessWidget {
                     Text(
                       "4",
                       style: TextStyle(
-                          fontSize: 20, color: Theme.of(context).primaryColor),
+                          fontSize: 20,
+                           //color: Theme.of(context).primaryColor
+                           ),
                     ),
                     Text("dates")
                   ],

@@ -89,9 +89,15 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                             padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 2) : const EdgeInsets.only(left: 2),
                             child: Row(
                               children: <Widget>[
-                                Text(widget.person.firstName, style: TextStyle(fontSize: 20, color: Colors.white)),
-                                Text(" ,", style: TextStyle(fontSize: 20, color: Colors.white)),
-                                Text(StaticFunctions.getAge(widget.person.birthday).toString(), style: TextStyle(fontSize: 20, color: Colors.white)),
+                                Text(widget.person.firstName, style: TextStyle(fontSize: 20,
+                                 //color: Colors.white
+                                 )),
+                                Text(" ,", style: TextStyle(fontSize: 20,
+                                // color: Colors.white
+                                 )),
+                                Text(StaticFunctions.getAge(widget.person.birthday).toString(), style: TextStyle(fontSize: 20,
+                                 //color: Colors.white
+                                 )),
                               ],
                             ),
                           )
@@ -102,7 +108,9 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                       ),
                       Row(
                         children: <Widget>[
-                          Icon(Icons.location_on, color: Colors.white),
+                          Icon(Icons.location_on, 
+                          //color: Colors.white
+                          ),
                           Padding(
                             padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
                             child:
@@ -110,9 +118,13 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                width: 120,
                                       child: 
                                   (widget.person.area != null) ?Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.area.toString())+
-                                  ", "+LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15, color: Colors.white)):
+                                  ", "+LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15,
+                                   //color: Colors.white
+                                   )):
                                   
-                                  Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15, color: Colors.white)),
+                                  Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15, 
+                                  //color: Colors.white
+                                  )),
                             //     ],
                             // ),
                              ),
@@ -153,12 +165,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                 Icon(
                   Icons.star,
                   size: 42,
-                  color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.white : Theme.of(context).accentColor,
+                  //color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.white : Theme.of(context).accentColor,
                 ),
                 Icon(
                   Icons.star,
                   size: 38,
-                  color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Theme.of(context).accentColor : Colors.white,
+                  //color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Theme.of(context).accentColor : Colors.white,
                 ),
               ],
             ),
@@ -212,12 +224,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                               children: <Widget>[
                                 Icon(
                                   Icons.star,
-                                  color: Colors.black,
+                                  //color: Colors.black,
                                   size: 24,
                                 ),
                                 Icon(
                                   Icons.star,
-                                  color: Colors.cyan,
+                                  //color: Colors.cyan,
                                   size: 15,
                                 ),
                               ],
@@ -230,12 +242,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                               children: <Widget>[
                                 Icon(
                                   Icons.star,
-                                  color: Colors.black,
+                                  //color: Colors.black,
                                   size: 24,
                                 ),
                                 Icon(
                                   Icons.star,
-                                  color: Colors.cyan,
+                                 // color: Colors.cyan,
                                   size: 15,
                                 ),
                               ],
@@ -248,12 +260,12 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                               children: <Widget>[
                                 Icon(
                                   Icons.star,
-                                  color: Colors.black,
+                                 // color: Colors.black,
                                   size: 24,
                                 ),
                                 Icon(
                                   Icons.star,
-                                  color: Colors.cyan,
+                                //  color: Colors.cyan,
                                   size: 15,
                                 ),
                               ],

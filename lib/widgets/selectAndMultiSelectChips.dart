@@ -26,15 +26,21 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
       bool isSelected = pickedChips[value] != null && pickedChips[value] == true;
       chipList.add(FilterChip(
         elevation: isSelected ? 5 : 0,
-        selectedColor: ColorManager().theme.filterBackgroundColor,
-        checkmarkColor: ColorManager().theme.primary[300],
+        //selectedColor: ColorManager().theme.filterBackgroundColor,
+        //checkmarkColor: ColorManager().theme.primary[300],
         selected: isSelected ? true : false,
         label: new Text(
           LocaleText.getLocaleSelectText(MyApp.getLocale(), value.toString()),
-          style: TextStyle(color: ColorManager().theme.primary[300]),
+          style: TextStyle(
+            //color: ColorManager().theme.primary[300]
+            ),
         ),
-        backgroundColor: ColorManager().theme.fillColor,
-        shape: StadiumBorder(side: isSelected ? BorderSide(color: ColorManager().theme.primary[300]) : BorderSide(color: ColorManager().theme.fillColor)),
+        //backgroundColor: ColorManager().theme.fillColor,
+        shape: StadiumBorder(side: isSelected ? BorderSide(
+          //color: ColorManager().theme.primary[300]
+          ) : BorderSide(
+         // color: ColorManager().theme.fillColor
+          )),
         onSelected: (bool bvalue) {
           setState(() {
             pickedChips[value] = bvalue;
@@ -72,14 +78,21 @@ class _SelectChipState extends State<SelectChip> {
       chipList.add(FilterChip(
         showCheckmark: false,
         elevation: isSelected ? 5 : 0,
-        selectedColor: ColorManager().theme.filterBackgroundColor,
+        //selectedColor: ColorManager().theme.filterBackgroundColor,
         selected: isSelected ? true : false,
         label: new Text(
           LocaleText.getLocaleSelectText(MyApp.getLocale(), value.toString()),
-          style: TextStyle(color: ColorManager().theme.primary[300]),
+          style: TextStyle(
+            //color: ColorManager().theme.primary[300]
+            ),
         ),
-        backgroundColor: ColorManager().theme.fillColor,
-        shape: StadiumBorder(side: isSelected ? BorderSide(color: ColorManager().theme.primary[300]) : BorderSide(color: ColorManager().theme.fillColor)),
+        //backgroundColor: ColorManager().theme.fillColor,
+        shape: StadiumBorder(side: isSelected ? BorderSide(
+         // color: ColorManager().theme.primary[300]
+         )
+           : BorderSide(
+             //color: ColorManager().theme.fillColor
+             )),
 
         // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
         onSelected: (bool bvalue) {

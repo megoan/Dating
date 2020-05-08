@@ -46,8 +46,8 @@ class _PhotoPickerState extends State<PhotoPicker> {
       // ],
       androidUiSettings: AndroidUiSettings(
           toolbarTitle: 'Cropper',
-          toolbarColor: Theme.of(context).primaryColor,
-          toolbarWidgetColor: Colors.white,
+          //toolbarColor: Theme.of(context).primaryColor,
+          //toolbarWidgetColor: Colors.white,
           //initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
           //toolbarWidgetColor:Theme.of(context).primaryColor
@@ -75,12 +75,16 @@ class _PhotoPickerState extends State<PhotoPicker> {
                                Container(
                                 width: (widget.small)?120:150,
                                 height: (widget.small)?120:150,
-                                child: CircleAvatar(radius: 140,backgroundColor: Theme.of(context).primaryColor,),
+                                child: CircleAvatar(radius: 140,
+                                //backgroundColor: Theme.of(context).primaryColor,
+                                ),
                               ),
                               Container(
                                 width: (widget.small)?112:140,
                                 height:(widget.small)?112:140,
-                                child: widget.image!=null?CircleAvatar(backgroundImage:widget.imageUrl!=null?Image.network(widget.imageUrl): new FileImage(widget.image), radius: (widget.small)?112:140,):CircleAvatar(backgroundColor: Colors.grey ,radius: (widget.small)?112:140,)
+                                child: widget.image!=null?CircleAvatar(backgroundImage:widget.imageUrl!=null?Image.network(widget.imageUrl): new FileImage(widget.image), radius: (widget.small)?112:140,):CircleAvatar(
+                                  //backgroundColor: Colors.grey,
+                                  radius: (widget.small)?112:140,)
                               ),
                              
                             ],
@@ -143,12 +147,12 @@ class ImageButton extends StatelessWidget {
          },
          child: new Icon(
            iconData,
-           color: Colors.white,
+           //color: Colors.white,
            size: (small)?15:20
          ),
          shape: new CircleBorder(),
          elevation: 0,
-         fillColor: Theme.of(context).primaryColor,
+         //fillColor: Theme.of(context).primaryColor,
          padding: const EdgeInsets.all(0),
        ),
      );
@@ -172,10 +176,12 @@ class ImageNumberIcon extends StatelessWidget {
          onPressed: () {
            
          },
-         child: Text(number.toString(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+         child: Text(number.toString(),style: TextStyle(
+           //color: Colors.white,
+           fontWeight: FontWeight.bold),),
          shape: new CircleBorder(),
          elevation: 0,
-         fillColor: Theme.of(context).primaryColor,
+         //fillColor: Theme.of(context).primaryColor,
          padding: const EdgeInsets.all(0),
        ),
      );

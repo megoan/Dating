@@ -49,12 +49,12 @@ class CustomDialog extends StatelessWidget {
           ),
           margin: EdgeInsets.only(top: 66),
           decoration: new BoxDecoration(
-            color: Colors.white,
+            //color: Colors.white,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black26,
+                //color: Colors.black26,
                 blurRadius: 10.0,
                 offset: const Offset(0.0, 10.0),
               ),
@@ -115,8 +115,10 @@ class CustomDialog extends StatelessWidget {
                        
                       },
                       child: CircleAvatar(
-                        backgroundColor: Theme.of(context).accentColor,
-                        child: Icon(Icons.chat,color: Colors.white,))),
+                       // backgroundColor: Theme.of(context).accentColor,
+                        child: Icon(Icons.chat,
+                        //color: Colors.white,
+                        ))),
                 ],
               ),
               // Align(
@@ -144,7 +146,7 @@ class CustomDialog extends StatelessWidget {
                     height: 130,
                     child: CircleAvatar(
                       radius: 130,
-                      backgroundColor: Theme.of(context).accentColor,
+                      //backgroundColor: Theme.of(context).accentColor,
                     ),
                   ),
                   Container(

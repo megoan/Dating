@@ -70,31 +70,43 @@ class PersonListCard extends StatelessWidget {
                                           child: Column(
                         children: <Widget>[
                         Row(children: <Widget>[
-                          Icon(Icons.person,color:Colors.white),
+                          Icon(Icons.person,
+                          //color:Colors.white
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
-                            child: Text("Samy, 28",style:TextStyle(fontSize: 18,color:Colors.white)),
+                            child: Text("Samy, 28",style:TextStyle(fontSize: 18,
+                            //color:Colors.white
+                            )),
                           )
                         ], 
                         ),
                         SizedBox(height: 8,),
                           Row(children: <Widget>[
-                          Icon(Icons.location_city,color:Colors.white),
+                          Icon(Icons.location_city,
+                          //color:Colors.white
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
-                            child: Text("Bet Shemesh",style:TextStyle(fontSize: 18,color:Colors.white)),
+                            child: Text("Bet Shemesh",style:TextStyle(fontSize: 18,
+                            //color:Colors.white
+                            )),
                           )
                         ],
                         
                         ),
                          SizedBox(height: 8,),
                           Row(children: <Widget>[
-                          Icon(Icons.short_text,color:Colors.white),
+                          Icon(Icons.short_text,
+                          //color:Colors.white
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: FittedBox(
                               fit: BoxFit.fitWidth,
-                              child: Text("dsfjhfgsh djkasdfg dsfsdfsdf h",style:TextStyle(fontSize: 18,color:Colors.white))),
+                              child: Text("dsfjhfgsh djkasdfg dsfsdfsdf h",style:TextStyle(fontSize: 18,
+                             // color:Colors.white
+                              ))),
                           )
                         ],
                         
@@ -111,7 +123,9 @@ class PersonListCard extends StatelessWidget {
                                Container(
                                 width: 100,
                                 height: 100,
-                                child: CircleAvatar(radius: 100,backgroundColor: Theme.of(context).primaryColor,),
+                                child: CircleAvatar(radius: 100,
+                               // backgroundColor: Theme.of(context).primaryColor,
+                               ),
                               ),
                               Container(
                                 width: 90,
@@ -125,12 +139,18 @@ class PersonListCard extends StatelessWidget {
                                                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: <Widget>[
-                                      Icon(Icons.star,color: Colors.cyan,),
+                                      Icon(Icons.star,
+                                      //color: Colors.cyan,
+                                      ),
                                        Padding(
                                          padding: const EdgeInsets.only(top:5),
-                                         child: Icon(Icons.star,color: Colors.cyan,),
+                                         child: Icon(Icons.star,
+                                         //color: Colors.cyan,
+                                         ),
                                        ),
-                                        Icon(Icons.star,color: Colors.cyan,),
+                                        Icon(Icons.star,
+                                        //color: Colors.cyan,
+                                        ),
                                     ],
                                   ),
                                 ),
