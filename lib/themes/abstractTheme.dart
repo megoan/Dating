@@ -36,6 +36,7 @@ class AbstractTheme {
   );
 
    Color filterBackgroundColor = Color(0xff262e4b);
+  Color cardBackgroundColor = Color(0xff354066);
    Color fillColor = Color(0xff212842);
    Color textColor = Colors.white;
 }
@@ -74,48 +75,51 @@ class DarkTheme extends AbstractTheme{
       900: const Color(0xFF0000BD),
     },
   );
-
+//354066
    Color filterBackgroundColor = Color(0xff262e4b);
    Color fillColor = Color(0xff212842);
    Color textColor = Colors.white;
+   Color cardBackgroundColor = Color(0xff354066);
 }
 
 class LightTheme extends AbstractTheme{
 
- MaterialColor primary = const MaterialColor(
-    0xFF0079ff,
+
+  MaterialColor primary = const MaterialColor(
+    0xFFFFFFFF,
     const <int, Color>{
-      50: const Color(0xFFD5E9FF),
-      100: const Color(0xFFAAD2FF),
-      200: const Color(0xFF80BCFF),
-      300: const Color(0xFF55A6FF),
-      400: const Color(0xFF2B8FFF),
-      500: const Color(0xFF0079ff),
-      600: const Color(0xFF006AE0),
-      700: const Color(0xFF005CC2),
-      800: const Color(0xFF004DA3),
-      900: const Color(0xFF003F85),
+      50:  const Color(0xFFFFFFFF),
+      100: const Color(0xFFFFFFFF),
+      200: const Color(0xFFFFFFFF),
+      300: const Color(0xFFFFFFFF),
+      400: const Color(0xFFFFFFFF),
+      500: const Color(0xFFFFFFFF),
+      600: const Color(0xFFFFFFFF),
+      700: const Color(0xFFFFFFFF),
+      800: const Color(0xFFFFFFFF),
+      900: const Color(0xFFFFFFFF),
     },
   );
 
 
    MaterialColor secondary = const MaterialColor(
-    0xFF073D77,
+    0xFF3C46A2,
     const <int, Color>{
-      50: const Color(0xFFD6DFE8),
-      100: const Color(0xFFACBED2),
-      200: const Color(0xFF839EBB),
-      300: const Color(0xFF5A7EA4),
-      400: const Color(0xFF305D8E),
-      500: const Color(0xFF073D77),
-      600: const Color(0xFF063568),
-      700: const Color(0xFF042D5A),
-      800: const Color(0xFF03264B),
-      900: const Color(0xFF011E3D),
+      50: const Color(0xFFE7E8F3),
+      100: const Color(0xFFC2C6E3),
+      200: const Color(0xFF9DA1B0),
+      300: const Color(0xFF747DBD),
+      400: const Color(0xFF5861AF),
+      500: const Color(0xFF3C46A2),
+      600: const Color(0xFF363E98),
+      700: const Color(0xFF2E358D),
+      800: const Color(0xFF262B81),
+      900: const Color(0xFF18196C),
     },
   );
 
    Color filterBackgroundColor = Color(0xff262e4b);
+   Color cardBackgroundColor = Color(0xff354066);
    Color fillColor = Color(0xff212842);
    Color textColor = Colors.white;
 }

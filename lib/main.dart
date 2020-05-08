@@ -27,17 +27,17 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-   static void setTheme(BuildContext context){
-     if (ColorManager.mYTHEME == MYTHEME.DARK) {
-        ColorManager.mYTHEME = MYTHEME.LIGHT;
-     }
-     else{
-        ColorManager.mYTHEME = MYTHEME.DARK;
-     }
-   
-     _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
+  static void setTheme(BuildContext context) {
+    if (ColorManager.mYTHEME == MYTHEME.DARK) {
+      ColorManager.mYTHEME = MYTHEME.LIGHT;
+    } else {
+      ColorManager.mYTHEME = MYTHEME.DARK;
+    }
+
+    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
     state.setState(() {});
   }
+
   MyApp() {
     local = Locale('he');
   }
@@ -58,7 +58,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
- 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -71,15 +70,50 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         child: MaterialApp(
-          themeMode: ColorManager.mYTHEME == MYTHEME.DARK?ThemeMode.dark:ThemeMode.light,
+          themeMode: ColorManager.mYTHEME == MYTHEME.DARK ? ThemeMode.dark : ThemeMode.light,
           theme: ThemeData(
-            brightness: Brightness.light
-            //primaryColor: ColorManager().theme.primary,
-            //accentColor: ColorManager().theme.secondary,
+            hintColor: Colors.red,
+            buttonColor: Colors.red,
+            dividerColor: ColorManager().theme.secondary,
+
+            iconTheme: new IconThemeData(color: ColorManager().theme.secondary),
+            primaryTextTheme: TextTheme(title: TextStyle(color: ColorManager().theme.secondary)),
+            appBarTheme: AppBarTheme(
+              color: Color.fromARGB(255, 255, 255, 255),
+              iconTheme: new IconThemeData(color: ColorManager().theme.secondary),
+            ),
+            brightness: Brightness.light,
+            primaryColor: ColorManager().theme.primary,
+            accentColor: ColorManager().theme.secondary,
             //primarySwatch:  Colors.blue,
           ),
           darkTheme: ThemeData(
-            brightness: Brightness.dark
+             backgroundColor: Colors.red,
+             toggleButtonsTheme: ToggleButtonsThemeData(
+               color: Colors.green
+             ),
+            buttonTheme: ButtonThemeData(
+              disabledColor:  ColorManager().theme.secondary,
+              focusColor:  ColorManager().theme.secondary,
+              highlightColor: ColorManager().theme.secondary,
+              hoverColor: ColorManager().theme.secondary,
+              splashColor:  ColorManager().theme.secondary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+                side:BorderSide(color: Colors.red)
+              ),
+              buttonColor: ColorManager().theme.secondary, colorScheme: ColorScheme(primary: ColorManager().theme.secondary, primaryVariant: ColorManager().theme.secondary, secondary: ColorManager().theme.secondary, secondaryVariant: ColorManager().theme.secondary, surface: ColorManager().theme.secondary, background: ColorManager().theme.secondary, error: ColorManager().theme.secondary, onPrimary: ColorManager().theme.secondary, onSecondary: ColorManager().theme.secondary, onSurface: ColorManager().theme.secondary, onBackground: ColorManager().theme.secondary, onError: ColorManager().theme.secondary, brightness: Brightness.dark)
+                //highlightColor:  ColorManager().theme.secondary,
+                //s
+
+                ),
+            bottomAppBarColor: ColorManager().theme.primary[700],
+            //buttonColor: ColorManager().theme.secondary,
+            scaffoldBackgroundColor: ColorManager().theme.filterBackgroundColor,
+            cardColor: ColorManager().theme.cardBackgroundColor,
+            brightness: Brightness.dark,
+            primaryColor: ColorManager().theme.primary,
+            accentColor: ColorManager().theme.secondary,
           ),
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here
