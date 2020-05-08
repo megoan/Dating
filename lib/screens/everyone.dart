@@ -72,7 +72,7 @@ class _EveryoneState extends State<Everyone> {
   Widget build(BuildContext context) {
     try {
       return Container(
-          color: ColorManager().theme.filterBackgroundColor,
+          //color: ColorManager().theme.filterBackgroundColor,
           child: (isLoading)
               ? Center(
                   child: CircularProgressIndicator(),

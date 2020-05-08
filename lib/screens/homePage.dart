@@ -87,12 +87,14 @@ class _HomePageState extends State<HomePage> {
                     closedBuilder: (BuildContext _, VoidCallback openContainer) {
                       return Container(
                         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-                        color: ColorManager().theme.filterBackgroundColor,
+                        //color: ColorManager().theme.filterBackgroundColor,
                         child: Row(
                           children: <Widget>[
                             Expanded(
                               child: TextField(
-                                style: TextStyle(color: ColorManager().theme.textColor),
+                                style: TextStyle(
+                                  //color: ColorManager().theme.textColor
+                                ),
                                 controller: _filter,
                                 autofocus: true,
                                 onChanged: (value) {
@@ -103,12 +105,16 @@ class _HomePageState extends State<HomePage> {
                                   contentPadding: EdgeInsets.all(0),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                    borderSide: BorderSide(color: ColorManager().theme.primary, width: 1),
+                                    borderSide: BorderSide(
+                                      //color: ColorManager().theme.primary,
+                                       width: 1),
                                   ),
-                                  hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                                  hintStyle: TextStyle(
+                                   // color: ColorManager().theme.primary[300]
+                                    ),
                                   prefixIcon: new Icon(
                                     Icons.search,
-                                    color: ColorManager().theme.textColor,
+                                    //color: ColorManager().theme.textColor,
                                   ),
                                   hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
                                   border: OutlineInputBorder(
@@ -120,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                             IconButton(
                                 icon: Icon(
                                   Icons.filter_list,
-                                  color: ColorManager().theme.textColor,
+                                  //color: ColorManager().theme.textColor,
                                 ),
                                 onPressed: () => openContainer()),
                           ],
@@ -134,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                       icon: Icon(
                         Icons.ac_unit,
-                        color: Colors.black,
+                        //color: Colors.black,
                       ),
                       onPressed: () {
                         MyApp.setTheme(context);
@@ -152,7 +158,7 @@ class _HomePageState extends State<HomePage> {
           controller: controller,
           children: <Widget>[
             Container(
-              color: Colors.grey[300],
+              //color: Colors.grey[300],
               child: ShadchanList(),
               //  color: Colors.pink,
             ),
@@ -162,7 +168,7 @@ class _HomePageState extends State<HomePage> {
               //  color: Colors.cyan,
             ),
             Container(
-              color: Colors.grey[300],
+              //color: Colors.grey[300],
               child: FavoriteList(),
             ),
             Container(
@@ -210,11 +216,11 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: FABBottomAppBar(
           selectedIndex: selectedIndex,
           centerItemText: 'A',
-          color: Colors.grey,
-          selectedColor: Theme.of(context).primaryColor,
+          //color: Colors.grey,
+          //selectedColor: Theme.of(context).primaryColor,
           notchedShape: CircularNotchedRectangle(),
           onTabSelected: _selectedTab,
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           items: [
             // FABBottomAppBarItem(iconData: Icons.menu, text: 'This'),
             FABBottomAppBarItem(iconData: Icons.people_outline, text: LocaleText.getLocaleText(MyApp.getLocale(), "My list")),

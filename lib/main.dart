@@ -71,10 +71,15 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         child: MaterialApp(
+          themeMode: ColorManager.mYTHEME == MYTHEME.DARK?ThemeMode.dark:ThemeMode.light,
           theme: ThemeData(
-            primaryColor: ColorManager().theme.primary,
-            accentColor: ColorManager().theme.secondary,
+            brightness: Brightness.light
+            //primaryColor: ColorManager().theme.primary,
+            //accentColor: ColorManager().theme.secondary,
             //primarySwatch:  Colors.blue,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark
           ),
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here
