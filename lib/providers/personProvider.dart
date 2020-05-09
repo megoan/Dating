@@ -242,7 +242,7 @@ class PersonProvider extends ChangeNotifier {
   List<Person> allPeople = [];
   List<Person> myPeople = [];
   String nameFilter="";
-  
+  int numberofFilters = 0;
   double ageMax=99;
   double ageMin=18;
   Map<Area,bool> pickedArea;
@@ -250,6 +250,7 @@ class PersonProvider extends ChangeNotifier {
   Map<Status,bool> pickedStatus={};
   List<Gender> genders = [];
   List<Country> countrys = [];
+  
   void updateNameFilter(val){
 
        nameFilter=val;
@@ -293,6 +294,12 @@ class PersonProvider extends ChangeNotifier {
     }
     return true;
   }
+
+  void updateNumberOfFilters({int counter = 0}){
+    numberofFilters = counter;
+    notifyListeners();
+  }
+  
 
   Future<List<Person>> getAllPeopleQuery({Function predicate, Comparator<Person> personComparator}) {
     List<Person> temp = [];
@@ -489,6 +496,7 @@ class PersonProvider extends ChangeNotifier {
   }
 
   Future<String> 
+  
   addPerson(Person person) {
     return Future.delayed(Duration(milliseconds: 500)).then((onValue) {
       person.id = (allPeopleDataBase.length+1).toString();

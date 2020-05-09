@@ -10,6 +10,7 @@ class ShadchanProvider extends ChangeNotifier {
   List<Person> myFavoritesList = [];
   List<Shadchan> allShadchanim = [];
   Map<String, Shadchan> allShadchanimMap = {};
+  
   Future<bool> getAllShadchanim() async {
     if (allShadchanim.length==0) {
          allShadchanim = [];
@@ -40,7 +41,7 @@ class ShadchanProvider extends ChangeNotifier {
       return true;
     });
   }
-    Future<Shadchan>getShadchanByID(String id)async{
+  Future<Shadchan>getShadchanByID(String id)async{
     return Future.delayed(Duration(milliseconds: 500),(){
       for (var shadchan in allShadchanim) {
         if (shadchan.id==id) {
@@ -50,6 +51,7 @@ class ShadchanProvider extends ChangeNotifier {
       return null;
     });
   }
+  
   void removeFavorite(String id){
     if (myFavorites.containsKey(id)) {
       myFavorites.remove(id);

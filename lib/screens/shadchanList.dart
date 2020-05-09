@@ -50,11 +50,11 @@ class _ShadchanListState extends State<ShadchanList> {
 
   @override
   Widget build(BuildContext context) {
-    return(isLoading)?Center(child: CircularProgressIndicator(),) : ListView.builder(
+    return(isLoading)?Center(child: CircularProgressIndicator(),) :  ListView.builder(
   itemCount: personProvider.myPeople.length,
   itemBuilder: (BuildContext ctxt, int index) => Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: returnCard( personProvider.myPeople[index]),
+      padding: const EdgeInsets.all(8.0),
+      child: returnCard( personProvider.myPeople[index]),
   )
 );
 }
