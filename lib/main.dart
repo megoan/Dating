@@ -88,21 +88,60 @@ class _MyAppState extends State<MyApp> {
             //primarySwatch:  Colors.blue,
           ),
           darkTheme: ThemeData(
-             backgroundColor: Colors.red,
-             toggleButtonsTheme: ToggleButtonsThemeData(
-               color: Colors.green
-             ),
-            buttonTheme: ButtonThemeData(
-              disabledColor:  ColorManager().theme.secondary,
-              focusColor:  ColorManager().theme.secondary,
-              highlightColor: ColorManager().theme.secondary,
-              hoverColor: ColorManager().theme.secondary,
-              splashColor:  ColorManager().theme.secondary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-                side:BorderSide(color: Colors.red)
+            backgroundColor: ColorManager().theme.primary[300],
+
+            toggleButtonsTheme: ToggleButtonsThemeData(color: Colors.green),
+
+            chipTheme: ChipThemeData(
+                disabledColor: ColorManager().theme.fillColor,
+                backgroundColor: ColorManager().theme.fillColor,
+                checkmarkColor: ColorManager().theme.primary[300],
+                selectedColor: ColorManager().theme.filterBackgroundColor,
+                selectedShadowColor: ColorManager().theme.primary[300],
+                secondarySelectedColor: ColorManager().theme.filterBackgroundColor,
+                labelPadding: EdgeInsets.symmetric(horizontal: 10),
+                padding: EdgeInsets.all(0),
+                shape: StadiumBorder(side: BorderSide(color: ColorManager().theme.fillColor)),
+                labelStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                secondaryLabelStyle: TextStyle(color: ColorManager().theme.primary[300]),
+                brightness: Brightness.dark),
+
+            inputDecorationTheme: InputDecorationTheme(
+              fillColor: Colors.black12,
+              filled: true,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
               ),
-              buttonColor: ColorManager().theme.secondary, colorScheme: ColorScheme(primary: ColorManager().theme.secondary, primaryVariant: ColorManager().theme.secondary, secondary: ColorManager().theme.secondary, secondaryVariant: ColorManager().theme.secondary, surface: ColorManager().theme.secondary, background: ColorManager().theme.secondary, error: ColorManager().theme.secondary, onPrimary: ColorManager().theme.secondary, onSecondary: ColorManager().theme.secondary, onSurface: ColorManager().theme.secondary, onBackground: ColorManager().theme.secondary, onError: ColorManager().theme.secondary, brightness: Brightness.dark)
+              contentPadding: EdgeInsets.all(15),
+              border: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+              ),
+              hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+            ),
+
+            buttonTheme: ButtonThemeData(
+                disabledColor: ColorManager().theme.secondary,
+                focusColor: ColorManager().theme.secondary,
+                highlightColor: ColorManager().theme.secondary,
+                hoverColor: ColorManager().theme.secondary,
+                splashColor: ColorManager().theme.secondary,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30), side: BorderSide(color: ColorManager().theme.primary[300])),
+                buttonColor: ColorManager().theme.secondary,
+                colorScheme: ColorScheme(
+                    primary: ColorManager().theme.secondary,
+                    primaryVariant: ColorManager().theme.secondary,
+                    secondary: ColorManager().theme.secondary,
+                    secondaryVariant: ColorManager().theme.secondary,
+                    surface: ColorManager().theme.secondary,
+                    background: ColorManager().theme.secondary,
+                    error: ColorManager().theme.secondary,
+                    onPrimary: ColorManager().theme.secondary,
+                    onSecondary: ColorManager().theme.secondary,
+                    onSurface: ColorManager().theme.secondary,
+                    onBackground: ColorManager().theme.secondary,
+                    onError: ColorManager().theme.secondary,
+                    brightness: Brightness.dark)
                 //highlightColor:  ColorManager().theme.secondary,
                 //s
 
@@ -113,7 +152,7 @@ class _MyAppState extends State<MyApp> {
             cardColor: ColorManager().theme.cardBackgroundColor,
             brightness: Brightness.dark,
             primaryColor: ColorManager().theme.primary,
-            accentColor: ColorManager().theme.secondary,
+            accentColor: ColorManager().theme.primary[300],
           ),
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here
@@ -201,7 +240,13 @@ class _MyHomePageState extends State<MyHomePage> {
     final PhoneVerificationFailed verifiedFailed = (AuthException exception) {
       print('${exception.message}');
     };
-    await FirebaseAuth.instance.verifyPhoneNumber(phoneNumber: this.phoneCode.text + " " + this.phoneNo, codeAutoRetrievalTimeout: autoRetrieve, codeSent: smsCodeSent, timeout: const Duration(seconds: 5), verificationCompleted: verifiedSuccess, verificationFailed: verifiedFailed);
+    await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: this.phoneCode.text + " " + this.phoneNo,
+        codeAutoRetrievalTimeout: autoRetrieve,
+        codeSent: smsCodeSent,
+        timeout: const Duration(seconds: 5),
+        verificationCompleted: verifiedSuccess,
+        verificationFailed: verifiedFailed);
   }
 
   Future<bool> smsCodeDialog(BuildContext context) {

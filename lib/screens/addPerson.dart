@@ -264,7 +264,7 @@ class _AddPersonState extends State<AddPerson> {
       personProvider = Provider.of<PersonProvider>(context);
       print(widget.update);
       if (widget.update == null || !widget.update) {
-        personProvider.newPerson = new Person(shadchanID: personProvider.shadchanProvider.myShadchan.id);
+        personProvider.newPerson = new Person(shadchanID: personProvider.shadchanProvider.myShadchanId);
         personProvider.newPerson.areas = new Map<Area, bool>();
         personProvider.newPerson.countrys = new Map<Country, bool>();
         personProvider.newPerson.doses = new Map<Dos, bool>();
@@ -314,9 +314,9 @@ class _AddPersonState extends State<AddPerson> {
       child: Scaffold(
         key: _scaffoldKey,
         //backgroundColor: ColorManager().theme.filterBackgroundColor,
-        appBar: AppBar(
-          title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
-        ),
+        // appBar: AppBar(
+        //   title: Text(LocaleText.getLocaleText(MyApp.getLocale(), 'Add a candidate')),
+        // ),
         body: Stepper(
             type: StepperType.horizontal,
             currentStep: _index,

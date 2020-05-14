@@ -37,9 +37,9 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
         ),
         //backgroundColor: ColorManager().theme.fillColor,
         shape: StadiumBorder(side: isSelected ? BorderSide(
-          //color: ColorManager().theme.primary[300]
+          color: ColorManager().theme.primary[300]
           ) : BorderSide(
-         // color: ColorManager().theme.fillColor
+         color: ColorManager().theme.fillColor
           )),
         onSelected: (bool bvalue) {
           setState(() {
@@ -88,10 +88,10 @@ class _SelectChipState extends State<SelectChip> {
         ),
         //backgroundColor: ColorManager().theme.fillColor,
         shape: StadiumBorder(side: isSelected ? BorderSide(
-         // color: ColorManager().theme.primary[300]
+         color: ColorManager().theme.primary[300]
          )
            : BorderSide(
-             //color: ColorManager().theme.fillColor
+             color: ColorManager().theme.fillColor
              )),
 
         // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
