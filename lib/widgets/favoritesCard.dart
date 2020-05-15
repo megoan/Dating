@@ -26,7 +26,7 @@ class FavoritesCard extends StatelessWidget {
             child: Container(
           child: Row(
             children: <Widget>[
-              Padding(
+            Padding(
                 padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
                 child: InkWell(
                   onTap: (){
@@ -38,7 +38,7 @@ class FavoritesCard extends StatelessWidget {
                  ),
                 ),
               ),
-               Padding(
+            Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Stack(
                             alignment: AlignmentDirectional.center,
@@ -59,7 +59,7 @@ class FavoritesCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                         Expanded(
+            Expanded(
                                           child: Container(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

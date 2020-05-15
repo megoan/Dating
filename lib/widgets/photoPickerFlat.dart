@@ -62,11 +62,11 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                   height: (widget.small) ? 110 : 140,
                   child: widget.image != null
                       ? CircleAvatar(
-                          //backgroundColor: Colors.black12,
+                          backgroundColor: Colors.black12,
                           backgroundImage: widget.imageUrl != null ? Image.network(widget.imageUrl) : new FileImage(widget.image),
                         )
                       : CircleAvatar(
-                          backgroundColor: Colors.transparent,
+                          backgroundColor: Colors.black12,
                           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                             ImageButton(small: widget.small, image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
                             ImageButton(
@@ -132,7 +132,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                     border: Border.all(
                       color: ColorManager().theme.primary,
                        width: widget.imageUrl == null&&  widget.image == null? 1.5:2.5),
-                   // color: Colors.black12,
+                    color: Colors.black12,
                   ),
                   width: widget.width ?? widget.width,
                   height: widget.height ?? widget.height,

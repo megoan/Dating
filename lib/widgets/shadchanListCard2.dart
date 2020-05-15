@@ -5,6 +5,7 @@ import 'package:dating/providers/langText.dart';
 import 'package:dating/providers/personProvider.dart';
 import 'package:dating/providers/staticFunctions.dart';
 import 'package:dating/screens/compareThemList.dart';
+import 'package:dating/themes/colorManager.dart';
 import 'package:flutter/material.dart';
 import 'package:dating/screens/addPerson.dart';
 import 'package:provider/provider.dart';
@@ -47,10 +48,11 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
           child: Container(
             decoration: BoxDecoration(
               border: Border(
+                
                 //  top: BorderSide(width: 16.0, color: Colors.lightBlue.shade50),
                 right: BorderSide(
                   width: 12.0,
-                  //color: Theme.of(context).primaryColor,
+                  color: Colors.black12//ColorManager().theme.primary[800],
                 ),
               ),
             ),
@@ -162,7 +164,7 @@ class _ShadchanListCard2State extends State<ShadchanListCard2> {
                   ),
                 ),
                 Divider(
-                  height: 1,
+                  height: 1,thickness: 1.5,color: Colors.black12//ColorManager().theme.primary[800],
                 ),
                 Container(
                   child: Row(

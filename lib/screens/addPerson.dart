@@ -440,6 +440,7 @@ class _AddPersonState extends State<AddPerson> {
                                           width: 40,
                                           height: 40,
                                           decoration: BoxDecoration(
+                                           
                                             borderRadius: BorderRadius.circular(50),
                                             border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, 
                                             color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary
@@ -492,7 +493,7 @@ class _AddPersonState extends State<AddPerson> {
                         ),
                         if (missingImage)
                           Text(LocaleText.getLocaleText(MyApp.getLocale(), 'This field is required'), style: TextStyle(
-                            //color: Colors.red, fontSize: 12
+                            color: Colors.red[300], fontSize: 14
                             )),
                         SizedBox(
                           height: 20,
@@ -988,7 +989,7 @@ class _AddPersonState extends State<AddPerson> {
                           children: <Widget>[
                             Expanded(
                               child: Slider(
-                                //activeColor: ColorManager().theme.secondary,
+                                activeColor: ColorManager().theme.primary[300],
                                 min: 1.3,
                                 max: 2.3,
                                 divisions: 130,
