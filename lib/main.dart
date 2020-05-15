@@ -88,9 +88,10 @@ class _MyAppState extends State<MyApp> {
             //primarySwatch:  Colors.blue,
           ),
           darkTheme: ThemeData(
-            backgroundColor: ColorManager().theme.primary[300],
-
-            toggleButtonsTheme: ToggleButtonsThemeData(color: Colors.green),
+            backgroundColor: ColorManager().theme.primary,
+          errorColor: Colors.red[300],
+           
+           
 
             chipTheme: ChipThemeData(
                 disabledColor: ColorManager().theme.fillColor,
@@ -106,53 +107,46 @@ class _MyAppState extends State<MyApp> {
                 secondaryLabelStyle: TextStyle(color: ColorManager().theme.primary[300]),
                 brightness: Brightness.dark),
 
+
+            hintColor: ColorManager().theme.primary[300],
             inputDecorationTheme: InputDecorationTheme(
               fillColor: Colors.black12,
+              
               filled: true,
               enabledBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                borderSide: BorderSide(color: ColorManager().theme.primary, width: 0.6),
+                borderSide: BorderSide(color: ColorManager().theme.primary,),
+              ),
+                disabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                borderSide: BorderSide(color: ColorManager().theme.primary, ),
               ),
               contentPadding: EdgeInsets.all(15),
               border: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                 borderSide: BorderSide(color: ColorManager().theme.primary[300], ),
               ),
               hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
             ),
 
-            buttonTheme: ButtonThemeData(
-                disabledColor: ColorManager().theme.secondary,
-                focusColor: ColorManager().theme.secondary,
-                highlightColor: ColorManager().theme.secondary,
-                hoverColor: ColorManager().theme.secondary,
-                splashColor: ColorManager().theme.secondary,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30), side: BorderSide(color: ColorManager().theme.primary[300])),
-                buttonColor: ColorManager().theme.secondary,
-                colorScheme: ColorScheme(
-                    primary: ColorManager().theme.secondary,
-                    primaryVariant: ColorManager().theme.secondary,
-                    secondary: ColorManager().theme.secondary,
-                    secondaryVariant: ColorManager().theme.secondary,
-                    surface: ColorManager().theme.secondary,
-                    background: ColorManager().theme.secondary,
-                    error: ColorManager().theme.secondary,
-                    onPrimary: ColorManager().theme.secondary,
-                    onSecondary: ColorManager().theme.secondary,
-                    onSurface: ColorManager().theme.secondary,
-                    onBackground: ColorManager().theme.secondary,
-                    onError: ColorManager().theme.secondary,
-                    brightness: Brightness.dark)
-                //highlightColor:  ColorManager().theme.secondary,
-                //s
+            canvasColor: ColorManager().theme.fillColor, //משפיע על רקעי מערכת כמו הרקע של הכותרת של הסטפר
 
-                ),
-            bottomAppBarColor: ColorManager().theme.primary[700],
-            //buttonColor: ColorManager().theme.secondary,
+            
+            bottomAppBarColor: ColorManager().theme.primary,
+            dialogBackgroundColor: ColorManager().theme.filterBackgroundColor,
             scaffoldBackgroundColor: ColorManager().theme.filterBackgroundColor,
             cardColor: ColorManager().theme.cardBackgroundColor,
             brightness: Brightness.dark,
             primaryColor: ColorManager().theme.primary,
             accentColor: ColorManager().theme.primary[300],
+            snackBarTheme: SnackBarThemeData(backgroundColor: ColorManager().theme.secondary,contentTextStyle: TextStyle(color:Colors.white)) ,
+            buttonTheme: ButtonThemeData( //משפיע על כפתורי מערכת כמו המשך ב stepper
+           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),buttonColor: ColorManager().theme.secondary,
+            ),
+
+             // toggleButtonsTheme: ToggleButtonsThemeData(color: Colors.green),
+            
+             //buttonColor: ColorManager().theme.secondary,
           ),
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here

@@ -56,8 +56,8 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
             children: [
               Container(
                   decoration: BoxDecoration(border: Border.all(
-                    //color: ColorManager().theme.primary,
-                     width: 2.0), shape: BoxShape.circle),
+                    color: ColorManager().theme.primary,
+                     width: widget.imageUrl == null&&  widget.image == null? 1.5:2.5), shape: BoxShape.circle),
                   width: (widget.small) ? 110 : 140,
                   height: (widget.small) ? 110 : 140,
                   child: widget.image != null
@@ -66,7 +66,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                           backgroundImage: widget.imageUrl != null ? Image.network(widget.imageUrl) : new FileImage(widget.image),
                         )
                       : CircleAvatar(
-                         // backgroundColor: Colors.black12,
+                          backgroundColor: Colors.transparent,
                           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                             ImageButton(small: widget.small, image: widget.image, imageCallBack: getCameraImage, iconData: Icons.add_a_photo),
                             ImageButton(
@@ -85,7 +85,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                     width: widget.circle ? 30 : 40,
                     height: widget.circle ? 30 : 40,
                     decoration: BoxDecoration(
-                      //color: ColorManager().theme.primary,
+                      color: ColorManager().theme.primary,
                       borderRadius: widget.circle ? BorderRadius.only(topLeft: Radius.circular(20), bottomRight: Radius.circular(20)) : BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(5)),
                     ),
                     child: ImageButton(
@@ -106,7 +106,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                     width: widget.circle ? 30 : 40,
                     height: widget.circle ? 30 : 40,
                     decoration: BoxDecoration(
-                     // color: ColorManager().theme.primary,
+                      color: ColorManager().theme.primary,
                       borderRadius: widget.circle
                           ? BorderRadius.only(bottomLeft: Radius.circular(20), topRight: Radius.circular(20))
                           : BorderRadius.only(
@@ -130,8 +130,8 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                      //color: ColorManager().theme.primary,
-                       width: 2.0),
+                      color: ColorManager().theme.primary,
+                       width: widget.imageUrl == null&&  widget.image == null? 1.5:2.5),
                    // color: Colors.black12,
                   ),
                   width: widget.width ?? widget.width,
@@ -157,7 +157,7 @@ class _PhotoPickerFlatState extends State<PhotoPickerFlat> {
                   right: 0,
                   child: Container(
                     decoration: BoxDecoration(
-                      //color: ColorManager().theme.primary,
+                      color: ColorManager().theme.primary,
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(20)),
                     ),
                     child: Column(
@@ -205,11 +205,11 @@ class ImageButton extends StatelessWidget {
       },
       constraints: small ? BoxConstraints(minWidth: 35, minHeight: 35) : BoxConstraints(minWidth: 40, minHeight: 40),
       child: new Icon(iconData,
-       //color: Colors.white,
+       color: Colors.white,
         size: small ? 16 : 20),
       shape: new CircleBorder(),
       elevation: 0,
-      //fillColor: color,
+      fillColor: color,
       padding: const EdgeInsets.all(0),
     );
   }

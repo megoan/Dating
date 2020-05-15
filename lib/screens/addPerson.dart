@@ -411,28 +411,10 @@ class _AddPersonState extends State<AddPerson> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     TextFormField(
-                                      //cursorColor: Colors.white,
-                                      style: themeTextStyle,
-                                      initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
+                                     initialValue: personProvider.newPerson != null && personProvider.newPerson.firstName != null ? personProvider.newPerson.firstName : "",
                                       decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.all(15),
-                                        filled: true,
-                                        fillColor: Colors.black12,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                          borderSide: BorderSide(
-                                            //color: ColorManager().theme.primary,
-                                             width: 0.6),
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                        ),
-
-                                        hintStyle: TextStyle(
-                                          //color: ColorManager().theme.primary[300]
-                                          ),
-                                        labelStyle: themeTextStyle, //TextStyle(color: ColorManager().theme.primary),
-                                        hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
+                                     
+                                       hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Plony'),
                                         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'First name'),
                                       ),
                                       inputFormatters: [new LengthLimitingTextInputFormatter(30)],
@@ -441,26 +423,9 @@ class _AddPersonState extends State<AddPerson> {
                                     ),
                                     //LAST NAME
                                     TextFormField(
-                                      //cursorColor: Colors.white,
-                                      style: themeTextStyle,
-                                      initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
+                                     initialValue: personProvider.newPerson != null && personProvider.newPerson.lastName != null ? personProvider.newPerson.lastName : "",
                                       decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.black12,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                          borderSide: BorderSide(
-                                            //color: ColorManager().theme.primary,
-                                             width: 0.6),
-                                        ),
-                                        contentPadding: EdgeInsets.all(15),
-                                        border: OutlineInputBorder(
-                                          borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                        ),
-                                        hintStyle: TextStyle(
-                                          //color: ColorManager().theme.primary[300]
-                                          ),
-                                        labelStyle: themeTextStyle,
+                                      
                                         hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'Almony'),
                                         labelText: LocaleText.getLocaleText(MyApp.getLocale(), 'Last name'),
                                       ),
@@ -477,14 +442,14 @@ class _AddPersonState extends State<AddPerson> {
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
                                             border: Border.all(width: sSelected == Gender.MALE ? 2.0 : 1.5, 
-                                            //color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary
+                                            color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary
                                             ),
                                           ),
                                           child: IconButton(
                                               icon: FaIcon(FontAwesomeIcons.male),
-                                              //color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
+                                            color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
                                               padding: EdgeInsets.all(5.0),
-                                              // alignment: Alignment.centerRight,
+                                             
                                               onPressed: () => setState(() {
                                                     sSelected = Gender.MALE;
                                                   })),
@@ -492,7 +457,7 @@ class _AddPersonState extends State<AddPerson> {
                                         Text(
                                           "  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Boy'),
                                           style: sSelected == Gender.MALE ? themeTextStyle : TextStyle(
-                                            //color: Colors.white60
+                                            color: Colors.white60
                                             ),
                                         ),
                                         Spacer(),
@@ -502,20 +467,20 @@ class _AddPersonState extends State<AddPerson> {
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
                                             border: Border.all(width: sSelected == Gender.FEMALE ? 2.0 : 1.5,
-                                             //color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary
+                                             color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary
                                              ),
                                           ),
                                           child: IconButton(
                                               icon: FaIcon(FontAwesomeIcons.female),
-                                              //color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
+                                              color: sSelected == Gender.FEMALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary,
                                               padding: EdgeInsets.all(5.0),
-                                              //alignment: Alignment.centerRight,
+                                             
                                               onPressed: () => setState(() {
                                                     sSelected = Gender.FEMALE;
                                                   })),
                                         ),
                                         Text("  " + LocaleText.getLocaleText(MyApp.getLocale(), 'Girl'), style: sSelected == Gender.FEMALE ? themeTextStyle : TextStyle(
-                                          //color: Colors.white60
+                                          color: Colors.white60
                                           )),
                                       ],
                                     ),
@@ -587,8 +552,10 @@ class _AddPersonState extends State<AddPerson> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 FlatButton(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0), side: BorderSide(
-                                    //color: ColorManager().theme.primary
+                                  color: Colors.black12,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0), side: BorderSide(
+                                    color: state.hasError
+                                    ? Colors.red[300]:ColorManager().theme.primary
                                     )),
                                   //color: Colors.black12,
                                   onPressed: () {
@@ -637,7 +604,7 @@ class _AddPersonState extends State<AddPerson> {
                                     ? Text(
                                         state.errorText,
                                         style: TextStyle(
-                                          //color: Colors.red,
+                                          color: Colors.red[300],
                                            fontSize: 12),
                                       )
                                     : Container()
@@ -666,24 +633,17 @@ class _AddPersonState extends State<AddPerson> {
                           ],
                         ),
                         TextFormField(
-                          //cursorColor: Colors.white,
+                        
                           style: TextStyle(
-                            //color: Colors.white,
+                           
                              fontSize: 18
                             ),
                           initialValue: personProvider.newPerson != null && personProvider.newPerson.phone != null ? personProvider.newPerson.phone : "",
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(15),
-                            filled: true,
-                            //fillColor: Colors.black12,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(
-                                
-                               // color: ColorManager().theme.primary,
-                                 width: 0.6),
-                            ),
+                           
+                           
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             ),
@@ -716,7 +676,7 @@ class _AddPersonState extends State<AddPerson> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 SelectChip(Country.values, (country) {
-                                  //state.didChange(country);
+                                  
                                   setState(() {
                                     personProvider.newPerson.country = country;
                                   });
@@ -724,10 +684,7 @@ class _AddPersonState extends State<AddPerson> {
                                 state.hasError
                                     ? Text(
                                         state.errorText,
-                                        style: TextStyle(
-                                          //color: Colors.red, 
-                                          fontSize: 12),
-                                      )
+                                        style: TextStyle(fontSize: 12))
                                     : Container()
                               ],
                             );
@@ -978,22 +935,7 @@ class _AddPersonState extends State<AddPerson> {
                           maxLines: null,
                           maxLength: 70,
                           decoration: InputDecoration(
-                            filled: true,
-                            //fillColor: Colors.black12,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(
-                               // color: ColorManager().theme.primary,
-                               width: 0.6),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                            ),
-                            //icon: const Icon(Icons.short_text),
-                            hintStyle: TextStyle(
-                             // color:  ColorManager().theme.primary[300]
-                            ),
-
+                            
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them short'),
                           ),
                           inputFormatters: [new LengthLimitingTextInputFormatter(70)],
@@ -1021,20 +963,6 @@ class _AddPersonState extends State<AddPerson> {
                           maxLines: null,
                           minLines: 5,
                           decoration: InputDecoration(
-                            filled: true,
-                            //fillColor: Colors.black12,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                              borderSide: BorderSide(
-                                //color: ColorManager().theme.primary, 
-                                width: 0.6),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                            ),
-                            hintStyle: TextStyle(
-                              //color: ColorManager().theme.primary[300]
-                              ),
                             hintText: LocaleText.getLocaleText(MyApp.getLocale(), 'About them long'),
                           ),
                           // inputFormatters: [
