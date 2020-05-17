@@ -131,14 +131,14 @@ class _MyAppState extends State<MyApp> {
 
             canvasColor: ColorManager().theme.fillColor, //משפיע על רקעי מערכת כמו הרקע של הכותרת של הסטפר
 
-            
-            bottomAppBarColor: ColorManager().theme.primary,
+            appBarTheme: AppBarTheme(color: ColorManager().theme.fillColor ),
+            bottomAppBarColor: ColorManager().theme.fillColor,
             dialogBackgroundColor: ColorManager().theme.filterBackgroundColor,
             scaffoldBackgroundColor: ColorManager().theme.filterBackgroundColor,
             cardColor: ColorManager().theme.cardBackgroundColor,
             brightness: Brightness.dark,
             primaryColor: ColorManager().theme.primary,
-            accentColor: ColorManager().theme.primary[300],
+            accentColor: ColorManager().theme.secondary,
             snackBarTheme: SnackBarThemeData(backgroundColor: ColorManager().theme.secondary,contentTextStyle: TextStyle(color:Colors.white)) ,
             buttonTheme: ButtonThemeData( //משפיע על כפתורי מערכת כמו המשך ב stepper
            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),buttonColor: ColorManager().theme.secondary,

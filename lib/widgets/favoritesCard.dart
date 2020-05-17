@@ -10,6 +10,7 @@ import 'package:dating/screens/profileInfo.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
 import 'loader.dart';
+import 'package:dating/themes/colorManager.dart';
 class FavoritesCard extends StatelessWidget {
   final Person person;
   final Shadchan shadchan;
@@ -26,6 +27,16 @@ class FavoritesCard extends StatelessWidget {
             child: Container(
           child: Row(
             children: <Widget>[
+            // InkWell(
+            //               child: Container(
+            //     height: 60,
+            //     width: 30,
+            //     decoration: BoxDecoration(
+            //       color: Colors.grey[200],//ColorManager().theme.filterBackgroundColor,
+            //       borderRadius: BorderRadius.only(
+            //     topLeft: Radius.circular(100),bottomLeft:Radius.circular(100) 
+            //   )),child: Icon(Icons.delete,size:20,color: Colors.grey[700] ,)),
+            // ),
             Padding(
                 padding: MyApp.getLocale()=="he"? const EdgeInsets.only(right: 10):const EdgeInsets.only(left: 10),
                 child: InkWell(
@@ -34,7 +45,7 @@ class FavoritesCard extends StatelessWidget {
                     reset();
                   },
                   child: Icon(Icons.cancel,size:40,
-                 // color: Theme.of(context).primaryColor,
+                
                  ),
                 ),
               ),
@@ -89,7 +100,8 @@ class FavoritesCard extends StatelessWidget {
                         ),
             Padding(
               padding: MyApp.getLocale()=="he"? const EdgeInsets.only(left: 10):const EdgeInsets.only(right: 10),
-              child: OutlineButton(
+              child: RaisedButton(
+               color: ColorManager().theme.secondary,
                           onPressed: (){
                             Navigator.of(context).push( new MaterialPageRoute( builder: (context) => new CompareThemList(person,shadchan)));
                           },
@@ -97,7 +109,7 @@ class FavoritesCard extends StatelessWidget {
                           child: Row(
                             children: <Widget>[
                               Text( LocaleText.getLocaleText(MyApp.getLocale(), 'Compare'),style: TextStyle(
-                                //color: Theme.of(context).accentColor
+                               color: Colors.white
                                 ),),
                             ],
                           ),
@@ -105,12 +117,7 @@ class FavoritesCard extends StatelessWidget {
                         shape: new RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(30.0),
                                 ),
-                       borderSide: BorderSide(
-                         
-                    //color: Theme.of(context).accentColor, //Color of the border
-                    style: BorderStyle.solid, //Style of the border
-                    width: 1, //width of the border
-                  ),),
+                     ),
             ),
             ],
             

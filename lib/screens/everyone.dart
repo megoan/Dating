@@ -71,7 +71,7 @@ class _EveryoneState extends State<Everyone> {
                             closedBuilder: (BuildContext _, VoidCallback openContainer) {
                               return Container(
                                 padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                                color: ColorManager().theme.filterBackgroundColor,
+                                
                                 child: Row(
                                   children: <Widget>[
                                     SizedBox(width: 5,),
@@ -93,7 +93,7 @@ class _EveryoneState extends State<Everyone> {
                                           hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
                                           prefixIcon: new Icon(
                                             Icons.search,
-                                            color: ColorManager().theme.textColor,
+                                            color: ColorManager().theme.primary[300],
                                           ),
                                           hintText: LocaleText.getLocaleText(MyApp.getLocale(), "Search Name"),
                                           border: OutlineInputBorder(
@@ -173,8 +173,8 @@ class _OpenContainerWrapper extends StatelessWidget {
       },
       tappable: false,
       closedBuilder: closedBuilder,
-      openColor: AppTheme.filterBackgroundColor,
-      closedColor: AppTheme.filterBackgroundColor,
+      openColor: ColorManager().theme.fillColor,
+      closedColor:ColorManager().theme.fillColor,
     );
   }
 }
