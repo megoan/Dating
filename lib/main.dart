@@ -111,7 +111,6 @@ class _MyAppState extends State<MyApp> {
             hintColor: ColorManager().theme.primary[300],
             inputDecorationTheme: InputDecorationTheme(
               fillColor: Colors.black12,
-              
               filled: true,
               enabledBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(30.0)),

@@ -54,9 +54,9 @@ class _EveryBodyFilterState extends State<EveryBodyFilter> {
     return WillPopScope(
       onWillPop: () async => await updateFilterCount(),
           child: Scaffold(
-        //backgroundColor: ColorManager().theme.filterBackgroundColor,
+       
         appBar: AppBar(
-            //backgroundColor: ColorManager().theme.filterBackgroundColor,
+           
             ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
