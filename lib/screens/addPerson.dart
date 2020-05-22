@@ -535,7 +535,8 @@ class _AddPersonState extends State<AddPerson> {
                               children: <Widget>[
                                 FlatButton(
                                   color: Colors.black12,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0), side: BorderSide(color: state.hasError ? Colors.red[300] : ColorManager().theme.primary)),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0), side: BorderSide(color: state.hasError ? Colors.red[300] : 
+                                  ColorManager().theme.primary)),
                                   //color: Colors.black12,
                                   onPressed: () {
                                     showModalBottomSheet(
@@ -616,9 +617,7 @@ class _AddPersonState extends State<AddPerson> {
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(15),
-                            border: OutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                            ),
+                           
                             hintStyle: TextStyle(
                                 //color: ColorManager().theme.primary[300]
                                 ),

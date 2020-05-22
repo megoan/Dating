@@ -39,6 +39,9 @@ class AbstractTheme {
    Color cardBackgroundColor = Color(0xFFC2C6E3);
    Color fillColor = const Color(0xFF747DBD);
    Color textColor = Colors.black87;
+   Color fillOnBackGroundColor = const Color(0xFFFFFFFF);
+   Color darkPrimeryLightSecondary = Color(0xFF3C46A2);
+   Color darkPrimeryLightGrey = Color(0xFF6646d0);
 }
 
 class DarkTheme extends AbstractTheme{
@@ -75,11 +78,13 @@ class DarkTheme extends AbstractTheme{
       900: const Color(0xFF0000BD),
     },
   );
-//354066
    Color filterBackgroundColor = Color(0xff262e4b);
    Color fillColor = Color(0xff212842);
    Color textColor = Colors.white;
    Color cardBackgroundColor = Color(0xff354066);
+   Color fillOnBackGroundColor = Colors.black12;
+   Color darkPrimeryLightSecondary = Color(0xFF3C46A2);
+   Color darkPrimeryLightGrey = Color(0xFF3C46A2);
 }
 
 class LightTheme extends AbstractTheme{
@@ -118,10 +123,13 @@ class LightTheme extends AbstractTheme{
     },
   );
 
- Color filterBackgroundColor = Color(0xFF6646d0);
-   Color cardBackgroundColor = Color(0xFFC2C6E3);
-   Color fillColor = const Color(0xFF363E98);
-   Color textColor = Colors.black87;
+   Color filterBackgroundColor = const Color(0xFF6646d0);
+   Color cardBackgroundColor = const Color(0xFFC2C6E3);
+   Color fillColor = const Color(0xFFFFFFFF);
+   Color textColor = Colors.black54;
+   Color fillOnBackGroundColor = const Color(0xFFFFFFFF);
+   Color darkPrimeryLightSecondary = Color(0xFF6646d0);
+   Color darkPrimeryLightGrey = Colors.black12;
 }
 
 

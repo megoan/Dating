@@ -20,7 +20,7 @@ import 'dart:ui' as ui;
 Locale local;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  ColorManager.mYTHEME = MYTHEME.DARK;
+  ColorManager.mYTHEME = MYTHEME.LIGHT;
 
   Provider.debugCheckInvalidValueType = null;
   runApp(MyApp());
@@ -72,8 +72,8 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
           themeMode: ColorManager.mYTHEME == MYTHEME.DARK ? ThemeMode.dark : ThemeMode.light,
           theme: ThemeData(
-          //backgroundColor: ColorManager().theme.primary,
           errorColor: Colors.red[300],
+          hintColor: Colors.grey,//ColorManager().theme.secondary,
 
           chipTheme: ChipThemeData(
           disabledColor: ColorManager().theme.primary,
@@ -90,29 +90,29 @@ class _MyAppState extends State<MyApp> {
           
           brightness: Brightness.light),
           
-          
-          
-          hintColor: ColorManager().theme.primary[300],
-          
-          
-          
           inputDecorationTheme: InputDecorationTheme(
-              fillColor: Colors.black12,
-              filled: true,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                borderSide: BorderSide(color: ColorManager().theme.primary,),
-              ),
-                disabledBorder: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                borderSide: BorderSide(color: ColorManager().theme.primary, ),
-              ),
+            
+          //  enabledBorder: OutlineInputBorder(
+          //       borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+          //       borderSide: BorderSide(color: ColorManager().theme.secondary,),
+          //     ),
+          //       disabledBorder: OutlineInputBorder(
+          //       borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+          //       borderSide: BorderSide(color: ColorManager().theme.secondary, ),
+          //     ),
+
+          //     focusedBorder: OutlineInputBorder(
+          //       borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+          //       borderSide: BorderSide(color: ColorManager().theme.secondary, ),
+          //     ),
+              
               contentPadding: EdgeInsets.all(15),
-              border: OutlineInputBorder(
-                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                 borderSide: BorderSide(color: ColorManager().theme.primary[300], ),
-              ),
-              hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
+              // border: OutlineInputBorder(
+              //   // borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+              //   // borderSide: BorderSide(color: ColorManager().theme.secondary, ),
+              // ),
+              labelStyle: TextStyle(color: Colors.grey[600]),
+              hintStyle: TextStyle(color: Colors.grey[600])// ColorManager().theme.secondary),
             ),
   //        textTheme: Theme.of(context).textTheme.apply(
   // bodyColor: Colors.grey[600],),
@@ -125,7 +125,7 @@ class _MyAppState extends State<MyApp> {
             scaffoldBackgroundColor: ColorManager().theme.primary,
             //cardColor: ColorManager().theme.cardBackgroundColor,
             brightness: Brightness.light,
-            primaryColor: ColorManager().theme.primary,
+            primaryColor: ColorManager().theme.secondary,
             accentColor: ColorManager().theme.secondary,
             snackBarTheme: SnackBarThemeData(backgroundColor: ColorManager().theme.secondary,contentTextStyle: TextStyle(color:Colors.white)) ,
             buttonTheme: ButtonThemeData( //משפיע על כפתורי מערכת כמו המשך ב stepper
