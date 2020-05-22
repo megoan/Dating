@@ -36,7 +36,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
             ColorManager().theme.primary[300]
             :
              isSelected ? ColorManager().theme.primary[300]
-            : ColorManager().theme.secondary
+            : ColorManager().theme.secondary[300]
             ),
         ),
         //backgroundColor: ColorManager().theme.fillColor,
@@ -49,7 +49,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
              color: ColorManager().theme.fillColor
              ):
              BorderSide(
-             color: ColorManager().theme.secondary,
+             color: ColorManager().theme.secondary[300],
              )
              ),
         onSelected: (bool bvalue) {
@@ -97,8 +97,8 @@ class _SelectChipState extends State<SelectChip> {
             color: ColorManager.mYTHEME == MYTHEME.DARK ?
             ColorManager().theme.primary[300]
             :
-             isSelected ? ColorManager().theme.primary[300]
-            : ColorManager().theme.secondary
+             isSelected ? ColorManager().theme.primary
+            : ColorManager().theme.secondary[300]
             ),
         ),
         //backgroundColor: ColorManager().theme.fillColor,
@@ -111,7 +111,7 @@ class _SelectChipState extends State<SelectChip> {
              color: ColorManager().theme.fillColor
              ):
              BorderSide(
-             color: ColorManager().theme.secondary,
+             color: ColorManager().theme.secondary[300],
              )
              ),
 

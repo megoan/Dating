@@ -42,6 +42,7 @@ class AbstractTheme {
    Color fillOnBackGroundColor = const Color(0xFFFFFFFF);
    Color darkPrimeryLightSecondary = Color(0xFF3C46A2);
    Color darkPrimeryLightGrey = Color(0xFF6646d0);
+  Color darkWhiteLightSecondary =  Colors.white;
 }
 
 class DarkTheme extends AbstractTheme{
@@ -85,6 +86,7 @@ class DarkTheme extends AbstractTheme{
    Color fillOnBackGroundColor = Colors.black12;
    Color darkPrimeryLightSecondary = Color(0xFF3C46A2);
    Color darkPrimeryLightGrey = Color(0xFF3C46A2);
+   Color darkWhiteLightSecondary =  Colors.white;
 }
 
 class LightTheme extends AbstractTheme{
@@ -110,16 +112,16 @@ class LightTheme extends AbstractTheme{
    MaterialColor secondary = const MaterialColor(
     0xFF6646d0,
     const <int, Color>{
-      50: const Color(0xFFE7E8F3),
-      100: const Color(0xFFC2C6E3),
-      200: const Color(0xFF9DA1B0),
-      300: const Color(0xFF747DBD),
-      400: const Color(0xFF5861AF),
+      50: const Color(0xFFFFFFFF),
+      100: const Color(0xFFE0DAF6),
+      200: const Color(0xFFC2B5EC),
+      300: const Color(0xFFA390E3),
+      400: const Color(0xFF856BD9),
       500: const Color(0xFF6646d0),
-      600: const Color(0xFF363E98),
-      700: const Color(0xFF2E358D),
-      800: const Color(0xFF262B81),
-      900: const Color(0xFF18196C),
+      600: const Color(0xFF5238A6),
+      700: const Color(0xFF3D2A7D),
+      800: const Color(0xFF291C53),
+      900: const Color(0xFF140E2A),
     },
   );
 
@@ -130,6 +132,7 @@ class LightTheme extends AbstractTheme{
    Color fillOnBackGroundColor = const Color(0xFFFFFFFF);
    Color darkPrimeryLightSecondary = Color(0xFF6646d0);
    Color darkPrimeryLightGrey = Colors.black12;
+   Color darkWhiteLightSecondary = const Color(0xFF6646d0);
 }
 
 

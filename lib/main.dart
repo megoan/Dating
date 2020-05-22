@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
           secondarySelectedColor: ColorManager().theme.primary,
           labelPadding: EdgeInsets.symmetric(horizontal: 10),
           padding: EdgeInsets.all(0),
-          shape: StadiumBorder(side: BorderSide(color: ColorManager().theme.secondary,width: 1.5)),
+          shape: StadiumBorder(side: BorderSide(color: Color(0xFFA390E3),width: 1.5)),
           labelStyle: TextStyle(color: ColorManager().theme.secondary),
           secondaryLabelStyle: TextStyle(color: ColorManager().theme.secondary),
           
@@ -116,7 +116,7 @@ class _MyAppState extends State<MyApp> {
             ),
   //        textTheme: Theme.of(context).textTheme.apply(
   // bodyColor: Colors.grey[600],),
-  iconTheme: IconThemeData(color: Colors.grey[600]),
+  iconTheme: IconThemeData(color: Colors.grey),
             //canvasColor: ColorManager().theme.fillColor, //משפיע על רקעי מערכת כמו הרקע של הכותרת של הסטפר
 
             //appBarTheme: AppBarTheme(color: ColorManager().theme.fillColor ),

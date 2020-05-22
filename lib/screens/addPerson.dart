@@ -302,7 +302,7 @@ class _AddPersonState extends State<AddPerson> {
       //color: ColorManager().theme.textColor
       );
   TextStyle titles = new TextStyle(
-      //color: ColorManager().theme.textColor,
+      color: ColorManager().theme.textColor,
       fontSize: 20);
 
   Widget title(title) {
@@ -424,13 +424,17 @@ class _AddPersonState extends State<AddPerson> {
                                     
                                     Row(
                                       children: <Widget>[
+                                        //Male
                                         Container(
                                           width: 40,
                                           height: 40,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
                                             border: Border.all(
-                                                width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? ColorManager().theme.primary[300] : ColorManager().theme.primary),
+                                                width: sSelected == Gender.MALE ? 2.0 : 1.5, color: sSelected == Gender.MALE ? 
+                                                ColorManager.mYTHEME == MYTHEME.DARK ?ColorManager().theme.primary[300]:
+                                                ColorManager().theme.secondary
+                                                 : ColorManager().theme.darkPrimeryLightGrey),
                                           ),
                                           child: IconButton(
                                               icon: FaIcon(FontAwesomeIcons.male),
@@ -445,6 +449,7 @@ class _AddPersonState extends State<AddPerson> {
                                           style: sSelected == Gender.MALE ? themeTextStyle : TextStyle(color: Colors.white60),
                                         ),
                                         Spacer(),
+                                         //Female
                                         Container(
                                           width: 40,
                                           height: 40,
@@ -534,10 +539,11 @@ class _AddPersonState extends State<AddPerson> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 FlatButton(
-                                  color: Colors.black12,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0), side: BorderSide(color: state.hasError ? Colors.red[300] : 
-                                  ColorManager().theme.primary)),
-                                  //color: Colors.black12,
+                                  color:  ColorManager().theme.fillOnBackGroundColor,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0), 
+                                  side: BorderSide(color: state.hasError ? Colors.red[300] : 
+                                  ColorManager().theme.darkPrimeryLightGrey)),
+                                  //color:  ColorManager().theme.fillOnBackGroundColor,
                                   onPressed: () {
                                     showModalBottomSheet(
                                         context: context,
@@ -566,7 +572,7 @@ class _AddPersonState extends State<AddPerson> {
                                             Text(
                                               dateString,
                                               style: TextStyle(
-                                                  // color: Colors.white,
+                                                   color: ColorManager().theme.darkWhiteLightSecondary,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18.0),
                                             ),
@@ -574,6 +580,7 @@ class _AddPersonState extends State<AddPerson> {
                                         ),
                                         FaIcon(
                                           FontAwesomeIcons.angleDown,
+                                          color: ColorManager().theme.darkWhiteLightSecondary,
                                           size: 20,
                                        
                                         ),
@@ -1275,7 +1282,7 @@ class _AddPersonState extends State<AddPerson> {
                         },
                         decoration: InputDecoration(
                           filled: true,
-                          //fillColor: Colors.black12,
+                          //fillColor:  ColorManager().theme.fillOnBackGroundColor,
                           enabledBorder: OutlineInputBorder(
                             borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                             borderSide: BorderSide(
