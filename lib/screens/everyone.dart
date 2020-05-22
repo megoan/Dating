@@ -9,6 +9,30 @@ import 'package:dating/widgets/personListCard2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+class _OpenContainerWrapper extends StatelessWidget {
+  const _OpenContainerWrapper({
+    this.closedBuilder,
+    this.transitionType,
+  });
+
+  final OpenContainerBuilder closedBuilder;
+  final ContainerTransitionType transitionType;
+
+  @override
+  Widget build(BuildContext context) {
+    return OpenContainer(
+      transitionType: transitionType,
+      openBuilder: (BuildContext context, VoidCallback _) {
+        return EveryBodyFilter();
+      },
+      tappable: false,
+      closedBuilder: closedBuilder,
+       openColor: ColorManager().theme.filterBackgroundColor,
+       closedColor: ColorManager().theme.filterBackgroundColor,
+    );
+  }
+}
+
 class Everyone extends StatefulWidget {
   @override
   _EveryoneState createState() => _EveryoneState();
@@ -20,21 +44,19 @@ class _EveryoneState extends State<Everyone> {
   ContainerTransitionType _transitionType = ContainerTransitionType.fadeThrough;
   bool isInit = true;
   bool isLoading = true;
-  
-  Widget filterCounter(int number ){
+
+  Widget filterCounter(int number) {
     return Container(
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color:Colors.red,
-        
+        color: Colors.red,
       ),
-      child: Center(child:
-      Text(number.toString(),style:TextStyle(color: Colors.white))
-      ),
+      child: Center(child: Text(number.toString(), style: TextStyle(color: Colors.white))),
     );
   }
 
+  
   @override
   void didChangeDependencies() async {
     if (isInit) {
@@ -54,10 +76,10 @@ class _EveryoneState extends State<Everyone> {
 
   @override
   Widget build(BuildContext context) {
-     personProvider = Provider.of<PersonProvider>(context);
+    personProvider = Provider.of<PersonProvider>(context);
     try {
       return Container(
-          //color: ColorManager().theme.filterBackgroundColor,
+          color: ColorManager().theme.filterBackgroundColor,
           child: (isLoading)
               ? Center(
                   child: CircularProgressIndicator(),
@@ -66,15 +88,15 @@ class _EveryoneState extends State<Everyone> {
                   ? Column(
                       children: <Widget>[
                         _OpenContainerWrapper(
-                          
                             transitionType: _transitionType,
                             closedBuilder: (BuildContext _, VoidCallback openContainer) {
                               return Container(
                                 padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                                
                                 child: Row(
                                   children: <Widget>[
-                                    SizedBox(width: 5,),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
                                     Expanded(
                                       child: TextField(
                                         style: TextStyle(color: ColorManager().theme.textColor),
@@ -102,17 +124,18 @@ class _EveryoneState extends State<Everyone> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 5,),
-                                    Stack(
-                                                                          children:<Widget>[ IconButton(
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Stack(children: <Widget>[
+                                      IconButton(
                                           icon: Icon(
                                             Icons.filter_list,
-                                            color: ColorManager().theme.textColor,
+                                            color: Colors.white,
                                           ),
                                           onPressed: () => openContainer()),
-                                          if(personProvider.numberofFilters>0)filterCounter(personProvider.numberofFilters)
-                                          ]
-                                    ),
+                                      if (personProvider.numberofFilters > 0) filterCounter(personProvider.numberofFilters)
+                                    ]),
                                   ],
                                 ),
                               );
@@ -153,28 +176,3 @@ class _EveryoneState extends State<Everyone> {
 }
 
 
-
-class _OpenContainerWrapper extends StatelessWidget {
-  const _OpenContainerWrapper({
-    this.closedBuilder,
-    this.transitionType,
-  });
-
-  final OpenContainerBuilder closedBuilder;
-  final ContainerTransitionType transitionType;
-
-  @override
-  Widget build(BuildContext context) {
-    return OpenContainer(
-      
-      transitionType: transitionType,
-      openBuilder: (BuildContext context, VoidCallback _) {
-        return EveryBodyFilter();
-      },
-      tappable: false,
-      closedBuilder: closedBuilder,
-      openColor: ColorManager().theme.fillColor,
-      closedColor:ColorManager().theme.fillColor,
-    );
-  }
-}

@@ -72,28 +72,72 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
           themeMode: ColorManager.mYTHEME == MYTHEME.DARK ? ThemeMode.dark : ThemeMode.light,
           theme: ThemeData(
-            hintColor: Colors.red,
-            buttonColor: Colors.red,
-            dividerColor: ColorManager().theme.secondary,
+          //backgroundColor: ColorManager().theme.primary,
+          errorColor: Colors.red[300],
 
-            iconTheme: new IconThemeData(color: ColorManager().theme.secondary),
-            primaryTextTheme: TextTheme(title: TextStyle(color: ColorManager().theme.secondary)),
-            appBarTheme: AppBarTheme(
-              color: Color.fromARGB(255, 255, 255, 255),
-              iconTheme: new IconThemeData(color: ColorManager().theme.secondary),
+          chipTheme: ChipThemeData(
+          disabledColor: ColorManager().theme.primary,
+          backgroundColor: ColorManager().theme.primary,
+          checkmarkColor: ColorManager().theme.primary[300],
+          selectedColor: ColorManager().theme.filterBackgroundColor,
+          selectedShadowColor: ColorManager().theme.primary,
+          secondarySelectedColor: ColorManager().theme.primary,
+          labelPadding: EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.all(0),
+          shape: StadiumBorder(side: BorderSide(color: ColorManager().theme.secondary,width: 1.5)),
+          labelStyle: TextStyle(color: ColorManager().theme.secondary),
+          secondaryLabelStyle: TextStyle(color: ColorManager().theme.secondary),
+          
+          brightness: Brightness.light),
+          
+          
+          
+          hintColor: ColorManager().theme.primary[300],
+          
+          
+          
+          inputDecorationTheme: InputDecorationTheme(
+              fillColor: Colors.black12,
+              filled: true,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                borderSide: BorderSide(color: ColorManager().theme.primary,),
+              ),
+                disabledBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                borderSide: BorderSide(color: ColorManager().theme.primary, ),
+              ),
+              contentPadding: EdgeInsets.all(15),
+              border: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                 borderSide: BorderSide(color: ColorManager().theme.primary[300], ),
+              ),
+              hintStyle: TextStyle(color: ColorManager().theme.primary[300]),
             ),
+  //        textTheme: Theme.of(context).textTheme.apply(
+  // bodyColor: Colors.grey[600],),
+  iconTheme: IconThemeData(color: Colors.grey[600]),
+            //canvasColor: ColorManager().theme.fillColor, //משפיע על רקעי מערכת כמו הרקע של הכותרת של הסטפר
+
+            //appBarTheme: AppBarTheme(color: ColorManager().theme.fillColor ),
+            //bottomAppBarColor: ColorManager().theme.fillColor,
+            dialogBackgroundColor: ColorManager().theme.filterBackgroundColor,
+            scaffoldBackgroundColor: ColorManager().theme.primary,
+            //cardColor: ColorManager().theme.cardBackgroundColor,
             brightness: Brightness.light,
             primaryColor: ColorManager().theme.primary,
             accentColor: ColorManager().theme.secondary,
-            //primarySwatch:  Colors.blue,
+            snackBarTheme: SnackBarThemeData(backgroundColor: ColorManager().theme.secondary,contentTextStyle: TextStyle(color:Colors.white)) ,
+            buttonTheme: ButtonThemeData( //משפיע על כפתורי מערכת כמו המשך ב stepper
+           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),buttonColor: ColorManager().theme.secondary,
+            ),
           ),
+          
+          
           darkTheme: ThemeData(
-            backgroundColor: ColorManager().theme.primary,
+          backgroundColor: ColorManager().theme.primary,
           errorColor: Colors.red[300],
-           
-           
-
-            chipTheme: ChipThemeData(
+          chipTheme: ChipThemeData(
                 disabledColor: ColorManager().theme.fillColor,
                 backgroundColor: ColorManager().theme.fillColor,
                 checkmarkColor: ColorManager().theme.primary[300],
@@ -106,10 +150,8 @@ class _MyAppState extends State<MyApp> {
                 labelStyle: TextStyle(color: ColorManager().theme.primary[300]),
                 secondaryLabelStyle: TextStyle(color: ColorManager().theme.primary[300]),
                 brightness: Brightness.dark),
-
-
-            hintColor: ColorManager().theme.primary[300],
-            inputDecorationTheme: InputDecorationTheme(
+          hintColor: ColorManager().theme.primary[300],
+          inputDecorationTheme: InputDecorationTheme(
               fillColor: Colors.black12,
               filled: true,
               enabledBorder: OutlineInputBorder(
@@ -143,9 +185,6 @@ class _MyAppState extends State<MyApp> {
            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),buttonColor: ColorManager().theme.secondary,
             ),
 
-             // toggleButtonsTheme: ToggleButtonsThemeData(color: Colors.green),
-            
-             //buttonColor: ColorManager().theme.secondary,
           ),
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here

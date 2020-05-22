@@ -32,15 +32,26 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
         label: new Text(
           LocaleText.getLocaleSelectText(MyApp.getLocale(), value.toString()),
           style: TextStyle(
-            //color: ColorManager().theme.primary[300]
+             color: ColorManager.mYTHEME == MYTHEME.DARK ?
+            ColorManager().theme.primary[300]
+            :
+             isSelected ? ColorManager().theme.primary[300]
+            : ColorManager().theme.secondary
             ),
         ),
         //backgroundColor: ColorManager().theme.fillColor,
-        shape: StadiumBorder(side: isSelected ? BorderSide(
-          color: ColorManager().theme.primary[300]
-          ) : BorderSide(
-         color: ColorManager().theme.fillColor
-          )),
+           shape: StadiumBorder(side: ColorManager.mYTHEME == MYTHEME.DARK ?
+         isSelected ?
+         BorderSide(
+         color: ColorManager().theme.primary[300]
+         )
+           : BorderSide(
+             color: ColorManager().theme.fillColor
+             ):
+             BorderSide(
+             color: ColorManager().theme.secondary,
+             )
+             ),
         onSelected: (bool bvalue) {
           setState(() {
             pickedChips[value] = bvalue;
@@ -78,21 +89,31 @@ class _SelectChipState extends State<SelectChip> {
       chipList.add(FilterChip(
         showCheckmark: false,
         elevation: isSelected ? 5 : 0,
-        //selectedColor: ColorManager().theme.filterBackgroundColor,
+       
         selected: isSelected ? true : false,
         label: new Text(
           LocaleText.getLocaleSelectText(MyApp.getLocale(), value.toString()),
           style: TextStyle(
-            //color: ColorManager().theme.primary[300]
+            color: ColorManager.mYTHEME == MYTHEME.DARK ?
+            ColorManager().theme.primary[300]
+            :
+             isSelected ? ColorManager().theme.primary[300]
+            : ColorManager().theme.secondary
             ),
         ),
         //backgroundColor: ColorManager().theme.fillColor,
-        shape: StadiumBorder(side: isSelected ? BorderSide(
+        shape: StadiumBorder(side: ColorManager.mYTHEME == MYTHEME.DARK ?
+         isSelected ?
+         BorderSide(
          color: ColorManager().theme.primary[300]
          )
            : BorderSide(
              color: ColorManager().theme.fillColor
-             )),
+             ):
+             BorderSide(
+             color: ColorManager().theme.secondary,
+             )
+             ),
 
         // shape: StadiumBorder(side: BorderSide(color: Colors.blueGrey)),
         onSelected: (bool bvalue) {

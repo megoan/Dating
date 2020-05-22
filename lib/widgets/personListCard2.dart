@@ -90,13 +90,13 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                             child: Row(
                               children: <Widget>[
                                 Text(widget.person.firstName, style: TextStyle(fontSize: 20,
-                                 //color: Colors.white
+                                 color: Colors.white
                                  )),
                                 Text(" ,", style: TextStyle(fontSize: 20,
-                                // color: Colors.white
+                                 color: Colors.white
                                  )),
                                 Text(StaticFunctions.getAge(widget.person.birthday).toString(), style: TextStyle(fontSize: 20,
-                                 //color: Colors.white
+                                 color: Colors.white
                                  )),
                               ],
                             ),
@@ -109,7 +109,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                       Row(
                         children: <Widget>[
                           Icon(Icons.location_on, 
-                          //color: Colors.white
+                          color: Colors.white
                           ),
                           Padding(
                             padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(left: 5),
@@ -119,11 +119,11 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                                       child: 
                                   (widget.person.area != null) ?Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.area.toString())+
                                   ", "+LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15,
-                                   //color: Colors.white
+                                   color: Colors.white
                                    )):
                                   
                                   Text(LocaleText.getLocaleSelectText(MyApp.getLocale(),widget.person.country.toString()), style: TextStyle(fontSize: 15, 
-                                  //color: Colors.white
+                                  color: Colors.white
                                   )),
                             //     ],
                             // ),
@@ -131,18 +131,7 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                           )
                         ],
                       ),
-                      // SizedBox(
-                      //   height: 8,
-                      // ),
-                      // Row(
-                      //   children: <Widget>[
-                      //     Icon(Icons.short_text, color: Colors.white),
-                      //     Padding(
-                      //       padding: MyApp.getLocale() == "he" ? const EdgeInsets.only(right: 10) : const EdgeInsets.only(left: 10),
-                      //       child: FittedBox(fit: BoxFit.fitWidth, child: Text(widget.person.short, style: TextStyle(fontSize: 15, color: Colors.white))),
-                      //     )
-                      //   ],
-                      // ),
+                  
                     ],
                   ),
                 ),
@@ -165,12 +154,14 @@ class _PersonListCardTestState extends State<PersonListCardTest> {
                 Icon(
                   Icons.star,
                   size: 42,
-                  //color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Colors.white : Theme.of(context).accentColor,
+                  color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ?
+                   Colors.white : Theme.of(context).accentColor,
                 ),
                 Icon(
                   Icons.star,
                   size: 38,
-                  //color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ? Theme.of(context).accentColor : Colors.white,
+                  color: personProvider.shadchanProvider.myFavorites.containsKey(widget.person.id) ?
+                   Theme.of(context).accentColor : Colors.white,
                 ),
               ],
             ),
