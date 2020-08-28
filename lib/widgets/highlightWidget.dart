@@ -12,16 +12,14 @@ class HighLightedIcon extends StatefulWidget {
     Key key,
     this.size = 24.0,
     this.color,
-  })
-      : super(key: key);
+  }) : super(key: key);
   @override
   State<HighLightedIcon> createState() {
     return new _AnimatedIconState();
   }
 }
 
-class _AnimatedIconState extends State<HighLightedIcon>
-    with SingleTickerProviderStateMixin {
+class _AnimatedIconState extends State<HighLightedIcon> with SingleTickerProviderStateMixin {
   final double dx = 4.0;
   AnimationController controller;
   Animation<double> animation;
@@ -29,10 +27,8 @@ class _AnimatedIconState extends State<HighLightedIcon>
   @override
   initState() {
     super.initState();
-    controller = new AnimationController(
-        duration: const Duration(milliseconds: 300), vsync: this);
-    animation = new Tween(begin: widget.size, end: widget.size + dx)
-        .animate(controller);
+    controller = new AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
+    animation = new Tween(begin: widget.size, end: widget.size + dx).animate(controller);
 
     animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -74,8 +70,7 @@ class _Animator extends AnimatedWidget {
     this.size,
     this.color,
     Animation<double> animation,
-  })
-      : super(key: key, listenable: animation);
+  }) : super(key: key, listenable: animation);
 
   @override
   Widget build(BuildContext context) {

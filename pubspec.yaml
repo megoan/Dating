@@ -34,7 +34,7 @@ dependencies:
   cloud_firestore: ^0.13.4+1
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.8.1
-  flutter_cupertino_date_picker: ^1.0.22
+  flutter_cupertino_date_picker: ^1.0.26+2
 
 dev_dependencies:
   flutter_test:
